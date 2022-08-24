@@ -1,0 +1,24 @@
+{
+  "name": "playground",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "tsc && vue-tsc && vite build",
+    "build:storybook": "build-storybook",
+    "dev": "vite --open",
+    "dev:usepack": "cross-env USEPACK=true vite --port 5000 --open",
+    "preview": "vite preview",
+    "storybook": "start-storybook -p 6006",
+    "typecheck": "tsc && vue-tsc"
+  },
+  "dependencies": {
+    "vue-router": "^4.1.4"
+  },
+  "devDependencies": {
+    "@iconify-json/carbon": "^1.1.7",
+    "@unocss/reset": "^0.45.12",
+    "cross-env": "^7.0.3",
+    "unocss": "^0.45.12",
+    "vite-plugin-pages": "^0.25.0",
+    "vue-loader": "^17.0.0"
+  }
+}

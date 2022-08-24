@@ -1,0 +1,50 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "Node",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "skipDefaultLibCheck": true,
+    "sourceMap": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strictNullChecks": true,
+    "esModuleInterop": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "allowSyntheticDefaultImports": true,
+    "noEmit": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noUnusedLocals": false,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": false,
+    "noImplicitThis": true,
+    "noImplicitAny": false,
+    "importHelpers": false,
+    "resolveJsonModule": true,
+    "isolatedModules": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "jsx": "preserve",
+    "types": [
+      "vite/client",
+      "vite-plugin-pages/client",
+      "../global"
+    ],
+    "paths": {
+      "~/*": [
+        "src/*"
+      ],
+      "#/*": [
+        "../dist/*"
+      ],
+      "vue3-toastify": [
+        "../src"
+      ],
+      "vue3-toastify/*": [
+        "../src/*"
+      ]
+    }
+  }
+}

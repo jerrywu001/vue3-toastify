@@ -1,0 +1,7 @@
+// Vitest Snapshot v1
+
+exports[`dom test > testing-library/jest-dom 1`] = `
+<div
+  id="adm-mask"
+/>
+`;
