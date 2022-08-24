@@ -7,6 +7,8 @@ export type ToastFunc = {
   (content: Content, options?: ToastOptions): void;
 };
 
+export type ToastType = 'info' | 'success' | 'error' | 'warn' | 'loading' | 'default';
+
 /**
  * options for toast
  */
@@ -15,7 +17,12 @@ export interface Options {
    * toast duration
    * @default 5000
    */
-  duration: number;
+  duration?: number;
+  /**
+   * toast type {@link ToastType}
+   * @default ToastType.info
+   */
+  type?: ToastType;
 }
 
 /**

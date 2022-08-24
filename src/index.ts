@@ -21,3 +21,4 @@ if (window !== undefined && 'Vue' in window) {
 export default Vue3Toastify;
 export * from './types'; // can not delete
 export * from './components';
+export * from './hooks';

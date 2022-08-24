@@ -26,7 +26,7 @@
   "typings": "./dist/index.d.ts",
   "files": [
     "dist",
-    "src/component.d.ts",
+    "global.d.ts",
     "package.json",
     "README.md"
   ],

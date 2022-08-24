@@ -1,12 +1,16 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { ToastifyContainer } from 'vue3-toastify';
+import { onMounted, ref } from 'vue';
+import { ToastifyContainer, toast } from 'vue3-toastify';
 
 const count = ref(0);
 
 function changeCount() {
   count.value += 1;
 }
+
+onMounted(() => {
+  toast.success('tst', { duration: 2000 });
+});
 </script>
 
 <template>
@@ -14,8 +18,6 @@ function changeCount() {
     <div py2 px6>
       <button class="mybtn" @click="changeCount">change count value</button>
     </div>
-
-    <!-- <Demo :count="count" /> -->
 
     <div style="display: flex;">
       <ToastifyContainer :count="count" />

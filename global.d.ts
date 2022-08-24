@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-empty-interface */
-import { ToastifyContainer } from './components';
+import { ToastifyContainer, type ToastFunc } from 'vue3-toastify';
 import type { Plugin, VNode } from 'vue';
 
 declare const Vue3Toastify: Plugin;
@@ -7,7 +6,7 @@ export default Vue3Toastify;
 
 declare global {
   interface Window {
-    Vue3Toastify?: Vue3Toastify;
+    Vue3Toastify?: typeof Vue3Toastify;
   }
 }
 
