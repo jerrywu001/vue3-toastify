@@ -1,25 +1,20 @@
-import { DefineComponent, defineComponent } from 'vue';
+import { DefineComponent, defineComponent, onMounted } from 'vue';
+import type { ToastOptions } from '../../types';
+import props from './prop';
 
-export interface Props {
-  count?: number;
-}
-
-/**
- * ToastifyContainer.
- */
-export const ToastifyContainer = defineComponent({
+const ToastifyContainer = defineComponent({
   name: 'ToastifyContainer',
-  inheritAttrs: true,
-  props: {
-    count: {
-      type: Number,
-      required: false,
-      default: 0,
-    },
-  },
-  setup(props: Props) {
+  inheritAttrs: false,
+  props,
+  setup(_props: ToastOptions) {
+    onMounted(() => {
+      console.log('props===>', _props);
+    });
+
     return () => (
-      <div>count in jsx component: {props.count}</div>
+      <div>jjjjjjjj</div>
     );
   },
-}) as DefineComponent<Props>;
+}) as DefineComponent<ToastOptions>;
+
+export default ToastifyContainer;

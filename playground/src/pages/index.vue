@@ -1,26 +1,15 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
-import { ToastifyContainer, toast } from 'vue3-toastify';
+import { toast } from 'vue3-toastify';
 
-const count = ref(0);
-
-function changeCount() {
-  count.value += 1;
+function showToast() {
+  toast('sfsd', { autoClose: 2000 });
 }
-
-onMounted(() => {
-  toast.success('tst', { duration: 2000 });
-});
 </script>
 
 <template>
   <div>
     <div py2 px6>
-      <button class="mybtn" @click="changeCount">change count value</button>
-    </div>
-
-    <div style="display: flex;">
-      <ToastifyContainer :count="count" />
+      <button class="mybtn" @click="showToast">showToast</button>
     </div>
   </div>
 </template>

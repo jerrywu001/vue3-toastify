@@ -17,7 +17,7 @@ export default defineConfig({
     ],
     [
       'icon-btn',
-      'text-[0.9em] inline-block cursor-pointer select-none opacity-75 transition duration-200 ease-in-out hover:opacity-100 hover:text-teal-600',
+      'text-[0.9em] inline-block cursor-pointer select-none opacity-75 transition autoClose-200 ease-in-out hover:opacity-100 hover:text-teal-600',
     ],
   ],
   presets: [

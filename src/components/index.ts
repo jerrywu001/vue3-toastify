@@ -1,1 +1,1 @@
-export { ToastifyContainer } from './toastify-container';
+export { default as ToastifyContainer } from './toastify-container';

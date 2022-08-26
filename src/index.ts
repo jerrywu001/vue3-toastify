@@ -1,15 +1,10 @@
-import { GlobalOptions } from './types';
-import { ToastifyContainer } from './components';
 import { Plugin } from 'vue';
-
-const defaultOptions = {
-  duration: 5000,
-} as GlobalOptions;
+import { defaultGlobalOptions } from './utils/constant';
 
 const Vue3Toastify: Plugin = {
-  install(app, options = defaultOptions) {
+  install(app, options = {}) {
+    options = { ...defaultGlobalOptions, ...options };
     console.log(options);
-    app.component('ToastifyContainer', ToastifyContainer);
   },
 };
 

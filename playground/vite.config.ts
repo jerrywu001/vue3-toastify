@@ -12,7 +12,6 @@ export default defineConfig({
   resolve: {
     alias: {
       '@/': `${path.resolve(__dirname, 'src')}/`,
-      '#/': `${path.resolve(__dirname, '../dist')}/`,
       'vue3-toastify': path.resolve(__dirname, process.env.USEPACK === 'true' ? '../dist/esm' : '../src'),
     },
   },

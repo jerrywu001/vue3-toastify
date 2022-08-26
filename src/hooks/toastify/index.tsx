@@ -1,48 +1,33 @@
-/* eslint-disable arrow-body-style */
-import { defineComponent, onMounted, createApp, DefineComponent } from 'vue';
-import type { Content, ToastOptions } from 'vue3-toastify';
+import { createApp } from 'vue';
+import { defaultToastOptions, POSITION, TYPE } from '../../utils/constant';
+import { generateToastId, generateRenderRoot } from '../../utils/tools';
+import { ToastifyContainer } from '../../components';
+import type { Content, ToastOptions, ToastType } from '../../types';
 
-const Wrapper = defineComponent({
-  name: 'ToastifyWrapper',
-  props: {
-    duration: {
-      type: Number,
-      required: false,
-    },
-  },
-  setup(props) {
-    onMounted(() => {
-      console.log('props===>', props);
-    });
-
-    return () => {
-      return (
-        <div>jjjjjjjj</div>
-      );
-    };
-  },
-}) as DefineComponent<ToastOptions>;
-
-function openToast(content: Content, options: ToastOptions) {
-  const { type } = options;
-  const renderRoot = document.createElement('div');
-  document.body.appendChild(renderRoot);
-  console.log(content, options, type);
+function openToast(content: Content, type: ToastType, options = {} as ToastOptions) {
+  options = { ...defaultToastOptions, type, ...options };
+  if (!options.toastId) {
+    options.toastId = generateToastId();
+  }
+  options = { ...options, content } as ToastOptions;
 
   // @ts-ignore
-  const app = createApp(Wrapper, options);
+  const app = createApp(ToastifyContainer, options);
+  const renderRoot = generateRenderRoot(options);
   app.mount(renderRoot);
 }
 
 /** default toast */
-const toast = (content: Content, options: ToastOptions) => openToast(content, { ...options, type: 'default' });
+const toast = (content: Content, options?: ToastOptions) => openToast(content, 'default', options);
 /** info toast */
-toast.info = (content: Content, options: ToastOptions) => openToast(content, { ...options, type: 'info' });
+toast.info = (content: Content, options?: ToastOptions) => openToast(content, 'info', options);
 /** error toast */
-toast.error = (content: Content, options: ToastOptions) => openToast(content, { ...options, type: 'error' });
+toast.error = (content: Content, options?: ToastOptions) => openToast(content, 'error', options);
 /** warning toast */
-toast.warn = (content: Content, options: ToastOptions) => openToast(content, { ...options, type: 'warn' });
+toast.warn = (content: Content, options?: ToastOptions) => openToast(content, 'warn', options);
 /** success toast */
-toast.success = (content: Content, options: ToastOptions) => openToast(content, { ...options, type: 'success' });
+toast.success = (content: Content, options?: ToastOptions) => openToast(content, 'success', options);
+toast.POSITION = POSITION;
+toast.TYPE = TYPE;
 
 export default toast;

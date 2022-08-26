@@ -17,11 +17,11 @@ npm install --save vue3-toastify
 
 ```js
 // main.ts
-import Vue3Toastify, { type GlobalOptions } from 'vue3-toastify';
+import Vue3Toastify, { type TransitionGroupOptions } from 'vue3-toastify';
 
 app.use(Vue3Toastify);
 
-// app.use(Vue3Toastify, { duration: 3000 } as GlobalOptions);
+// app.use(Vue3Toastify, { autoClose: 3000 } as TransitionGroupOptions);
 ```
 
 ```js
