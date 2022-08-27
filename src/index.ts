@@ -17,3 +17,4 @@ export default Vue3Toastify;
 export * from './types'; // can not delete
 export * from './components';
 export * from './hooks';
+export * from './store';

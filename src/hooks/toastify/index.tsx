@@ -1,6 +1,7 @@
-import { createApp } from 'vue';
+import { addToast } from '../..';
+import { createVNode, render } from 'vue';
 import { defaultToastOptions, POSITION, TYPE } from '../../utils/constant';
-import { generateToastId, generateRenderRoot } from '../../utils/tools';
+import { generateRenderRoot, generateToastId } from '../../utils/tools';
 import { ToastifyContainer } from '../../components';
 import type { Content, ToastOptions, ToastType } from '../../types';
 
@@ -10,11 +11,13 @@ function openToast(content: Content, type: ToastType, options = {} as ToastOptio
     options.toastId = generateToastId();
   }
   options = { ...options, content } as ToastOptions;
+  const rootDom = generateRenderRoot(options);
+
+  addToast(options);
 
   // @ts-ignore
-  const app = createApp(ToastifyContainer, options);
-  const renderRoot = generateRenderRoot(options);
-  app.mount(renderRoot);
+  const vm = createVNode(ToastifyContainer, options);
+  render(vm, rootDom);
 }
 
 /** default toast */

@@ -10,14 +10,18 @@ export function generateToastId() {
 
 export function generateRenderRoot(options: ToastOptions) {
   const { position } = options;
+  const existContainer = !!document.querySelector(`.${Default.CSS_NAMESPACE}`);
   const container = document.createElement('div');
   const renderRoot = document.createElement('div');
   const containerClassName = `${Default.CSS_NAMESPACE}__toast-container`;
 
-  container.className = Default.CSS_NAMESPACE;
   renderRoot.className = `${containerClassName} ${containerClassName}--${position}`;
-  container.appendChild(renderRoot);
-  document.body.appendChild(container);
+
+  if (!existContainer) {
+    container.className = Default.CSS_NAMESPACE;
+    container.appendChild(renderRoot);
+    document.body.appendChild(container);
+  }
 
   return renderRoot;
 }

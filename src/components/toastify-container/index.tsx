@@ -1,18 +1,29 @@
-import { DefineComponent, defineComponent, onMounted } from 'vue';
-import type { ToastOptions } from '../../types';
 import props from './prop';
+import { DefineComponent, defineComponent, watchEffect } from 'vue';
+import { toastOptionList } from '../..';
+import type { ToastOptions } from '../../types';
 
 const ToastifyContainer = defineComponent({
   name: 'ToastifyContainer',
   inheritAttrs: false,
   props,
   setup(_props: ToastOptions) {
-    onMounted(() => {
-      console.log('props===>', _props);
+    watchEffect(() => {
+      if (toastOptionList) {
+        console.log(toastOptionList);
+      }
     });
 
     return () => (
-      <div>jjjjjjjj</div>
+      <>
+        {
+          toastOptionList.value.map((item) => (
+            <div>
+              {item.content}
+            </div>
+          ))
+        }
+      </>
     );
   },
 }) as DefineComponent<ToastOptions>;
