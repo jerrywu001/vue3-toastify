@@ -128,5 +128,8 @@
     "vue": {
       "optional": true
     }
+  },
+  "dependencies": {
+    "clsx": "^1.2.1"
   }
 }

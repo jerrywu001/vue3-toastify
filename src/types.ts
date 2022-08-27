@@ -176,3 +176,15 @@ export interface ToastOptions extends Options {
    */
   render?: VNode | (() => VNode);
 }
+
+/**
+ * ClassName for the elements - can take a function to build a classname or a raw string that is cx'ed to defaults
+ */
+export type ToastClassName =
+ | ((context?: {
+   type?: ToastType;
+   defaultClassName?: string;
+   position?: ToastPosition;
+   rtl?: boolean;
+ }) => string)
+ | string;

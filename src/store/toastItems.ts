@@ -1,5 +1,5 @@
 import { ref } from 'vue';
-import { ToastOptions } from 'vue3-toastify/types';
+import { ToastOptions } from '../types';
 
 export const toastOptionList = ref<ToastOptions[]>([]);
 

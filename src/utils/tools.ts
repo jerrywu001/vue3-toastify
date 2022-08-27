@@ -8,6 +8,26 @@ export function generateToastId() {
   return Math.random().toString(36).substring(2, 9);
 }
 
+export function isNum(v: any): v is Number {
+  return typeof v === 'number' && !isNaN(v);
+}
+
+export function isBool(v: any): v is Boolean {
+  return typeof v === 'boolean';
+}
+
+export function isStr(v: any): v is String {
+  return typeof v === 'string';
+}
+
+export function isFn(v: any): v is Function {
+  return typeof v === 'function';
+}
+
+export function parseClassName(v: any) {
+  return isStr(v) || isFn(v) ? v : null;
+}
+
 export function generateRenderRoot(options: ToastOptions) {
   const { position } = options;
   const existContainer = !!document.querySelector(`.${Default.CSS_NAMESPACE}`);
