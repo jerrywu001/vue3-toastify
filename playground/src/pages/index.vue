@@ -2,7 +2,7 @@
 import { toast } from 'vue3-toastify';
 
 function showToast() {
-  toast('sfsd', { autoClose: 2000 });
+  toast.success('sfsd', { autoClose: 2000 });
 }
 </script>
 

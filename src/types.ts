@@ -8,7 +8,7 @@ export type ToastFunc = {
 
 export type Id = number | string;
 
-export type ToastType = 'info' | 'success' | 'error' | 'warn' | 'loading' | 'default';
+export type ToastType = 'info' | 'success' | 'error' | 'warning' | 'loading' | 'default';
 export type ToastPosition = 'top-left' | 'top-right' | 'top-center' | 'bottom-left' | 'bottom-right' | 'bottom-center';
 export type ToastTransition = 'zoom' | 'flip' | 'bounce' | 'fade';
 export type ToastTheme = 'light' | 'dark' | 'colored';

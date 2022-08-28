@@ -1,5 +1,5 @@
 import { CSSProperties, PropType, VNode } from 'vue';
-import { POSITION } from 'vue3-toastify/utils/constant';
+import { POSITION } from '../../utils/constant';
 import type { Content, ToastPosition, ToastTheme, ToastTransition, ToastType } from '../../types';
 
 const props = {
@@ -100,7 +100,7 @@ const props = {
     default: 'default',
   },
   icon: {
-    type: Object as PropType<boolean | string | number | VNode>,
+    type: [Boolean, String, Number, Object] as PropType<boolean | string | number | VNode>,
     required: false,
     default: undefined,
   },

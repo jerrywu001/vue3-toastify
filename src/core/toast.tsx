@@ -1,9 +1,9 @@
-import { addToast } from '../..';
 import { createVNode, render } from 'vue';
-import { defaultToastOptions, POSITION, TYPE } from '../../utils/constant';
-import { generateRenderRoot, generateToastId } from '../../utils/tools';
-import { ToastifyContainer } from '../../components';
-import type { Content, ToastOptions, ToastType } from '../../types';
+import { defaultToastOptions, POSITION, TYPE } from '../utils/constant';
+import { generateRenderRoot, generateToastId } from '../utils/tools';
+import { ToastifyContainer } from '../components';
+import type { Content, ToastOptions, ToastType } from '../types';
+import { addToast } from '../store';
 
 function openToast(content: Content, type: ToastType, options = {} as ToastOptions) {
   options = { ...defaultToastOptions, type, ...options };
@@ -27,7 +27,7 @@ toast.info = (content: Content, options?: ToastOptions) => openToast(content, 'i
 /** error toast */
 toast.error = (content: Content, options?: ToastOptions) => openToast(content, 'error', options);
 /** warning toast */
-toast.warn = (content: Content, options?: ToastOptions) => openToast(content, 'warn', options);
+toast.warn = (content: Content, options?: ToastOptions) => openToast(content, 'warning', options);
 /** success toast */
 toast.success = (content: Content, options?: ToastOptions) => openToast(content, 'success', options);
 toast.POSITION = POSITION;

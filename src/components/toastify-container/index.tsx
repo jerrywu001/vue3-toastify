@@ -2,9 +2,9 @@ import props from './prop';
 import { CloseButton } from '../CloseButton';
 import { Default } from '../../utils/constant';
 import { DefineComponent, defineComponent } from 'vue';
-import { ProgressBar } from '../ProgressBar';
 import { toastOptionList } from '../..';
 import type { ToastOptions, ToastTheme, ToastType } from '../../types';
+import ProgressBar from '../progress-bar/ProgressBar';
 
 const ToastifyContainer = defineComponent({
   name: 'ToastifyContainer',

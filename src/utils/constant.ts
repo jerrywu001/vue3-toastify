@@ -22,7 +22,7 @@ export const POSITION: { [key in KeyOfPosition]: ToastPosition } = {
 export const TYPE: { [key in KeyOfType]: ToastType } = {
   INFO: 'info',
   SUCCESS: 'success',
-  WARNING: 'warn',
+  WARNING: 'warning',
   ERROR: 'error',
   LOADING: 'loading',
   DEFAULT: 'default',
