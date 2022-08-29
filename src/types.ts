@@ -63,12 +63,12 @@ export interface Options {
    * Add optional classes to the container
    * @default ''
    */
-  className?: string;
+  className?: ToastClassName;
   /**
    * Add optional classes to the TransitionGroup container
    * @default ''
    */
-  bodyClassName?: string;
+  bodyClassName?: ToastClassName;
   /**
    * Add optional inline style to the container
    * @default {}
@@ -78,7 +78,7 @@ export interface Options {
    * Add optional classes to the progress bar
    * @default -
    */
-  progressClassName?: string;
+  progressClassName?: ToastClassName;
   /**
    * Add optional inline style to the progress bar
    * @default {}

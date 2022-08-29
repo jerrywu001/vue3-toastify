@@ -2,7 +2,7 @@
 import { ProgressBarProps, props as properties } from './prop';
 import { computed, CSSProperties, DefineComponent, defineComponent } from 'vue';
 import { Default } from '../../utils/constant';
-import { isFn } from 'vue3-toastify/utils/tools';
+import { isFn } from '../../utils/tools';
 
 const ProgressBar = defineComponent({
   name: 'ProgressBar',
@@ -36,7 +36,7 @@ const ProgressBar = defineComponent({
           type: props.type,
           defaultClassName: defaultClassName.value,
         })
-        : `${defaultClassName.value} ${props.className}`,
+        : `${defaultClassName.value} ${props.className || ''}`,
     );
 
     // 🧐 controlledProgress is derived from progress

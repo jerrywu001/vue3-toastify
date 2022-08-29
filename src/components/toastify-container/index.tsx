@@ -1,7 +1,7 @@
 import props from './prop';
 import { CloseButton } from '../CloseButton';
 import { Default } from '../../utils/constant';
-import { DefineComponent, defineComponent } from 'vue';
+import { computed, DefineComponent, defineComponent } from 'vue';
 import { toastOptionList } from '../..';
 import type { ToastOptions, ToastTheme, ToastType } from '../../types';
 import ProgressBar from '../progress-bar/ProgressBar';
@@ -11,10 +11,12 @@ const ToastifyContainer = defineComponent({
   inheritAttrs: false,
   props,
   setup(_props: ToastOptions) {
+    const toasts = computed(() => toastOptionList.value.filter(v => v.position === _props.position));
+
     return () => (
-      <div class="Toastify__toast-container Toastify__toast-container--top-right">
+      <>
         {
-          toastOptionList.value.map((item) => {
+          toasts.value.map((item) => {
             const className = [
               `${Default.CSS_NAMESPACE}__toast`,
               `${Default.CSS_NAMESPACE}__toast-theme--${item.theme}`,
@@ -54,7 +56,7 @@ const ToastifyContainer = defineComponent({
             );
           })
         }
-      </div>
+      </>
     );
   },
 }) as DefineComponent<ToastOptions>;

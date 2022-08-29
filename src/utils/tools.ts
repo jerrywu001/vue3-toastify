@@ -1,4 +1,5 @@
-import { ToastOptions } from '../types';
+import { mergeProps, VNodeProps } from 'vue';
+import { TransitionGroupOptions } from '../types';
 import { Default } from './constant';
 
 /**
@@ -28,20 +29,23 @@ export function parseClassName(v: any) {
   return isStr(v) || isFn(v) ? v : null;
 }
 
-export function generateRenderRoot(options: ToastOptions) {
-  const { position } = options;
-  const existContainer = !!document.querySelector(`.${Default.CSS_NAMESPACE}`);
-  const container = document.createElement('div');
-  const renderRoot = document.createElement('div');
-  const containerClassName = `${Default.CSS_NAMESPACE}__toast-container`;
+export function mergeOptions<T = VNodeProps>(...args: any[]) {
+  return mergeProps(...args as VNodeProps[]) as T;
+}
 
-  renderRoot.className = `${containerClassName} ${containerClassName}--${position}`;
+/**
+ * save default props of toast container
+ * @param options {@link TransitionGroupOptions}
+ */
+export function saveGlobalOptions(options = {} as TransitionGroupOptions) {
+  localStorage.setItem(`${Default.CSS_NAMESPACE}-default-options`, JSON.stringify(options));
+}
 
-  if (!existContainer) {
-    container.className = Default.CSS_NAMESPACE;
-    container.appendChild(renderRoot);
-    document.body.appendChild(container);
-  }
-
-  return renderRoot;
+/**
+ * get default props of toast container
+ * @param options {@link TransitionGroupOptions}
+ */
+export function getGlobalOptions() {
+  const str = localStorage.getItem(`${Default.CSS_NAMESPACE}-default-options`);
+  return JSON.parse((str || '{}')) as TransitionGroupOptions;
 }

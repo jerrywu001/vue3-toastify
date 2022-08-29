@@ -1,23 +1,28 @@
-import { createVNode, render } from 'vue';
-import { defaultToastOptions, POSITION, TYPE } from '../utils/constant';
-import { generateRenderRoot, generateToastId } from '../utils/tools';
+import { addToast } from '../store';
+import { createApp } from 'vue';
+import { generateRenderRoot, toastContainerInScreen } from '../utils/render';
+import { generateToastId, getGlobalOptions, mergeOptions } from '../utils/tools';
+import { POSITION, TYPE } from '../utils/constant';
 import { ToastifyContainer } from '../components';
 import type { Content, ToastOptions, ToastType } from '../types';
-import { addToast } from '../store';
 
 function openToast(content: Content, type: ToastType, options = {} as ToastOptions) {
-  options = { ...defaultToastOptions, type, ...options };
+  options = mergeOptions<ToastOptions>(getGlobalOptions(), { type }, options);
+
   if (!options.toastId) {
     options.toastId = generateToastId();
   }
   options = { ...options, content } as ToastOptions;
-  const rootDom = generateRenderRoot(options);
+  console.log('Toast options: ', options);
 
   addToast(options);
 
-  // @ts-ignore
-  const vm = createVNode(ToastifyContainer, options);
-  render(vm, rootDom);
+  if (!toastContainerInScreen(options.position)) {
+    const rootDom = generateRenderRoot(options);
+    // @ts-ignore
+    const app = createApp(ToastifyContainer, options);
+    app.mount(rootDom);
+  }
 }
 
 /** default toast */

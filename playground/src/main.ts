@@ -8,9 +8,7 @@ import Vue3Toasity, { type TransitionGroupOptions } from 'vue3-toastify';
 
 import App from './App.vue';
 
-import '@unocss/reset/tailwind.css';
 import 'virtual:windi.css';
-import 'uno.css';
 import './styles/main.css';
 import './index.css';
 
@@ -23,5 +21,17 @@ const router = createRouter({
   routes,
 });
 app.use(router);
-app.use(Vue3Toasity, { autoClose: 3000 } as TransitionGroupOptions);
+
+app.use(
+  Vue3Toasity,
+  {
+    // rtl: true,
+    autoClose: 3000,
+    style: {
+      opacity: '1',
+      userSelect: 'initial',
+    },
+  } as TransitionGroupOptions,
+);
+
 app.mount('#app');
