@@ -2,7 +2,7 @@ import { addToast } from '../store';
 import { createApp } from 'vue';
 import { generateRenderRoot, toastContainerInScreen } from '../utils/render';
 import { generateToastId, getGlobalOptions, mergeOptions } from '../utils/tools';
-import { POSITION, TYPE } from '../utils/constant';
+import { POSITION, THEME, TYPE } from '../utils/constant';
 import { ToastifyContainer } from '../components';
 import type { Content, ToastOptions, ToastType } from '../types';
 
@@ -49,10 +49,10 @@ toast.loading = (content: Content, options?: ToastOptions) => openToast(
   } as ToastOptions),
 );
 /** dark toast */
-toast.dark = (content: Content, options?: ToastOptions) => mergeOptions(
+toast.dark = (content: Content, options?: ToastOptions) => openToast(
   content,
   TYPE.DEFAULT,
-  mergeOptions(options, { theme: 'dark' }),
+  mergeOptions(options, { theme: THEME.DARK }),
 );
 
 toast.POSITION = POSITION;

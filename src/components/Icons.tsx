@@ -2,7 +2,7 @@
 import { Default } from '../utils/constant';
 import { ToastOptions, ToastTheme, ToastType } from '../types';
 import { cloneVNode, isVNode, VNode } from 'vue';
-import { isFn, isNum, isStr } from 'vue3-toastify/utils/tools';
+import { isFn, isNum, isStr } from '../utils/tools';
 
 /**
  * Used when providing custom icon
@@ -84,8 +84,9 @@ const maybeIcon = (type: string): type is keyof typeof Icons => type in Icons;
 export function getIcon({ theme, type, isLoading, icon }: ToastOptions) {
   let Icon: VNode | string | number | undefined;
   const iconProps = { theme, type };
-
-  if (icon === false) {
+  if (isLoading) {
+    Icon = Icons.spinner();
+  } else if (icon === false) {
     icon = undefined;
   } else if (isFn(icon)) {
     // @ts-ignore
@@ -93,10 +94,8 @@ export function getIcon({ theme, type, isLoading, icon }: ToastOptions) {
     Icon = iconCreator(iconProps as BuiltInIconProps);
   } else if (isVNode(icon)) {
     Icon = cloneVNode(icon, iconProps);
-  } else if ((isStr(icon) || isNum(icon)) && !isLoading) {
+  } else if ((isStr(icon) || isNum(icon))) {
     Icon = icon;
-  } else if (isLoading) {
-    Icon = Icons.spinner();
   } else if (maybeIcon(type as string)) {
     Icon = Icons[type as string](iconProps);
   }
