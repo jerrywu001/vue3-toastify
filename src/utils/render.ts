@@ -1,12 +1,12 @@
 import { ToastClassName, ToastOptions, ToastPosition, TransitionGroupOptions } from '../types';
-import { Default } from './constant';
+import { Default, POSITION } from './constant';
 import { isFn } from './tools';
 
-export function toastContainerInScreen(position = 'top-right' as ToastPosition) {
+export function toastContainerInScreen(position = POSITION.TOP_RIGHT as ToastPosition) {
   return !!document.querySelector(`.${Default.CSS_NAMESPACE}__toast-container--${position}`);
 }
 
-export function getToastPosClassName(position = 'top-right' as ToastPosition) {
+export function getToastPosClassName(position = POSITION.TOP_RIGHT as ToastPosition) {
   return `${Default.CSS_NAMESPACE}__toast-container--${position}`;
 }
 

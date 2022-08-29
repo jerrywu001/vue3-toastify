@@ -1,5 +1,5 @@
 import { CSSProperties, PropType, VNode } from 'vue';
-import { POSITION } from '../../utils/constant';
+import { POSITION, THEME, TYPE } from '../../utils/constant';
 import type { Content, ToastPosition, ToastTheme, ToastTransition, ToastType } from '../../types';
 
 const props = {
@@ -75,12 +75,12 @@ const props = {
   theme: {
     type: String as PropType<ToastTheme>,
     required: false,
-    default: 'light',
+    default: THEME.LIGHT,
   },
   content: {
     type: String as PropType<Content>,
     required: false,
-    default: 'light',
+    default: '',
   },
   toastId: {
     type: [String, Number],
@@ -97,7 +97,7 @@ const props = {
   type: {
     type: String as PropType<ToastType>,
     required: false,
-    default: 'default',
+    default: TYPE.DEFAULT,
   },
   icon: {
     type: [Boolean, String, Number, Object] as PropType<boolean | string | number | VNode>,
@@ -128,6 +128,11 @@ const props = {
     type: Object as PropType<VNode | (() => VNode)>,
     required: false,
     default: undefined,
+  },
+  isLoading: {
+    type: Boolean,
+    required: false,
+    default: false,
   },
 };
 

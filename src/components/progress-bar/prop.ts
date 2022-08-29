@@ -1,6 +1,7 @@
 import { CSSProperties, PropType } from 'vue';
 import { ToastClassName } from '../../types';
 import type { ToastTheme, ToastType } from '../../types';
+import { THEME, TYPE } from '../../utils/constant';
 
 export const props = {
   delay: {
@@ -16,12 +17,12 @@ export const props = {
   type: {
     type: String as PropType<ToastType>,
     required: false,
-    default: 'default',
+    default: TYPE.DEFAULT,
   },
   theme: {
     type: String as PropType<ToastTheme>,
     required: false,
-    default: 'light',
+    default: THEME.LIGHT,
   },
   hide: {
     type: Boolean,

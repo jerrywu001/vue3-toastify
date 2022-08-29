@@ -1,4 +1,4 @@
-import type { Options, ToastOptions, ToastPosition, ToastType, TransitionGroupOptions } from '../types';
+import type { Options, ToastOptions, ToastPosition, ToastTheme, ToastType, TransitionGroupOptions } from '../types';
 
 type KeyOfPosition =
   | 'TOP_LEFT'
@@ -8,7 +8,9 @@ type KeyOfPosition =
   | 'BOTTOM_RIGHT'
   | 'BOTTOM_CENTER';
 
-type KeyOfType = 'INFO' | 'SUCCESS' | 'WARNING' | 'ERROR' | 'LOADING' | 'DEFAULT';
+type KeyOfType = 'INFO' | 'SUCCESS' | 'WARNING' | 'ERROR' | 'DEFAULT';
+
+type KeyOfTheme = 'LIGHT' | 'DARK' | 'COLORED';
 
 export const POSITION: { [key in KeyOfPosition]: ToastPosition } = {
   TOP_LEFT: 'top-left',
@@ -19,12 +21,17 @@ export const POSITION: { [key in KeyOfPosition]: ToastPosition } = {
   BOTTOM_CENTER: 'bottom-center',
 };
 
+export const THEME: { [key in KeyOfTheme]: ToastTheme } = {
+  LIGHT: 'light',
+  DARK: 'dark',
+  COLORED: 'colored',
+};
+
 export const TYPE: { [key in KeyOfType]: ToastType } = {
   INFO: 'info',
   SUCCESS: 'success',
   WARNING: 'warning',
   ERROR: 'error',
-  LOADING: 'loading',
   DEFAULT: 'default',
 };
 

@@ -175,6 +175,7 @@ export interface ToastOptions extends Options {
    * @default -
    */
   render?: VNode | (() => VNode);
+  isLoading?: boolean;
 }
 
 /**

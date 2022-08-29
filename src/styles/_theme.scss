@@ -54,6 +54,9 @@
   &--error {
     background: var(--toastify-color-progress-error);
   }
+  &-theme--colored#{&}--default {
+    background: var(--toastify-color-progress-colored);
+  }
   &-theme--colored#{&}--info,
   &-theme--colored#{&}--success,
   &-theme--colored#{&}--warning,

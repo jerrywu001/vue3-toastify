@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { Default } from '../utils/constant';
+import { Default, THEME } from '../utils/constant';
 import { type DefineComponent, defineComponent, type PropType } from 'vue';
 import { type ToastTheme } from '../types';
 
@@ -16,7 +16,7 @@ export const CloseButton = defineComponent({
     theme: {
       type: String as PropType<ToastTheme>,
       required: false,
-      default: 'light',
+      default: THEME.LIGHT,
     },
     ariaLabel: {
       type: String,

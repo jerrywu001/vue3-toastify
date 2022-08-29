@@ -26,15 +26,35 @@ function openToast(content: Content, type: ToastType, options = {} as ToastOptio
 }
 
 /** default toast */
-const toast = (content: Content, options?: ToastOptions) => openToast(content, 'default', options);
+const toast = (content: Content, options?: ToastOptions) => openToast(content, TYPE.DEFAULT, options);
 /** info toast */
-toast.info = (content: Content, options?: ToastOptions) => openToast(content, 'info', options);
+toast.info = (content: Content, options?: ToastOptions) => openToast(content, TYPE.INFO, options);
 /** error toast */
-toast.error = (content: Content, options?: ToastOptions) => openToast(content, 'error', options);
+toast.error = (content: Content, options?: ToastOptions) => openToast(content, TYPE.ERROR, options);
 /** warning toast */
-toast.warn = (content: Content, options?: ToastOptions) => openToast(content, 'warning', options);
+toast.warning = (content: Content, options?: ToastOptions) => openToast(content, TYPE.WARNING, options);
+toast.warn = toast.warning;
 /** success toast */
-toast.success = (content: Content, options?: ToastOptions) => openToast(content, 'success', options);
+toast.success = (content: Content, options?: ToastOptions) => openToast(content, TYPE.SUCCESS, options);
+/** loading toast */
+toast.loading = (content: Content, options?: ToastOptions) => openToast(
+  content,
+  TYPE.DEFAULT,
+  mergeOptions(options, {
+    isLoading: true,
+    autoClose: false,
+    closeOnClick: false,
+    closeButton: false,
+    draggable: false,
+  } as ToastOptions),
+);
+/** dark toast */
+toast.dark = (content: Content, options?: ToastOptions) => mergeOptions(
+  content,
+  TYPE.DEFAULT,
+  mergeOptions(options, { theme: 'dark' }),
+);
+
 toast.POSITION = POSITION;
 toast.TYPE = TYPE;
 
