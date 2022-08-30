@@ -41,8 +41,8 @@ jobs:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           NETLIFY_DEPLOY_TO_PROD: true
           use_nvm: false
-          build_command: 'npm run build:storybook'
-          build_directory: 'playground/storybook-static'
+          build_command: 'npm run build:docs'
+          build_directory: 'docs/docs/.vitepress/dist'
 
       # https://github.com/marketplace/actions/deploy-to-vercel-action
       # - name: deploy to vercel
