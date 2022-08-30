@@ -2,13 +2,12 @@
 import { ref, watchEffect, type VNode } from 'vue';
 import { useRouter } from 'vue-router';
 import { toast, ToastPosition, ToastTheme, ToastType } from 'vue3-toastify';
-import { POSITION, THEME, TYPE } from 'vue3-toastify/utils/constant';
 
 const iconVal = ref<string | number>('');
 const icon = ref<string | number | boolean | VNode | undefined>(undefined);
-const type = ref<ToastType>(TYPE.DEFAULT);
-const pos = ref<ToastPosition>(POSITION.TOP_RIGHT);
-const theme = ref<ToastTheme>(THEME.LIGHT);
+const type = ref<ToastType>(toast.TYPE.DEFAULT);
+const pos = ref<ToastPosition>(toast.POSITION.TOP_RIGHT);
+const theme = ref<ToastTheme>(toast.THEME.LIGHT);
 
 function showToast() {
   toast.success('Wow so easy!', {
@@ -60,7 +59,7 @@ watchEffect(() => {
 </script>
 
 <template>
-  <div style="position: fixed; top: 50%; margin-top: -50px; left: 50%; margin-left: -325px;">
+  <div style="position: fixed; top: 28px; left: 50%; margin-left: -325px;">
     <p>Icon</p>
     <div class="py-2 px-6" style="display: flex; font-size: 12px;">
       <button
@@ -94,96 +93,96 @@ watchEffect(() => {
     <p>Theme</p>
     <div class="py-2 px-6">
       <button
-        :class="['c-btn radio', { 'active': theme === THEME.LIGHT }]"
-        @click="changeTheme(THEME.LIGHT)"
+        :class="['c-btn radio', { 'active': theme === toast.THEME.LIGHT }]"
+        @click="changeTheme(toast.THEME.LIGHT)"
       >
-        {{ THEME.LIGHT }}
+        {{ toast.THEME.LIGHT }}
       </button>
       <button
-        :class="['c-btn radio', { 'active': theme === THEME.DARK }]"
-        @click="changeTheme(THEME.DARK)"
+        :class="['c-btn radio', { 'active': theme === toast.THEME.DARK }]"
+        @click="changeTheme(toast.THEME.DARK)"
       >
-        {{ THEME.DARK }}
+        {{ toast.THEME.DARK }}
       </button>
       <button
-        :class="['c-btn radio', { 'active': theme === THEME.COLORED }]"
-        @click="changeTheme(THEME.COLORED)"
+        :class="['c-btn radio', { 'active': theme === toast.THEME.COLORED }]"
+        @click="changeTheme(toast.THEME.COLORED)"
       >
-        {{ THEME.COLORED }}
+        {{ toast.THEME.COLORED }}
       </button>
     </div>
 
     <p>Type</p>
     <div class="py-2 px-6">
       <button
-        :class="['c-btn radio', { 'active': type === TYPE.DEFAULT }]"
-        @click="changeType(TYPE.DEFAULT)"
+        :class="['c-btn radio', { 'active': type === toast.TYPE.DEFAULT }]"
+        @click="changeType(toast.TYPE.DEFAULT)"
       >
-        {{ TYPE.DEFAULT }}
+        {{ toast.TYPE.DEFAULT }}
       </button>
       <button
-        :class="['c-btn radio', { 'active': type === TYPE.SUCCESS }]"
-        @click="changeType(TYPE.SUCCESS)"
+        :class="['c-btn radio', { 'active': type === toast.TYPE.SUCCESS }]"
+        @click="changeType(toast.TYPE.SUCCESS)"
       >
-        {{ TYPE.SUCCESS }}
+        {{ toast.TYPE.SUCCESS }}
       </button>
       <button
-        :class="['c-btn radio', { 'active': type === TYPE.WARNING }]"
-        @click="changeType(TYPE.WARNING)"
+        :class="['c-btn radio', { 'active': type === toast.TYPE.WARNING }]"
+        @click="changeType(toast.TYPE.WARNING)"
       >
-        {{ TYPE.WARNING }}
+        {{ toast.TYPE.WARNING }}
       </button>
       <button
-        :class="['c-btn radio', { 'active': type === TYPE.ERROR }]"
-        @click="changeType(TYPE.ERROR)"
+        :class="['c-btn radio', { 'active': type === toast.TYPE.ERROR }]"
+        @click="changeType(toast.TYPE.ERROR)"
       >
-        {{ TYPE.ERROR }}
+        {{ toast.TYPE.ERROR }}
       </button>
       <button
-        :class="['c-btn radio', { 'active': type === TYPE.INFO }]"
-        @click="changeType(TYPE.INFO)"
+        :class="['c-btn radio', { 'active': type === toast.TYPE.INFO }]"
+        @click="changeType(toast.TYPE.INFO)"
       >
-        {{ TYPE.INFO }}
+        {{ toast.TYPE.INFO }}
       </button>
     </div>
 
     <p>Position</p>
     <div class="py-2 px-6">
       <button
-        :class="['c-btn radio', { 'active': pos === POSITION.TOP_LEFT }]"
-        @click="changePos(POSITION.TOP_LEFT)"
+        :class="['c-btn radio', { 'active': pos === toast.POSITION.TOP_LEFT }]"
+        @click="changePos(toast.POSITION.TOP_LEFT)"
       >
-        {{ POSITION.TOP_LEFT }}
+        {{ toast.POSITION.TOP_LEFT }}
       </button>
       <button
-        :class="['c-btn radio', { 'active': pos === POSITION.TOP_CENTER }]"
-        @click="changePos(POSITION.TOP_CENTER)"
+        :class="['c-btn radio', { 'active': pos === toast.POSITION.TOP_CENTER }]"
+        @click="changePos(toast.POSITION.TOP_CENTER)"
       >
-        {{ POSITION.TOP_CENTER }}
+        {{ toast.POSITION.TOP_CENTER }}
       </button>
       <button
-        :class="['c-btn radio', { 'active': pos === POSITION.TOP_RIGHT }]"
-        @click="changePos(POSITION.TOP_RIGHT)"
+        :class="['c-btn radio', { 'active': pos === toast.POSITION.TOP_RIGHT }]"
+        @click="changePos(toast.POSITION.TOP_RIGHT)"
       >
-        {{ POSITION.TOP_RIGHT }}
+        {{ toast.POSITION.TOP_RIGHT }}
       </button>
       <button
-        :class="['c-btn radio', { 'active': pos === POSITION.BOTTOM_LEFT }]"
-        @click="changePos(POSITION.BOTTOM_LEFT)"
+        :class="['c-btn radio', { 'active': pos === toast.POSITION.BOTTOM_LEFT }]"
+        @click="changePos(toast.POSITION.BOTTOM_LEFT)"
       >
-        {{ POSITION.BOTTOM_LEFT }}
+        {{ toast.POSITION.BOTTOM_LEFT }}
       </button>
       <button
-        :class="['c-btn radio', { 'active': pos === POSITION.BOTTOM_CENTER }]"
-        @click="changePos(POSITION.BOTTOM_CENTER)"
+        :class="['c-btn radio', { 'active': pos === toast.POSITION.BOTTOM_CENTER }]"
+        @click="changePos(toast.POSITION.BOTTOM_CENTER)"
       >
-        {{ POSITION.BOTTOM_CENTER }}
+        {{ toast.POSITION.BOTTOM_CENTER }}
       </button>
       <button
-        :class="['c-btn radio', { 'active': pos === POSITION.BOTTOM_RIGHT }]"
-        @click="changePos(POSITION.BOTTOM_RIGHT)"
+        :class="['c-btn radio', { 'active': pos === toast.POSITION.BOTTOM_RIGHT }]"
+        @click="changePos(toast.POSITION.BOTTOM_RIGHT)"
       >
-        {{ POSITION.BOTTOM_RIGHT }}
+        {{ toast.POSITION.BOTTOM_RIGHT }}
       </button>
     </div>
     <br>

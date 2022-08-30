@@ -1,5 +1,12 @@
-import { ToastClassName, ToastOptions, ToastPosition, TransitionGroupOptions } from '../types';
+import type { App } from 'vue';
 import { Default, POSITION } from './constant';
+import type {
+  Id,
+  ToastClassName,
+  ToastOptions,
+  ToastPosition,
+  TransitionGroupOptions,
+} from '../types';
 import { isFn } from './tools';
 
 export function toastContainerInScreen(position = POSITION.TOP_RIGHT as ToastPosition) {
@@ -26,13 +33,31 @@ export function getContainerClassName(position: ToastPosition, className: ToastC
     : `${defaultClassName} ${className || ''}`;
 }
 
+export function getContainerId(options: ToastOptions) {
+  return options.containerId || String(options.position);
+}
+
+export function cacheRenderInstance(app: App<Element>, id: Id) {
+  const container = document.getElementById(String(id));
+  if (container) {
+    window.toastInsMap = window.toastInsMap || {};
+    window.toastInsMap[container.id] = app;
+  }
+}
+
+export function unmountContainer(options: ToastOptions) {
+  const id = getContainerId(options);
+  window.toastInsMap[id].unmount();
+  document.getElementById(String(id))?.remove();
+}
+
 export function generateRenderRoot(options: ToastOptions & TransitionGroupOptions) {
   const { position, className, rtl = false } = options;
   const rootClass = Default.CSS_NAMESPACE;
   const toastPosClassName = getToastPosClassName(position);
   const existRoot = !!document.querySelector(`.${rootClass}`);
   const existRenderRoot = !!document.querySelector(`.${toastPosClassName}`);
-  const container = document.createElement('div');
+  const container = document.querySelector(`.${rootClass}`) || document.createElement('div');
   const renderRoot = document.createElement('div');
 
   renderRoot.className = getContainerClassName(
@@ -40,6 +65,7 @@ export function generateRenderRoot(options: ToastOptions & TransitionGroupOption
     className as ToastClassName,
     rtl,
   );
+  renderRoot.id = getContainerId(options);
 
   if (!existRoot) {
     container.className = Default.CSS_NAMESPACE;
@@ -48,7 +74,6 @@ export function generateRenderRoot(options: ToastOptions & TransitionGroupOption
 
   if (!existRenderRoot) {
     container.appendChild(renderRoot);
-    document.body.appendChild(container);
   }
 
   return renderRoot;

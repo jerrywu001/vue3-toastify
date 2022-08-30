@@ -17,6 +17,8 @@ export type ToastTheme = 'light' | 'dark' | 'colored';
  * options for toast
  */
 export interface Options {
+  /** toast group id */
+  containerId?: string;
   /**
    * One of top-right, top-center, top-left, bottom-right, bottom-center, bottom-left
    * @mark {@link ToastPosition}
@@ -189,3 +191,5 @@ export type ToastClassName =
    rtl?: boolean;
  }) => string)
  | string;
+
+export type Data = Record<string, unknown>;

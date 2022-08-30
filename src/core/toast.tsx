@@ -1,10 +1,14 @@
 import { addToast } from '../store';
+import {
+  cacheRenderInstance,
+  generateRenderRoot,
+  toastContainerInScreen,
+} from '../utils/render';
 import { createApp } from 'vue';
-import { generateRenderRoot, toastContainerInScreen } from '../utils/render';
 import { generateToastId, getGlobalOptions, mergeOptions } from '../utils/tools';
 import { POSITION, THEME, TYPE } from '../utils/constant';
 import { ToastifyContainer } from '../components';
-import type { Content, ToastOptions, ToastType } from '../types';
+import type { Content, Data, Id, ToastOptions, ToastType } from '../types';
 
 function openToast(content: Content, type: ToastType, options = {} as ToastOptions) {
   options = mergeOptions<ToastOptions>(getGlobalOptions(), { type }, options);
@@ -19,10 +23,12 @@ function openToast(content: Content, type: ToastType, options = {} as ToastOptio
 
   if (!toastContainerInScreen(options.position)) {
     const rootDom = generateRenderRoot(options);
-    // @ts-ignore
-    const app = createApp(ToastifyContainer, options);
+    const app = createApp(ToastifyContainer, options as Data);
     app.mount(rootDom);
+    cacheRenderInstance(app, rootDom.id);
   }
+
+  return options.toastId as Id;
 }
 
 /** default toast */
@@ -56,6 +62,7 @@ toast.dark = (content: Content, options?: ToastOptions) => openToast(
 );
 
 toast.POSITION = POSITION;
+toast.THEME = THEME;
 toast.TYPE = TYPE;
 
 export default toast;

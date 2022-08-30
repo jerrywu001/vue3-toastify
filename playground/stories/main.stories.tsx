@@ -4,5 +4,6 @@ export default {
 
 export const Main = () => (
   <div>
+    test storybook
   </div>
 );
