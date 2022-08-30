@@ -1,5 +1,5 @@
 import Index from './pages/index.vue';
-import About from './pages/About.vue';
+import About from './pages/about.vue';
 import { createRouter, createWebHistory } from 'vue-router';
 
 const routes = [

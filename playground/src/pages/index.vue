@@ -59,7 +59,7 @@ watchEffect(() => {
 </script>
 
 <template>
-  <div style="position: fixed; top: 28px; left: 50%; margin-left: -325px;">
+  <div style="padding: 0 24px 22px; margin: 0 auto; max-width: 1192px;">
     <p>Icon</p>
     <div class="py-2 px-6" style="display: flex; font-size: 12px;">
       <button

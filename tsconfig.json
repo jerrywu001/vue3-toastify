@@ -32,7 +32,10 @@
       "vue3-toastify/*": [
         "./src/*"
       ]
-    }
+    },
+    "types": [
+      "./global"
+    ]
   },
   "include": [
     "**/*"

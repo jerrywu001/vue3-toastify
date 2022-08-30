@@ -31,6 +31,7 @@
     "README.md"
   ],
   "workspaces": [
+    "docs",
     "playground"
   ],
   "scripts": {
@@ -38,11 +39,14 @@
     "build": "tsup && npm run build:css",
     "dev": "npm run dev -w playground",
     "dev:use-bundle": "run-p tsup-w dev-pack",
+    "docs": "npm run docs:dev -w docs",
+    "build:docs": "npm run docs:build -w docs",
     "build:css": "npm run build:scss && npm run build:postcss && rimraf rf ./src/index.css",
     "build:scss": "sass --no-source-map --style=compressed src/styles/main.scss src/index.css",
     "build:postcss": "postcss src/index.css -o dist/index.css",
     "build:vite": "vite build && npm run build:css",
     "build:storybook": "npm run build:storybook -w playground",
+    "preview:docs": "npm run docs:serve -w docs",
     "postinstall": "rimraf rf ./node_modules/@types/react",
     "lint": "eslint --ext .ts,.tsx,.vue ./src",
     "tsup-w": "tsup --watch",
