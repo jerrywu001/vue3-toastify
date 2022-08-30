@@ -1,9 +1,5 @@
-import { addToast } from '../store';
-import {
-  cacheRenderInstance,
-  generateRenderRoot,
-  toastContainerInScreen,
-} from '../utils/render';
+import { addToast, cacheRenderInstance } from '../store';
+import { generateRenderRoot, toastContainerInScreen } from '../utils/render';
 import { createApp } from 'vue';
 import { generateToastId, getGlobalOptions, mergeOptions } from '../utils/tools';
 import { POSITION, THEME, TYPE } from '../utils/constant';

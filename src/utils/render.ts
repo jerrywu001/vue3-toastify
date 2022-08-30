@@ -1,13 +1,12 @@
-import type { App } from 'vue';
 import { Default, POSITION } from './constant';
 import type {
-  Id,
   ToastClassName,
   ToastOptions,
   ToastPosition,
   TransitionGroupOptions,
 } from '../types';
 import { isFn } from './tools';
+import { toastInsMap } from 'vue3-toastify/store/toastIns';
 
 export function toastContainerInScreen(position = POSITION.TOP_RIGHT as ToastPosition) {
   return !!document.querySelector(`.${Default.CSS_NAMESPACE}__toast-container--${position}`);
@@ -37,17 +36,9 @@ export function getContainerId(options: ToastOptions) {
   return options.containerId || String(options.position);
 }
 
-export function cacheRenderInstance(app: App<Element>, id: Id) {
-  const container = document.getElementById(String(id));
-  if (container) {
-    window.toastInsMap = window.toastInsMap || {};
-    window.toastInsMap[container.id] = app;
-  }
-}
-
 export function unmountContainer(options: ToastOptions) {
   const id = getContainerId(options);
-  window.toastInsMap[id].unmount();
+  toastInsMap.value[id].unmount();
   document.getElementById(String(id))?.remove();
 }
 

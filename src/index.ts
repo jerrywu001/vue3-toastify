@@ -11,7 +11,7 @@ const Vue3Toastify: Plugin = {
 };
 
 // CDN compatibility
-if (window !== undefined && 'Vue' in window) {
+if (typeof window !== 'undefined') {
   window.Vue3Toastify = Vue3Toastify;
 }
 
