@@ -4,7 +4,6 @@ import path from 'path';
 import { defineConfig } from 'vite';
 import Vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
-import WindiCSS from 'vite-plugin-windicss';
 
 export default defineConfig({
   resolve: {
@@ -22,7 +21,5 @@ export default defineConfig({
     }),
 
     vueJsx(),
-
-    WindiCSS(),
   ],
 });

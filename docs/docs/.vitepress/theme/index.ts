@@ -4,7 +4,6 @@ import Playground from '../../../../playground/src/pages/index.vue';
 // @ts-ignore
 import CodeDemo from '../../components/CodeDemo.vue';
 
-import 'virtual:windi.css';
 import './index.scss';
 
 // eslint-disable-next-line import/no-relative-packages

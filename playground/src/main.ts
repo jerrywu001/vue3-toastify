@@ -5,7 +5,6 @@ import Vue3Toasity, { type TransitionGroupOptions } from 'vue3-toastify';
 
 import App from './App.vue';
 
-import 'virtual:windi.css';
 import './styles/main.css';
 import './index.css';
 

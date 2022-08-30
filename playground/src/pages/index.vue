@@ -196,8 +196,24 @@ watchEffect(() => {
 </template>
 
 <style lang="postcss">
+.py-2 {
+  padding-top: 0.5rem; /* 8px */
+  padding-bottom: 0.5rem; /* 8px */
+}
+
+.px-6 {
+  padding-left: 1.5rem; /* 24px */
+  padding-right: 1.5rem; /* 24px */
+}
+
 .c-btn {
-  @apply rounded-md border border-light-50 mr-5 p-2 text-xs;
+  border-width: 1px;
+  border-radius: 0.375rem;
+  border-color: rgba(253, 253, 253, 1);
+  margin-right: 1.25rem;
+  padding: 0.5rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
 }
 
 .green {

@@ -1,6 +1,5 @@
 import { defineConfig } from 'vitepress';
 import vueJsx from '@vitejs/plugin-vue-jsx';
-import WindiCSS from 'vite-plugin-windicss';
 import { version } from '../../../package.json';
 import path from 'path';
 
@@ -9,7 +8,6 @@ export default defineConfig({
   title: 'Vue3 toastify',
   description: 'Vue3 toastify docs',
   lastUpdated: true,
-
   themeConfig: {
     nav: nav(),
 
@@ -38,7 +36,6 @@ export default defineConfig({
     },
     plugins: [
       vueJsx(),
-      WindiCSS(),
     ],
   },
 })
@@ -67,6 +64,7 @@ function sidebarConfig() {
       collapsible: true,
       items: [
         { text: 'Introduction', link: '/get-started/introduction' },
+        { text: 'Installation', link: '/get-started/installation' },
       ]
     },
     {
