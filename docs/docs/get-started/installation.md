@@ -2,67 +2,28 @@
 
 ## Requirements
 
-vue version >=3.2.0
+`vue` version >=`3.2.0`
 
 ## Installation
 
-- With npm:
 
-```bash
+:::code-group
+```bash  [Npm]
 npm install --save vue3-toastify
 ```
 
-- With yarn:
-
-```bash
+```bash  [Yarn]
 yarn add vue3-toastify
 ```
+:::
 
 ## Global config
 
-
-```ts
-import { createApp } from 'vue';
-import Vue3Toasity, { type TransitionGroupOptions } from 'vue3-toastify';
-import App from './App.vue';
-import 'vue3-toastify/dist/index.css';
-
-const app = createApp(App);
-
-app.use(
-  Vue3Toasity,
-  {
-    autoClose: 3000,
-    style: {
-      opacity: '1',
-      userSelect: 'initial',
-    },
-    // ...
-  } as TransitionGroupOptions,
-);
-
-app.mount('#app');
-
-```
+see: demo --> `main.js`
 
 ## demo
 
-```vue
-<template>
-  <div>
-    <button @click="notify">Notify !</button>
-  </div>
-</template>
-
-<script setup lang="ts">
-import { toast } from 'vue3-toastify';
-import 'vue3-toastify/dist/index.css';
-
-const notify = () => toast("Wow so easy !");
-</script>
-```
-
-::: details jsx demo
+::: details For Jsx
 ```jsx
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
@@ -76,5 +37,42 @@ function App() {
     </div>
   );
 }
+```
+:::
+
+::: sandbox
+```vue App.vue
+<template>
+  <div>
+    <button @click="notify">Notify !</button>
+  </div>
+</template>
+
+<script>
+import { toast } from 'vue3-toastify';
+
+export default {
+   name: "App",
+   setup() {
+    const notify = () => toast("Wow so easy !", { autoClose: 3000 });
+    return { notify };
+   }
+};
+</script>
+```
+
+```js /src/main.js [active]
+import App from './App.vue';
+import { createApp } from 'vue';
+import Vue3Toasity from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
+
+createApp(App).use(
+  Vue3Toasity,
+  {
+    autoClose: 3000,
+    // ...
+  },
+).mount('#app');
 ```
 :::

@@ -11,23 +11,35 @@ export default defineConfig({
 
   markdown: {
     config(md) {
-      md.use(require('markdown-it-directive'))
-      md.use(require('markdown-it-directive-webcomponents'), {
-        components: [
+      md
+        .use(require('markdown-it-directive'))
+        .use(
+          require('markdown-it-directive-webcomponents'),
           {
-            present: 'both',
-            name: 'playground',
-            tag: 'playground',
-            parseInner: true,
-          },
-          {
-            present: 'both',
-            name: 'sandbox',
-            tag: 'sand-box',
-            parseInner: true,
-          },
-        ],
-      });
+            components: [
+              {
+                present: 'both',
+                name: 'playground',
+                tag: 'playground',
+                parseInner: true,
+              },
+              {
+                present: 'both',
+                name: 'sandbox',
+                tag: 'sand-box',
+                allowedAttrs: ['readonly', 'closabletabs', 'template'],
+                parseInner: true,
+              },
+              {
+                present: 'both',
+                name: 'code-group',
+                tag: 'code-group',
+                allowedAttrs: ['tag'],
+                parseInner: true,
+              },
+            ],
+          }
+      );
     },
   },
 
