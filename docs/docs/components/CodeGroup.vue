@@ -102,6 +102,10 @@ onMounted(() => {
   margin-top: 1rem;
   margin-bottom: 1rem;
 
+  p {
+    margin: 0;
+  }
+
   div[class*='language-'] {
     display: none;
     width: 100%;
@@ -111,10 +115,6 @@ onMounted(() => {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     background-color: rgba(43, 47, 77, 0.93);
-
-    & > button.copy {
-      background-color: transparent;
-    }
 
     &:first-child {
       display: block;
@@ -132,7 +132,7 @@ onMounted(() => {
       display: flex;
       height: 100%;
       width: 100%;
-      background-color: rgba(255, 255, 255, 0.84);
+      background-color: #fff;
     }
   }
 
@@ -186,19 +186,9 @@ onMounted(() => {
     }
   }
 
-  p {
-    margin: 0;
-  }
-}
-
-.dark {
-  .code-group {
+  .dark & {
     div[class*='language-'] {
       background-color: rgba(43, 47, 77, 0.63);
-
-      & > button.copy {
-        background-color: rgba(18, 12, 12, 0.24);
-      }
     }
 
     &-wrapper {
