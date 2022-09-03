@@ -1,13 +1,22 @@
 html,
-body,
-#app {
-  height: 100%;
+body {
   margin: 0;
   padding: 0;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
 }
 
 html.dark {
   background: #121212;
+}
+
+#app {
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 .page-fade-enter-active,
