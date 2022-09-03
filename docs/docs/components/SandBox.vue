@@ -4,6 +4,7 @@
     :template="template"
     :files="files"
     :options="{
+      showConsoleButton: true,
       showLineNumbers: true,
       showTabs: true,
       closableTabs: closabletabs === 'true',
@@ -18,7 +19,7 @@ import {
   type SandpackFiles,
   type SandpackThemeProp,
   type SandpackPredefinedTemplate,
-  SandpackPredefinedTheme,
+  type SandpackPredefinedTheme,
 } from 'codesandbox-sandpack-vue3';
 import { renderToString } from 'vue/server-renderer';
 import { nextTick, onBeforeMount, onMounted, PropType, ref, useSlots, VNode } from 'vue';
