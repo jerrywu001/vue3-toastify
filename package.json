@@ -73,7 +73,7 @@
     "@storybook/addon-links": "~6.4.22",
     "@storybook/builder-vite": "0.1.37",
     "@storybook/vue3": "~6.4.22",
-    "@swc/core": "^1.2.246",
+    "@swc/core": "^1.2.247",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/user-event": "^14.4.3",
     "@testing-library/vue": "^6.6.1",
@@ -84,7 +84,7 @@
     "@typescript-eslint/parser": "^5.36.1",
     "@vitejs/plugin-vue": "^3.0.3",
     "@vitejs/plugin-vue-jsx": "^2.0.1",
-    "@vitest/ui": "^0.22.1",
+    "@vitest/ui": "^0.23.0",
     "@vue/babel-plugin-jsx": "^1.1.1",
     "@vue/eslint-config-typescript": "^11.0.0",
     "autoprefixer": "^10.4.8",
@@ -102,7 +102,7 @@
     "husky": "^8.0.1",
     "jsdom": "^20.0.0",
     "lint-staged": "^13.0.3",
-    "npm": "^8.18.0",
+    "npm": "^8.19.1",
     "npm-run-all": "^4.1.5",
     "postcss": "^8.4.16",
     "postcss-cli": "^10.0.0",
@@ -121,8 +121,8 @@
     "typescript": "~4.7.4",
     "vite": "^3.0.9",
     "vite-plugin-dts": "^1.4.1",
-    "vitest": "^0.22.1",
-    "vue-tsc": "^0.40.5"
+    "vitest": "^0.23.0",
+    "vue-tsc": "^0.40.7"
   },
   "peerDependencies": {
     "vue": "^3.2.0"
