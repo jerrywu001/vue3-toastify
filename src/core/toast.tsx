@@ -1,8 +1,9 @@
-import { addToast, cacheRenderInstance } from '../store';
+import { cacheRenderInstance } from '../store';
+import { createApp, nextTick } from 'vue';
+import { Event, eventManager } from '..';
 import { generateRenderRoot, toastContainerInScreen } from '../utils/render';
-import { createApp } from 'vue';
 import { generateToastId, getGlobalOptions, mergeOptions } from '../utils/tools';
-import { POSITION, THEME, TYPE } from '../utils/constant';
+import { POSITION, THEME, TRANSITIONS, TYPE } from '../utils/constant';
 import { ToastifyContainer } from '../components';
 import type { Content, Data, Id, ToastOptions, ToastType } from '../types';
 
@@ -12,10 +13,12 @@ function openToast(content: Content, type: ToastType, options = {} as ToastOptio
   if (!options.toastId) {
     options.toastId = generateToastId();
   }
-  options = { ...options, content } as ToastOptions;
-  console.log('Toast options: ', options);
 
-  addToast(options);
+  options = {
+    ...options,
+    content,
+    containerId: options.containerId || String(options.position),
+  } as ToastOptions;
 
   if (!toastContainerInScreen(options.position)) {
     const rootDom = generateRenderRoot(options);
@@ -23,6 +26,10 @@ function openToast(content: Content, type: ToastType, options = {} as ToastOptio
     app.mount(rootDom);
     cacheRenderInstance(app, rootDom.id);
   }
+
+  nextTick(() => {
+    eventManager.emit(Event.Add, content, options);
+  });
 
   return options.toastId as Id;
 }
@@ -57,8 +64,19 @@ toast.dark = (content: Content, options?: ToastOptions) => openToast(
   mergeOptions(options, { theme: THEME.DARK }),
 );
 
+/** remove a toast */
+toast.remove = (toastId: Id) => {
+  eventManager.emit(Event.Remove, toastId);
+};
+
+/** clear all toast */
+toast.clearAll = (containerId?: Id) => {
+  eventManager.emit(Event.ClearAll, containerId);
+};
+
 toast.POSITION = POSITION;
 toast.THEME = THEME;
 toast.TYPE = TYPE;
+toast.TRANSITIONS = TRANSITIONS;
 
 export default toast;

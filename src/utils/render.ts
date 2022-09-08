@@ -6,7 +6,6 @@ import type {
   TransitionGroupOptions,
 } from '../types';
 import { isFn } from './tools';
-import { toastInsMap } from 'vue3-toastify/store/toastIns';
 
 export function toastContainerInScreen(position = POSITION.TOP_RIGHT as ToastPosition) {
   return !!document.querySelector(`.${Default.CSS_NAMESPACE}__toast-container--${position}`);
@@ -36,12 +35,6 @@ export function getContainerId(options: ToastOptions) {
   return options.containerId || String(options.position);
 }
 
-export function unmountContainer(options: ToastOptions) {
-  const id = getContainerId(options);
-  toastInsMap.value[id].unmount();
-  document.getElementById(String(id))?.remove();
-}
-
 export function generateRenderRoot(options: ToastOptions & TransitionGroupOptions) {
   const { position, className, rtl = false } = options;
   const rootClass = Default.CSS_NAMESPACE;
@@ -56,7 +49,7 @@ export function generateRenderRoot(options: ToastOptions & TransitionGroupOption
     className as ToastClassName,
     rtl,
   );
-  renderRoot.id = getContainerId(options);
+  renderRoot.id = getContainerId(options) as string;
 
   if (!existRoot) {
     container.className = Default.CSS_NAMESPACE;

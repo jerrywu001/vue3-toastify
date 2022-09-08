@@ -1,15 +1,18 @@
 import props from './prop';
-import { computed, DefineComponent, defineComponent } from 'vue';
-import { toastOptionList } from '../..';
-import type { ToastOptions } from '../../types';
 import ToastItem from '../ToastItem';
+import { computed, DefineComponent, defineComponent } from 'vue';
+import { useToastContainer } from '../..';
+import type { Id, ToastOptions } from '../../types';
 
 const ToastifyContainer = defineComponent({
   name: 'ToastifyContainer',
   inheritAttrs: false,
   props,
   setup(_props: ToastOptions) {
-    const toasts = computed(() => toastOptionList.value.filter(v => v.position === _props.position));
+    const { toastMap } = useToastContainer(_props);
+    const containerId = computed(() => _props.containerId as Id);
+    const allToasts = computed<ToastOptions[]>(() => toastMap[containerId.value] || []);
+    const toasts = computed(() => allToasts.value.filter(v => v.position === _props.position));
 
     return () => (
       <>

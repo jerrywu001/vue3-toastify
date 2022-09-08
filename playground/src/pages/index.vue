@@ -1,37 +1,44 @@
 <script setup lang="ts">
 import { ref, watchEffect, type VNode } from 'vue';
 import { useRouter } from 'vue-router';
-import { toast, ToastPosition, ToastTheme, ToastType } from 'vue3-toastify';
+import { toast, ToastPosition, ToastTheme, ToastTransition, ToastType } from 'vue3-toastify';
 
 const iconVal = ref<string | number>('');
 const icon = ref<string | number | boolean | VNode | undefined>(undefined);
 const type = ref<ToastType>(toast.TYPE.DEFAULT);
 const pos = ref<ToastPosition>(toast.POSITION.TOP_RIGHT);
+const transition = ref<ToastTransition>(toast.TRANSITIONS.BOUNCE);
 const theme = ref<ToastTheme>(toast.THEME.LIGHT);
 
 function showToast() {
-  toast.success('Wow so easy!', {
+  toast.success(`Wow so easy! ${parseInt(String(Math.random() * 100000), 10)}`, {
     icon: icon.value,
     theme: theme.value,
     type: type.value,
     position: pos.value,
     autoClose: 2000,
+    transition: transition.value,
     style: { userSelect: 'none' },
   });
 }
 
 function showLoadToast() {
-  toast.loading('Wow so easy!', {
+  toast.loading(`Wow so easy! ${parseInt(String(Math.random() * 100000), 10)}`, {
     icon: icon.value,
     theme: theme.value,
     type: type.value,
     position: pos.value,
     autoClose: 2000,
+    transition: transition.value,
     style: { userSelect: 'none' },
   });
 }
 
 const router = useRouter();
+
+const clearAll = () => {
+  toast.clearAll();
+};
 
 const toAbout = () => {
   router.push('/about');
@@ -43,6 +50,10 @@ const changeType = (value: ToastType) => {
 
 const changePos = (value: ToastPosition) => {
   pos.value = value;
+};
+
+const changeTransition = (value: ToastTransition) => {
+  transition.value = value;
 };
 
 const changeTheme = (value: ToastTheme) => {
@@ -146,6 +157,34 @@ watchEffect(() => {
       </button>
     </div>
 
+    <p>Transition</p>
+    <div class="py-2 px-6">
+      <button
+        :class="['c-btn radio', { 'active': transition === toast.TRANSITIONS.BOUNCE }]"
+        @click="changeTransition(toast.TRANSITIONS.BOUNCE)"
+      >
+        {{ toast.TRANSITIONS.BOUNCE }}
+      </button>
+      <button
+        :class="['c-btn radio', { 'active': transition === toast.TRANSITIONS.FLIP }]"
+        @click="changeTransition(toast.TRANSITIONS.FLIP)"
+      >
+        {{ toast.TRANSITIONS.FLIP }}
+      </button>
+      <button
+        :class="['c-btn radio', { 'active': transition === toast.TRANSITIONS.SLIDE }]"
+        @click="changeTransition(toast.TRANSITIONS.SLIDE)"
+      >
+        {{ toast.TRANSITIONS.SLIDE }}
+      </button>
+      <button
+        :class="['c-btn radio', { 'active': transition === toast.TRANSITIONS.ZOOM }]"
+        @click="changeTransition(toast.TRANSITIONS.ZOOM)"
+      >
+        {{ toast.TRANSITIONS.ZOOM }}
+      </button>
+    </div>
+
     <p>Position</p>
     <div class="py-2 px-6">
       <button
@@ -191,6 +230,7 @@ watchEffect(() => {
       <button class="c-btn green" @click="showToast">💡 show toast</button>
       <button class="c-btn green" @click="showLoadToast">💡 show loading toast</button>
       <button class="c-btn green" @click="toAbout">🚀 to about</button>
+      <button class="c-btn green" @click="clearAll">unmount all container</button>
     </div>
   </div>
 </template>

@@ -1,4 +1,4 @@
-import { CSSProperties, PropType } from 'vue';
+import { HTMLAttributes, PropType } from 'vue';
 import { ToastClassName } from '../../types';
 import type { ToastTheme, ToastType } from '../../types';
 import { THEME, TYPE } from '../../utils/constant';
@@ -34,11 +34,6 @@ export const props = {
     required: false,
     default: '',
   },
-  style: {
-    type: Object as PropType<CSSProperties>,
-    required: false,
-    default: {},
-  },
   controlledProgress: {
     type: Boolean,
     required: false,
@@ -66,7 +61,7 @@ export const props = {
   },
 };
 
-export interface ProgressBarProps {
+export interface ProgressBarProps extends HTMLAttributes {
   /**
    * The animation delay which determine when to close the toast
    */
@@ -101,11 +96,6 @@ export interface ProgressBarProps {
    * Optionnal className
    */
   className?: ToastClassName;
-
-  /**
-   * Optionnal inline style
-   */
-  style?: CSSProperties;
 
   /**
    * Tell wether or not controlled progress bar is used

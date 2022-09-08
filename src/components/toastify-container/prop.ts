@@ -3,6 +3,11 @@ import { POSITION, THEME, TYPE } from '../../utils/constant';
 import type { Content, ToastPosition, ToastTheme, ToastTransition, ToastType } from '../../types';
 
 const props = {
+  containerId: {
+    type: String,
+    required: false,
+    default: '',
+  },
   position: {
     type: String as PropType<ToastPosition>,
     required: false,
@@ -14,7 +19,7 @@ const props = {
     default: false,
   },
   closeButton: {
-    type: Object as PropType<boolean | VNode | (() => VNode)>,
+    type: [Boolean, Function, Object] as PropType<boolean | VNode | (() => VNode)>,
     required: false,
     default: undefined,
   },

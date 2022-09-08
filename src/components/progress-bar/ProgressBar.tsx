@@ -1,18 +1,20 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { ProgressBarProps, props as properties } from './prop';
-import { computed, CSSProperties, DefineComponent, defineComponent } from 'vue';
+import { computed, CSSProperties, DefineComponent, defineComponent, onMounted, ref } from 'vue';
 import { Default } from '../../utils/constant';
 import { isFn } from '../../utils/tools';
 
 const ProgressBar = defineComponent({
   name: 'ProgressBar',
-  inheritAttrs: false,
   props: properties,
-  setup(props) {
+  // @ts-ignore
+  setup(props: ProgressBarProps, { attrs }) {
+    const nodeRef = ref<HTMLDivElement>();
+
     const ariaHidden = computed(() => props.hide ? 'true' : 'false');
 
     const style = computed<CSSProperties>(() => ({
-      ...props.style,
+      ...(attrs.style || {}),
       animationDuration: `${props.delay}ms`,
       animationPlayState: props.isRunning ? 'running' : 'paused',
       opacity: props.hide ? 0 : 1,
@@ -40,29 +42,32 @@ const ProgressBar = defineComponent({
     );
 
     // 🧐 controlledProgress is derived from progress
-    // so if controlledProgress is set
-    // it means that this is also the case for progress
-    const animationEvent = computed(
-      () => ({
-        [props.controlledProgress && props.progress! >= 1
-          ? 'onTransitionEnd'
-          : 'onAnimationEnd']:
-        props.controlledProgress && props.progress! < 1
-          ? null
-          : () => {
-            if (props.isIn && props.closeToast) props.closeToast();
-          },
-      }),
-    );
+    // so if controlledProgress is set, it means that this is also the case for progress
+    const animationEventName = computed(() => props.controlledProgress && props.progress! >= 1
+      ? 'ontransitionend'
+      : 'onanimationend');
+    const animationEventHandler = computed(() => props.controlledProgress && props.progress! < 1
+      ? null
+      : () => {
+        if (props.isIn && props.closeToast) {
+          props.closeToast();
+        }
+      });
+
+    onMounted(() => {
+      if (nodeRef.value) {
+        nodeRef.value[animationEventName.value] = animationEventHandler.value;
+      }
+    });
 
     return () => (
       <div
+        ref={nodeRef}
         role="progressbar"
         aria-hidden={ariaHidden.value}
         aria-label="notification timer"
         class={classNames.value}
         style={style.value}
-        {...animationEvent.value}
       />
     );
   },
