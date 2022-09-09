@@ -57,6 +57,10 @@ export function useCssTransition(props: CSSTransitionProps & OtherProps) {
     isRunning.value = true;
   }
 
+  function hideToast() {
+    isIn.value = false;
+  }
+
   // function pauseToast() {
   //   isRunning.value = false;
   // }
@@ -85,10 +89,6 @@ export function useCssTransition(props: CSSTransitionProps & OtherProps) {
 
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     if (!isIn.value) preventExitTransition.value ? onExited() : onExit();
-  }
-
-  function hideToast() {
-    isIn.value = false;
   }
 
   watchEffect(() => {

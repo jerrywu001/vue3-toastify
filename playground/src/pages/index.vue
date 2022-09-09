@@ -1,241 +1,59 @@
 <script setup lang="ts">
-import { ref, watchEffect, type VNode } from 'vue';
-import { useRouter } from 'vue-router';
-import { toast, ToastPosition, ToastTheme, ToastTransition, ToastType } from 'vue3-toastify';
+import { ref } from 'vue';
+import { toast, ToastOptions } from 'vue3-toastify';
+import Conditions from '../components/Conditions.vue';
 
-const iconVal = ref<string | number>('');
-const icon = ref<string | number | boolean | VNode | undefined>(undefined);
-const type = ref<ToastType>(toast.TYPE.DEFAULT);
-const pos = ref<ToastPosition>(toast.POSITION.TOP_RIGHT);
-const transition = ref<ToastTransition>(toast.TRANSITIONS.BOUNCE);
-const theme = ref<ToastTheme>(toast.THEME.LIGHT);
+const showConditions = ref(false);
+const options = ref({} as ToastOptions);
+
+const toggleConditions = () => {
+  showConditions.value = !showConditions.value;
+};
+
+const onOptionsChange = (opts: ToastOptions) => {
+  options.value = opts;
+};
 
 function showToast() {
-  toast.success(`Wow so easy! ${parseInt(String(Math.random() * 100000), 10)}`, {
-    icon: icon.value,
-    theme: theme.value,
-    type: type.value,
-    position: pos.value,
-    autoClose: 2000,
-    transition: transition.value,
-    style: { userSelect: 'none' },
-  });
+  toast.success(`Wow so easy! ${parseInt(String(Math.random() * 100000), 10)}`, options.value);
 }
 
 function showLoadToast() {
-  toast.loading(`Wow so easy! ${parseInt(String(Math.random() * 100000), 10)}`, {
-    icon: icon.value,
-    theme: theme.value,
-    type: type.value,
-    position: pos.value,
-    autoClose: 2000,
-    transition: transition.value,
-    style: { userSelect: 'none' },
-  });
+  toast.loading(`Wow so easy! ${parseInt(String(Math.random() * 100000), 10)}`, options.value);
 }
-
-const router = useRouter();
 
 const clearAll = () => {
   toast.clearAll();
 };
-
-const toAbout = () => {
-  router.push('/about');
-};
-
-const changeType = (value: ToastType) => {
-  type.value = value;
-};
-
-const changePos = (value: ToastPosition) => {
-  pos.value = value;
-};
-
-const changeTransition = (value: ToastTransition) => {
-  transition.value = value;
-};
-
-const changeTheme = (value: ToastTheme) => {
-  theme.value = value;
-};
-
-const changeIcon = (value: string | number | boolean | VNode | undefined) => {
-  icon.value = value;
-};
-
-watchEffect(() => {
-  icon.value = iconVal.value || undefined;
-});
 </script>
 
 <template>
-  <div style="padding: 0 24px 22px; margin: 0 auto; max-width: 1192px;">
-    <p>Icon</p>
-    <div class="py-2 px-6" style="display: flex; flex-wrap: wrap; font-size: 12px;">
-      <button
-        :class="['c-btn radio', { 'active': icon === false }]"
-        @click="changeIcon(false)"
-      >
-        disabled icon
-      </button>
-      <button
-        :class="['c-btn radio', { 'active': icon === undefined }]"
-        @click="changeIcon(undefined)"
-      >
-        unset
-      </button>
-      <div>
-        <button
-          class="c-btn radio"
-          style="border: none;"
-        >
-          custom icon:
-        </button>
-        <input
-          v-model="iconVal"
-          :class="[{ 'active': icon !== undefined && icon !== false && !!iconVal }]"
-          style="width: 300px;"
-          placeholder="enter custom icon: string | number"
-        >
-      </div>
-    </div>
+  <div class="hr" />
 
-    <p>Theme</p>
-    <div class="py-2 px-6">
-      <button
-        :class="['c-btn radio', { 'active': theme === toast.THEME.LIGHT }]"
-        @click="changeTheme(toast.THEME.LIGHT)"
-      >
-        {{ toast.THEME.LIGHT }}
-      </button>
-      <button
-        :class="['c-btn radio', { 'active': theme === toast.THEME.DARK }]"
-        @click="changeTheme(toast.THEME.DARK)"
-      >
-        {{ toast.THEME.DARK }}
-      </button>
-      <button
-        :class="['c-btn radio', { 'active': theme === toast.THEME.COLORED }]"
-        @click="changeTheme(toast.THEME.COLORED)"
-      >
-        {{ toast.THEME.COLORED }}
-      </button>
-    </div>
+  <Conditions
+    :visible="showConditions"
+    @on-close="toggleConditions"
+    @on-change="onOptionsChange"
+  />
 
-    <p>Type</p>
-    <div class="py-2 px-6">
-      <button
-        :class="['c-btn radio', { 'active': type === toast.TYPE.DEFAULT }]"
-        @click="changeType(toast.TYPE.DEFAULT)"
-      >
-        {{ toast.TYPE.DEFAULT }}
-      </button>
-      <button
-        :class="['c-btn radio', { 'active': type === toast.TYPE.SUCCESS }]"
-        @click="changeType(toast.TYPE.SUCCESS)"
-      >
-        {{ toast.TYPE.SUCCESS }}
-      </button>
-      <button
-        :class="['c-btn radio', { 'active': type === toast.TYPE.WARNING }]"
-        @click="changeType(toast.TYPE.WARNING)"
-      >
-        {{ toast.TYPE.WARNING }}
-      </button>
-      <button
-        :class="['c-btn radio', { 'active': type === toast.TYPE.ERROR }]"
-        @click="changeType(toast.TYPE.ERROR)"
-      >
-        {{ toast.TYPE.ERROR }}
-      </button>
-      <button
-        :class="['c-btn radio', { 'active': type === toast.TYPE.INFO }]"
-        @click="changeType(toast.TYPE.INFO)"
-      >
-        {{ toast.TYPE.INFO }}
-      </button>
-    </div>
+  <div class="py-2 px-6" style="display: flex;">
+    <button class="c-btn dashed" @click="toggleConditions">👉🏽 Open options modal</button>
+  </div>
 
-    <p>Transition</p>
-    <div class="py-2 px-6">
-      <button
-        :class="['c-btn radio', { 'active': transition === toast.TRANSITIONS.BOUNCE }]"
-        @click="changeTransition(toast.TRANSITIONS.BOUNCE)"
-      >
-        {{ toast.TRANSITIONS.BOUNCE }}
-      </button>
-      <button
-        :class="['c-btn radio', { 'active': transition === toast.TRANSITIONS.FLIP }]"
-        @click="changeTransition(toast.TRANSITIONS.FLIP)"
-      >
-        {{ toast.TRANSITIONS.FLIP }}
-      </button>
-      <button
-        :class="['c-btn radio', { 'active': transition === toast.TRANSITIONS.SLIDE }]"
-        @click="changeTransition(toast.TRANSITIONS.SLIDE)"
-      >
-        {{ toast.TRANSITIONS.SLIDE }}
-      </button>
-      <button
-        :class="['c-btn radio', { 'active': transition === toast.TRANSITIONS.ZOOM }]"
-        @click="changeTransition(toast.TRANSITIONS.ZOOM)"
-      >
-        {{ toast.TRANSITIONS.ZOOM }}
-      </button>
-    </div>
-
-    <p>Position</p>
-    <div class="py-2 px-6">
-      <button
-        :class="['c-btn radio', { 'active': pos === toast.POSITION.TOP_LEFT }]"
-        @click="changePos(toast.POSITION.TOP_LEFT)"
-      >
-        {{ toast.POSITION.TOP_LEFT }}
-      </button>
-      <button
-        :class="['c-btn radio', { 'active': pos === toast.POSITION.TOP_CENTER }]"
-        @click="changePos(toast.POSITION.TOP_CENTER)"
-      >
-        {{ toast.POSITION.TOP_CENTER }}
-      </button>
-      <button
-        :class="['c-btn radio', { 'active': pos === toast.POSITION.TOP_RIGHT }]"
-        @click="changePos(toast.POSITION.TOP_RIGHT)"
-      >
-        {{ toast.POSITION.TOP_RIGHT }}
-      </button>
-      <button
-        :class="['c-btn radio', { 'active': pos === toast.POSITION.BOTTOM_LEFT }]"
-        @click="changePos(toast.POSITION.BOTTOM_LEFT)"
-      >
-        {{ toast.POSITION.BOTTOM_LEFT }}
-      </button>
-      <button
-        :class="['c-btn radio', { 'active': pos === toast.POSITION.BOTTOM_CENTER }]"
-        @click="changePos(toast.POSITION.BOTTOM_CENTER)"
-      >
-        {{ toast.POSITION.BOTTOM_CENTER }}
-      </button>
-      <button
-        :class="['c-btn radio', { 'active': pos === toast.POSITION.BOTTOM_RIGHT }]"
-        @click="changePos(toast.POSITION.BOTTOM_RIGHT)"
-      >
-        {{ toast.POSITION.BOTTOM_RIGHT }}
-      </button>
-    </div>
-    <br>
-
-    <div class="py-2 px-6" style="display: flex;">
-      <button class="c-btn green" @click="showToast">💡 show toast</button>
-      <button class="c-btn green" @click="showLoadToast">💡 show loading toast</button>
-      <button class="c-btn green" @click="toAbout">🚀 to about</button>
-      <button class="c-btn green" @click="clearAll">unmount all container</button>
-    </div>
+  <div class="py-2 px-6" style="display: flex;">
+    <button class="c-btn green" @click="showToast">💡 show toast</button>
+    <button class="c-btn green" @click="showLoadToast">🫓 show loading toast</button>
+    <button class="c-btn green" @click="clearAll">💣 unmount all container</button>
   </div>
 </template>
 
-<style lang="postcss">
+<style lang="postcss" scoped>
+.hr {
+  border: 1px #ddd dotted;
+  width: calc(100% - 36px);
+  margin: 0 auto 16px;
+}
+
 .py-2 {
   padding-top: 0.5rem; /* 8px */
   padding-bottom: 0.5rem; /* 8px */
@@ -254,6 +72,16 @@ watchEffect(() => {
   padding: 0.5rem;
   font-size: 0.75rem;
   line-height: 1rem;
+}
+
+.dashed {
+  border: 1px rgb(182, 181, 181) dashed;
+  font-size: 14px;
+
+  &:hover {
+    border-color: #666;
+    opacity: 0.8;
+  }
 }
 
 .green {

@@ -46,6 +46,11 @@ const ToastItem = defineComponent({
         class={className.value}
         style={item.style || {}}
         ref={toastRef}
+        onClick={(e) => {
+          if (item.closeOnClick) {
+            hideToast();
+          }
+        }}
       >
         {/* content */}
         <div

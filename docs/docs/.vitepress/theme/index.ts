@@ -2,8 +2,6 @@ import DefaultTheme from 'vitepress/theme';
 // @ts-ignore
 import Playground from '../../../../playground/src/pages/index.vue';
 // @ts-ignore
-import CodeDemo from '../../components/CodeDemo.vue';
-// @ts-ignore
 import CodeGroup from '../../components/CodeGroup.vue';
 // @ts-ignore
 import SandBox from '../../components/SandBox.vue';
@@ -17,7 +15,6 @@ export default {
   ...DefaultTheme,
   enhanceApp({ app }) {
     app.component('Playground', Playground);
-    app.component('CodeDemo', CodeDemo);
     app.component('CodeGroup', CodeGroup);
     app.component('SandBox', SandBox);
   }

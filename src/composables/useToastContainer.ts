@@ -28,6 +28,10 @@ export function removeOne(id?: Id) {
     if (containerId) {
       const toasts = toastMap[containerId];
       toastMap[containerId] = toasts.filter(v => v.toastId !== id);
+
+      if (!toastMap[containerId].length) {
+        unmountContainer(containerId);
+      }
     }
   }
 }

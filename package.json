@@ -73,7 +73,7 @@
     "@storybook/addon-links": "~6.4.22",
     "@storybook/builder-vite": "0.1.37",
     "@storybook/vue3": "~6.4.22",
-    "@swc/core": "^1.2.248",
+    "@swc/core": "^1.2.249",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/user-event": "^14.4.3",
     "@testing-library/vue": "^6.6.1",
@@ -122,7 +122,7 @@
     "vite": "3.0.9",
     "vite-plugin-dts": "^1.4.1",
     "vitest": "^0.23.1",
-    "vue-tsc": "^0.40.12"
+    "vue-tsc": "^0.40.13"
   },
   "peerDependencies": {
     "vue": "^3.2.0"

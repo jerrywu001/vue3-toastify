@@ -14,7 +14,7 @@ const ProgressBar = defineComponent({
     const ariaHidden = computed(() => props.hide ? 'true' : 'false');
 
     const style = computed<CSSProperties>(() => ({
-      ...(attrs.style || {}),
+      ...(attrs.style as CSSProperties || {}),
       animationDuration: `${props.delay}ms`,
       animationPlayState: props.isRunning ? 'running' : 'paused',
       opacity: props.hide ? 0 : 1,
