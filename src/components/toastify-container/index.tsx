@@ -8,6 +8,7 @@ const ToastifyContainer = defineComponent({
   name: 'ToastifyContainer',
   inheritAttrs: false,
   props,
+  // @ts-ignore
   setup(_props: ToastOptions) {
     const { toastMap } = useToastContainer(_props);
     const containerId = computed(() => _props.containerId as Id);
