@@ -15,46 +15,46 @@ export function getAllToast() {
   return Object.values(rawMap).reduce((t, v) => [...t, ...v], []);
 }
 
-export function useToastContainer(props = {} as Options) {
-  function getContainerId(id: Id) {
-    const all = getAllToast();
-    const toast = all.find(v => v.toastId === id);
+export function getContainerId(id: Id) {
+  const all = getAllToast();
+  const toast = all.find(v => v.toastId === id);
 
-    return toast?.containerId;
-  }
+  return toast?.containerId;
+}
 
-  function addOne(_: Content, opts: Options) {
-    const { containerId = '' } = opts;
+export function removeOne(id?: Id) {
+  if (id) {
+    const containerId = getContainerId(id);
     if (containerId) {
-      toastMap[containerId] = toastMap[containerId] || [];
-      if (!toastMap[containerId].find(v => v.toastId === opts.toastId)) {
-        if (opts.newestOnTop) {
-          toastMap[containerId].unshift(opts);
-        } else {
-          toastMap[containerId].push(opts);
-        }
+      const toasts = toastMap[containerId];
+      toastMap[containerId] = toasts.filter(v => v.toastId !== id);
+    }
+  }
+}
+
+export function addOne(_: Content, opts: Options) {
+  const { containerId = '' } = opts;
+  if (containerId) {
+    toastMap[containerId] = toastMap[containerId] || [];
+    if (!toastMap[containerId].find(v => v.toastId === opts.toastId)) {
+      if (opts.newestOnTop) {
+        toastMap[containerId].unshift(opts);
+      } else {
+        toastMap[containerId].push(opts);
       }
     }
   }
+}
 
-  function removeOne(id?: Id) {
-    if (id) {
-      const containerId = getContainerId(id);
-      if (containerId) {
-        const toasts = toastMap[containerId];
-        toastMap[containerId] = toasts.filter(v => v.toastId !== id);
-      }
-    }
+export function clearAll(containerId?: Id) {
+  if (!containerId) {
+    unmountAllContainer();
+  } else {
+    unmountContainer(containerId);
   }
+}
 
-  function clearAll(containerId?: Id) {
-    if (!containerId) {
-      unmountAllContainer();
-    } else {
-      unmountContainer(containerId);
-    }
-  }
-
+export function useToastContainer(props = {} as Options) {
   onMounted(() => {
     eventManager
       .off(Event.Add, addOne)

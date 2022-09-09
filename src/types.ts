@@ -13,6 +13,13 @@ export type ToastPosition = 'top-left' | 'top-right' | 'top-center' | 'bottom-le
 export type ToastTransition = 'zoom' | 'flip' | 'bounce' | 'slide';
 export type ToastTheme = 'light' | 'dark' | 'colored';
 
+export interface CloseButtonProps {
+  closeToast: (e: MouseEvent) => void;
+  type: ToastType;
+  ariaLabel?: string;
+  theme: ToastTheme;
+}
+
 /**
  * options for toast
  */
@@ -30,12 +37,16 @@ export interface Options {
    * @default 5000
    */
   autoClose?: number | boolean;
+
   /**
-   * A Vue Component to replace the default close button or false to hide the button
-   *
-   * @default -
+   * Pass a custom close button.
+   * To remove the close button pass `false`
    */
-  closeButton?: boolean | VNode | (() => VNode);
+  closeButton?:
+  | boolean
+  | ((props: CloseButtonProps) => VNode)
+  | VNode<CloseButtonProps>;
+
   /**
    * A reference to a valid react-transition-group/Transition component
    * @default 'bounce'

@@ -1,12 +1,11 @@
 import ProgressBar from './progress-bar/ProgressBar';
 import props from './toastify-container/prop';
 import { CloseButton } from './CloseButton';
-import { computed, DefineComponent, defineComponent, ref } from 'vue';
+import { cloneVNode, computed, DefineComponent, defineComponent, isVNode, ref, VNode } from 'vue';
 import { Default, getDefaultTransition } from '../utils/constant';
 import type { Id, ToastOptions, ToastPosition, ToastTheme, ToastTransition, ToastType, TransitionGroupOptions } from '../types';
 import { getIcon } from './Icons';
-import { Event, eventManager } from '../core';
-import { useCssTransition } from '../composables';
+import { removeOne, useCssTransition } from '../composables';
 
 type Props = ToastOptions & TransitionGroupOptions;
 
@@ -27,11 +26,18 @@ const ToastItem = defineComponent({
       item.className || '',
     ].join(' '));
 
-    const { isRunning, isIn, closeToast } = useCssTransition({
+    const { isRunning, isIn, hideToast } = useCssTransition({
       ...getDefaultTransition(item.transition as ToastTransition),
       toastId: item.toastId as Id,
       toastRef,
       position: item.position as ToastPosition,
+      done: () => { removeOne(item.toastId); },
+    });
+
+    const getCloneCloseVNode = () => cloneVNode(item.closeButton as VNode, {
+      closeToast: hideToast,
+      type: item.type as ToastType,
+      theme: item.theme as ToastTheme,
     });
 
     return () => (
@@ -64,12 +70,31 @@ const ToastItem = defineComponent({
         </div>
 
         {/* close button */}
-        <CloseButton
-          theme={item.theme as ToastTheme}
-          closeToast={() => {
-            eventManager.emit(Event.Remove, item.toastId as Id);
-          }}
-        />
+
+        {
+          (item.closeButton === undefined || item.closeButton === true) && (
+            <CloseButton
+              theme={item.theme as ToastTheme}
+              closeToast={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
+                hideToast();
+              }}
+            />
+          )
+        }
+        {
+          isVNode(item.closeButton) && getCloneCloseVNode()
+        }
+        {
+          typeof item.closeButton === 'function' && (
+            item.closeButton({
+              closeToast: hideToast,
+              type: item.type as ToastType,
+              theme: item.theme as ToastTheme,
+            })
+          )
+        }
 
         {/* progress bar */}
         <ProgressBar
@@ -84,7 +109,7 @@ const ToastItem = defineComponent({
           delay={item.autoClose as number}
           controlledProgress={isProgressControlled.value}
           progress={item.progress}
-          closeToast={closeToast}
+          closeToast={item.isLoading ? undefined : hideToast}
         />
       </div>
     );

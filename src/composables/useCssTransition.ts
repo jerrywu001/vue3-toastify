@@ -1,8 +1,7 @@
-import { computed, nextTick, onMounted, reactive, ref, Ref, watchEffect } from 'vue';
+import { computed, onMounted, reactive, ref, Ref, watchEffect } from 'vue';
 import { Default, SyntheticEvent } from '../utils/constant';
 import { AnimationStep, CSSTransitionProps, Id } from '../types';
 import { getAllToast } from './useToastContainer';
-import { eventManager, Event as EventTypes } from '../core';
 
 interface OtherProps {
   toastRef: Ref<HTMLDivElement | undefined>;
@@ -10,6 +9,7 @@ interface OtherProps {
 }
 
 const NullCallback = () => {};
+const ExitDuration = 700;
 
 /**
  * Used to collapse toast after exit animation
@@ -20,17 +20,18 @@ function collapseToast(
   duration = Default.COLLAPSE_DURATION,
 ) {
   const { scrollHeight, style } = node;
+  const delay = duration as number;
 
   requestAnimationFrame(() => {
     style.minHeight = 'initial';
     style.height = scrollHeight + 'px';
-    style.transition = `all ${duration}ms`;
+    style.transition = `all ${delay}ms`;
 
     requestAnimationFrame(() => {
       style.height = '0';
       style.padding = '0';
       style.margin = '0';
-      setTimeout(done, duration as number);
+      setTimeout(done, delay);
     });
   });
 }
@@ -48,6 +49,7 @@ export function useCssTransition(props: CSSTransitionProps & OtherProps) {
     collapseDuration: props.collapseDuration || Default.COLLAPSE_DURATION,
   });
 
+  const doneHandler = (options.done || NullCallback) as () => void;
   const enterClassName = computed(() => options.appendPosition ? `${options.enter}--${options.position}` : options.enter);
   const exitClassName = computed(() => options.appendPosition ? `${options.exit}--${options.position}` : options.exit);
 
@@ -65,10 +67,11 @@ export function useCssTransition(props: CSSTransitionProps & OtherProps) {
     if (!node) return;
 
     const onExited = () => {
-      const doneHandler = (options.done || NullCallback) as () => void;
-      node.removeEventListener('animationend', onExited);
       if (options.collapse) {
-        collapseToast(node, doneHandler, options.collapseDuration);
+        setTimeout(() => {
+          node.removeEventListener('animationend', onExited);
+          collapseToast(node, doneHandler, options.collapseDuration);
+        }, ExitDuration);
       } else {
         doneHandler();
       }
@@ -84,19 +87,14 @@ export function useCssTransition(props: CSSTransitionProps & OtherProps) {
     if (!isIn.value) preventExitTransition.value ? onExited() : onExit();
   }
 
-  function closeToast() {
-    eventManager.emit(EventTypes.Remove, options.toastId as Id);
-    nextTick(() => {
-      isIn.value = false;
-    });
+  function hideToast() {
+    isIn.value = false;
   }
 
-  watchEffect(
-    () => {
-      const all = getAllToast();
-      isIn.value = all.findIndex(v => v.toastId === options.toastId) > -1;
-    },
-  );
+  watchEffect(() => {
+    const all = getAllToast();
+    isIn.value = all.findIndex(v => v.toastId === options.toastId) > -1;
+  });
 
   watchEffect(onExitHandler);
 
@@ -133,5 +131,5 @@ export function useCssTransition(props: CSSTransitionProps & OtherProps) {
     onEnter();
   });
 
-  return { isIn, isRunning, closeToast };
+  return { isIn, isRunning, hideToast };
 }

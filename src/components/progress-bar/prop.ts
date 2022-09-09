@@ -75,7 +75,7 @@ export interface ProgressBarProps extends HTMLAttributes {
   /**
    * Func to close the current toast
    */
-  closeToast: () => void;
+  closeToast?: () => void;
 
   /**
    * Optional type : info, success ...
