@@ -20,11 +20,11 @@ close toast after 8 seconds
 import { toast } from 'jerry-todo';
 
 export default {
-   name: "App",
-   setup() {
+  name: "App",
+  setup() {
     const notify = () => toast("Wow so easy !");
     return { notify };
-   }
+  }
 };
 </script>
 ```

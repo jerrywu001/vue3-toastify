@@ -17,20 +17,22 @@ import Msg from './Msg.vue';
 import 'jerry-todo/dist/index.css';
 
 export default {
-   name: "App",
-   setup() {
+  name: "App",
+  setup() {
     const notify = () => {
       toast(Msg, { closeOnClick: false, autoClose: 8000 });
-      // toast(<Msg />, { closeOnClick: false, autoClose: 8000 }); // not work!!!!
+
+      // not work!!!!
+      // toast(<Msg />, { closeOnClick: false, autoClose: 8000 });
     };
     return { notify };
-   }
+  }
 };
 </script>
 
 <template>
   <div>
-    <button @click="notify">Notify !</button>
+    <button @click="notify">toast in .vue</button>
   </div>
 </template>
 ```
@@ -74,16 +76,27 @@ You can also write with a tsx component. that is cool!!
 ```vue App.vue
 <template>
   <JsxDemo />
+  <button @click="show">toast with callback in .vue</button>
 </template>
 
 <script>
+import { h } from 'vue';
+import { toast } from 'jerry-todo';
 import JsxDemo from './JsxDemo.jsx';
+import Msg from './Msg.vue';
 
 export default {
-   name: "App",
-   setup() {
-    return { JsxDemo };
-   }
+  name: "App",
+  setup() {
+    const show = () => {
+      toast(
+        ({ closeToast, toastProps }) => h(Msg, { closeToast, toastProps }),
+        { closeOnClick: false, autoClose: 8000 },
+      );
+    };
+
+    return { JsxDemo, show };
+  }
 };
 </script>
 ```
@@ -98,7 +111,8 @@ const JsxDemo = defineComponent({
   setup() {
     const displayMsg = () => {
       toast(Msg, { closeOnClick: false, autoClose: 8000 });
-      // toast(<Msg />, { closeOnClick: false, autoClose: 8000 }); // not work !!
+      // not work !!
+      // toast(<Msg />, { closeOnClick: false, autoClose: 8000 });
 
       // cool !!!
       toast(({ closeToast, toastProps }) => (
@@ -112,7 +126,7 @@ const JsxDemo = defineComponent({
 
     return () => (
       <div>
-        <button onClick={displayMsg}>displayMsg</button>
+        <button onClick={displayMsg}>toast in .jsx</button>
       </div>
     );
   },
@@ -174,13 +188,13 @@ import CountDisplay from './CountDisplay.vue';
 import 'jerry-todo/dist/index.css';
 
 export default {
-   name: "App",
-   setup() {
+  name: "App",
+  setup() {
     const { increment } = useCounterStore();
     const notify = () => toast(CountDisplay, { autoClose: false, closeOnClick: false });
 
     return { notify, increment };
-   }
+  }
 };
 </script>
 ```
@@ -191,13 +205,13 @@ import { storeToRefs } from 'pinia';
 import { useCounterStore } from './stores/useCounterStore';
 
 export default {
-   name: "CountDisplay",
-   setup() {
+  name: "CountDisplay",
+  setup() {
     const store = useCounterStore();
     const { count } = storeToRefs(store);
 
     return { count };
-   }
+  }
 };
 </script>
 
@@ -227,4 +241,3 @@ import { createPinia } from 'pinia';
 createApp(App).use(createPinia()).mount('#app');
 ```
 :::
-

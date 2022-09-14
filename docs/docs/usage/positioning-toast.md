@@ -19,8 +19,8 @@ import { toast } from 'jerry-todo';
 import 'jerry-todo/dist/index.css';
 
 export default {
-   name: "App",
-   setup() {
+  name: "App",
+  setup() {
     const notify = () => {
       toast("Default Notification !");
 
@@ -47,7 +47,7 @@ export default {
     };
 
     return { notify };
-   }
+  }
 };
 </script>
 
