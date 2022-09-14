@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { toast, ToastOptions } from 'vue3-toastify';
+import { toast, ToastOptions } from 'jerry-todo';
 import Conditions from '../components/Conditions.vue';
 
 const showConditions = ref(false);
@@ -50,7 +50,6 @@ const clearAll = () => {
 <style lang="postcss" scoped>
 .hr {
   border: 1px #ddd dotted;
-  width: calc(100% - 36px);
   margin: 0 auto 16px;
 }
 

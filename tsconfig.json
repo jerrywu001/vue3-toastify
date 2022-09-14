@@ -26,10 +26,10 @@
     "resolveJsonModule": true,
     "isolatedModules": false,
     "paths": {
-      "vue3-toastify": [
+      "jerry-todo": [
         "src/index.ts"
       ],
-      "vue3-toastify/*": [
+      "jerry-todo/*": [
         "./src/*"
       ]
     },

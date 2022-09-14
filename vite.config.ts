@@ -10,7 +10,7 @@ import { defineConfig } from 'vite';
 export default defineConfig({
   resolve: {
     alias: {
-      'vue3-toastify': path.resolve(__dirname, './src/index.ts'),
+      'jerry-todo': path.resolve(__dirname, './src/index.ts'),
     },
   },
   build: {

@@ -20,8 +20,8 @@ module.exports = {
     return mergeConfig(config, {
       resolve: {
         alias: {
-          'vue3-toastify': path.resolve(__dirname, '../../src'),
-          'vue3-toastify/': path.resolve(__dirname, '../../src/'),
+          'jerry-todo': path.resolve(__dirname, '../../src'),
+          'jerry-todo/': path.resolve(__dirname, '../../src/'),
         },
       },
       plugins: [

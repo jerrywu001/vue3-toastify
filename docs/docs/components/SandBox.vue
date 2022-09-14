@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/attribute-hyphenation -->
 <template>
   <Sandpack
     :theme="theme"
@@ -9,6 +10,11 @@
       showTabs: true,
       closableTabs: closabletabs === 'true',
       readOnly: readonly === 'true',
+    }"
+    :customSetup="{
+      dependencies: {
+        'jerry-todo': '0.0.1',
+      },
     }"
   />
 </template>

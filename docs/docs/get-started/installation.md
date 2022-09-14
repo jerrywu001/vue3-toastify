@@ -9,24 +9,24 @@
 
 :::code-group
 ```bash  [Npm]
-npm install --save vue3-toastify
+npm install --save jerry-todo
 ```
 
 ```bash  [Yarn]
-yarn add vue3-toastify
+yarn add jerry-todo
 ```
 :::
 
 ## Global config
 
-see: demo --> `main.js`
+see: [demo](#demo) --> `main.js`
 
 ## demo
 
 ::: details For Jsx
 ```jsx
-import { toast } from 'vue3-toastify';
-import 'vue3-toastify/dist/index.css';
+import { toast } from 'jerry-todo';
+import 'jerry-todo/dist/index.css';
 
 function App() {
   const notify = () => toast("Wow so easy !");
@@ -49,7 +49,7 @@ function App() {
 </template>
 
 <script>
-import { toast } from 'vue3-toastify';
+import { toast } from 'jerry-todo';
 
 export default {
    name: "App",
@@ -64,8 +64,8 @@ export default {
 ```js /src/main.js [active]
 import App from './App.vue';
 import { createApp } from 'vue';
-import Vue3Toasity from 'vue3-toastify';
-import 'vue3-toastify/dist/index.css';
+import Vue3Toasity from 'jerry-todo';
+import 'jerry-todo/dist/index.css';
 
 createApp(App).use(
   Vue3Toasity,

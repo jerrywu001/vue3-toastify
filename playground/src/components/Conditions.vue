@@ -182,7 +182,7 @@
 
 <script setup lang="ts">
 import { reactive, ref, watchEffect, type VNode } from 'vue';
-import { toast, ToastOptions, ToastPosition, ToastTheme, ToastTransition, ToastType } from 'vue3-toastify';
+import { toast, ToastOptions, ToastPosition, ToastTheme, ToastTransition, ToastType } from 'jerry-todo';
 
 type Icon = string | number | boolean | VNode | undefined;
 
@@ -205,7 +205,8 @@ const opts = reactive({
   position: toast.POSITION.TOP_RIGHT,
   autoClose: 3000,
   transition: toast.TRANSITIONS.BOUNCE,
-});
+  className: 'foo-bar',
+} as ToastOptions);
 
 const iconVal = ref<string | number>('');
 

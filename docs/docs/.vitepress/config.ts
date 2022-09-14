@@ -49,12 +49,12 @@ export default defineConfig({
     sidebar: sidebarConfig(),
 
     editLink: {
-      pattern: 'https://github.com/jerrywu001/vue3-toastify/edit/main/docs/docs/:path',
+      pattern: 'https://github.com/jerrywu001/jerry-todo/edit/main/docs/docs/:path',
       text: 'Edit this page on GitHub'
     },
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/jerrywu001/vue3-toastify' }
+      { icon: 'github', link: 'https://github.com/jerrywu001/jerry-todo' }
     ],
 
     footer: {
@@ -66,7 +66,7 @@ export default defineConfig({
   vite: {
     resolve: {
       alias: {
-        'vue3-toastify': `${path.resolve(__dirname, '../../../src')}`,
+        'jerry-todo': `${path.resolve(__dirname, '../../../src')}`,
       },
     },
     plugins: [
@@ -85,7 +85,7 @@ function nav() {
       items: [
         {
           text: 'Changelog',
-          link: 'https://github.com/jerrywu001/vue3-toastify/releases'
+          link: 'https://github.com/jerrywu001/jerry-todo/releases'
         }
       ]
     }

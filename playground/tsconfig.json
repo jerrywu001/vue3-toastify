@@ -35,10 +35,10 @@
       "@/*": [
         "src/*"
       ],
-      "vue3-toastify": [
+      "jerry-todo": [
         "../src"
       ],
-      "vue3-toastify/*": [
+      "jerry-todo/*": [
         "../src/*"
       ]
     }

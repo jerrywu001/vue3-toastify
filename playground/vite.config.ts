@@ -9,7 +9,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@/': `${path.resolve(__dirname, 'src')}/`,
-      'vue3-toastify': path.resolve(__dirname, process.env.USEPACK === 'true' ? '../dist/esm' : '../src'),
+      'jerry-todo': path.resolve(__dirname, process.env.USEPACK === 'true' ? '../dist/esm' : '../src'),
     },
   },
   build: {

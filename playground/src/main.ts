@@ -1,7 +1,7 @@
 import { createApp } from 'vue';
 import router from './routes';
 
-import Vue3Toasity, { type TransitionGroupOptions } from 'vue3-toastify';
+import Vue3Toasity, { type TransitionGroupOptions } from 'jerry-todo';
 
 import App from './App.vue';
 

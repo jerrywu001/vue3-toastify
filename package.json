@@ -1,22 +1,22 @@
 {
-  "name": "vue3-toastify",
+  "name": "jerry-todo",
   "version": "0.0.0",
   "description": "🎉 Vue3-Toastify allows you to add notifications to your app with ease. No more nonsense!",
   "keywords": [
     "vue3",
-    "vue3-toastify",
+    "jerry-todo",
     "toast",
     "notification",
     "alert",
     "vue3-component"
   ],
-  "homepage": "https://github.com/jerrywu001/vue3-toastify#readme",
+  "homepage": "https://github.com/jerrywu001/jerry-todo#readme",
   "bugs": {
-    "url": "https://github.com/jerrywu001/vue3-toastify/issues"
+    "url": "https://github.com/jerrywu001/jerry-todo/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jerrywu001/vue3-toastify.git"
+    "url": "git+https://github.com/jerrywu001/jerry-todo.git"
   },
   "license": "MIT",
   "author": "jerrywu001 <57242263@163.com>",
