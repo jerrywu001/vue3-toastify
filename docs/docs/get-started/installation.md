@@ -1,5 +1,9 @@
 # Installation
 
+:::tip
+View it with a PC, the effect is even better
+:::
+
 ## Requirements
 
 `vue` version >=`3.2.0`
@@ -23,21 +27,29 @@ see: [demo](#demo) --> `main.js`
 
 ## demo
 
+:::warning
+Don't forget to import styles
+:::
+
 ::: details For Jsx
 ```jsx
 import { toast } from 'jerry-todo';
+import { defineComponent } from 'vue';
 import 'jerry-todo/dist/index.css';
 
-function App() {
-  const notify = () => toast("Wow so easy !");
+const JsxDemo = defineComponent({
+  setup() {
+    const notify = () => toast('Wow so easy !');
 
-  return () => (
-    <div>
-      <button onClick={notify}>Notify !</button>
-    </div>
-  );
-}
-```
+    return () => (
+      <div>
+        <button onClick={notify}>Notify !</button>
+      </div>
+    );
+  },
+});
+
+export default JsxDemo;
 :::
 
 ::: sandbox
@@ -72,7 +84,7 @@ createApp(App).use(
   {
     autoClose: 3000,
     // ...
-  },
+  }, // global options type definition --> ToastContainerOptions
 ).mount('#app');
 ```
 :::

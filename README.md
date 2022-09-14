@@ -17,11 +17,11 @@ npm install --save jerry-todo
 
 ```js
 // main.ts
-import Vue3Toastify, { type TransitionGroupOptions } from 'jerry-todo';
+import Vue3Toastify, { type ToastContainerOptions } from 'jerry-todo';
 
 app.use(Vue3Toastify);
 
-// app.use(Vue3Toastify, { autoClose: 3000 } as TransitionGroupOptions);
+// app.use(Vue3Toastify, { autoClose: 3000 } as ToastContainerOptions);
 ```
 
 ```js

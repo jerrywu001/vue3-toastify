@@ -65,8 +65,12 @@ toast.dark = (content: Content, options?: ToastOptions) => openToast(
 );
 
 /** remove a toast */
-toast.remove = (toastId: Id) => {
-  eventManager.emit(Event.Remove, toastId);
+toast.remove = (toastId?: Id) => {
+  if (toastId) {
+    eventManager.emit(Event.Remove, toastId);
+  } else {
+    eventManager.emit(Event.ClearAll);
+  }
 };
 
 /** clear all toast */

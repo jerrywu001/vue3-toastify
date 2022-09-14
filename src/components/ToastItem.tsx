@@ -1,20 +1,37 @@
 import ProgressBar from './progress-bar/ProgressBar';
 import props from './toastify-container/prop';
+import {
+  cloneVNode,
+  computed,
+  DefineComponent,
+  defineComponent,
+  h,
+  isVNode,
+  ref,
+  toRaw,
+  VNode,
+} from 'vue';
 import { CloseButton } from './CloseButton';
-import { cloneVNode, computed, DefineComponent, defineComponent, isVNode, ref, VNode } from 'vue';
 import { Default, getDefaultTransition } from '../utils/constant';
-import type { Id, ToastOptions, ToastPosition, ToastTheme, ToastTransition, ToastType, TransitionGroupOptions } from '../types';
 import { getIcon } from './Icons';
+import { isComponent, isFn } from '../utils/tools';
 import { removeOne, useCssTransition } from '../composables';
-
-type Props = ToastOptions & TransitionGroupOptions;
+import type {
+  Content,
+  Id,
+  ToastPosition,
+  ToastProps,
+  ToastTheme,
+  ToastTransition,
+  ToastType,
+} from '../types';
 
 const ToastItem = defineComponent({
   name: 'ToastItem',
   inheritAttrs: false,
   props,
   // @ts-ignore
-  setup(item: Props) {
+  setup(item: ToastProps) {
     const toastRef = ref<HTMLDivElement>();
 
     const isProgressControlled = computed(() => !!item.rtl);
@@ -71,7 +88,23 @@ const ToastItem = defineComponent({
               </div>
             )
           }
-          <div>{item.content}</div>
+          <div>
+            {
+              isComponent(item.content as Content)
+                ?
+                h(
+                  item.content as any,
+                  {
+                    toastProps: toRaw(item),
+                    closeToast: hideToast,
+                  },
+                )
+                : isFn(item.content) ? (item.content as Function)({
+                  toastProps: toRaw(item),
+                  closeToast: hideToast,
+                }) : item.content
+            }
+          </div>
         </div>
 
         {/* close button */}
@@ -119,6 +152,6 @@ const ToastItem = defineComponent({
       </div>
     );
   },
-}) as DefineComponent<Props>;
+}) as DefineComponent<ToastProps>;
 
 export default ToastItem;

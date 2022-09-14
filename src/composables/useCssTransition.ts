@@ -9,7 +9,7 @@ interface OtherProps {
 }
 
 const NullCallback = () => {};
-const ExitDuration = 700;
+const ExitDuration = 300;
 
 /**
  * Used to collapse toast after exit animation
@@ -57,7 +57,11 @@ export function useCssTransition(props: CSSTransitionProps & OtherProps) {
     isRunning.value = true;
   }
 
-  function hideToast() {
+  function hideToast(e?: MouseEvent) {
+    if (e) {
+      e.stopPropagation();
+      e.preventDefault();
+    }
     isIn.value = false;
   }
 

@@ -83,7 +83,7 @@ const props = {
     default: THEME.LIGHT,
   },
   content: {
-    type: String as PropType<Content>,
+    type: [String, Object] as PropType<Content>,
     required: false,
     default: '',
   },
@@ -110,7 +110,7 @@ const props = {
     default: undefined,
   },
   delay: {
-    type: Number,
+    type: [Number, Boolean],
     required: false,
     default: undefined,
   },

@@ -8,16 +8,15 @@ For convenience, `toast` exposes a POSITION property to avoid any typos.
 
 # example
 
+:::tip
+View it with a PC, the effect is even better
+:::
+
 ::: sandbox
 ```vue App.vue
-<template>
-  <div>
-    <button @click="notify">Notify !</button>
-  </div>
-</template>
-
 <script>
 import { toast } from 'jerry-todo';
+import 'jerry-todo/dist/index.css';
 
 export default {
    name: "App",
@@ -51,5 +50,15 @@ export default {
    }
 };
 </script>
+
+<template>
+  <div>
+    <button @click="notify">Notify !</button>
+  </div>
+</template>
+
+<style>
+.foo-bar { color: #f00; }
+</style>
 ```
 :::

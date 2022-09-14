@@ -13,7 +13,8 @@
     }"
     :customSetup="{
       dependencies: {
-        'jerry-todo': '0.0.1',
+        pinia: '^2.0.22',
+        'jerry-todo': '^0.0.5',
       },
     }"
   />

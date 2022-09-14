@@ -49,7 +49,7 @@ const ProgressBar = defineComponent({
     const animationEventHandler = computed(() => props.controlledProgress && props.progress! < 1
       ? null
       : () => {
-        if (props.isIn && props.closeToast) {
+        if (props.isIn && props.closeToast && props.delay !== false) {
           props.closeToast();
         }
       });

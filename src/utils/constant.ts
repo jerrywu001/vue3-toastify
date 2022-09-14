@@ -6,7 +6,7 @@ import type {
   ToastTheme,
   ToastTransition,
   ToastType,
-  TransitionGroupOptions,
+  ToastContainerOptions,
 } from '../types';
 
 type KeyOfPosition =
@@ -70,16 +70,16 @@ export const defaultOptions = {
   theme: 'light',
 } as Options;
 
-export const defaultTransitionGroupOptions = {
+export const defaultToastContainerOptions = {
   rtl: false,
   newestOnTop: false,
   toastClassName: '',
-} as TransitionGroupOptions;
+} as ToastContainerOptions;
 
 export const defaultGlobalOptions = {
   ...defaultOptions,
-  ...defaultTransitionGroupOptions,
-} as TransitionGroupOptions;
+  ...defaultToastContainerOptions,
+} as ToastContainerOptions;
 
 export const defaultToastOptions = {
   ...defaultOptions,

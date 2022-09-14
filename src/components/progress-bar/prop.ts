@@ -5,7 +5,7 @@ import { THEME, TYPE } from '../../utils/constant';
 
 export const props = {
   delay: {
-    type: Number,
+    type: [Number, Boolean],
     required: false,
     default: undefined,
   },
@@ -65,7 +65,7 @@ export interface ProgressBarProps extends HTMLAttributes {
   /**
    * The animation delay which determine when to close the toast
    */
-  delay: number;
+  delay: number | boolean;
 
   /**
    * Whether or not the animation is running or paused

@@ -1,7 +1,7 @@
 import { createApp } from 'vue';
 import router from './routes';
 
-import Vue3Toasity, { type TransitionGroupOptions } from 'jerry-todo';
+import Vue3Toasity, { type ToastContainerOptions } from 'jerry-todo';
 
 import App from './App.vue';
 
@@ -23,7 +23,7 @@ app.use(
       opacity: '1',
       userSelect: 'initial',
     },
-  } as TransitionGroupOptions,
+  } as ToastContainerOptions,
 );
 
 app.mount('#app');

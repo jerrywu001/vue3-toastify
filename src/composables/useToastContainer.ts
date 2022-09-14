@@ -1,12 +1,10 @@
 import { onMounted, onUnmounted, reactive, toRaw } from 'vue';
-import { Content, Id, ToastOptions, TransitionGroupOptions } from '../types';
+import { Content, Id, ToastOptions, ToastProps } from '../types';
 import { eventManager, Event, unmountAllContainer, unmountContainer } from '..';
 
 export interface ToastMap {
   [containerId: Id]: ToastOptions[];
 }
-
-type Options = ToastOptions & TransitionGroupOptions;
 
 export const toastMap = reactive({} as ToastMap);
 
@@ -36,7 +34,7 @@ export function removeOne(id?: Id) {
   }
 }
 
-export function addOne(_: Content, opts: Options) {
+export function addOne(_: Content, opts: ToastProps) {
   const { containerId = '' } = opts;
   if (containerId) {
     toastMap[containerId] = toastMap[containerId] || [];
@@ -58,7 +56,7 @@ export function clearAll(containerId?: Id) {
   }
 }
 
-export function useToastContainer(props = {} as Options) {
+export function useToastContainer(props = {} as ToastProps) {
   onMounted(() => {
     eventManager
       .off(Event.Add, addOne)

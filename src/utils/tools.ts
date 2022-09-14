@@ -1,6 +1,7 @@
+import { globalOptions } from '../store';
 import { mergeProps, VNodeProps } from 'vue';
-import { TransitionGroupOptions } from '../types';
-import { Default } from './constant';
+import { Content, ToastContainerOptions } from '../types';
+import { Default, defaultGlobalOptions } from './constant';
 
 /**
  * Generate a random toastId
@@ -33,19 +34,23 @@ export function mergeOptions<T = VNodeProps>(...args: any[]) {
   return mergeProps(...args as VNodeProps[]) as T;
 }
 
+export function isComponent(content: Content) {
+  return typeof content === 'object'
+    && (!!(content as any).render || !!(content as any).setup);
+}
+
 /**
  * save default props of toast container
- * @param options {@link TransitionGroupOptions}
+ * @param options {@link ToastContainerOptions}
  */
-export function saveGlobalOptions(options = {} as TransitionGroupOptions) {
-  localStorage.setItem(`${Default.CSS_NAMESPACE}-default-options`, JSON.stringify(options));
+export function saveGlobalOptions(options = {} as ToastContainerOptions) {
+  globalOptions[`${Default.CSS_NAMESPACE}-default-options`] = options;
 }
 
 /**
  * get default props of toast container
- * @param options {@link TransitionGroupOptions}
+ * @param options {@link ToastContainerOptions}
  */
 export function getGlobalOptions() {
-  const str = localStorage.getItem(`${Default.CSS_NAMESPACE}-default-options`);
-  return JSON.parse((str || '{}')) as TransitionGroupOptions;
+  return globalOptions[`${Default.CSS_NAMESPACE}-default-options`] || defaultGlobalOptions;
 }

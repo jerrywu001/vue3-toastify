@@ -107,6 +107,10 @@ function sidebarConfig() {
       collapsible: true,
       items: [
         { text: 'Positioning toast', link: '/usage/positioning-toast' },
+        { text: 'Handling autoClose', link: '/usage/auto-close' },
+        { text: 'Render more than string', link: '/usage/render-more-than-string' },
+        { text: 'Remove toast programmatically', link: '/usage/remove-toast-programmatically' },
+        { text: 'Icons', link: '/usage/icons' },
       ]
     },
     {

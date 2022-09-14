@@ -1,11 +1,11 @@
 import { Plugin } from 'vue';
-import { TransitionGroupOptions } from './types';
+import { ToastContainerOptions } from './types';
 import { defaultGlobalOptions } from './utils/constant';
 import { mergeOptions, saveGlobalOptions } from './utils/tools';
 
 const Vue3Toastify: Plugin = {
-  install(app, options = {} as TransitionGroupOptions) {
-    const globalOptions = mergeOptions<TransitionGroupOptions>(defaultGlobalOptions, options);
+  install(app, options = {} as ToastContainerOptions) {
+    const globalOptions = mergeOptions<ToastContainerOptions>(defaultGlobalOptions, options);
     saveGlobalOptions(globalOptions);
   },
 };

@@ -1,6 +1,10 @@
-import type { CSSProperties, VNode } from 'vue';
+import type { CSSProperties, DefineComponent, VNode } from 'vue';
 
-export type Content = string | VNode | (() => VNode);
+export type Content =
+  | string
+  | VNode
+  | ((props: ToastContentProps) => VNode)
+  | DefineComponent<{}, {}, any>;
 
 export type ToastFunc = {
   (content: Content, options?: ToastOptions): void;
@@ -18,6 +22,12 @@ export interface CloseButtonProps {
   type: ToastType;
   ariaLabel?: string;
   theme: ToastTheme;
+}
+
+export interface ToastContentProps<Data = {}> {
+  closeToast?: (e?: MouseEvent) => void;
+  toastProps?: ToastOptions;
+  data?: Data;
 }
 
 /**
@@ -113,7 +123,7 @@ export interface Options {
 /**
  * options for app.use
  */
-export interface TransitionGroupOptions extends Options {
+export interface ToastContainerOptions extends Options {
   /**
    * Support right to left content
    * @default false
@@ -215,6 +225,8 @@ export interface ToastOptions extends Options {
 
   isLoading?: boolean;
 }
+
+export type ToastProps = ToastOptions & ToastContainerOptions;
 
 /**
  * ClassName for the elements - can take a function to build a classname or a raw string that is cx'ed to defaults

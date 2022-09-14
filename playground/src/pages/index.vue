@@ -2,6 +2,9 @@
 import { ref } from 'vue';
 import { toast, ToastOptions } from 'jerry-todo';
 import Conditions from '../components/Conditions.vue';
+import MsgH from '../components/MsgH.vue';
+import Msg from '../components/Msg';
+import JsxDemo from '../components/JsxDemo';
 
 const showConditions = ref(false);
 const options = ref({} as ToastOptions);
@@ -25,9 +28,16 @@ function showLoadToast() {
 const clearAll = () => {
   toast.clearAll();
 };
+
+const displayMsg = () => {
+  toast(Msg, { closeOnClick: false, autoClose: 8000 });
+};
 </script>
 
 <template>
+  <JsxDemo />
+  <button class="c-btn dashed" @click="displayMsg">displayMsg</button>
+
   <div class="hr" />
 
   <Conditions

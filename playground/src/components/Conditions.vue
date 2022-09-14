@@ -205,7 +205,6 @@ const opts = reactive({
   position: toast.POSITION.TOP_RIGHT,
   autoClose: 3000,
   transition: toast.TRANSITIONS.BOUNCE,
-  className: 'foo-bar',
 } as ToastOptions);
 
 const iconVal = ref<string | number>('');
