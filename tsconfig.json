@@ -34,7 +34,8 @@
       ]
     },
     "types": [
-      "./global"
+      "./global",
+      "@types/node"
     ]
   },
   "include": [
