@@ -1,19 +1,8 @@
 /* eslint-disable max-len */
 import { Default } from '../utils/constant';
-import { ToastOptions, ToastTheme, ToastType } from '../types';
+import { BuiltInIconProps, ToastOptions } from '../types';
 import { cloneVNode, isVNode, VNode } from 'vue';
 import { isFn, isNum, isStr } from '../utils/tools';
-
-/**
- * Used when providing custom icon
- */
-export interface IconProps {
-  theme: ToastTheme;
-  type: ToastType;
-  path: string;
-}
-
-export type BuiltInIconProps = HTMLOrSVGElement & IconProps;
 
 const Svg = ({ theme, type, path, ...rest }: BuiltInIconProps) => (
   <svg

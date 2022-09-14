@@ -1,5 +1,16 @@
 import type { CSSProperties, DefineComponent, VNode } from 'vue';
 
+/**
+ * Used when providing custom icon
+ */
+export interface IconProps {
+  theme: ToastTheme;
+  type: ToastType;
+  path?: string;
+}
+
+export type BuiltInIconProps = HTMLOrSVGElement & IconProps;
+
 export type Content =
   | string
   | VNode
@@ -178,7 +189,13 @@ export interface ToastOptions extends Options {
    * the icons from being displayed
    * @default -
    */
-  icon?: boolean | string | number | VNode;
+  icon?:
+  | boolean
+  | string
+  | number
+  | VNode
+  | ((props: IconProps) => VNode)
+  | DefineComponent<IconProps, {}, {}>;
 
   /**
    * Let you delay the toast appearance. Pass a value in ms

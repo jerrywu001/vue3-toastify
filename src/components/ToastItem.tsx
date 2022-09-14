@@ -69,11 +69,11 @@ const ToastItem = defineComponent({
           }
         }}
       >
-        {/* content */}
         <div
           role="alert"
           class={`${Default.CSS_NAMESPACE}__toast-body`}
         >
+          {/* icon */}
           {
             toastIcon.value != null && (
               <div
@@ -84,10 +84,25 @@ const ToastItem = defineComponent({
                   ].join(' ')
                 }
               >
-                { toastIcon.value }
+                {
+                  isComponent(toastIcon.value as any)
+                    ?
+                    h(
+                      toastIcon.value as any,
+                      {
+                        theme: item.theme,
+                        type: item.type,
+                      },
+                    )
+                    : isFn(toastIcon.value) ? (toastIcon.value as Function)({
+                      theme: item.theme,
+                      type: item.type,
+                    }) : toastIcon.value
+                }
               </div>
             )
           }
+          {/* content */}
           <div>
             {
               isComponent(item.content as Content)
