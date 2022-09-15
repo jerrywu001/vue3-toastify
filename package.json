@@ -1,6 +1,6 @@
 {
   "name": "jerry-todo",
-  "version": "0.0.5",
+  "version": "0.0.9",
   "description": "🎉 Vue3-Toastify allows you to add notifications to your app with ease. No more nonsense!",
   "keywords": [
     "vue3",
@@ -60,10 +60,10 @@
     "typecheck": "tsc && vue-tsc"
   },
   "devDependencies": {
-    "@babel/core": "^7.19.0",
-    "@babel/plugin-transform-runtime": "^7.18.10",
-    "@babel/plugin-transform-typescript": "^7.19.0",
-    "@babel/preset-env": "^7.19.0",
+    "@babel/core": "^7.19.1",
+    "@babel/plugin-transform-runtime": "^7.19.1",
+    "@babel/plugin-transform-typescript": "^7.19.1",
+    "@babel/preset-env": "^7.19.1",
     "@babel/preset-typescript": "^7.18.6",
     "@commitlint/cli": "^17.1.2",
     "@commitlint/config-conventional": "^17.1.0",
@@ -73,7 +73,7 @@
     "@storybook/addon-links": "~6.4.22",
     "@storybook/builder-vite": "0.1.37",
     "@storybook/vue3": "~6.4.22",
-    "@swc/core": "^1.3.0",
+    "@swc/core": "^1.3.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/user-event": "^14.4.3",
     "@testing-library/vue": "^6.6.1",
@@ -87,7 +87,7 @@
     "@vitest/ui": "^0.23.2",
     "@vue/babel-plugin-jsx": "^1.1.1",
     "@vue/eslint-config-typescript": "^11.0.1",
-    "autoprefixer": "^10.4.10",
+    "autoprefixer": "^10.4.11",
     "babel-loader": "^8.2.5",
     "bumpp": "^8.2.1",
     "core-js": "^3.25.1",
@@ -108,7 +108,7 @@
     "postcss-cli": "^10.0.0",
     "postcss-loader": "^7.0.1",
     "postcss-nested": "^5.0.6",
-    "postcss-scss": "^4.0.4",
+    "postcss-scss": "^4.0.5",
     "rimraf": "^3.0.2",
     "sass": "^1.54.9",
     "shelljs": "^0.8.5",
@@ -122,7 +122,7 @@
     "vite": "3.1.0",
     "vite-plugin-dts": "^1.5.0",
     "vitest": "^0.23.2",
-    "vue-loader": "^16.8.3",
+    "vue-loader": "^17.0.0",
     "vue-tsc": "^0.40.13"
   },
   "peerDependencies": {

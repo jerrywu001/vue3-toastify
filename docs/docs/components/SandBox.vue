@@ -14,7 +14,7 @@
     :customSetup="{
       dependencies: {
         pinia: '^2.0.22',
-        'jerry-todo': '^0.0.5',
+        'jerry-todo': '^0.0.9',
       },
     }"
   />
@@ -143,7 +143,6 @@ onMounted(() => {
       const target = document.documentElement;
       const mb = new MutationObserver((mutationRecord) => {
         const dom = mutationRecord[0].target as HTMLDivElement;
-        console.log(dom.className);
         theme.value = (dom.className || 'light') as SandpackPredefinedTheme;
       });
       mb.observe(target, {

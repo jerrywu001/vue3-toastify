@@ -1,8 +1,8 @@
 import {
   Id,
-  ToastItem,
   Content,
   ToastOptions,
+  UpdateOptions,
 } from '../types';
 
 export const enum Event {
@@ -24,7 +24,7 @@ type OnAddCallback = (
 ) => void;
 type OnRemoveCallback = (id: Id) => void;
 type OnClearAllQueueCallback = (containerId?: Id) => void;
-export type OnUpdateCallback = (toast: ToastItem) => void;
+export type OnUpdateCallback = (toast: UpdateOptions) => void;
 
 type Callback =
   | OnAddCallback
@@ -48,7 +48,7 @@ export interface EventManager {
     options: NotValidatedToastProps
   ): void;
   emit(event: Event.Remove, id: Id): void;
-  emit(event: Event.Update, data: ToastItem): void;
+  emit(event: Event.Update, data: UpdateOptions): void;
   emit(event: Event.ClearAll, containerId?: Id): void;
 }
 

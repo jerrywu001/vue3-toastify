@@ -16,4 +16,25 @@ hero:
       link: https://github.com/jerrywu001/jerry-todo
 ---
 
-<Playground />
+<div class="VP-Hero">
+  <Playground />
+</div>
+
+<style>
+@media (min-width: 960px) {
+  .VP-Hero {
+    padding: calc(var(--vp-nav-height) + 80px) 64px 64px;
+  }
+}
+@media (min-width: 640px) {
+  .VP-Hero {
+    padding: calc(var(--vp-nav-height) + 80px) 48px 64px;
+  }
+}
+
+.VP-Hero {
+  padding: calc(var(--vp-nav-height) + 48px) 24px 48px;
+  margin: 0 auto;
+  max-width: 1250px;
+}
+</style>

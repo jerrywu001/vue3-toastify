@@ -38,8 +38,21 @@ export interface CloseButtonProps {
 export interface ToastContentProps<Data = {}> {
   closeToast?: (e?: MouseEvent) => void;
   toastProps?: ToastOptions;
-  data?: Data;
+  data: Data;
 }
+
+export type IconType =
+| boolean
+| string
+| number
+| VNode
+| ((props: IconProps) => VNode)
+| DefineComponent<IconProps, {}, {}>;
+
+export type CloseBtnType =
+| boolean
+| ((props: CloseButtonProps) => VNode)
+| DefineComponent<IconProps, {}, {}>;
 
 /**
  * options for toast
@@ -63,10 +76,7 @@ export interface Options {
    * Pass a custom close button.
    * To remove the close button pass `false`
    */
-  closeButton?:
-  | boolean
-  | ((props: CloseButtonProps) => VNode)
-  | VNode<CloseButtonProps>;
+  closeButton?: CloseBtnType;
 
   /**
    * A reference to a valid react-transition-group/Transition component
@@ -157,7 +167,7 @@ export interface ToastContainerOptions extends Options {
   limit?: number;
 }
 
-export interface ToastOptions extends Options {
+export interface ToastOptions<Data = {}> extends Options {
   /**
    * Set a custom `toastId`
    */
@@ -189,13 +199,7 @@ export interface ToastOptions extends Options {
    * the icons from being displayed
    * @default -
    */
-  icon?:
-  | boolean
-  | string
-  | number
-  | VNode
-  | ((props: IconProps) => VNode)
-  | DefineComponent<IconProps, {}, {}>;
+  icon?: IconType;
 
   /**
    * Let you delay the toast appearance. Pass a value in ms
@@ -206,24 +210,18 @@ export interface ToastOptions extends Options {
   /**
    * Called when toast is mounted.
    */
-  onOpen?: <T = {}>(props: T) => void;
+  onOpen?: () => void;
 
   /**
    * Called when toast is unmounted.
    */
-  onClose?: <T = {}>(props: T) => void;
+  onClose?: () => void;
 
   /**
    * Called when click inside Toast notification
    * @default -
    */
   onClick?: (event: MouseEvent) => void;
-
-  /**
-   * Only available when using toast.update
-   * @default -
-   */
-  render?: VNode | (() => VNode);
 
   /**
    * An optional css class to set.
@@ -260,21 +258,6 @@ export type ToastClassName =
 export type Data = Record<string, unknown>;
 
 export type ToastItemStatus = 'added' | 'removed' | 'updated';
-
-/**
- * for update toast
- */
-export interface ToastItem<T = {}> {
-  content: Content;
-  id: Id;
-  theme?: ToastTheme;
-  type?: ToastOptions;
-  isLoading?: boolean;
-  containerId?: Id;
-  data: T;
-  icon?: VNode | false;
-  status: ToastItemStatus;
-}
 
 export interface Toast {
   content: Content;
@@ -321,4 +304,23 @@ export interface CSSTransitionProps {
 export const enum AnimationStep {
   Enter,
   Exit,
+}
+
+type Nullable<T> = {
+  [P in keyof T]: T[P] | null;
+};
+
+export type ToastContent<T = unknown> =
+  | string
+  | VNode
+  | ((props: ToastContentProps<T>) => string | VNode)
+  | DefineComponent<{}, {}, any>
+  | (() => string);
+
+export interface UpdateOptions<T = unknown> extends Nullable<ToastOptions<T>> {
+  /**
+   * Used to update a toast.
+   * Pass any valid ReactNode(string, number, component)
+   */
+  render?: ToastContent<T>;
 }

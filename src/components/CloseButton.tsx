@@ -1,13 +1,7 @@
 /* eslint-disable max-len */
 import { Default, THEME } from '../utils/constant';
 import { type DefineComponent, defineComponent, type PropType } from 'vue';
-import { type ToastTheme } from '../types';
-
-export interface CloseButtonProps {
-  closeToast: (e: MouseEvent) => void;
-  ariaLabel?: string;
-  theme: ToastTheme;
-}
+import { ToastType, type CloseButtonProps, type ToastTheme } from '../types';
 
 export const CloseButton = defineComponent({
   name: 'CloseButton',
@@ -18,13 +12,18 @@ export const CloseButton = defineComponent({
       required: false,
       default: THEME.LIGHT,
     },
+    type: {
+      type: String as PropType<ToastType>,
+      required: false,
+      default: THEME.LIGHT,
+    },
     ariaLabel: {
       type: String,
       required: false,
       default: 'close',
     },
     closeToast: {
-      type: Function,
+      type: Function as PropType<(e?: MouseEvent) => void>,
       required: false,
       default: undefined,
     },
@@ -49,4 +48,4 @@ export const CloseButton = defineComponent({
       </button>
     );
   },
-}) as DefineComponent<CloseButtonProps>;
+}) as DefineComponent<Partial<CloseButtonProps>>;

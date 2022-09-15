@@ -1,6 +1,6 @@
 import { CSSProperties, PropType, VNode } from 'vue';
 import { POSITION, THEME, TYPE } from '../../utils/constant';
-import type { Content, ToastPosition, ToastTheme, ToastTransition, ToastType } from '../../types';
+import type { Content, IconType, ToastPosition, ToastTheme, ToastTransition, ToastType } from '../../types';
 
 const props = {
   containerId: {
@@ -12,6 +12,11 @@ const props = {
     type: String as PropType<ToastPosition>,
     required: false,
     default: POSITION.TOP_LEFT,
+  },
+  bodyClassName: {
+    type: String,
+    required: false,
+    default: '',
   },
   autoClose: {
     type: [Number, Boolean],
@@ -60,6 +65,11 @@ const props = {
       return {} as CSSProperties;
     },
   },
+  progress: {
+    type: [Number, String],
+    required: false,
+    default: undefined,
+  },
   progressClassName: {
     type: String,
     required: false,
@@ -83,7 +93,7 @@ const props = {
     default: THEME.LIGHT,
   },
   content: {
-    type: [String, Object] as PropType<Content>,
+    type: [String, Object, Function] as PropType<Content>,
     required: false,
     default: '',
   },
@@ -93,7 +103,7 @@ const props = {
     default: '',
   },
   data: {
-    type: Object as PropType<{ [key: string]: any }>,
+    type: [Object, String] as PropType<{ [key: string]: any }>,
     required: false,
     default() {
       return {};
@@ -105,12 +115,12 @@ const props = {
     default: TYPE.DEFAULT,
   },
   icon: {
-    type: [Boolean, String, Number, Object] as PropType<boolean | string | number | VNode>,
+    type: [Boolean, String, Number, Object, Function] as PropType<IconType>,
     required: false,
     default: undefined,
   },
   delay: {
-    type: [Number, Boolean],
+    type: Number,
     required: false,
     default: undefined,
   },
@@ -129,15 +139,25 @@ const props = {
     required: false,
     default: undefined,
   },
-  render: {
-    type: Object as PropType<VNode | (() => VNode)>,
-    required: false,
-    default: undefined,
-  },
   isLoading: {
     type: Boolean,
     required: false,
+    default: undefined,
+  },
+  rtl: {
+    type: Boolean,
+    required: false,
     default: false,
+  },
+  toastClassName: {
+    type: String,
+    required: false,
+    default: '',
+  },
+  updateId: {
+    type: String,
+    required: false,
+    default: '',
   },
 };
 

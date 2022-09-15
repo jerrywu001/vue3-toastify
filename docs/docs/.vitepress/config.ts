@@ -107,10 +107,18 @@ function sidebarConfig() {
       collapsible: true,
       items: [
         { text: 'Positioning toast', link: '/usage/positioning-toast' },
+        { text: 'Replace the default transition', link: '/usage/replace-default-transition' },
+        { text: 'Handling promises', link: '/usage/promise' },
         { text: 'Handling autoClose', link: '/usage/auto-close' },
         { text: 'Render more than string', link: '/usage/render-more-than-string' },
-        { text: 'Remove toast programmatically', link: '/usage/remove-toast-programmatically' },
+        { text: 'Remove toast', link: '/usage/remove-toast-programmatically' },
         { text: 'Icons', link: '/usage/icons' },
+        { text: 'Use a custom id', link: '/usage/use-a-custom-id' },
+        { text: 'Use a custom close button', link: '/usage/custom-close-button' },
+        { text: 'Prevent duplicate', link: '/usage/prevent-duplicate' },
+        { text: 'Delay notification appearance', link: '/usage/delay-toast-appearance' },
+        { text: 'Define callback', link: '/usage/define-callback' },
+        { text: 'Pause on focus loss', link: '/usage/pause-on-focus-loss' },
       ]
     },
     {

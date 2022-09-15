@@ -18,7 +18,6 @@ app.use(
   Vue3Toasity,
   {
     // rtl: true,
-    autoClose: 3000,
     style: {
       opacity: '1',
       userSelect: 'initial',

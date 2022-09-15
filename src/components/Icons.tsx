@@ -1,8 +1,8 @@
 /* eslint-disable max-len */
 import { Default } from '../utils/constant';
-import { BuiltInIconProps, ToastOptions } from '../types';
-import { cloneVNode, isVNode, VNode } from 'vue';
-import { isFn, isNum, isStr } from '../utils/tools';
+import { BuiltInIconProps, IconType, ToastOptions } from '../types';
+import { cloneVNode, isVNode, toRaw, VNode } from 'vue';
+import { isComponent, isFn, isNum, isStr } from '../utils/tools';
 
 const Svg = ({ theme, type, path, ...rest }: BuiltInIconProps) => (
   <svg
@@ -71,15 +71,17 @@ export const Icons = {
 const maybeIcon = (type: string): type is keyof typeof Icons => type in Icons;
 
 export function getIcon({ theme, type, isLoading, icon }: ToastOptions) {
-  let Icon: VNode | string | number | undefined;
+  let Icon: undefined | IconType;
   const iconProps = { theme, type };
   if (isLoading) {
     Icon = Icons.spinner();
   } else if (icon === false) {
-    icon = undefined;
+    Icon = undefined;
+  } else if (isComponent(icon as any)) {
+    Icon = toRaw(icon);
   } else if (isFn(icon)) {
     // @ts-ignore
-    const iconCreator: (props?: BuiltInIconProps) => JSX.Element = icon;
+    const iconCreator: (props?: BuiltInIconProps) => VNode = icon;
     Icon = iconCreator(iconProps as BuiltInIconProps);
   } else if (isVNode(icon)) {
     Icon = cloneVNode(icon, iconProps);

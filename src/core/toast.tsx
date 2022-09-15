@@ -1,11 +1,11 @@
 import { cacheRenderInstance } from '../store';
-import { createApp, nextTick } from 'vue';
-import { Event, eventManager } from '..';
+import { createApp, nextTick, toRaw } from 'vue';
+import { Event, eventManager, getAllToast, getToast } from '..';
 import { generateRenderRoot, toastContainerInScreen } from '../utils/render';
-import { generateToastId, getGlobalOptions, mergeOptions } from '../utils/tools';
+import { generateToastId, getGlobalOptions, isFn, isStr, mergeOptions } from '../utils/tools';
 import { POSITION, THEME, TRANSITIONS, TYPE } from '../utils/constant';
 import { ToastifyContainer } from '../components';
-import type { Content, Data, Id, ToastOptions, ToastType } from '../types';
+import type { Content, Data, Id, ToastOptions, ToastProps, ToastType, UpdateOptions } from '../types';
 
 function openToast(content: Content, type: ToastType, options = {} as ToastOptions) {
   options = mergeOptions<ToastOptions>(getGlobalOptions(), { type }, options);
@@ -28,7 +28,11 @@ function openToast(content: Content, type: ToastType, options = {} as ToastOptio
   }
 
   nextTick(() => {
-    eventManager.emit(Event.Add, content, options);
+    if (options.updateId) {
+      eventManager.emit(Event.Update, options as UpdateOptions);
+    } else {
+      eventManager.emit(Event.Add, content, options);
+    }
   });
 
   return options.toastId as Id;
@@ -77,6 +81,134 @@ toast.remove = (toastId?: Id) => {
 toast.clearAll = (containerId?: Id) => {
   eventManager.emit(Event.ClearAll, containerId);
 };
+
+/**
+ * return true if one container is displaying the toast
+ */
+toast.isActive = (toastId: Id) => {
+  let isToastActive = false;
+
+  const all = getAllToast();
+  isToastActive = all.findIndex(v => v.toastId === toastId) > -1;
+
+  return isToastActive;
+};
+
+toast.update = (toastId: Id, options: UpdateOptions = {}) => {
+  // if you call toast and toast.update directly nothing will be displayed
+  // this is why I defered the update
+  setTimeout(() => {
+    const item = getToast(toastId);
+    if (item) {
+      const oldOptions = toRaw(item);
+      const { content: oldContent } = oldOptions;
+
+      const nextOptions = {
+        ...oldOptions,
+        ...options,
+        toastId: options.toastId || toastId,
+        updateId: generateToastId(),
+      } as ToastProps & UpdateOptions;
+
+      const content = nextOptions.render || oldContent;
+      delete nextOptions.render;
+
+      openToast(content as Content, nextOptions.type as ToastType, nextOptions);
+    }
+  }, 0);
+};
+
+/**
+ * Used for controlled progress bar.
+ */
+toast.done = (id: Id) => {
+  toast.update(id, {
+    isLoading: false,
+    progress: 1,
+  });
+};
+
+toast.promise = handlePromise;
+
+export interface ToastPromiseParams<T = unknown> {
+  pending?: string | UpdateOptions<void>;
+  success?: string | UpdateOptions<T>;
+  error?: string | UpdateOptions<any>;
+}
+
+function handlePromise<T = unknown>(
+  promise: Promise<T> | (() => Promise<T>),
+  { pending, error, success }: ToastPromiseParams<T>,
+  options?: ToastOptions,
+) {
+  let id: Id;
+
+  if (pending) {
+    id = isStr(pending)
+      ? toast.loading(pending, options)
+      : toast.loading(pending.render as Content, {
+        ...options,
+        ...(pending as ToastOptions),
+      });
+  }
+
+  const resetParams = {
+    isLoading: undefined,
+    autoClose: null,
+    closeOnClick: null,
+    closeButton: null,
+    draggable: null,
+    delay: 100,
+  };
+
+  const resolver = (
+    type: ToastType,
+    input: string | UpdateOptions<T> | undefined,
+    result: T,
+  ) => {
+    // Remove the toast if the input has not been provided. This prevents the toast from hanging
+    // in the pending state if a success/error toast has not been provided.
+    if (input == null) {
+      toast.remove(id);
+      return;
+    }
+
+    const baseParams = {
+      type,
+      ...resetParams,
+      ...options,
+      data: result,
+    };
+    const params = isStr(input) ? { render: input } : input;
+
+    // if the id is set we know that it's an update
+    if (id) {
+      toast.update(id, {
+        ...baseParams,
+        ...params,
+        isLoading: false,
+        autoClose: true,
+      } as UpdateOptions);
+    } else {
+      // using toast.promise without loading
+      toast(params.render as Content, {
+        ...baseParams,
+        ...params,
+        isLoading: false,
+        autoClose: true,
+      } as ToastOptions);
+    }
+
+    return result;
+  };
+
+  const p = isFn(promise) ? promise() : promise;
+
+  // call the resolvers only when needed
+  p.then(result => resolver('success', success, result)).catch(err => resolver('error', error, err));
+
+  return p;
+}
 
 toast.POSITION = POSITION;
 toast.THEME = THEME;

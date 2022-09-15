@@ -74,16 +74,12 @@ You can also write with a tsx component. that is cool!!
 
 ::: sandbox
 ```vue App.vue
-<template>
-  <JsxDemo />
-  <button @click="show">toast with callback in .vue</button>
-</template>
-
 <script>
 import { h } from 'vue';
-import { toast } from 'jerry-todo';
 import JsxDemo from './JsxDemo.jsx';
 import Msg from './Msg.vue';
+import { toast } from 'jerry-todo';
+import 'jerry-todo/dist/index.css';
 
 export default {
   name: "App",
@@ -99,12 +95,16 @@ export default {
   }
 };
 </script>
+
+<template>
+  <JsxDemo />
+  <button @click="show">toast with callback in .vue</button>
+</template>
 ```
 
 ```jsx /src/JsxDemo.jsx [active]
 import { toast } from 'jerry-todo';
 import { defineComponent } from 'vue';
-import 'jerry-todo/dist/index.css';
 import Msg from './Msg';
 
 const JsxDemo = defineComponent({
@@ -173,14 +173,6 @@ In this example we will use pinia to share state accross a component and a toast
 
 ::: sandbox
 ```vue App.vue
-<template>
-  <div>
-    <button @click="notify">show toast</button>
-    <br />
-    <button @click="increment">increment</button>
-  </div>
-</template>
-
 <script>
 import { toast } from 'jerry-todo';
 import { useCounterStore } from './stores/useCounterStore';
@@ -197,6 +189,14 @@ export default {
   }
 };
 </script>
+
+<template>
+  <div>
+    <button @click="notify">show toast</button>
+    <br />
+    <button @click="increment">increment</button>
+  </div>
+</template>
 ```
 
 ```vue /src/CountDisplay.vue

@@ -15,7 +15,7 @@ const ProgressBar = defineComponent({
 
     const style = computed<CSSProperties>(() => ({
       ...(attrs.style as CSSProperties || {}),
-      animationDuration: `${props.delay}ms`,
+      animationDuration: `${props.autoClose === true ? 5000 : props.autoClose}ms`,
       animationPlayState: props.isRunning ? 'running' : 'paused',
       opacity: props.hide ? 0 : 1,
       transform: props.controlledProgress ? `scaleX(${props.progress})` : 'none',
@@ -49,7 +49,7 @@ const ProgressBar = defineComponent({
     const animationEventHandler = computed(() => props.controlledProgress && props.progress! < 1
       ? null
       : () => {
-        if (props.isIn && props.closeToast && props.delay !== false) {
+        if (props.isIn && props.closeToast && props.autoClose !== false) {
           props.closeToast();
         }
       });

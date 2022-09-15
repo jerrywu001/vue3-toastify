@@ -4,7 +4,7 @@ import type { ToastTheme, ToastType } from '../../types';
 import { THEME, TYPE } from '../../utils/constant';
 
 export const props = {
-  delay: {
+  autoClose: {
     type: [Number, Boolean],
     required: false,
     default: undefined,
@@ -65,7 +65,7 @@ export interface ProgressBarProps extends HTMLAttributes {
   /**
    * The animation delay which determine when to close the toast
    */
-  delay: number | boolean;
+  autoClose: number | boolean;
 
   /**
    * Whether or not the animation is running or paused

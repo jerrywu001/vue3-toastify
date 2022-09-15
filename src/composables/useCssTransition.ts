@@ -1,11 +1,15 @@
-import { computed, onMounted, reactive, ref, Ref, watchEffect } from 'vue';
+import { computed, ComputedRef, Events, onMounted, onUnmounted, reactive, ref, Ref, watchEffect } from 'vue';
 import { Default, SyntheticEvent } from '../utils/constant';
-import { AnimationStep, CSSTransitionProps, Id } from '../types';
+import { AnimationStep, CSSTransitionProps, ToastProps } from '../types';
 import { getAllToast } from './useToastContainer';
 
-interface OtherProps {
+type EventHandlers<E> = {
+  [K in keyof E]?: E[K] extends Function ? E[K] : (payload: E[K]) => void
+};
+
+interface OtherProps extends ToastProps {
   toastRef: Ref<HTMLDivElement | undefined>;
-  toastId: Id;
+  loading: ComputedRef<boolean>;
 }
 
 const NullCallback = () => {};
@@ -53,8 +57,41 @@ export function useCssTransition(props: CSSTransitionProps & OtherProps) {
   const enterClassName = computed(() => options.appendPosition ? `${options.enter}--${options.position}` : options.enter);
   const exitClassName = computed(() => options.appendPosition ? `${options.exit}--${options.position}` : options.exit);
 
+  const eventHandlers = computed<EventHandlers<Events>>(() => props.pauseOnHover ? {
+    onMouseenter: pauseToast,
+    onMouseleave: playToast,
+  } : {});
+
+  function bindFocusEvents() {
+    if (!document.hasFocus()) pauseToast();
+
+    window.addEventListener('focus', playToast);
+    window.addEventListener('blur', pauseToast);
+  }
+
+  function unbindFocusEvents() {
+    window.removeEventListener('focus', playToast);
+    window.removeEventListener('blur', pauseToast);
+  }
+
+  watchEffect(() => {
+    if (props.isLoading !== undefined) {
+      if (props.loading.value) {
+        pauseToast();
+      } else {
+        playToast();
+      }
+    }
+  });
+
   function playToast() {
-    isRunning.value = true;
+    if (!props.loading.value || props.isLoading === undefined) {
+      isRunning.value = true;
+    }
+  }
+
+  function pauseToast() {
+    isRunning.value = false;
   }
 
   function hideToast(e?: MouseEvent) {
@@ -64,10 +101,6 @@ export function useCssTransition(props: CSSTransitionProps & OtherProps) {
     }
     isIn.value = false;
   }
-
-  // function pauseToast() {
-  //   isRunning.value = false;
-  // }
 
   function onExitHandler() {
     const node = props.toastRef.value as HTMLDivElement;
@@ -133,7 +166,22 @@ export function useCssTransition(props: CSSTransitionProps & OtherProps) {
     };
 
     onEnter();
+
+    if (props.pauseOnFocusLoss) {
+      bindFocusEvents();
+    }
   });
 
-  return { isIn, isRunning, hideToast };
+  onUnmounted(() => {
+    if (props.pauseOnFocusLoss) {
+      unbindFocusEvents();
+    }
+  });
+
+  return {
+    isIn,
+    isRunning,
+    hideToast,
+    eventHandlers,
+  };
 }

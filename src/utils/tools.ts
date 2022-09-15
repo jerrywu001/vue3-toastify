@@ -10,6 +10,10 @@ export function generateToastId() {
   return Math.random().toString(36).substring(2, 9);
 }
 
+export function isNull(v: any) {
+  return typeof v === 'undefined' || v === null;
+}
+
 export function isNum(v: any): v is Number {
   return typeof v === 'number' && !isNaN(v);
 }

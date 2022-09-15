@@ -1,0 +1,129 @@
+# Handling promises
+
+![](https://user-images.githubusercontent.com/5574267/130862554-652397ed-1b1e-40d4-a250-c38734ec8e5d.png)
+
+## toast.loading
+
+If you want to take care of each step yourself you can use `toast.loading` and update the notification yourself.
+
+::: sandbox
+```vue App.vue
+<script>
+import { toast } from 'jerry-todo';
+import Msg from './Msg.vue';
+import 'jerry-todo/dist/index.css';
+
+export default {
+  name: "App",
+  setup() {
+    const notify = () => {
+      const id = toast.loading('Please wait...');
+
+      setTimeout(() => {
+        toast.update(id, {
+          render: Msg,
+          autoClose: true,
+          closeOnClick: true,
+          closeButton: true,
+          type: 'success',
+          isLoading: false,
+        });
+
+        setTimeout(() => {
+          // done
+          toast.done(id);
+        }, 1000);
+      }, 2000);
+    };
+    return { notify };
+  }
+};
+</script>
+
+<template>
+  <div>
+    <button @click="notify">toast</button>
+  </div>
+</template>
+```
+
+```vue /src/Msg.vue [active]
+<script>
+import { ToastProps } from 'jerry-todo';
+import { PropType } from 'vue';
+
+export default {
+  name: 'Msg',
+  props: {
+    closeToast: Function,
+    toastProps: Object,
+    // for ts
+    // closeToast: Function as PropType<(e?: MouseEvent) => void>,
+    // toastProps: Object as PropType<ToastProps>,
+  },
+};
+</script>
+
+<template>
+  <div>
+    <p>I am a vue component</p>
+    <p>Position: {{ toastProps?.position }}</p>
+    <button
+      @click="($event) => { closeToast && closeToast($event) }"
+    >
+      Click me to close toast
+    </button>
+  </div>
+</template>
+```
+:::
+
+## toast.promise
+
+The library exposes a `toast.promise` function. Supply a promise or a function that return a promise and the notification will be updated if it resolves or fails. When the promise is pending a spinner is displayed.
+
+Let's start with a simple example
+
+:::sandbox
+```vue App.vue
+<script>
+import { toast } from 'jerry-todo';
+import 'jerry-todo/dist/index.css';
+
+export default {
+  name: "App",
+  setup() {
+    const displayPromise = () => {
+      const resolveAfter3Sec = new Promise(resolve => setTimeout(resolve, 3000));
+      toast.promise(
+        resolveAfter3Sec,
+        {
+          pending: 'Promise is pending',
+          success: 'Promise resolved 👌',
+          error: 'Promise rejected 🤯',
+        },
+      );
+
+      const functionThatReturnPromise = () => new Promise((resolve, reject) => setTimeout(reject, 3000));
+      toast.promise(
+        functionThatReturnPromise,
+        {
+          pending: 'Promise is pending',
+          success: 'Promise resolved 👌',
+          error: 'Promise rejected 🤯',
+        },
+      );
+    };
+    return { displayPromise };
+  }
+};
+</script>
+
+<template>
+  <div>
+    <button @click="displayPromise">display promise</button>
+  </div>
+</template>
+```
+:::
+

@@ -2,9 +2,6 @@
 import { ref } from 'vue';
 import { toast, ToastOptions } from 'jerry-todo';
 import Conditions from '../components/Conditions.vue';
-// import MsgH from '../components/MsgH.vue';
-import Msg from '../components/Msg';
-import JsxDemo from '../components/JsxDemo';
 
 const showConditions = ref(false);
 const options = ref({} as ToastOptions);
@@ -29,17 +26,63 @@ const clearAll = () => {
   toast.clearAll();
 };
 
-const displayMsg = () => {
-  toast(Msg, { closeOnClick: false, autoClose: 8000 });
+const displayPromise = () => {
+  // eslint-disable-next-line no-promise-executor-return
+  const resolveAfter3Sec = new Promise(resolve => setTimeout(resolve, 3000));
+  toast.promise(
+    resolveAfter3Sec,
+    {
+      pending: 'Promise is pending',
+      success: 'Promise resolved 👌',
+      error: 'Promise rejected 🤯',
+    },
+  );
+
+  // eslint-disable-next-line no-promise-executor-return
+  const functionThatReturnPromise = () => new Promise((resolve, reject) => setTimeout(reject, 3000));
+  toast.promise(
+    functionThatReturnPromise,
+    {
+      pending: 'Promise is pending',
+      success: 'Promise resolved 👌',
+      error: 'Promise rejected 🤯',
+    },
+  );
+
+  const resolveWithSomeData =
+    // eslint-disable-next-line no-promise-executor-return
+    new Promise<{ text: string; }>(resolve => setTimeout(() => resolve({ text: 'world' }), 3000));
+  toast.promise(
+    resolveWithSomeData,
+    {
+      pending: {
+        render() {
+          return "I'm loading";
+        },
+        icon: false,
+      },
+      success: {
+        render({ data }) {
+          return `Hello ${data.text}`;
+        },
+        // other options
+        icon: '🟢',
+      },
+      error: {
+        render({ data }) {
+          // When the promise reject, data will contains the error
+          return `error ${data.message}`;
+        },
+      },
+    },
+    {
+      position: toast.POSITION.TOP_LEFT,
+    },
+  );
 };
 </script>
 
 <template>
-  <JsxDemo />
-  <button class="c-btn dashed" @click="displayMsg">displayMsg</button>
-
-  <div class="hr" />
-
   <Conditions
     :visible="showConditions"
     @on-close="toggleConditions"
@@ -52,6 +95,7 @@ const displayMsg = () => {
 
   <div class="py-2 px-6" style="display: flex;">
     <button class="c-btn green" @click="showToast">💡 show toast</button>
+    <button class="c-btn green" @click="displayPromise">🫓 promise</button>
     <button class="c-btn green" @click="showLoadToast">🫓 show loading toast</button>
     <button class="c-btn green" @click="clearAll">💣 unmount all container</button>
   </div>
