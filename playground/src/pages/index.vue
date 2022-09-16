@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { h, ref } from 'vue';
 import { toast, ToastOptions } from 'jerry-todo';
 import Conditions from '../components/Conditions.vue';
 
@@ -51,7 +51,7 @@ const displayPromise = () => {
 
   const resolveWithSomeData =
     // eslint-disable-next-line no-promise-executor-return
-    new Promise<{ text: string; }>(resolve => setTimeout(() => resolve({ text: 'world' }), 3000));
+    new Promise<{ message: string; }>((resolve, reject) => setTimeout(() => reject({ message: 'world' }), 3000));
   toast.promise(
     resolveWithSomeData,
     {
@@ -63,7 +63,7 @@ const displayPromise = () => {
       },
       success: {
         render({ data }) {
-          return `Hello ${data.text}`;
+          return `Hello ${data.message}`;
         },
         // other options
         icon: '🟢',
@@ -71,8 +71,11 @@ const displayPromise = () => {
       error: {
         render({ data }) {
           // When the promise reject, data will contains the error
-          return `error ${data.message}`;
+          return h('div', `error ${data.message}`);
+          // return `error ${data.message}`;
         },
+        // render: 'just text',
+        // render: h('div', 'error'),
       },
     },
     {

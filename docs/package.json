@@ -8,9 +8,9 @@
     "docs:serve": "vitepress serve docs"
   },
   "devDependencies": {
-    "codesandbox-sandpack-vue3": "^1.2.1",
+    "codesandbox-sandpack-vue3": "^1.2.4",
     "markdown-it-directive": "^1.0.1",
     "markdown-it-directive-webcomponents": "^1.2.0",
-    "vitepress": "1.0.0-alpha.14"
+    "vitepress": "1.0.0-alpha.15"
   }
 }
