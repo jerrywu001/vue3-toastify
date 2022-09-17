@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { h, ref } from 'vue';
-import { Bounce, toast, ToastOptions } from 'jerry-todo';
+import { toast, ToastOptions } from 'jerry-todo';
 import Conditions from '../components/Conditions.vue';
 
 const showConditions = ref(false);
@@ -15,24 +15,7 @@ const onOptionsChange = (opts: ToastOptions) => {
 };
 
 function showToast() {
-  toast('Custom style', {
-    autoClose: 30000,
-    toastClassName: 'toast-classssssss2222',
-    bodyClassName: 'toast-body-Ccccct-size222',
-    progressClassName: 'fancy-progress-bar222',
-    toastStyle: {
-      fontSize: '18px',
-    },
-  });
-  // toast.success('s', {
-  //   transition: {
-  //     ...Bounce,
-  //     collapse: false,
-  //   },
-  //   autoClose: 2000,
-  //   // hideProgressBar: true,
-  // });
-  // toast.success(`Wow so easy! ${parseInt(String(Math.random() * 100000), 10)}`, options.value);
+  toast.success(`Wow so easy! ${parseInt(String(Math.random() * 100000), 10)}`, options.value);
 }
 
 function showLoadToast() {
