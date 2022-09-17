@@ -37,8 +37,9 @@ const ToastItem = defineComponent({
       `${Default.CSS_NAMESPACE}__toast`,
       `${Default.CSS_NAMESPACE}__toast-theme--${item.theme}`,
       `${Default.CSS_NAMESPACE}__toast--${item.type}`,
-      item.className || '',
-    ].join(' '));
+      item.rtl ? `${Default.CSS_NAMESPACE}__toast--rtl` : undefined,
+      item.toastClassName || '',
+    ].filter(Boolean).join(' '));
 
     const {
       isRunning,
@@ -57,7 +58,7 @@ const ToastItem = defineComponent({
       <div
         id={item.toastId as string}
         class={className.value}
-        style={item.style || {}}
+        style={item.toastStyle || {}}
         ref={toastRef}
         onClick={(e) => {
           if (item.closeOnClick) {
@@ -67,8 +68,8 @@ const ToastItem = defineComponent({
         { ...eventHandlers.value }
       >
         <div
-          role="alert"
-          class={`${Default.CSS_NAMESPACE}__toast-body`}
+          role={item.role}
+          class={`${Default.CSS_NAMESPACE}__toast-body ${item.bodyClassName || ''}`}
         >
           {/* icon */}
           {

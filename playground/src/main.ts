@@ -18,6 +18,10 @@ app.use(
   Vue3Toasity,
   {
     // rtl: true,
+    containerClassName: 'container-classsssssss',
+    toastClassName: 'toast-classssssss',
+    bodyClassName: 'toast-body-Ccccct-size',
+    progressClassName: 'fancy-progress-bar',
     style: {
       opacity: '1',
       userSelect: 'initial',

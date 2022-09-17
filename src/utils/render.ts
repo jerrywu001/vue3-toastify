@@ -36,7 +36,7 @@ export function getContainerId(options: ToastOptions) {
 }
 
 export function generateRenderRoot(options: ToastProps) {
-  const { position, className, rtl = false } = options;
+  const { position, containerClassName, rtl = false, style = {} } = options;
   const rootClass = Default.CSS_NAMESPACE;
   const toastPosClassName = getToastPosClassName(position);
   const existRoot = !!document.querySelector(`.${rootClass}`);
@@ -46,10 +46,17 @@ export function generateRenderRoot(options: ToastProps) {
 
   renderRoot.className = getContainerClassName(
     position as ToastPosition,
-    className as ToastClassName,
+    containerClassName as ToastClassName,
     rtl,
   );
   renderRoot.id = getContainerId(options) as string;
+
+  for (const name in style) {
+    if (Object.prototype.hasOwnProperty.call(style, name)) {
+      const val = style[name];
+      renderRoot.style[name] = val;
+    }
+  }
 
   if (!existRoot) {
     container.className = Default.CSS_NAMESPACE;

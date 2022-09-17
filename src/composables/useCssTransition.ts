@@ -10,6 +10,8 @@ type EventHandlers<E> = {
 interface OtherProps extends ToastProps {
   toastRef: Ref<HTMLDivElement | undefined>;
   loading: ComputedRef<boolean>;
+  /** on propgress end or cancel */
+  done?: () => void;
 }
 
 const NullCallback = () => {};
@@ -49,7 +51,7 @@ export function useCssTransition(props: CSSTransitionProps & OtherProps) {
   const options = reactive({
     ...props,
     appendPosition: props.appendPosition || false,
-    collapse: props.collapse || true,
+    collapse: typeof props.collapse === 'undefined' ? true : props.collapse,
     collapseDuration: props.collapseDuration || Default.COLLAPSE_DURATION,
   });
 

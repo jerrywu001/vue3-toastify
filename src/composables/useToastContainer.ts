@@ -1,7 +1,6 @@
 import { nextTick, onMounted, onUnmounted, reactive, toRaw } from 'vue';
 import { Content, Id, ToastOptions, ToastProps, UpdateOptions } from '../types';
 import { eventManager, Event, unmountAllContainer, unmountContainer } from '..';
-import { isNull } from '../utils/tools';
 
 export interface ToastMap {
   [containerId: Id]: ToastOptions[];
@@ -81,9 +80,7 @@ export function updateToast(opts = {} as UpdateOptions) {
         for (const optName in opts) {
           if (Object.prototype.hasOwnProperty.call(opts, optName)) {
             const value = opts[optName];
-            if (!isNull(value)) {
-              item[optName] = value;
-            }
+            item[optName] = value;
           }
         }
       }, opts.delay || 0);

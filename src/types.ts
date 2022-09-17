@@ -58,7 +58,13 @@ export type CloseBtnType =
  * options for toast
  */
 export interface Options {
-  /** toast group id */
+  /**
+   * Support right to left content
+   * @default false
+   */
+  rtl?: boolean;
+
+  /** Used to identify the ToastContainer when working with multiple container. Also used to set the id attribute */
   containerId?: Id;
   /**
    * One of top-right, top-center, top-left, bottom-right, bottom-center, bottom-left
@@ -104,15 +110,15 @@ export interface Options {
    */
   closeOnClick?: boolean;
   /**
-   * Add optional classes to the container
-   * @default ''
+   * Add optional classes to the toast wrapper
+   * @default -
    */
-  className?: ToastClassName;
+  toastClassName?: string; // TODO: ToastClassName
   /**
    * Add optional classes to the TransitionGroup container
    * @default ''
    */
-  bodyClassName?: ToastClassName;
+  bodyClassName?: string; // TODO: ToastClassName
   /**
    * Add optional inline style to the container
    * @default {}
@@ -122,7 +128,7 @@ export interface Options {
    * Add optional classes to the progress bar
    * @default -
    */
-  progressClassName?: ToastClassName;
+  progressClassName?: string; // TODO: ToastClassName
   /**
    * Add optional inline style to the progress bar
    * @default {}
@@ -146,25 +152,20 @@ export interface Options {
  */
 export interface ToastContainerOptions extends Options {
   /**
-   * Support right to left content
-   * @default false
-   */
-  rtl?: boolean;
-  /**
    * Display newest toast on top
    * @default false
    */
   newestOnTop?: boolean;
   /**
-   * Add optional classes to the toast
+   * Add optional classes to the container
    * @default -
    */
-  toastClassName?: string;
+  containerClassName?: string; // TODO: ToastClassName
   /**
    * Used to limit the number of toast displayed on screen at the same time
    * @default -
    */
-  limit?: number;
+  limit?: number; // TODO
 }
 
 export interface ToastOptions<Data = {}> extends Options {
@@ -185,7 +186,7 @@ export interface ToastOptions<Data = {}> extends Options {
    * any additional data you want to pass toast("content", { data: {key: value} })
    * @default {}
    */
-  data?: { [key: string]: any };
+  data?: Data;
 
   /**
    * One of info, success, warning, error, default, loading
@@ -224,14 +225,9 @@ export interface ToastOptions<Data = {}> extends Options {
   onClick?: (event: MouseEvent) => void;
 
   /**
-   * An optional css class to set.
-   */
-  className?: ToastClassName;
-
-  /**
    * An optional inline style to apply.
    */
-  style?: CSSProperties;
+  toastStyle?: CSSProperties;
 
   /**
    * Set the percentage for the controlled progress bar. `Value must be between 0 and 1.`
@@ -265,11 +261,6 @@ export interface Toast {
 }
 
 export interface CSSTransitionProps {
-  /** on propgress end or cancel */
-  done?: () => void;
-
-  /** toast position */
-  position?: ToastPosition;
   /**
    * Css class to apply when toast enter
    */

@@ -13,8 +13,9 @@
     }"
     :customSetup="{
       dependencies: {
+        'animate.css': '~4.1.1',
+        'jerry-todo': '^0.0.12',
         pinia: '^2.0.22',
-        'jerry-todo': '^0.0.9',
       },
     }"
   />

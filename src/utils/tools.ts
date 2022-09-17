@@ -10,10 +10,6 @@ export function generateToastId() {
   return Math.random().toString(36).substring(2, 9);
 }
 
-export function isNull(v: any) {
-  return typeof v === 'undefined' || v === null;
-}
-
 export function isNum(v: any): v is Number {
   return typeof v === 'number' && !isNaN(v);
 }
@@ -40,7 +36,7 @@ export function mergeOptions<T = VNodeProps>(...args: any[]) {
 
 export function isComponent(content: Content) {
   return typeof content === 'object'
-    && (!!(content as any).render || !!(content as any).setup);
+    && (!!(content as any)?.render || !!(content as any)?.setup || typeof content?.type === 'object');
 }
 
 /**

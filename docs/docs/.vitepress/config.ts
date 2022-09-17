@@ -103,11 +103,21 @@ function sidebarConfig() {
       ]
     },
     {
+      text: 'API Reference',
+      collapsible: true,
+      items: [
+        { text: 'Container', link: '/api/container' },
+        { text: 'Toast', link: '/api/toast' },
+      ]
+    },
+    {
       text: 'Usage',
       collapsible: true,
       items: [
         { text: 'Positioning toast', link: '/usage/positioning-toast' },
         { text: 'Replace the default transition', link: '/usage/replace-default-transition' },
+        { text: 'How to style', link: '/usage/how-to-style' },
+        { text: 'Define custom animation', link: '/usage/custom-animation' },
         { text: 'Handling promises', link: '/usage/promise' },
         { text: 'Handling autoClose', link: '/usage/auto-close' },
         { text: 'Render more than string', link: '/usage/render-more-than-string' },
@@ -116,16 +126,11 @@ function sidebarConfig() {
         { text: 'Use a custom id', link: '/usage/use-a-custom-id' },
         { text: 'Use a custom close button', link: '/usage/custom-close-button' },
         { text: 'Prevent duplicate', link: '/usage/prevent-duplicate' },
+        { text: 'Enable right to left support', link: '/usage/enable-right-to-left-support' },
         { text: 'Delay notification appearance', link: '/usage/delay-toast-appearance' },
         { text: 'Define callback', link: '/usage/define-callback' },
         { text: 'Pause on focus loss', link: '/usage/pause-on-focus-loss' },
-      ]
-    },
-    {
-      text: 'API Reference',
-      collapsible: true,
-      items: [
-        { text: 'Toast', link: '/api/toast' },
+        { text: 'Accessibility', link: '/usage/accessibility' },
       ]
     },
   ];

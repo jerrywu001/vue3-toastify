@@ -1,6 +1,6 @@
 import { CSSProperties, PropType, VNode } from 'vue';
 import { POSITION, THEME, TYPE } from '../../utils/constant';
-import type { Content, IconType, ToastPosition, ToastTheme, ToastTransition, ToastType } from '../../types';
+import type { Content, CSSTransitionProps, IconType, ToastPosition, ToastTheme, ToastTransition, ToastType } from '../../types';
 
 const props = {
   containerId: {
@@ -29,7 +29,7 @@ const props = {
     default: undefined,
   },
   transition: {
-    type: String as PropType<ToastTransition>,
+    type: [String, Object] as PropType<ToastTransition | CSSTransitionProps>,
     required: false,
     default: 'bounce',
   },
@@ -53,18 +53,6 @@ const props = {
     required: false,
     default: true,
   },
-  className: {
-    type: String,
-    required: false,
-    default: '',
-  },
-  style: {
-    type: Object as PropType<CSSProperties>,
-    required: false,
-    default() {
-      return {} as CSSProperties;
-    },
-  },
   progress: {
     type: [Number, String],
     required: false,
@@ -74,6 +62,13 @@ const props = {
     type: String,
     required: false,
     default: '',
+  },
+  toastStyle: {
+    type: Object as PropType<CSSProperties>,
+    required: false,
+    default() {
+      return {} as CSSProperties;
+    },
   },
   progressStyle: {
     type: Object as PropType<CSSProperties>,

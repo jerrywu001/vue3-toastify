@@ -39,7 +39,9 @@ import 'jerry-todo/dist/index.css';
 
 const JsxDemo = defineComponent({
   setup() {
-    const notify = () => toast('Wow so easy !');
+    const notify = () => {
+      toast('Wow so easy !');
+    };
 
     return () => (
       <div>
@@ -66,7 +68,11 @@ import { toast } from 'jerry-todo';
 export default {
    name: "App",
    setup() {
-    const notify = () => toast("Wow so easy !", { autoClose: 3000 });
+    const notify = () => {
+      toast("Wow so easy !", {
+        autoClose: 1000,
+      }); // ToastOptions
+    }
     return { notify };
    }
 };

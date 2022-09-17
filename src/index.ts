@@ -21,3 +21,4 @@ export * from './components';
 export * from './core';
 export * from './store';
 export * from './composables';
+export { Bounce, Flip, Slide, Zoom } from './utils/constant';
