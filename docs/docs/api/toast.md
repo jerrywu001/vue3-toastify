@@ -12,21 +12,22 @@ When displaying a toast, the options are inherited from the container. Toast opt
 | toastId            | Id                | Provide a custom id                                                                                 |
 | type               | ToastType         | One of info, success, warning, error                                                                |
 | position           | ToastPosition     | One of top-right, top-center, top-left, bottom-right, bottom-center, bottom-left                    |
-| rtl                | boolean           | Support right to left content                                                                       |
+| rtl                | booleanean        | Support right to left content                                                                       |
 | onOpen             | () => void        | Called when the notification appear                                                                 |
 | onClose            | () => void        | Called when the notification disappear                                                              |
-| autoClose          | bool \| number    | Delay in ms to close the toast. If set to false, the notification needs to be closed manually       |
+| autoClose          | boolean \| number | Delay in ms to close the toast. If set to false, the notification needs to be closed manually       |
 | closeButton        | CloseBtnType      | A React Component to replace the default close button or `false` to hide the button                 |
 | transition         | ToastTransition \| CSSTransitionProps         | A reference to a valid react-transition-group/Transition componen       |
-| hideProgressBar    | bool              | Display or not the progress bar below the toast(remaining time)                                     |
-| pauseOnHover       | bool              | Keep the timer running or not on hover                                                              |
-| pauseOnFocusLoss   | bool              | Pause the timer when the window loses focus                                                         |
-| closeOnClick       | bool              | Dismiss toast on click                                                                              |
+| hideProgressBar    | boolean           | Display or not the progress bar below the toast(remaining time)                                     |
+| pauseOnHover       | boolean           | Keep the timer running or not on hover                                                              |
+| pauseOnFocusLoss   | boolean           | Pause the timer when the window loses focus                                                         |
+| closeOnClick       | boolean           | Dismiss toast on click                                                                              |
 | toastClassName     | string            | Add optional classes to the container                                                               |
 | bodyClassName      | string            | Add optional classes to the TransitionGroup container                                               |
 | toastStyle         | CSSProperties     | Add optional inline style to the toast wrapper                                                      |
 | progressClassName  | string            | Add optional classes to the progress bar                                                            |
 | progressStyle      | CSSProperties     | Add optional inline style to the progress bar                                                       |
+| progress           | number            | Set the percentage for the controlled progress bar. `Value must be between 0 and 1.`                |
 | containerId        | Id                | Used to match a specific Toast container                                                            |
 | role               | string            | Define the ARIA role for the toasts                                                                 |
 | delay              | number            | Let you delay the toast appearance. Pass a value in ms                                              |

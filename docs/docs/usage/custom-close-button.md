@@ -13,9 +13,9 @@ When you use a custom close button, your button will receive a `closeToast` func
 ```vue App.vue
 <script>
 import { h } from 'vue';
-import { toast } from 'jerry-todo';
+import { toast } from 'vue3-toastify';
 import { VNodeIcon, ComponentIcon } from './icons.jsx';
-import 'jerry-todo/dist/index.css';
+import 'vue3-toastify/dist/index.css';
 
 export default {
   name: "App",
@@ -53,7 +53,7 @@ export default {
 ```
 
 ```jsx /src/icons.jsx
-// import { ToastType } from 'jerry-todo'; // type ToastType, type IconProps, type ToastTheme
+// import { ToastType } from 'vue3-toastify'; // type ToastType, type IconProps, type ToastTheme
 import { defineComponent, PropType } from 'vue';
 import props from './props';
 
@@ -143,7 +143,7 @@ toast('HELLO', {
 ::: sandbox
 ```vue App.vue
 <script>
-import { toast } from 'jerry-todo';
+import { toast } from 'vue3-toastify';
 
 export default {
   name: "App",
@@ -165,7 +165,7 @@ export default {
 ```
 
 ```jsx /src/icons.jsx
-// import { ToastType } from 'jerry-todo'; // type ToastType, type IconProps, type ToastTheme
+// import { ToastType } from 'vue3-toastify'; // type ToastType, type IconProps, type ToastTheme
 import { defineComponent, PropType } from 'vue';
 import props from './props';
 
@@ -226,8 +226,8 @@ import { h } from 'vue';
 import App from './App.vue';
 import { createApp } from 'vue';
 import { VNodeIcon, ComponentIcon } from './icons.jsx';
-import Vue3Toasity from 'jerry-todo';
-import 'jerry-todo/dist/index.css';
+import Vue3Toasity from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 createApp(App).use(
   Vue3Toasity,

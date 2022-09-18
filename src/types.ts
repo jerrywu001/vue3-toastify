@@ -232,7 +232,7 @@ export interface ToastOptions<Data = {}> extends Options {
   /**
    * Set the percentage for the controlled progress bar. `Value must be between 0 and 1.`
    */
-  progress?: number | string;
+  progress?: number;
 
   isLoading?: boolean;
 }

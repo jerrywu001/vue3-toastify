@@ -1,4 +1,4 @@
-import { ToastifyContainer, type ToastFunc } from 'jerry-todo';
+import { ToastifyContainer, type ToastFunc } from 'vue3-toastify';
 import type { Plugin, VNode } from 'vue';
 
 declare const Vue3Toastify: Plugin;

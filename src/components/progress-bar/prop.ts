@@ -50,7 +50,7 @@ export const props = {
     default: undefined,
   },
   progress: {
-    type: [Number, String],
+    type: Number,
     required: false,
     default: undefined,
   },
@@ -105,7 +105,7 @@ export interface ProgressBarProps extends HTMLAttributes {
   /**
    * Controlled progress value
    */
-  progress?: number | string;
+  progress?: number;
 
   /**
    * Support rtl content

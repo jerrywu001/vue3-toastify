@@ -49,12 +49,12 @@ export default defineConfig({
     sidebar: sidebarConfig(),
 
     editLink: {
-      pattern: 'https://github.com/jerrywu001/jerry-todo/edit/main/docs/docs/:path',
+      pattern: 'https://github.com/jerrywu001/vue3-toastify/edit/main/docs/docs/:path',
       text: 'Edit this page on GitHub'
     },
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/jerrywu001/jerry-todo' }
+      { icon: 'github', link: 'https://github.com/jerrywu001/vue3-toastify' }
     ],
 
     footer: {
@@ -66,7 +66,7 @@ export default defineConfig({
   vite: {
     resolve: {
       alias: {
-        'jerry-todo': `${path.resolve(__dirname, '../../../src')}`,
+        'vue3-toastify': `${path.resolve(__dirname, '../../../src')}`,
       },
     },
     plugins: [
@@ -85,7 +85,7 @@ function nav() {
       items: [
         {
           text: 'Changelog',
-          link: 'https://github.com/jerrywu001/jerry-todo/releases'
+          link: 'https://github.com/jerrywu001/vue3-toastify/releases'
         }
       ]
     }
@@ -114,14 +114,17 @@ function sidebarConfig() {
       text: 'Usage',
       collapsible: true,
       items: [
+        { text: 'Container id', link: '/usage/container' },
         { text: 'Positioning toast', link: '/usage/positioning-toast' },
         { text: 'Replace the default transition', link: '/usage/replace-default-transition' },
+        { text: 'Use a controlled progress bar', link: '/usage/use-a-controlled-progress-bar' },
         { text: 'How to style', link: '/usage/how-to-style' },
         { text: 'Define custom animation', link: '/usage/custom-animation' },
         { text: 'Handling promises', link: '/usage/promise' },
         { text: 'Handling autoClose', link: '/usage/auto-close' },
         { text: 'Render more than string', link: '/usage/render-more-than-string' },
         { text: 'Remove toast', link: '/usage/remove-toast-programmatically' },
+        { text: 'Update a toast', link: '/usage/update-toast' },
         { text: 'Icons', link: '/usage/icons' },
         { text: 'Use a custom id', link: '/usage/use-a-custom-id' },
         { text: 'Use a custom close button', link: '/usage/custom-close-button' },

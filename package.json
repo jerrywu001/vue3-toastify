@@ -1,22 +1,22 @@
 {
-  "name": "jerry-todo",
-  "version": "0.0.12",
+  "name": "vue3-toastify",
+  "version": "0.0.0",
   "description": "🎉 Vue3-Toastify allows you to add notifications to your app with ease. No more nonsense!",
   "keywords": [
     "vue3",
-    "jerry-todo",
+    "vue3-toastify",
     "toast",
     "notification",
     "alert",
     "vue3-component"
   ],
-  "homepage": "https://github.com/jerrywu001/jerry-todo#readme",
+  "homepage": "https://github.com/jerrywu001/vue3-toastify#readme",
   "bugs": {
-    "url": "https://github.com/jerrywu001/jerry-todo/issues"
+    "url": "https://github.com/jerrywu001/vue3-toastify/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jerrywu001/jerry-todo.git"
+    "url": "git+https://github.com/jerrywu001/vue3-toastify.git"
   },
   "license": "MIT",
   "author": "jerrywu001 <57242263@163.com>",
@@ -59,6 +59,7 @@
     "test:ui": "vitest --ui",
     "typecheck": "tsc && vue-tsc"
   },
+  "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.19.1",
     "@babel/plugin-transform-runtime": "^7.19.1",
@@ -84,7 +85,7 @@
     "@typescript-eslint/parser": "^5.37.0",
     "@vitejs/plugin-vue": "^3.1.0",
     "@vitejs/plugin-vue-jsx": "^2.0.1",
-    "@vitest/ui": "^0.23.2",
+    "@vitest/ui": "^0.23.4",
     "@vue/babel-plugin-jsx": "^1.1.1",
     "@vue/eslint-config-typescript": "^11.0.1",
     "autoprefixer": "^10.4.11",
@@ -98,7 +99,7 @@
     "eslint-config-airbnb-typescript": "^17.0.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jsx-a11y": "^6.6.1",
-    "eslint-plugin-vue": "^9.4.0",
+    "eslint-plugin-vue": "^9.5.1",
     "husky": "^8.0.1",
     "jsdom": "^20.0.0",
     "lint-staged": "^13.0.3",
@@ -119,9 +120,10 @@
     "stylelint-prettier": "^2.0.0",
     "tsup": "^6.2.3",
     "typescript": "~4.8.3",
-    "vite": "^3.1.1",
+    "vite": "^3.1.2",
     "vite-plugin-dts": "^1.5.0",
-    "vitest": "^0.23.2",
+    "vite-plugin-style-import": "^2.0.0",
+    "vitest": "^0.23.4",
     "vue-loader": "^17.0.0",
     "vue-tsc": "^0.40.13"
   },
@@ -132,6 +134,5 @@
     "vue": {
       "optional": true
     }
-  },
-  "dependencies": {}
+  }
 }

@@ -28,8 +28,8 @@ Don't forget to add the position as well when you write your css animations. If 
 ::: sandbox
 ```vue App.vue
 <script>
-import { toast } from 'jerry-todo';
-import 'jerry-todo/dist/index.css';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 import 'animate.css';
 
 export default {
@@ -75,8 +75,8 @@ This can be disabled as well:
 ::: sandbox
 ```vue App.vue
 <script>
-import { toast, Bounce } from 'jerry-todo';
-import 'jerry-todo/dist/index.css';
+import { toast, Bounce } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 export default {
   name: "App",
@@ -113,8 +113,8 @@ The default duration is 300ms. This is also easy to change 💪
 ::: sandbox
 ```vue App.vue
 <script>
-import { toast, Bounce } from 'jerry-todo';
-import 'jerry-todo/dist/index.css';
+import { toast, Bounce } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 export default {
   name: "App",

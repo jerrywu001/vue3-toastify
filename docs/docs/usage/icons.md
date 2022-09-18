@@ -10,8 +10,8 @@ Notifications of different types (`toast.info`, `toast.error`, `toast.success`, 
 ::: sandbox
 ```vue App.vue
 <script>
-import { toast } from 'jerry-todo';
-import 'jerry-todo/dist/index.css';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 export default {
   name: "App",
@@ -52,8 +52,8 @@ export default {
 ::: sandbox
 ```vue App.vue
 <script>
-import { toast } from 'jerry-todo';
-import 'jerry-todo/dist/index.css';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 export default {
   name: "App",
@@ -88,7 +88,7 @@ export default {
 </template>
 
 <script>
-import { toast } from 'jerry-todo';
+import { toast } from 'vue3-toastify';
 
 export default {
   name: 'App',
@@ -103,8 +103,8 @@ export default {
 ```js /src/main.js [active]
 import App from './App.vue';
 import { createApp } from 'vue';
-import Vue3Toasity from 'jerry-todo';
-import 'jerry-todo/dist/index.css';
+import Vue3Toasity from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 createApp(App).use(
   Vue3Toasity,
@@ -121,9 +121,9 @@ createApp(App).use(
 ```vue App.vue
 <script>
 import { h } from 'vue';
-import { toast } from 'jerry-todo';
+import { toast } from 'vue3-toastify';
 import { VNodeIcon, ComponentIcon } from './icons.jsx';
-import 'jerry-todo/dist/index.css';
+import 'vue3-toastify/dist/index.css';
 
 export default {
   name: "App",
@@ -167,7 +167,7 @@ export default {
 ```
 
 ```jsx /src/icons.jsx
-// import { ToastType } from 'jerry-todo'; // type ToastType, type IconProps, type ToastTheme
+// import { ToastType } from 'vue3-toastify'; // type ToastType, type IconProps, type ToastTheme
 import { defineComponent, PropType } from 'vue';
 
 export const ComponentIcon = defineComponent({

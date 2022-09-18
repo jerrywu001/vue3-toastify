@@ -17,7 +17,7 @@ close toast after 8 seconds
 </template>
 
 <script>
-import { toast } from 'jerry-todo';
+import { toast } from 'vue3-toastify';
 
 export default {
   name: "App",
@@ -32,8 +32,8 @@ export default {
 ```js /src/main.js [active]
 import App from './App.vue';
 import { createApp } from 'vue';
-import Vue3Toasity from 'jerry-todo';
-import 'jerry-todo/dist/index.css';
+import Vue3Toasity from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 createApp(App).use(
   Vue3Toasity,
@@ -54,8 +54,8 @@ It will overrides the global options
 ::: sandbox
 ```vue App.vue [active]
 <script>
-import { toast } from 'jerry-todo';
-import 'jerry-todo/dist/index.css';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 export default {
   name: "App",
@@ -88,7 +88,7 @@ export default {
 ```js /src/main.js
 import App from './App.vue';
 import { createApp } from 'vue';
-import Vue3Toasity from 'jerry-todo';
+import Vue3Toasity from 'vue3-toastify';
 
 createApp(App).use(
   Vue3Toasity,
@@ -106,7 +106,7 @@ createApp(App).use(
 ::: sandbox
 ```vue App.vue
 <script>
-import { toast } from 'jerry-todo';
+import { toast } from 'vue3-toastify';
 
 export default {
   name: "App",
@@ -128,8 +128,8 @@ export default {
 ```js /src/main.js [active]
 import App from './App.vue';
 import { createApp } from 'vue';
-import Vue3Toasity from 'jerry-todo';
-import 'jerry-todo/dist/index.css';
+import Vue3Toasity from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 createApp(App).use(
   Vue3Toasity,
@@ -146,8 +146,8 @@ createApp(App).use(
 ::: sandbox
 ```vue App.vue
 <script>
-import { toast } from 'jerry-todo';
-import 'jerry-todo/dist/index.css';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 export default {
   name: "App",

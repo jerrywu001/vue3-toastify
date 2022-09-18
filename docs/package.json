@@ -7,6 +7,9 @@
     "docs:dev": "vitepress dev docs",
     "docs:serve": "vitepress serve docs"
   },
+  "dependencies": {
+    "ant-design-vue": "^3.2.12"
+  },
   "devDependencies": {
     "codesandbox-sandpack-vue3": "^1.2.4",
     "markdown-it-directive": "^1.0.1",

@@ -13,8 +13,8 @@ Bounce is used by default, but you can replace it with your own transition, or w
 ::: sandbox
 ```vue App.vue
 <script>
-import { toast } from 'jerry-todo';
-import 'jerry-todo/dist/index.css';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 export default {
   name: "App",

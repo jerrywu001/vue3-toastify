@@ -20,6 +20,14 @@ function openToast(content: Content, type: ToastType, options = {} as ToastOptio
     containerId: options.containerId || String(options.position),
   } as ToastOptions;
 
+  const progress = Number(options?.progress);
+  if (progress < 0) {
+    options.progress = 0;
+  }
+  if (progress > 1) {
+    options.progress = 1;
+  }
+
   if (!toastContainerInScreen(options.position)) {
     const rootDom = generateRenderRoot(options);
     const app = createApp(ToastifyContainer, options as Data);

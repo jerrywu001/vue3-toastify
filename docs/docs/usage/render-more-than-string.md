@@ -12,9 +12,9 @@ When you render a component, a `closeToast` prop and the `toastProps` are inject
 ::: sandbox
 ```vue App.vue
 <script>
-import { toast } from 'jerry-todo';
+import { toast } from 'vue3-toastify';
 import Msg from './Msg.vue';
-import 'jerry-todo/dist/index.css';
+import 'vue3-toastify/dist/index.css';
 
 export default {
   name: "App",
@@ -39,7 +39,7 @@ export default {
 
 ```vue /src/Msg.vue [active]
 <script>
-import { ToastProps } from 'jerry-todo';
+import { ToastProps } from 'vue3-toastify';
 import { PropType } from 'vue';
 
 export default {
@@ -78,8 +78,8 @@ You can also write with a tsx component. that is cool!!
 import { h } from 'vue';
 import JsxDemo from './JsxDemo.jsx';
 import Msg from './Msg.vue';
-import { toast } from 'jerry-todo';
-import 'jerry-todo/dist/index.css';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 export default {
   name: "App",
@@ -103,7 +103,7 @@ export default {
 ```
 
 ```jsx /src/JsxDemo.jsx [active]
-import { toast } from 'jerry-todo';
+import { toast } from 'vue3-toastify';
 import { defineComponent } from 'vue';
 import Msg from './Msg';
 
@@ -137,7 +137,7 @@ export default JsxDemo;
 
 ```vue /src/Msg.vue
 <script>
-import { ToastProps } from 'jerry-todo';
+import { ToastProps } from 'vue3-toastify';
 import { PropType } from 'vue';
 
 export default {
@@ -174,10 +174,10 @@ In this example we will use pinia to share state accross a component and a toast
 ::: sandbox
 ```vue App.vue
 <script>
-import { toast } from 'jerry-todo';
+import { toast } from 'vue3-toastify';
 import { useCounterStore } from './stores/useCounterStore';
 import CountDisplay from './CountDisplay.vue';
-import 'jerry-todo/dist/index.css';
+import 'vue3-toastify/dist/index.css';
 
 export default {
   name: "App",

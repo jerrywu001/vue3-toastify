@@ -13,11 +13,11 @@ View it with a PC, the effect is even better
 
 :::code-group
 ```bash  [Npm]
-npm install --save jerry-todo
+npm install --save vue3-toastify
 ```
 
 ```bash  [Yarn]
-yarn add jerry-todo
+yarn add vue3-toastify
 ```
 :::
 
@@ -33,9 +33,9 @@ Don't forget to import styles
 
 ::: details For Jsx
 ```jsx
-import { toast } from 'jerry-todo';
+import { toast } from 'vue3-toastify';
 import { defineComponent } from 'vue';
-import 'jerry-todo/dist/index.css';
+import 'vue3-toastify/dist/index.css';
 
 const JsxDemo = defineComponent({
   setup() {
@@ -63,7 +63,7 @@ export default JsxDemo;
 </template>
 
 <script>
-import { toast } from 'jerry-todo';
+import { toast } from 'vue3-toastify';
 
 export default {
    name: "App",
@@ -82,8 +82,8 @@ export default {
 ```js /src/main.js [active]
 import App from './App.vue';
 import { createApp } from 'vue';
-import Vue3Toasity from 'jerry-todo';
-import 'jerry-todo/dist/index.css';
+import Vue3Toasity from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 createApp(App).use(
   Vue3Toasity,

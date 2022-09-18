@@ -143,7 +143,7 @@ If overriding the css variables is not enough for you, you can override the exis
 
 ## Build your own style using the scss files
 
-Grab the [scss directory](https://github.com/jerrywu001/jerry-todo/tree/main/src/styles) of the repository and build your own stylesheet. If you just want to changes some colors most of them are defined inside the _variables.scss file.
+Grab the [scss directory](https://github.com/jerrywu001/vue3-toastify/tree/main/src/styles) of the repository and build your own stylesheet. If you just want to changes some colors most of them are defined inside the _variables.scss file.
 
 
 ```md
@@ -174,7 +174,7 @@ The `GlobalProps` accept the following props for styling:
 
 ```ts
 import { createApp } from 'vue';
-import Vue3Toasity, { type ToastContainerOptions } from 'jerry-todo';
+import Vue3Toasity, { type ToastContainerOptions } from 'vue3-toastify';
 import App from './App.vue';
 
 const app = createApp(App);

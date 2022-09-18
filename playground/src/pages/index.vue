@@ -1,14 +1,11 @@
 <script setup lang="ts">
 import { h, ref } from 'vue';
-import { toast, ToastOptions } from 'jerry-todo';
+import { Button, Divider } from 'ant-design-vue';
+import { toast, ToastOptions } from 'vue3-toastify';
 import Conditions from '../components/Conditions.vue';
+import 'ant-design-vue/dist/antd.css';
 
-const showConditions = ref(false);
 const options = ref({} as ToastOptions);
-
-const toggleConditions = () => {
-  showConditions.value = !showConditions.value;
-};
 
 const onOptionsChange = (opts: ToastOptions) => {
   options.value = opts;
@@ -50,8 +47,8 @@ const displayPromise = () => {
   );
 
   const resolveWithSomeData =
-    // eslint-disable-next-line no-promise-executor-return
-    new Promise<{ message: string; }>((resolve, reject) => setTimeout(() => reject({ message: 'world' }), 3000));
+      // eslint-disable-next-line no-promise-executor-return
+      new Promise<{ message: string; }>((resolve, reject) => setTimeout(() => reject({ message: 'world' }), 3000));
   toast.promise(
     resolveWithSomeData,
     {
@@ -86,84 +83,34 @@ const displayPromise = () => {
 </script>
 
 <template>
-  <Conditions
-    :visible="showConditions"
-    @on-close="toggleConditions"
-    @on-change="onOptionsChange"
-  />
+  <div style="padding: 0 24px 22px; margin: 0 auto; max-width: 1192px;">
+    <div class="btn-group">
+      <Button @click="showToast">toast</Button>
+      <Button @click="displayPromise">promise</Button>
+      <Button @click="showLoadToast">🚴🏽 loading toast</Button>
+      <Button type="dashed" danger @click="clearAll">unmount all container</Button>
+    </div>
 
-  <div class="py-2 px-6" style="display: flex;">
-    <button class="c-btn dashed" @click="toggleConditions">👉🏽 Open options modal</button>
-  </div>
+    <Divider>Important Props</Divider>
 
-  <div class="py-2 px-6" style="display: flex;">
-    <button class="c-btn green" @click="showToast">💡 show toast</button>
-    <button class="c-btn green" @click="displayPromise">🫓 promise</button>
-    <button class="c-btn green" @click="showLoadToast">🫓 show loading toast</button>
-    <button class="c-btn green" @click="clearAll">💣 unmount all container</button>
+    <Conditions
+      @on-change="onOptionsChange"
+    />
   </div>
 </template>
 
-<style lang="postcss" scoped>
-.hr {
-  border: 1px #ddd dotted;
-  margin: 0 auto 16px;
-}
+<style scoped lang="postcss">
+.btn-group {
+  display: flex;
+  flex-wrap: wrap;
 
-.py-2 {
-  padding-top: 0.5rem; /* 8px */
-  padding-bottom: 0.5rem; /* 8px */
-}
-
-.px-6 {
-  padding-left: 1.5rem; /* 24px */
-  padding-right: 1.5rem; /* 24px */
-}
-
-.c-btn {
-  border-width: 1px;
-  border-radius: 0.375rem;
-  border-color: rgba(253, 253, 253, 1);
-  margin-right: 1.25rem;
-  padding: 0.5rem;
-  font-size: 0.75rem;
-  line-height: 1rem;
-}
-
-.dashed {
-  border: 1px rgb(182, 181, 181) dashed;
-  font-size: 14px;
-
-  &:hover {
-    border-color: #666;
-    opacity: 0.8;
+  .ant-btn {
+    margin-right: 8px;
+    margin-bottom: 8px;
   }
 }
 
-.green {
-  background-color: rgba(16, 185, 129, 1);
-  color: #fff;
-}
-
-.radio {
-  background-color: rgba(243, 244, 246, 1);
-  color: #333;
-
-  &.active {
-    border-color: blue;
-    border-style: dashed;
-  }
-}
-
-input {
-  border: 1px #cccc dashed;
-  outline: none;
-  height: 30px;
-  padding: 0 6px !important;
-  color: #666 !important;
-
-  &.active {
-    border: 1px blue dashed;
-  }
+.ant-breadcrumb {
+  margin-bottom: 8px;
 }
 </style>

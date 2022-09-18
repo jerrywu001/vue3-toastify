@@ -10,8 +10,8 @@ Providing a custom toast id is certainly the most straightforward way to prevent
 ::: sandbox
 ```vue App.vue
 <script>
-import { toast } from 'jerry-todo';
-import 'jerry-todo/dist/index.css';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 export default {
   name: "App",
@@ -46,8 +46,8 @@ Maybe there is some situations where you cannot provide a custom toast id, in th
 ```vue App.vue
 <script>
 import { ref } from 'vue';
-import { toast } from 'jerry-todo';
-import 'jerry-todo/dist/index.css';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 export default {
   name: "App",

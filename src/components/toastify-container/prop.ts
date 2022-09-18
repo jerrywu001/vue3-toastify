@@ -54,7 +54,7 @@ const props = {
     default: true,
   },
   progress: {
-    type: [Number, String],
+    type: Number,
     required: false,
     default: undefined,
   },

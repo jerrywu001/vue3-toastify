@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { ProgressBarProps, props as properties } from './prop';
-import { computed, CSSProperties, DefineComponent, defineComponent, onMounted, ref } from 'vue';
+import { computed, CSSProperties, DefineComponent, defineComponent, ref, watchEffect } from 'vue';
 import { Default } from '../../utils/constant';
 import { isFn } from '../../utils/tools';
 
@@ -41,22 +41,28 @@ const ProgressBar = defineComponent({
         : `${defaultClassName.value} ${props.className || ''}`,
     );
 
-    // 🧐 controlledProgress is derived from progress
-    // so if controlledProgress is set, it means that this is also the case for progress
-    const animationEventName = computed(() => props.controlledProgress && props.progress! >= 1
-      ? 'ontransitionend'
-      : 'onanimationend');
-    const animationEventHandler = computed(() => props.controlledProgress && props.progress! < 1
-      ? null
-      : () => {
-        if (props.isIn && props.closeToast && props.autoClose !== false) {
-          props.closeToast();
-        }
-      });
-
-    onMounted(() => {
+    const removeEventListener = () => {
       if (nodeRef.value) {
-        nodeRef.value[animationEventName.value] = animationEventHandler.value;
+        nodeRef.value.onanimationend = null;
+        nodeRef.value.ontransitionend = null;
+      }
+    };
+
+    const eventCallback = () => {
+      if (props.isIn && props.closeToast && props.autoClose !== false) {
+        props.closeToast();
+        removeEventListener();
+      }
+    };
+
+    const animationendEventHandler = computed(() => props.controlledProgress ? null : eventCallback);
+    const transitionendEventHandler = computed(() => !props.controlledProgress ? null : eventCallback);
+
+    watchEffect(() => {
+      if (nodeRef.value) {
+        removeEventListener();
+        nodeRef.value.onanimationend = animationendEventHandler.value;
+        nodeRef.value.ontransitionend = transitionendEventHandler.value;
       }
     });
 

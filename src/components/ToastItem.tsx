@@ -31,7 +31,7 @@ const ToastItem = defineComponent({
     const toastRef = ref<HTMLDivElement>();
 
     const loading = computed(() => !!item.isLoading);
-    const isProgressControlled = computed(() => !!item.progress);
+    const isProgressControlled = computed(() => item.progress !== undefined && item.progress !== null);
     const toastIcon = computed(() => getIcon(item));
     const className = computed(() => [
       `${Default.CSS_NAMESPACE}__toast`,

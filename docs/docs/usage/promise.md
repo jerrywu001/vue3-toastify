@@ -9,9 +9,9 @@ If you want to take care of each step yourself you can use `toast.loading` and u
 ::: sandbox
 ```vue App.vue [active]
 <script>
-import { toast } from 'jerry-todo';
+import { toast } from 'vue3-toastify';
 import Msg from './Msg.vue';
-import 'jerry-todo/dist/index.css';
+import 'vue3-toastify/dist/index.css';
 
 export default {
   name: "App",
@@ -49,7 +49,7 @@ export default {
 
 ```vue /src/Msg.vue
 <script>
-import { ToastProps } from 'jerry-todo';
+import { ToastProps } from 'vue3-toastify';
 import { PropType } from 'vue';
 
 export default {
@@ -87,8 +87,8 @@ Let's start with a simple example
 :::sandbox
 ```vue App.vue
 <script>
-import { toast } from 'jerry-todo';
-import 'jerry-todo/dist/index.css';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 export default {
   name: "App",
@@ -152,8 +152,8 @@ Displaying a simple message is what you would want to do in 90% of cases. But wh
 :::sandbox
 ```vue App.vue
 <script>
-import { toast } from 'jerry-todo';
-import 'jerry-todo/dist/index.css';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 export default {
   name: "App",

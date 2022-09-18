@@ -9,15 +9,15 @@ vue version >=3.2.0
 # Installation
 
 ```bash
-npm install --save jerry-todo
-# yarn add jerry-todo
+npm install --save vue3-toastify
+# yarn add vue3-toastify
 ```
 
 ## Register Components Globally
 
 ```js
 // main.ts
-import Vue3Toastify, { type ToastContainerOptions } from 'jerry-todo';
+import Vue3Toastify, { type ToastContainerOptions } from 'vue3-toastify';
 
 app.use(Vue3Toastify);
 
@@ -29,7 +29,7 @@ app.use(Vue3Toastify);
 {
   "compilerOptions": {
     "types": [
-      "jerry-todo/global"
+      "vue3-toastify/global"
     ]
   }
 }

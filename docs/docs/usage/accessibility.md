@@ -6,7 +6,7 @@ By default, all toasts are diplayed with the ARIA `role` alert. This can be chan
 
 ```ts
 import { createApp } from 'vue';
-import Vue3Toasity, { type ToastContainerOptions } from 'jerry-todo';
+import Vue3Toasity, { type ToastContainerOptions } from 'vue3-toastify';
 import App from './App.vue';
 
 const app = createApp(App);

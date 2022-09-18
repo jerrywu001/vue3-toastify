@@ -13,7 +13,7 @@ hero:
       link: /get-started/introduction
     - theme: alt
       text: View on GitHub
-      link: https://github.com/jerrywu001/jerry-todo
+      link: https://github.com/jerrywu001/vue3-toastify
 ---
 
 <div class="VP-Hero">
