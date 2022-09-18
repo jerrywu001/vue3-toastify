@@ -101,6 +101,10 @@
 import { Divider, Input, Breadcrumb, BreadcrumbItem, Select, SelectOption } from 'ant-design-vue';
 import { reactive, ref, watchEffect, type VNode } from 'vue';
 import { toast, ToastOptions, ToastPosition, ToastTheme, ToastTransition, ToastType } from 'vue3-toastify';
+import 'ant-design-vue/es/input/style/index.css';
+import 'ant-design-vue/es/divider/style/index.css';
+import 'ant-design-vue/es/breadcrumb/style/index.css';
+import 'ant-design-vue/es/select/style/index.css';
 
 type Icon = string | number | boolean | VNode | undefined;
 
@@ -189,6 +193,22 @@ watchEffect(() => {
 
 .ant-breadcrumb {
   margin-bottom: 8px;
+}
+
+html.dark {
+  .ant-divider-horizontal.ant-divider-with-text {
+    color: #fff;
+    border-color: #8a8989;
+  }
+
+  .ant-breadcrumb,
+  .ant-breadcrumb-link,
+  .ant-breadcrumb-separator,
+  .ant-breadcrumb > span:first-child,
+  .ant-breadcrumb > span:last-child,
+  .ant-breadcrumb > span:last-child a {
+    color: #fff !important;
+  }
 }
 
 </style>

@@ -1,3 +1,9 @@
 .VP-Hero {
   padding: 0 !important;
 }
+
+html.dark {
+  .ant-breadcrumb > span:first-child {
+    color: #fff !important;
+  }
+}

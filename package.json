@@ -10,7 +10,7 @@
     "alert",
     "vue3-component"
   ],
-  "homepage": "https://github.com/jerrywu001/vue3-toastify#readme",
+  "homepage": "https://vue3-toastify.netlify.app",
   "bugs": {
     "url": "https://github.com/jerrywu001/vue3-toastify/issues"
   },

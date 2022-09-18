@@ -13,15 +13,48 @@ npm install --save vue3-toastify
 # yarn add vue3-toastify
 ```
 
-## Register Components Globally
+# The gist
+
+```html
+<template>
+  <div>
+    <button @click="notify">Notify !</button>
+  </div>
+</template>
+
+<script>
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
+
+export default {
+   name: "App",
+   setup() {
+    const notify = () => {
+      toast("Wow so easy !", {
+        autoClose: 1000,
+      }); // ToastOptions
+    }
+    return { notify };
+   }
+};
+</script>
+```
+
+# Demo
+
+[A demo is worth a thousand words](https://vue3-toastify.netlify.app)
+
+# Document
+
+Check the [documentation](https://vue3-toastify.netlify.app/get-started/introduction.html) to get you started!
+
+## Init Global Props
 
 ```js
 // main.ts
 import Vue3Toastify, { type ToastContainerOptions } from 'vue3-toastify';
 
-app.use(Vue3Toastify);
-
-// app.use(Vue3Toastify, { autoClose: 3000 } as ToastContainerOptions);
+app.use(Vue3Toastify, { autoClose: 3000 } as ToastContainerOptions);
 ```
 
 ```js
@@ -34,5 +67,3 @@ app.use(Vue3Toastify);
   }
 }
 ```
-
-# Features

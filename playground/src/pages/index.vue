@@ -3,7 +3,8 @@ import { h, ref } from 'vue';
 import { Button, Divider } from 'ant-design-vue';
 import { toast, ToastOptions } from 'vue3-toastify';
 import Conditions from '../components/Conditions.vue';
-import 'ant-design-vue/dist/antd.css';
+import 'ant-design-vue/es/button/style/index.css';
+import 'ant-design-vue/es/divider/style/index.css';
 
 const options = ref({} as ToastOptions);
 
@@ -85,10 +86,10 @@ const displayPromise = () => {
 <template>
   <div style="padding: 0 24px 22px; margin: 0 auto; max-width: 1192px;">
     <div class="btn-group">
-      <Button @click="showToast">toast</Button>
-      <Button @click="displayPromise">promise</Button>
-      <Button @click="showLoadToast">🚴🏽 loading toast</Button>
-      <Button type="dashed" danger @click="clearAll">unmount all container</Button>
+      <Button type="primary" @click="showToast">toast</Button>
+      <Button type="primary" @click="displayPromise">promise</Button>
+      <Button type="primary" @click="showLoadToast">🚴🏽 loading toast</Button>
+      <Button type="primary" danger @click="clearAll">unmount all container</Button>
     </div>
 
     <Divider>Important Props</Divider>
@@ -112,5 +113,17 @@ const displayPromise = () => {
 
 .ant-breadcrumb {
   margin-bottom: 8px;
+}
+
+html.dark {
+  .ant-divider-horizontal.ant-divider-with-text {
+    color: #fff;
+    border-color: #8a8989;
+  }
+
+  .ant-breadcrumb-link,
+  .ant-breadcrumb-separator {
+    color: #fff !important;
+  }
 }
 </style>
