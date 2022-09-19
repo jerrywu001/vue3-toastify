@@ -6,8 +6,7 @@ import { THEME, TYPE } from '../../utils/constant';
 export const props = {
   autoClose: {
     type: [Number, Boolean],
-    required: false,
-    default: undefined,
+    required: true,
   },
   isRunning: {
     type: Boolean,
@@ -22,7 +21,7 @@ export const props = {
   theme: {
     type: String as PropType<ToastTheme>,
     required: false,
-    default: THEME.LIGHT,
+    default: THEME.AUTO,
   },
   hide: {
     type: Boolean,

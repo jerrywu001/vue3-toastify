@@ -4,15 +4,19 @@ import { defaultGlobalOptions } from './utils/constant';
 import { mergeOptions, saveGlobalOptions } from './utils/tools';
 
 const Vue3Toastify: Plugin = {
-  install(app, options = {} as ToastContainerOptions) {
-    const globalOptions = mergeOptions<ToastContainerOptions>(defaultGlobalOptions, options);
-    saveGlobalOptions(globalOptions);
+  install(app, options = {} as Partial<ToastContainerOptions>) {
+    updateGlobalOptions(options);
   },
 };
 
 // CDN compatibility
 if (typeof window !== 'undefined') {
   window.Vue3Toastify = Vue3Toastify;
+}
+
+export function updateGlobalOptions(options = {} as Partial<ToastContainerOptions>) {
+  const globalOptions = mergeOptions<ToastContainerOptions>(defaultGlobalOptions, options);
+  saveGlobalOptions(globalOptions);
 }
 
 export default Vue3Toastify;

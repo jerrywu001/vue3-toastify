@@ -34,11 +34,19 @@ export default {
 
 - disable globally
 
-```js
+```ts
 app.use(
   Vue3Toasity,
   {
     pauseOnFocusLoss: false,
-  }, // as ToastContainerOptions
+  } as ToastContainerOptions,
 );
+```
+
+or
+
+```ts
+updateGlobalOptions({ rtl: true });
+
+toast.success('Wow so easy!');
 ```

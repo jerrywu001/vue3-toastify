@@ -10,7 +10,7 @@ export const CloseButton = defineComponent({
     theme: {
       type: String as PropType<ToastTheme>,
       required: false,
-      default: THEME.LIGHT,
+      default: THEME.AUTO,
     },
     type: {
       type: String as PropType<ToastType>,

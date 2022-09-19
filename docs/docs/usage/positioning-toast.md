@@ -6,7 +6,7 @@ The following values are allowed: **top-right**, **top-center**, **top-left**, *
 
 For convenience, `toast` exposes a POSITION property to avoid any typos.
 
-# example
+## example
 
 :::tip
 View it with a PC, the effect is even better

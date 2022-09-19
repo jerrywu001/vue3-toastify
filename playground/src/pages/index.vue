@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { h, ref } from 'vue';
-import { Button, Divider } from 'ant-design-vue';
+import { Divider } from 'ant-design-vue';
 import { toast, ToastOptions } from 'vue3-toastify';
 import Conditions from '../components/Conditions.vue';
 import 'ant-design-vue/es/button/style/index.css';
@@ -17,7 +17,7 @@ function showToast() {
 }
 
 function showLoadToast() {
-  toast.loading(`Wow so easy! ${parseInt(String(Math.random() * 100000), 10)}`, options.value);
+  toast.loading(`I can not auto close! ${parseInt(String(Math.random() * 100000), 10)}`, options.value);
 }
 
 const clearAll = () => {
@@ -69,15 +69,15 @@ const displayPromise = () => {
       error: {
         render({ data }) {
           // When the promise reject, data will contains the error
-          return h('div', `error ${data.message}`);
-          // return `error ${data.message}`;
+          return h('div', `inject data: ${data.message}`);
+          // return `inject data: ${data.message}`;
         },
         // render: 'just text',
         // render: h('div', 'error'),
       },
     },
     {
-      position: toast.POSITION.TOP_LEFT,
+      position: toast.POSITION.BOTTOM_CENTER,
     },
   );
 };
@@ -85,14 +85,14 @@ const displayPromise = () => {
 
 <template>
   <div style="padding: 0 24px 22px; margin: 0 auto; max-width: 1192px;">
-    <div class="btn-group">
-      <Button type="primary" @click="showToast">toast</Button>
-      <Button type="primary" @click="displayPromise">promise</Button>
-      <Button type="primary" @click="showLoadToast">🚴🏽 loading toast</Button>
-      <Button type="primary" danger @click="clearAll">unmount all container</Button>
-    </div>
+    <Divider>The playground</Divider>
 
-    <Divider>Important Props</Divider>
+    <div class="btn-group">
+      <button class="my-btn" @click="showToast">normal toast</button>
+      <button class="my-btn" @click="displayPromise">with promise</button>
+      <button class="my-btn" @click="showLoadToast">🚴🏽 loading toast</button>
+      <button class="my-btn danger" @click="clearAll">unmount all container</button>
+    </div>
 
     <Conditions
       @on-change="onOptionsChange"
@@ -100,30 +100,41 @@ const displayPromise = () => {
   </div>
 </template>
 
-<style scoped lang="postcss">
+<style lang="postcss">
 .btn-group {
   display: flex;
   flex-wrap: wrap;
+  margin-bottom: 28px;
 
-  .ant-btn {
-    margin-right: 8px;
-    margin-bottom: 8px;
+  .my-btn {
+    color: #fff;
+    border-color: #42b983;
+    background-color: #42b983;
+    border-radius: 20px;
+    padding: 5px 18px;
+    margin: 0 8px 8px 0;
+
+    &:hover {
+      border-color: #33986a;
+      background-color: #33986a;
+    }
+
+    &.danger {
+      border-color: #fa3737;
+      background-color: #fa3737;
+
+      &:hover {
+        border-color: #c92929;
+        background-color: #c92929;
+      }
+    }
   }
-}
-
-.ant-breadcrumb {
-  margin-bottom: 8px;
 }
 
 html.dark {
   .ant-divider-horizontal.ant-divider-with-text {
     color: #fff;
     border-color: #8a8989;
-  }
-
-  .ant-breadcrumb-link,
-  .ant-breadcrumb-separator {
-    color: #fff !important;
   }
 }
 </style>

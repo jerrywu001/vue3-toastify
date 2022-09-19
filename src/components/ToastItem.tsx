@@ -101,7 +101,7 @@ const ToastItem = defineComponent({
             )
           }
           {/* content */}
-          <div>
+          <div data-testid="toast-content">
             {
               isComponent(item.content as Content)
                 ?

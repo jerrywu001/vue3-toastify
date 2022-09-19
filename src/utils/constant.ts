@@ -21,7 +21,7 @@ type KeyOfType = 'INFO' | 'SUCCESS' | 'WARNING' | 'ERROR' | 'DEFAULT';
 
 type KeyOfTransition = 'FLIP' | 'SLIDE' | 'ZOOM' | 'BOUNCE';
 
-type KeyOfTheme = 'LIGHT' | 'DARK' | 'COLORED';
+type KeyOfTheme = 'AUTO' | 'LIGHT' | 'DARK' | 'COLORED';
 
 export const POSITION: { [key in KeyOfPosition]: ToastPosition } = {
   TOP_LEFT: 'top-left',
@@ -36,6 +36,7 @@ export const THEME: { [key in KeyOfTheme]: ToastTheme } = {
   LIGHT: 'light',
   DARK: 'dark',
   COLORED: 'colored',
+  AUTO: 'auto',
 };
 
 export const TYPE: { [key in KeyOfType]: ToastType } = {

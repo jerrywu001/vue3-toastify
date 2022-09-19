@@ -48,13 +48,15 @@ export default {
 
 Check the [documentation](https://vue3-toastify.netlify.app/get-started/introduction.html) to get you started!
 
-## Init Global Props
+## Init/Update Global Props
 
-```js
+```ts
 // main.ts
 import Vue3Toastify, { type ToastContainerOptions } from 'vue3-toastify';
 
-app.use(Vue3Toastify, { autoClose: 3000 } as ToastContainerOptions);
+app.use(Vue3Toastify, {
+  autoClose: 3000,
+} as ToastContainerOptions);
 ```
 
 ```js
@@ -66,4 +68,12 @@ app.use(Vue3Toastify, { autoClose: 3000 } as ToastContainerOptions);
     ]
   }
 }
+```
+
+or
+
+```ts
+updateGlobalOptions({ rtl: true });
+
+toast.success('Wow so easy!');
 ```

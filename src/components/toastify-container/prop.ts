@@ -85,7 +85,7 @@ const props = {
   theme: {
     type: String as PropType<ToastTheme>,
     required: false,
-    default: THEME.LIGHT,
+    default: THEME.AUTO,
   },
   content: {
     type: [String, Object, Function] as PropType<Content>,

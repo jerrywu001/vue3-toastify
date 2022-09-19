@@ -2,7 +2,7 @@ import { cacheRenderInstance } from '../store';
 import { createApp, nextTick, toRaw } from 'vue';
 import { Event, eventManager, getAllToast, getToast } from '..';
 import { generateRenderRoot, toastContainerInScreen } from '../utils/render';
-import { generateToastId, getGlobalOptions, isFn, isStr, mergeOptions } from '../utils/tools';
+import { generateToastId, getGlobalOptions, getSystemThem, isFn, isStr, mergeOptions } from '../utils/tools';
 import { POSITION, THEME, TRANSITIONS, TYPE } from '../utils/constant';
 import { ToastifyContainer } from '../components';
 import type { Content, Data, Id, ToastOptions, ToastProps, ToastType, UpdateOptions } from '../types';
@@ -10,7 +10,7 @@ import type { Content, Data, Id, ToastOptions, ToastProps, ToastType, UpdateOpti
 function openToast(content: Content, type: ToastType, options = {} as ToastOptions) {
   options = mergeOptions<ToastOptions>(getGlobalOptions(), { type }, options);
 
-  if (!options.toastId) {
+  if (!options.toastId || (typeof options.toastId !== 'string' && typeof options.toastId !== 'number')) {
     options.toastId = generateToastId();
   }
 
@@ -26,6 +26,10 @@ function openToast(content: Content, type: ToastType, options = {} as ToastOptio
   }
   if (progress > 1) {
     options.progress = 1;
+  }
+
+  if (options.theme === 'auto') {
+    options.theme = getSystemThem();
   }
 
   if (!toastContainerInScreen(options.position)) {

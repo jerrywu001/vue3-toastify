@@ -4,6 +4,10 @@
 By default, all toasts will inherit [global props](../api/container). Props defined on toast supersede [global props](../api/container).
 :::
 
+# Demo
+
+[Demo](/)
+
 ## Features
 
 - Easy to set up for real, you can make it work in less than 10sec!
@@ -17,5 +21,5 @@ By default, all toasts will inherit [global props](../api/container). Props defi
 - Pause toast when the window loses focus 👁
 - Fancy progress bar to display the remaining time
 - Possibility to update a toast
-- Dark mode 🌒
+- Dark mode 🌒, automatic detection the system dark mode (`html.dark`)
 - And much more !

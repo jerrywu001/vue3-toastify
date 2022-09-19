@@ -2,7 +2,6 @@
 import { ProgressBarProps, props as properties } from './prop';
 import { computed, CSSProperties, DefineComponent, defineComponent, ref, watchEffect } from 'vue';
 import { Default } from '../../utils/constant';
-import { isFn } from '../../utils/tools';
 
 const ProgressBar = defineComponent({
   name: 'ProgressBar',
@@ -31,15 +30,7 @@ const ProgressBar = defineComponent({
       props.rtl ? `${Default.CSS_NAMESPACE}__progress-bar--rtl` : null,
     ].filter(Boolean).join(' '));
 
-    const classNames = computed(
-      () => isFn(props.className)
-        ? props.className({
-          rtl: props.rtl,
-          type: props.type,
-          defaultClassName: defaultClassName.value,
-        })
-        : `${defaultClassName.value} ${props.className || ''}`,
-    );
+    const classNames = computed(() => `${defaultClassName.value} ${attrs?.class || ''}`);
 
     const removeEventListener = () => {
       if (nodeRef.value) {

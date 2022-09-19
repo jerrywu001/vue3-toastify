@@ -1,16 +1,14 @@
 <template>
   <div class="flex-modal">
     <div>
-      <Breadcrumb>
-        <BreadcrumbItem>🏠</BreadcrumbItem>
-        <BreadcrumbItem>Theme</BreadcrumbItem>
-      </Breadcrumb>
+      <div class="breadcrumb">🎨&nbsp;&nbsp;/&nbsp;&nbsp;Theme</div>
       <div class="options-box">
         <Select
           v-model:value="opts.theme"
-          :style="{ width: '120px' }"
+          :style="{ width: '130px' }"
           @change="(val) => { changeTheme(val as ToastTheme); }"
         >
+          <SelectOption :value="toast.THEME.AUTO">{{ toast.THEME.AUTO }}</SelectOption>
           <SelectOption :value="toast.THEME.LIGHT">{{ toast.THEME.LIGHT }}</SelectOption>
           <SelectOption :value="toast.THEME.DARK">{{ toast.THEME.DARK }}</SelectOption>
           <SelectOption :value="toast.THEME.COLORED">{{ toast.THEME.COLORED }}</SelectOption>
@@ -19,14 +17,11 @@
     </div>
 
     <div>
-      <Breadcrumb>
-        <BreadcrumbItem>⛱</BreadcrumbItem>
-        <BreadcrumbItem>Type</BreadcrumbItem>
-      </Breadcrumb>
+      <div class="breadcrumb">💡&nbsp;&nbsp;/&nbsp;&nbsp;Type</div>
       <div class="options-box">
         <Select
           v-model:value="opts.type"
-          :style="{ width: '120px' }"
+          :style="{ width: '130px' }"
           @change="(val) => { changeType(val as ToastType); }"
         >
           <SelectOption :value="toast.TYPE.DEFAULT">{{ toast.TYPE.DEFAULT }}</SelectOption>
@@ -39,33 +34,11 @@
     </div>
 
     <div>
-      <Breadcrumb>
-        <BreadcrumbItem>🚀</BreadcrumbItem>
-        <BreadcrumbItem>Transition</BreadcrumbItem>
-      </Breadcrumb>
-      <div class="options-box">
-        <Select
-          v-model:value="opts.transition"
-          :style="{ width: '120px' }"
-          @change="(val) => { changeTransition(val as ToastTransition); }"
-        >
-          <SelectOption :value="toast.TRANSITIONS.BOUNCE">{{ toast.TRANSITIONS.BOUNCE }}</SelectOption>
-          <SelectOption :value="toast.TRANSITIONS.FLIP">{{ toast.TRANSITIONS.FLIP }}</SelectOption>
-          <SelectOption :value="toast.TRANSITIONS.SLIDE">{{ toast.TRANSITIONS.SLIDE }}</SelectOption>
-          <SelectOption :value="toast.TRANSITIONS.ZOOM">{{ toast.TRANSITIONS.ZOOM }}</SelectOption>
-        </Select>
-      </div>
-    </div>
-
-    <div>
-      <Breadcrumb>
-        <BreadcrumbItem>🚘</BreadcrumbItem>
-        <BreadcrumbItem>Position</BreadcrumbItem>
-      </Breadcrumb>
+      <div class="breadcrumb">📡&nbsp;&nbsp;/&nbsp;&nbsp;Position</div>
       <div class="options-box">
         <Select
           v-model:value="opts.position"
-          :style="{ width: '120px' }"
+          :style="{ width: '130px' }"
           @change="(val) => { changePos(val as ToastPosition); }"
         >
           <SelectOption :value="toast.POSITION.TOP_LEFT">{{ toast.POSITION.TOP_LEFT }}</SelectOption>
@@ -77,34 +50,110 @@
         </Select>
       </div>
     </div>
+
+    <div>
+      <div class="breadcrumb">🎉&nbsp;&nbsp;/&nbsp;&nbsp;Transition</div>
+      <div class="options-box">
+        <Select
+          v-model:value="opts.transition"
+          :style="{ width: '130px' }"
+          @change="(val) => { changeTransition(val as ToastTransition); }"
+        >
+          <SelectOption :value="toast.TRANSITIONS.BOUNCE">{{ toast.TRANSITIONS.BOUNCE }}</SelectOption>
+          <SelectOption :value="toast.TRANSITIONS.FLIP">{{ toast.TRANSITIONS.FLIP }}</SelectOption>
+          <SelectOption :value="toast.TRANSITIONS.SLIDE">{{ toast.TRANSITIONS.SLIDE }}</SelectOption>
+          <SelectOption :value="toast.TRANSITIONS.ZOOM">{{ toast.TRANSITIONS.ZOOM }}</SelectOption>
+        </Select>
+      </div>
+    </div>
   </div>
 
-  <Divider>Other Props</Divider>
+  <Divider orientation="left">Other Props</Divider>
 
   <div class="others">
-    <Breadcrumb>
-      <BreadcrumbItem>🏖</BreadcrumbItem>
-      <BreadcrumbItem>Autoclose Delay</BreadcrumbItem>
-    </Breadcrumb>
-    <div class="options-box">
-      <Input
-        v-model:value="opts.autoClose"
-        :style="{ width: '200px' }"
-        type="number"
-        placeholder="empty to be false"
-      />ms
+    <div class="others-box">
+      <div>
+        <span>Autoclose Duration: </span>
+        <div class="options-box">
+          <Input
+            v-model:value="opts.autoClose"
+            type="number"
+            placeholder="empty to be false"
+          />
+        </div>
+        <span>ms</span>
+      </div>
+      <div>
+        <span>Progress: </span>
+        <div class="options-box">
+          <Input
+            v-model:value="opts.progress"
+            type="number"
+            placeholder="0 to 1"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="others-box">
+      <div>
+        <Checkbox v-model:checked="opts.hideProgressBar">
+          Hide progress bar(less fanciness!)
+        </Checkbox>
+      </div>
+      <div>
+        <Checkbox
+          :checked="opts.autoClose === false"
+          @change="() => {
+            opts.autoClose = opts.autoClose === false ? 3000 : false;
+          }"
+        >
+          Disable auto-close
+        </Checkbox>
+      </div>
+      <div>
+        <Checkbox v-model:checked="opts.closeOnClick">
+          Close on click
+        </Checkbox>
+      </div>
+      <div>
+        <Checkbox v-model:checked="opts.rtl">
+          Right to left layout
+        </Checkbox>
+      </div>
+      <div>
+        <Checkbox v-model:checked="opts.pauseOnHover">
+          Pause delay on hover
+        </Checkbox>
+      </div>
+      <div>
+        <Checkbox v-model:checked="opts.pauseOnFocusLoss">
+          Pause toast when the window loses focus
+        </Checkbox>
+      </div>
+      <div>
+        <Checkbox
+          :checked="newestOnTop === true"
+          @change="() => {
+            newestOnTop = !newestOnTop;
+            updateGlobalOptions({ newestOnTop });
+          }"
+        >
+          Newest on top* (play nice with bottom toast)
+        </Checkbox>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { Divider, Input, Breadcrumb, BreadcrumbItem, Select, SelectOption } from 'ant-design-vue';
+import { Divider, Input, Select, SelectOption, Checkbox } from 'ant-design-vue';
 import { reactive, ref, watchEffect, type VNode } from 'vue';
-import { toast, ToastOptions, ToastPosition, ToastTheme, ToastTransition, ToastType } from 'vue3-toastify';
+import { toast, updateGlobalOptions, ToastOptions, ToastPosition, ToastTheme, ToastTransition, ToastType } from 'vue3-toastify';
 import 'ant-design-vue/es/input/style/index.css';
 import 'ant-design-vue/es/divider/style/index.css';
-import 'ant-design-vue/es/breadcrumb/style/index.css';
 import 'ant-design-vue/es/select/style/index.css';
+import 'ant-design-vue/es/checkbox/style/index.css';
 
 type Icon = string | number | boolean | VNode | undefined;
 
@@ -120,16 +169,24 @@ const emit = defineEmits<{
   (event: 'on-close'): void;
 }>();
 
+const newestOnTop = ref(false);
+const progress = ref<number | undefined>(undefined);
+const iconVal = ref<string | number>('');
+
 const opts = reactive({
   icon: undefined as Icon,
-  theme: toast.THEME.LIGHT,
+  theme: toast.THEME.AUTO,
   type: toast.TYPE.DEFAULT,
   position: toast.POSITION.TOP_RIGHT,
-  autoClose: 3000,
+  closeOnClick: true,
+  pauseOnHover: true,
+  rtl: false,
+  pauseOnFocusLoss: true,
+  autoClose: 3000 as any,
+  hideProgressBar: false,
+  progress: progress.value as number,
   transition: toast.TRANSITIONS.BOUNCE,
 });
-
-const iconVal = ref<string | number>('');
 
 const changeType = (value: ToastType) => {
   opts.type = value;
@@ -175,6 +232,27 @@ watchEffect(() => {
 </script>
 
 <style lang="postcss" scoped>
+.others-box {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+  max-width: 930px;
+
+  & > div {
+    display: flex;
+    align-items: center;
+    margin-right: 16px;
+    margin-bottom: 8px;
+    width: 398px;
+    user-select: none;
+
+    .ant-input {
+      width: 100px;
+      margin: 0 12px;
+    }
+  }
+}
+
 .options-box {
   display: flex;
   flex-wrap: wrap;
@@ -191,8 +269,13 @@ watchEffect(() => {
   }
 }
 
-.ant-breadcrumb {
+.breadcrumb {
+  font-size: 14px;
   margin-bottom: 8px;
+}
+
+.ant-input {
+  margin-right: 8px !important;
 }
 
 html.dark {
@@ -201,13 +284,18 @@ html.dark {
     border-color: #8a8989;
   }
 
-  .ant-breadcrumb,
-  .ant-breadcrumb-link,
-  .ant-breadcrumb-separator,
-  .ant-breadcrumb > span:first-child,
-  .ant-breadcrumb > span:last-child,
-  .ant-breadcrumb > span:last-child a {
-    color: #fff !important;
+  .ant-input {
+    background-color: transparent;
+    border-color: #32a06f;
+    color: #fff;
+  }
+
+  .ant-checkbox-wrapper {
+    color: #fff;
+  }
+
+  .breadcrumb {
+    color: #fff;
   }
 }
 

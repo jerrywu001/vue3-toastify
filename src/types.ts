@@ -26,7 +26,7 @@ export type Id = number | string;
 export type ToastType = 'info' | 'success' | 'error' | 'warning' | 'loading' | 'default';
 export type ToastPosition = 'top-left' | 'top-right' | 'top-center' | 'bottom-left' | 'bottom-right' | 'bottom-center';
 export type ToastTransition = 'zoom' | 'flip' | 'bounce' | 'slide';
-export type ToastTheme = 'light' | 'dark' | 'colored';
+export type ToastTheme = 'auto' | 'light' | 'dark' | 'colored';
 
 export interface CloseButtonProps {
   closeToast: (e: MouseEvent) => void;
@@ -140,9 +140,10 @@ export interface Options {
    */
   role?: string;
   /**
-   * One of light, dark, colored
+   * One of auto, light, dark, colored
+   * @description `auto` means automatically detects system theme colors
    * @mark {@link ToastTheme}
-   * @default 'light'
+   * @default 'auto'
    */
   theme?: ToastTheme;
 }

@@ -1,6 +1,6 @@
 import { globalOptions } from '../store';
 import { mergeProps, VNodeProps } from 'vue';
-import { Content, ToastContainerOptions } from '../types';
+import { Content, ToastContainerOptions, ToastTheme } from '../types';
 import { Default, defaultGlobalOptions } from './constant';
 
 /**
@@ -53,4 +53,8 @@ export function saveGlobalOptions(options = {} as ToastContainerOptions) {
  */
 export function getGlobalOptions() {
   return globalOptions[`${Default.CSS_NAMESPACE}-default-options`] || defaultGlobalOptions;
+}
+
+export function getSystemThem() {
+  return (document.documentElement.className || 'light') as ToastTheme;
 }

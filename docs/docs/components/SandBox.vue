@@ -4,6 +4,7 @@
     :theme="theme"
     :template="template"
     :files="files"
+    :rtl="true"
     :options="{
       showConsoleButton: true,
       showLineNumbers: true,

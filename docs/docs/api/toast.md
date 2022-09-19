@@ -3,7 +3,7 @@
 ## Props
 
 :::tip
-When displaying a toast, the options are inherited from the container. Toast options supersede Container props
+When displaying a toast, the options are inherited from the [container](./container.md). Toast options supersede Container props
 :::
 
 
@@ -12,6 +12,8 @@ When displaying a toast, the options are inherited from the container. Toast opt
 | toastId            | Id                | Provide a custom id                                                                                 |
 | type               | ToastType         | One of info, success, warning, error                                                                |
 | position           | ToastPosition     | One of top-right, top-center, top-left, bottom-right, bottom-center, bottom-left                    |
+| theme              | ToastTheme        | One of auto, light, dark, colored, Default `auto`, that means automatically detects system theme colors  |
+| transition         | ToastTransition  \| CSSTransitionProps  | A reference to a valid transition animation                                   |
 | rtl                | booleanean        | Support right to left content                                                                       |
 | onOpen             | () => void        | Called when the notification appear                                                                 |
 | onClose            | () => void        | Called when the notification disappear                                                              |
