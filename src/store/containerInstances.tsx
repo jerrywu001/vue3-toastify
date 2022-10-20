@@ -17,7 +17,11 @@ export function unmountContainer(containerId: Id) {
 
   if (!containerInstances[id]) return;
 
-  containerInstances[id].unmount();
+  try {
+    containerInstances[id].unmount();
+  } catch (error) {
+    // error
+  }
   document.getElementById(id)?.remove();
   delete containerInstances[id];
 
