@@ -80,10 +80,13 @@ toast.success('Wow so easy!');
 
 ## nuxt
 
+https://stackblitz.com/edit/nuxt-starter-1gszqs?file=app.vue,plugins%2Fvue3-toastify.ts
+
 - plugins/vue3-toastify.ts
 
 ```ts
 import Vue3Toastify, { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.use(Vue3Toastify, { autoClose: 1000 });
@@ -100,7 +103,6 @@ export default defineNuxtPlugin((nuxtApp) => {
 ```html
 <script setup>
 // import { toast } from 'vue3-toastify';
-import 'vue3-toastify/dist/index.css';
 
 nextTick(() => {
   if (process.client) {
