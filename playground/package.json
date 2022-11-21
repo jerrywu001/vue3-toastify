@@ -11,11 +11,11 @@
     "typecheck": "tsc && vue-tsc"
   },
   "dependencies": {
-    "vue-router": "^4.1.5",
-    "ant-design-vue": "^3.2.13"
+    "vue-router": "^4.1.6",
+    "ant-design-vue": "^3.2.15"
   },
   "devDependencies": {
     "cross-env": "^7.0.3",
-    "vue-loader": "^17.0.0"
+    "vue-loader": "^17.0.1"
   }
 }

@@ -77,3 +77,45 @@ updateGlobalOptions({ rtl: true });
 
 toast.success('Wow so easy!');
 ```
+
+## nuxt
+
+- plugins/vue3-toastify.ts
+
+```ts
+import Vue3Toastify, { toast } from 'vue3-toastify';
+
+export default defineNuxtPlugin((nuxtApp) => {
+  nuxtApp.vueApp.use(Vue3Toastify, { autoClose: 1000 });
+
+  return {
+    provide: { toast },
+  };
+});
+
+```
+
+- demo.vue
+
+```html
+<script setup>
+// import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
+
+nextTick(() => {
+  if (process.client) {
+    useNuxtApp().$toast('notify after nextTick');
+  }
+});
+
+const notify = () => {
+  useNuxtApp().$toast.info('toastify success');
+  // or
+  // toast.info('toastify success');
+};
+</script>
+
+<template>
+  <button @click="notify">notify by click</button>
+</template>
+```

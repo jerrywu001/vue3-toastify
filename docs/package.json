@@ -8,12 +8,12 @@
     "docs:serve": "vitepress serve docs"
   },
   "dependencies": {
-    "ant-design-vue": "^3.2.13"
+    "ant-design-vue": "^3.2.15"
   },
   "devDependencies": {
-    "codesandbox-sandpack-vue3": "^1.2.9",
+    "codesandbox-sandpack-vue3": "^1.2.10",
     "markdown-it-directive": "^1.0.1",
     "markdown-it-directive-webcomponents": "^1.2.0",
-    "vitepress": "1.0.0-alpha.22"
+    "vitepress": "1.0.0-alpha.29"
   }
 }

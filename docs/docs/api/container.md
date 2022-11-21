@@ -26,7 +26,7 @@
 
 :::warning
 By default, all toasts will inherit ToastContainer's props. Props defined on toast supersede ToastContainer's props. Props marked with * can only be set on the ToastContainer. The demo is not exhaustive, check the doc for more!
-```
+:::
 
 ## Usage with `app.use`
 
