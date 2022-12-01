@@ -62,20 +62,14 @@ export default JsxDemo;
   </div>
 </template>
 
-<script>
+<script setup>
 import { toast } from 'vue3-toastify';
 
-export default {
-   name: "App",
-   setup() {
-    const notify = () => {
-      toast("Wow so easy !", {
-        autoClose: 1000,
-      }); // ToastOptions
-    }
-    return { notify };
-   }
-};
+const notify = () => {
+  toast("Wow so easy !", {
+    autoClose: 1000,
+  }); // ToastOptions
+}
 </script>
 ```
 

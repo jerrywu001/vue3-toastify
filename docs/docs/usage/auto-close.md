@@ -16,16 +16,10 @@ close toast after 8 seconds
   </div>
 </template>
 
-<script>
+<script setup>
 import { toast } from 'vue3-toastify';
 
-export default {
-  name: "App",
-  setup() {
-    const notify = () => toast("Wow so easy !");
-    return { notify };
-  }
-};
+const notify = () => toast("Wow so easy !");
 </script>
 ```
 
@@ -53,27 +47,20 @@ It will overrides the global options
 
 ::: sandbox
 ```vue App.vue [active]
-<script>
+<script setup>
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
-export default {
-  name: "App",
-  setup() {
-    const closeAfter15 = () => {
-      toast("Will close after 15s", {
-        autoClose: 15000,
-      });
-    };
+const closeAfter15 = () => {
+  toast("Will close after 15s", {
+    autoClose: 15000,
+  });
+};
 
-    const closeAfter7 = () => {
-      toast("Will close after 7s", {
-        autoClose: 7000,
-      });
-    };
-
-    return { closeAfter15, closeAfter7 };
-  }
+const closeAfter7 = () => {
+  toast("Will close after 7s", {
+    autoClose: 7000,
+  });
 };
 </script>
 
@@ -105,17 +92,10 @@ createApp(App).use(
 
 ::: sandbox
 ```vue App.vue
-<script>
+<script setup>
 import { toast } from 'vue3-toastify';
 
-export default {
-  name: "App",
-  setup() {
-    const show = () => toast("can not auto close");
-
-    return { show };
-  }
-};
+const show = () => toast("can not auto close");
 </script>
 
 <template>
@@ -145,18 +125,11 @@ createApp(App).use(
 
 ::: sandbox
 ```vue App.vue
-<script>
+<script setup>
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
-export default {
-  name: "App",
-  setup() {
-    const show = () => toast("can not auto close", { autoClose: false });
-
-    return { show };
-  }
-};
+const show = () => toast("can not auto close", { autoClose: false });
 </script>
 
 <template>

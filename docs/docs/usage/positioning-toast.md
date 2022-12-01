@@ -14,40 +14,33 @@ View it with a PC, the effect is even better
 
 ::: sandbox
 ```vue App.vue
-<script>
+<script setup>
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
-export default {
-  name: "App",
-  setup() {
-    const notify = () => {
-      toast("Default Notification !");
+const notify = () => {
+  toast("Default Notification !");
 
-      toast.success("Success Notification !", {
-        position: toast.POSITION.TOP_CENTER,
-      });
+  toast.success("Success Notification !", {
+    position: toast.POSITION.TOP_CENTER,
+  });
 
-      toast.error("Error Notification !", {
-        position: toast.POSITION.TOP_LEFT,
-      });
+  toast.error("Error Notification !", {
+    position: toast.POSITION.TOP_LEFT,
+  });
 
-      toast.warn("Warning Notification !", {
-        position: toast.POSITION.BOTTOM_LEFT,
-      });
+  toast.warn("Warning Notification !", {
+    position: toast.POSITION.BOTTOM_LEFT,
+  });
 
-      toast.info("Info Notification !", {
-        position: toast.POSITION.BOTTOM_CENTER,
-      });
+  toast.info("Info Notification !", {
+    position: toast.POSITION.BOTTOM_CENTER,
+  });
 
-      toast("Custom Style Notification with css class!", {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        className: 'foo-bar',
-      });
-    };
-
-    return { notify };
-  }
+  toast("Custom Style Notification with css class!", {
+    position: toast.POSITION.BOTTOM_RIGHT,
+    className: 'foo-bar',
+  });
 };
 </script>
 

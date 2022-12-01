@@ -9,23 +9,16 @@ Providing a custom toast id is certainly the most straightforward way to prevent
 
 ::: sandbox
 ```vue App.vue
-<script>
+<script setup>
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
-export default {
-  name: "App",
-  setup() {
-    const customId = 'custom-id';
+const customId = 'custom-id';
 
-    const notify = () => {
-      toast("I cannot be duplicated!", {
-        toastId: customId,
-      });
-    };
-
-    return { notify };
-  }
+const notify = () => {
+  toast("I cannot be duplicated!", {
+    toastId: customId,
+  });
 };
 </script>
 
@@ -44,23 +37,16 @@ Maybe there is some situations where you cannot provide a custom toast id, in th
 
 ::: sandbox
 ```vue App.vue
-<script>
+<script setup>
 import { ref } from 'vue';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
-export default {
-  name: "App",
-  setup() {
-    const toastId = ref('');
+const toastId = ref('');
 
-    const notify = () => {
-      if (!toast.isActive(toastId.value)) {
-        toastId.value = toast('I cannot be duplicated!');
-      }
-    };
-
-    return { notify };
+const notify = () => {
+  if (!toast.isActive(toastId.value)) {
+    toastId.value = toast('I cannot be duplicated!');
   }
 };
 </script>

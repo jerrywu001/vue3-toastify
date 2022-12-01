@@ -11,22 +11,16 @@ When you render a component, a `closeToast` prop and the `toastProps` are inject
 
 ::: sandbox
 ```vue App.vue
-<script>
+<script setup>
 import { toast } from 'vue3-toastify';
 import Msg from './Msg.vue';
 import 'vue3-toastify/dist/index.css';
 
-export default {
-  name: "App",
-  setup() {
-    const notify = () => {
-      toast(Msg, { closeOnClick: false, autoClose: 8000 });
+const notify = () => {
+  toast(Msg, { closeOnClick: false, autoClose: 8000 });
 
-      // not work!!!!
-      // toast(<Msg />, { closeOnClick: false, autoClose: 8000 });
-    };
-    return { notify };
-  }
+  // not work!!!!
+  // toast(<Msg />, { closeOnClick: false, autoClose: 8000 });
 };
 </script>
 
@@ -74,25 +68,18 @@ You can also write with a tsx component. that is cool!!
 
 ::: sandbox
 ```vue App.vue
-<script>
+<script setup>
 import { h } from 'vue';
 import JsxDemo from './JsxDemo.jsx';
 import Msg from './Msg.vue';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
-export default {
-  name: "App",
-  setup() {
-    const show = () => {
-      toast(
-        ({ closeToast, toastProps }) => h(Msg, { closeToast, toastProps }),
-        { closeOnClick: false, autoClose: 8000 },
-      );
-    };
-
-    return { JsxDemo, show };
-  }
+const show = () => {
+  toast(
+    ({ closeToast, toastProps }) => h(Msg, { closeToast, toastProps }),
+    { closeOnClick: false, autoClose: 8000 },
+  );
 };
 </script>
 
@@ -173,21 +160,14 @@ In this example we will use pinia to share state accross a component and a toast
 
 ::: sandbox
 ```vue App.vue
-<script>
+<script setup>
 import { toast } from 'vue3-toastify';
 import { useCounterStore } from './stores/useCounterStore';
 import CountDisplay from './CountDisplay.vue';
 import 'vue3-toastify/dist/index.css';
 
-export default {
-  name: "App",
-  setup() {
-    const { increment } = useCounterStore();
-    const notify = () => toast(CountDisplay, { autoClose: false, closeOnClick: false });
-
-    return { notify, increment };
-  }
-};
+const { increment } = useCounterStore();
+const notify = () => toast(CountDisplay, { autoClose: false, closeOnClick: false });
 </script>
 
 <template>
@@ -200,19 +180,12 @@ export default {
 ```
 
 ```vue /src/CountDisplay.vue
-<script>
+<script setup>
 import { storeToRefs } from 'pinia';
 import { useCounterStore } from './stores/useCounterStore';
 
-export default {
-  name: "CountDisplay",
-  setup() {
-    const store = useCounterStore();
-    const { count } = storeToRefs(store);
-
-    return { count };
-  }
-};
+const store = useCounterStore();
+const { count } = storeToRefs(store);
 </script>
 
 <template>

@@ -8,35 +8,29 @@ If you want to take care of each step yourself you can use `toast.loading` and u
 
 ::: sandbox
 ```vue App.vue [active]
-<script>
+<script setup>
 import { toast } from 'vue3-toastify';
 import Msg from './Msg.vue';
 import 'vue3-toastify/dist/index.css';
 
-export default {
-  name: "App",
-  setup() {
-    const notify = () => {
-      const id = toast.loading('Please wait...');
+const notify = () => {
+  const id = toast.loading('Please wait...');
 
-      setTimeout(() => {
-        toast.update(id, {
-          render: Msg,
-          autoClose: true,
-          closeOnClick: true,
-          closeButton: true,
-          type: 'success',
-          isLoading: false,
-        });
+  setTimeout(() => {
+    toast.update(id, {
+      render: Msg,
+      autoClose: true,
+      closeOnClick: true,
+      closeButton: true,
+      type: 'success',
+      isLoading: false,
+    });
 
-        setTimeout(() => {
-          // done
-          toast.done(id);
-        }, 1000);
-      }, 2000);
-    };
-    return { notify };
-  }
+    setTimeout(() => {
+      // done
+      toast.done(id);
+    }, 1000);
+  }, 2000);
 };
 </script>
 
@@ -86,39 +80,33 @@ Let's start with a simple example
 
 :::sandbox
 ```vue App.vue
-<script>
+<script setup>
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
-export default {
-  name: "App",
-  setup() {
-    const displayPromise = () => {
-      const resolveAfter3Sec = new Promise(resolve => setTimeout(resolve, 3000));
-      toast.promise(
-        resolveAfter3Sec,
-        {
-          pending: 'Promise is pending',
-          success: 'Promise resolved 👌',
-          error: 'Promise rejected 🤯',
-        },
-      );
+const displayPromise = () => {
+  const resolveAfter3Sec = new Promise(resolve => setTimeout(resolve, 3000));
+  toast.promise(
+    resolveAfter3Sec,
+    {
+      pending: 'Promise is pending',
+      success: 'Promise resolved 👌',
+      error: 'Promise rejected 🤯',
+    },
+  );
 
-      const functionThatReturnPromise = () => new Promise((resolve, reject) => setTimeout(reject, 3000));
-      toast.promise(
-        functionThatReturnPromise,
-        {
-          pending: 'Promise is pending',
-          success: 'Promise resolved 👌',
-          error: 'Promise rejected 🤯',
-        },
-        {
-          position: toast.POSITION.BOTTOM_CENTER,
-        },
-      );
-    };
-    return { displayPromise };
-  }
+  const functionThatReturnPromise = () => new Promise((resolve, reject) => setTimeout(reject, 3000));
+  toast.promise(
+    functionThatReturnPromise,
+    {
+      pending: 'Promise is pending',
+      success: 'Promise resolved 👌',
+      error: 'Promise rejected 🤯',
+    },
+    {
+      position: toast.POSITION.BOTTOM_CENTER,
+    },
+  );
 };
 </script>
 
@@ -151,46 +139,40 @@ Displaying a simple message is what you would want to do in 90% of cases. But wh
 
 :::sandbox
 ```vue App.vue
-<script>
+<script setup>
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
-export default {
-  name: "App",
-  setup() {
-    const displayPromise = () => {
-      const resolveWithSomeData = new Promise((resolve, reject) => setTimeout(() => resolve({ message: 'world' }), 3000));
-      toast.promise(
-        resolveWithSomeData,
-        {
-          pending: {
-            render() {
-              return "I'm loading";
-            },
-            // other options
-            icon: false,
-          },
-          success: {
-            render(res) {
-              return 'Hello ' + res.data.message;
-            },
-            // other options
-            icon: '🟢',
-          },
-          error: {
-            render(err) {
-              // When the promise reject, data will contains the error
-              return h('div', 'Err: ' + err.data.message);
-              // return 'Err: ' + err.data.message;
-            },
-            // render: 'just text',
-            // render: h('div', 'error'),
-          },
+const displayPromise = () => {
+  const resolveWithSomeData = new Promise((resolve, reject) => setTimeout(() => resolve({ message: 'world' }), 3000));
+  toast.promise(
+    resolveWithSomeData,
+    {
+      pending: {
+        render() {
+          return "I'm loading";
         },
-      );
-    };
-    return { displayPromise };
-  }
+        // other options
+        icon: false,
+      },
+      success: {
+        render(res) {
+          return 'Hello ' + res.data.message;
+        },
+        // other options
+        icon: '🟢',
+      },
+      error: {
+        render(err) {
+          // When the promise reject, data will contains the error
+          return h('div', 'Err: ' + err.data.message);
+          // return 'Err: ' + err.data.message;
+        },
+        // render: 'just text',
+        // render: h('div', 'error'),
+      },
+    },
+  );
 };
 </script>
 

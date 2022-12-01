@@ -11,37 +11,30 @@ When you use a custom close button, your button will receive a `closeToast` func
 
 ::: sandbox
 ```vue App.vue
-<script>
+<script setup>
 import { h } from 'vue';
 import { toast } from 'vue3-toastify';
 import { VNodeIcon, ComponentIcon } from './icons.jsx';
 import 'vue3-toastify/dist/index.css';
 
-export default {
-  name: "App",
-  setup() {
-    const notify = () => {
-      toast('component close icon1', {
-        closeOnClick: false,
-        autoClose: false,
-        closeButton: ComponentIcon, // ComponentIcon as CloseBtnType,
-      });
+const notify = () => {
+  toast('component close icon1', {
+    closeOnClick: false,
+    autoClose: false,
+    closeButton: ComponentIcon, // ComponentIcon as CloseBtnType,
+  });
 
-      toast('component close icon2', {
-        closeOnClick: false,
-        autoClose: false,
-        closeButton: (props) => h(ComponentIcon, props), // CloseButtonProps
-      });
+  toast('component close icon2', {
+    closeOnClick: false,
+    autoClose: false,
+    closeButton: (props) => h(ComponentIcon, props), // CloseButtonProps
+  });
 
-      toast('VNode close icon', {
-        closeOnClick: false,
-        autoClose: false,
-        closeButton: ({ closeToast }) => h(VNodeIcon, { onClick: closeToast  }),
-      });
-    };
-
-    return { notify };
-  }
+  toast('VNode close icon', {
+    closeOnClick: false,
+    autoClose: false,
+    closeButton: ({ closeToast }) => h(VNodeIcon, { onClick: closeToast  }),
+  });
 };
 </script>
 
@@ -142,18 +135,11 @@ toast('HELLO', {
 
 ::: sandbox
 ```vue App.vue
-<script>
+<script setup>
 import { toast } from 'vue3-toastify';
 
-export default {
-  name: "App",
-  setup() {
-    const notify = () => {
-      toast('component close icon');
-    };
-
-    return { notify };
-  }
+const notify = () => {
+  toast('component close icon');
 };
 </script>
 

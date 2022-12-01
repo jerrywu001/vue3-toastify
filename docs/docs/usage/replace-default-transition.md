@@ -12,32 +12,25 @@ Bounce is used by default, but you can replace it with your own transition, or w
 
 ::: sandbox
 ```vue App.vue
-<script>
+<script setup>
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
-export default {
-  name: "App",
-  setup() {
-    const notify = () => {
-      toast('BOUNCE', {
-        transition: toast.TRANSITIONS.BOUNCE,
-      });
-      toast('FLIP', {
-        transition: toast.TRANSITIONS.FLIP,
-      });
-      toast('ZOOM', {
-        transition: toast.TRANSITIONS.ZOOM,
-        position: toast.POSITION.TOP_LEFT,
-      });
-      toast('SLIDE', {
-        transition: toast.TRANSITIONS.SLIDE,
-        position: toast.POSITION.TOP_LEFT,
-      });
-    };
-
-    return { notify };
-  }
+const notify = () => {
+  toast('BOUNCE', {
+    transition: toast.TRANSITIONS.BOUNCE,
+  });
+  toast('FLIP', {
+    transition: toast.TRANSITIONS.FLIP,
+  });
+  toast('ZOOM', {
+    transition: toast.TRANSITIONS.ZOOM,
+    position: toast.POSITION.TOP_LEFT,
+  });
+  toast('SLIDE', {
+    transition: toast.TRANSITIONS.SLIDE,
+    position: toast.POSITION.TOP_LEFT,
+  });
 };
 </script>
 

@@ -12,51 +12,45 @@ you can only use `toast.update` to update progress value
 
 ::: sandbox
 ```vue App.vue
-<script>
+<script setup>
 import { ref } from 'vue';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
-export default {
-  name: "App",
-  setup() {
-    const progress = ref(1);
-    const type = ref(toast.TYPE.DEFAULT);
-    const toastId = ref('');
-    let interval;
+const progress = ref(1);
+const type = ref(toast.TYPE.DEFAULT);
+const toastId = ref('');
+let interval;
 
-    const notify = () => {
-      toastId.value = toast(
-        'custom progress',
-        {
-          toastId: 'custom id',
-          type: type.value,
-          progress: progress.value,
-          onOpen: () => setTimeout(changeProgress, 600),
-        }, // as ToastOptions
-      );
-    };
+const notify = () => {
+  toastId.value = toast(
+    'custom progress',
+    {
+      toastId: 'custom id',
+      type: type.value,
+      progress: progress.value,
+      onOpen: () => setTimeout(changeProgress, 600),
+    }, // as ToastOptions
+  );
+};
 
-    const changeProgress = () => {
-      interval = setInterval(() => {
-        progress.value -= 0.05;
+const changeProgress = () => {
+  interval = setInterval(() => {
+    progress.value -= 0.05;
 
-        // update progress
-        toast.update(toastId.value, {
-          progress: progress.value,
-          type: progress.value <= 0 ? toast.TYPE.SUCCESS : type.value,
-        });
+    // update progress
+    toast.update(toastId.value, {
+      progress: progress.value,
+      type: progress.value <= 0 ? toast.TYPE.SUCCESS : type.value,
+    });
 
-        // reset status
-        if (progress.value <= 0) {
-          clearInterval(interval);
-          type.value = toast.TYPE.DEFAULT;
-          progress.value = 1;
-        }
-      }, 100);
-    };
-    return { notify };
-  }
+    // reset status
+    if (progress.value <= 0) {
+      clearInterval(interval);
+      type.value = toast.TYPE.DEFAULT;
+      progress.value = 1;
+    }
+  }, 100);
 };
 </script>
 

@@ -4,23 +4,16 @@ The default behavior is to pause the toast timer whenever the window loses focus
 
 ::: sandbox
 ```vue App.vue
-<script>
+<script setup>
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
-export default {
-  name: "App",
-  setup() {
-    const notify = () => {
-      toast('default enable');
+const notify = () => {
+  toast('default enable');
 
-      toast('disable pauseOnFocusLoss', {
-        pauseOnFocusLoss: false,
-      });
-    };
-
-    return { notify };
-  }
+  toast('disable pauseOnFocusLoss', {
+    pauseOnFocusLoss: false,
+  });
 };
 </script>
 

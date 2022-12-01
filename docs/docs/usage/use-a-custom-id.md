@@ -5,23 +5,16 @@ A custom `toastId` can be used to replace the one generated. You can provide a `
 
 ::: sandbox
 ```vue App.vue
-<script>
+<script setup>
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
-export default {
-  name: "App",
-  setup() {
-    const notify = () => {
-      toast("I use a custom id", { toastId: "customId" });
-    };
+const notify = () => {
+  toast("I use a custom id", { toastId: "customId" });
+};
 
-    const remove = () => {
-      toast.remove("customId");
-    };
-
-    return { notify, remove };
-  }
+const remove = () => {
+  toast.remove("customId");
 };
 </script>
 

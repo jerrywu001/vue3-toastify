@@ -7,22 +7,15 @@ You can define two callbacks. Their names are self-explanatory:
 
 ::: sandbox
 ```vue App.vue
-<script>
+<script setup>
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
-export default {
-  name: "App",
-  setup() {
-    const notify = () => {
-      toast("Hello there", {
-        onOpen: () => window.alert('Called when I open'),
-        onClose: () => window.alert('Called when I close'),
-      });
-    };
-
-    return { notify };
-  }
+const notify = () => {
+  toast("Hello there", {
+    onOpen: () => window.alert('Called when I open'),
+    onClose: () => window.alert('Called when I close'),
+  });
 };
 </script>
 

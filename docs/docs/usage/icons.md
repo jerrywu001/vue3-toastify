@@ -9,31 +9,25 @@ Notifications of different types (`toast.info`, `toast.error`, `toast.success`, 
 
 ::: sandbox
 ```vue App.vue
-<script>
+<script setup>
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
-export default {
-  name: "App",
-  setup() {
-    const notify = () => {
-      toast.info('Hello!!'); // same as toast('Hello!!', { type: 'info' });
-      toast.error('Hello!!');
-      toast.success('Hello!!');
-      toast.success('Hello!!', {
-        theme: 'colored',
-        position: toast.POSITION.TOP_LEFT,
-      });
-      toast.warn('Hello!!', {
-        position: toast.POSITION.TOP_LEFT,
-      });
-      toast.warn('Hello!!', {
-        theme: 'dark',
-        position: toast.POSITION.TOP_LEFT,
-      });
-    };
-    return { notify };
-  }
+const notify = () => {
+  toast.info('Hello!!'); // same as toast('Hello!!', { type: 'info' });
+  toast.error('Hello!!');
+  toast.success('Hello!!');
+  toast.success('Hello!!', {
+    theme: 'colored',
+    position: toast.POSITION.TOP_LEFT,
+  });
+  toast.warn('Hello!!', {
+    position: toast.POSITION.TOP_LEFT,
+  });
+  toast.warn('Hello!!', {
+    theme: 'dark',
+    position: toast.POSITION.TOP_LEFT,
+  });
 };
 </script>
 
@@ -51,20 +45,14 @@ export default {
 
 ::: sandbox
 ```vue App.vue
-<script>
+<script setup>
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
-export default {
-  name: "App",
-  setup() {
-    const notify = () => {
-      toast.error('Without icon', {
-        icon: false,
-      });
-    };
-    return { notify };
-  }
+const notify = () => {
+  toast.error('Without icon', {
+    icon: false,
+  });
 };
 </script>
 
@@ -87,16 +75,10 @@ export default {
   </div>
 </template>
 
-<script>
+<script setup>
 import { toast } from 'vue3-toastify';
 
-export default {
-  name: 'App',
-  setup() {
-    const notify = () => toast.error('Disable the icon gloabally !');
-    return { notify };
-  }
-};
+const notify = () => toast.error('Disable the icon gloabally !');
 </script>
 ```
 
@@ -119,43 +101,36 @@ createApp(App).use(
 
 ::: sandbox
 ```vue App.vue
-<script>
+<script setup>
 import { h } from 'vue';
 import { toast } from 'vue3-toastify';
 import { VNodeIcon, ComponentIcon } from './icons.jsx';
 import 'vue3-toastify/dist/index.css';
 
-export default {
-  name: "App",
-  setup() {
-    const notify = () => {
-      toast.success('You can provide any string', {
-        icon: "🚀",
-      });
+const notify = () => {
+  toast.success('You can provide any string', {
+    icon: "🚀",
+  });
 
-      toast.success('You can provide any number', {
-        icon: 1,
-      });
+  toast.success('You can provide any number', {
+    icon: 1,
+  });
 
-      toast.success('You can provide any VNode', {
-        icon: VNodeIcon,
-        position: toast.POSITION.TOP_LEFT,
-      });
+  toast.success('You can provide any VNode', {
+    icon: VNodeIcon,
+    position: toast.POSITION.TOP_LEFT,
+  });
 
-      toast.success('You can provide a Component', {
-        icon: ComponentIcon,
-        position: toast.POSITION.TOP_LEFT,
-      });
+  toast.success('You can provide a Component', {
+    icon: ComponentIcon,
+    position: toast.POSITION.TOP_LEFT,
+  });
 
-      // or
-      toast('You can provide callback and return a component', {
-        icon: ({ theme, type }) => h(ComponentIcon, { theme, type }),
-        position: toast.POSITION.TOP_LEFT,
-      });
-    };
-
-    return { notify };
-  }
+  // or
+  toast('You can provide callback and return a component', {
+    icon: ({ theme, type }) => h(ComponentIcon, { theme, type }),
+    position: toast.POSITION.TOP_LEFT,
+  });
 };
 </script>
 

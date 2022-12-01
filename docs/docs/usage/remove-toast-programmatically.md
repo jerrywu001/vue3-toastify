@@ -8,22 +8,15 @@ If you call `toast.remove` without argument, all the displayed toasts will be re
 
 ::: sandbox
 ```vue App.vue
-<script>
+<script setup>
 import { ref } from 'vue';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
-export default {
-  name: "App",
-  setup() {
-    const toastId = ref('');
-    const notify = () => toastId.value = toast('Hello!!!');
-    const dismiss = () =>  toast.remove(toastId.value);
-    const dismissAll = () =>  toast.clearAll(); // toast.clearAll(containerId?: Id): void;
-
-    return { notify, dismiss, dismissAll };
-  }
-};
+const toastId = ref('');
+const notify = () => toastId.value = toast('Hello!!!');
+const dismiss = () =>  toast.remove(toastId.value);
+const dismissAll = () =>  toast.clearAll(); // toast.clearAll(containerId?: Id): void;
 </script>
 
 <template>

@@ -12,19 +12,13 @@ React-toastify has built-in support for RTL layout. All you need to do is to set
   </div>
 </template>
 
-<script>
+<script setup>
 import { toast } from 'vue3-toastify';
 
-export default {
-  name: "App",
-  setup() {
-    const notify = () => {
-      toast('Wow so easy !', {
-        // rtl: false,
-      });
-    };
-    return { notify };
-  }
+const notify = () => {
+  toast('Wow so easy !', {
+    // rtl: false,
+  });
 };
 </script>
 ```
