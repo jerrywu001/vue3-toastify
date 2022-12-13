@@ -1,4 +1,3 @@
-<!-- eslint-disable vue/attribute-hyphenation -->
 <template>
   <Sandpack
     :theme="theme"
@@ -12,7 +11,7 @@
       closableTabs: closabletabs === 'true',
       readOnly: readonly === 'true',
     }"
-    :customSetup="{
+    :custom-setup="{
       dependencies: {
         'animate.css': '~4.1.1',
         'vue3-toastify': '^0.0.1',
