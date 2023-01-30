@@ -4,6 +4,7 @@
 *.local
 dist
 dist-ssr
+docs/docs/.vitepress/cache
 build
 node_modules
 .idea/

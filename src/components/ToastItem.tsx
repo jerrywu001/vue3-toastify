@@ -117,7 +117,12 @@ const ToastItem = defineComponent({
                   toastProps: toRaw(item),
                   closeToast: hideToast,
                   data: item.data,
-                }) : item.content
+                }) : (
+                  item.dangerouslyHTMLString
+                    ? h('div', {
+                      innerHTML: (item.content as string).replace(/\n/g, '<br>'),
+                    }) : item.content
+                )
             }
           </div>
         </div>

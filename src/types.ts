@@ -59,6 +59,13 @@ export type CloseBtnType =
  */
 export interface Options {
   /**
+   * use like
+   * ```
+   * toast.info("Hello World.\n I am <b>Tom</b>");
+   * ```
+   */
+  dangerouslyHTMLString?: boolean;
+  /**
    * Support right to left content
    * @default false
    */

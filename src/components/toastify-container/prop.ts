@@ -4,9 +4,14 @@ import type { Content, CSSTransitionProps, IconType, ToastPosition, ToastTheme, 
 
 const props = {
   containerId: {
-    type: String,
+    type: Boolean,
     required: false,
     default: '',
+  },
+  dangerouslyHTMLString: {
+    type: String,
+    required: false,
+    default: false,
   },
   position: {
     type: String as PropType<ToastPosition>,
