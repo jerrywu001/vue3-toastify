@@ -14,7 +14,7 @@
     :custom-setup="{
       dependencies: {
         'animate.css': '~4.1.1',
-        'vue3-toastify': '^0.0.1',
+        'vue3-toastify': 'latest',
         pinia: '^2.0.22',
       },
     }"

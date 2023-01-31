@@ -122,6 +122,7 @@ function sidebarConfig() {
         { text: 'Define custom animation', link: '/usage/custom-animation' },
         { text: 'Handling promises', link: '/usage/promise' },
         { text: 'Handling autoClose', link: '/usage/auto-close' },
+        { text: 'Render html string', link: '/usage/render-html-string' },
         { text: 'Render more than string', link: '/usage/render-more-than-string' },
         { text: 'Remove toast', link: '/usage/remove-toast-programmatically' },
         { text: 'Update a toast', link: '/usage/update-toast' },

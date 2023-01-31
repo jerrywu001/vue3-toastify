@@ -61,7 +61,7 @@ export interface Options {
   /**
    * use like
    * ```
-   * toast.info("Hello World.\n I am <b>Tom</b>");
+   * toast.info("Hello World.\n I am <b>Tom</b>", { dangerouslyHTMLString: true });
    * ```
    */
   dangerouslyHTMLString?: boolean;
