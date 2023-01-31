@@ -30,13 +30,6 @@ export default defineConfig({
                 allowedAttrs: ['readonly', 'closabletabs', 'template'],
                 parseInner: true,
               },
-              {
-                present: 'both',
-                name: 'code-group',
-                tag: 'code-group',
-                allowedAttrs: ['tag'],
-                parseInner: true,
-              },
             ],
           }
       );

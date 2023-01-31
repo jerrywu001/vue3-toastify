@@ -1,0 +1,30 @@
+diff --git a/node_modules/vitepress/dist/node-cjs/serve-09824588.cjs b/node_modules/vitepress/dist/node-cjs/serve-09824588.cjs
+index 891825e..568b3c8 100644
+--- a/node_modules/vitepress/dist/node-cjs/serve-09824588.cjs
++++ b/node_modules/vitepress/dist/node-cjs/serve-09824588.cjs
+@@ -35417,9 +35417,8 @@ function preWrapperPlugin(md) {
+   const fence = md.renderer.rules.fence;
+   md.renderer.rules.fence = (...args) => {
+     const { info } = args[0][args[1]];
+-    const lang = extractLang(info);
+     const rawCode = fence(...args);
+-    return `<div class="language-${lang}${/ active( |$)/.test(info) ? " active" : ""}"><button title="Copy Code" class="copy"></button><span class="lang">${lang}</span>${rawCode}</div>`;
++    return `<div class="language-${info}${/ active( |$)/.test(info) ? " active" : ""}"><button title="Copy Code" class="copy"></button><span class="lang">${extractLang(info)}</span>${rawCode}</div>`;
+   };
+ }
+ function extractTitle(info) {
+diff --git a/node_modules/vitepress/dist/node/serve-ebe7f464.js b/node_modules/vitepress/dist/node/serve-ebe7f464.js
+index 8783057..4a44b23 100644
+--- a/node_modules/vitepress/dist/node/serve-ebe7f464.js
++++ b/node_modules/vitepress/dist/node/serve-ebe7f464.js
+@@ -35396,9 +35396,8 @@ function preWrapperPlugin(md) {
+   const fence = md.renderer.rules.fence;
+   md.renderer.rules.fence = (...args) => {
+     const { info } = args[0][args[1]];
+-    const lang = extractLang(info);
+     const rawCode = fence(...args);
+-    return `<div class="language-${lang}${/ active( |$)/.test(info) ? " active" : ""}"><button title="Copy Code" class="copy"></button><span class="lang">${lang}</span>${rawCode}</div>`;
++    return `<div class="language-${info}${/ active( |$)/.test(info) ? " active" : ""}"><button title="Copy Code" class="copy"></button><span class="lang">${extractLang(info)}</span>${rawCode}</div>`;
+   };
+ }
+ function extractTitle(info) {
