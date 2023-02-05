@@ -45,10 +45,10 @@ jobs:
           build_directory: 'docs/docs/.vitepress/dist'
 
       # https://github.com/marketplace/actions/deploy-to-vercel-action
-      # - name: deploy to vercel
-      #   uses: BetaHuhn/deploy-to-vercel-action@v1.7.1
-      #   with:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #     VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-      #     VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-      #     VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      - name: deploy to vercel
+        uses: BetaHuhn/deploy-to-vercel-action@v1.7.1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
