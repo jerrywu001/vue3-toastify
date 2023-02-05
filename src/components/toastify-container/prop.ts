@@ -4,12 +4,12 @@ import type { Content, CSSTransitionProps, IconType, ToastPosition, ToastTheme, 
 
 const props = {
   containerId: {
-    type: Boolean,
+    type: [String, Number],
     required: false,
     default: '',
   },
   dangerouslyHTMLString: {
-    type: String,
+    type: Boolean,
     required: false,
     default: false,
   },
@@ -155,7 +155,7 @@ const props = {
     default: '',
   },
   updateId: {
-    type: String,
+    type: [String, Number],
     required: false,
     default: '',
   },

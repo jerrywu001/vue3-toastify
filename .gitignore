@@ -16,7 +16,6 @@ yarn.lock
 
 src/index.css
 playground/dist
-playground/storybook-static
 
 __unconfig_vite.config.ts
 .vercel

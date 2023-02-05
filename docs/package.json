@@ -11,9 +11,7 @@
     "ant-design-vue": "^3.2.15"
   },
   "devDependencies": {
-    "sandpack-vue3": "^2.2.2",
-    "markdown-it-directive": "^1.0.1",
-    "markdown-it-directive-webcomponents": "^1.2.0",
-    "vitepress": "1.0.0-alpha.44"
+    "vitepress": "1.0.0-alpha.45",
+    "vitepress-plugin-sandpack": "latest"
   }
 }

@@ -2,7 +2,7 @@ import DefaultTheme from 'vitepress/theme';
 // @ts-ignore
 import Playground from '../../../../playground/src/pages/index.vue';
 // @ts-ignore
-import SandBox from '../../components/SandBox.vue';
+import Sandbox from '../../components/SandBox.vue';
 
 import './index.scss';
 
@@ -13,6 +13,6 @@ export default {
   ...DefaultTheme,
   enhanceApp({ app }) {
     app.component('Playground', Playground);
-    app.component('SandBox', SandBox);
+    app.component('Sandbox', Sandbox);
   }
 }

@@ -1,5 +1,7 @@
 import { defineConfig } from 'vitepress';
+import container from 'markdown-it-container';
 import vueJsx from '@vitejs/plugin-vue-jsx';
+import { renderSandbox } from 'vitepress-plugin-sandpack';
 import { version } from '../../../package.json';
 import path from 'path';
 
@@ -12,27 +14,11 @@ export default defineConfig({
   markdown: {
     config(md) {
       md
-        .use(require('markdown-it-directive'))
-        .use(
-          require('markdown-it-directive-webcomponents'),
-          {
-            components: [
-              {
-                present: 'both',
-                name: 'playground',
-                tag: 'playground',
-                parseInner: true,
-              },
-              {
-                present: 'both',
-                name: 'sandbox',
-                tag: 'sand-box',
-                allowedAttrs: ['readonly', 'closabletabs', 'template'],
-                parseInner: true,
-              },
-            ],
-          }
-      );
+        .use(container, 'sandbox', {
+          render (tokens, idx) {
+            return renderSandbox(tokens, idx, 'sandbox');
+          },
+        });
     },
   },
 
