@@ -13,8 +13,10 @@ const onOptionsChange = (opts: ToastOptions) => {
 };
 
 function showToast() {
-  // toast.success('Hello\niii&nbsp;<strong>jack</strong>', { dangerouslyHTMLString: true });
-  toast.success(`Wow so easy! ${parseInt(String(Math.random() * 100000), 10)}`, options.value);
+  toast.success(
+    `Hello!\nWow so easy!&nbsp;<strong>${parseInt(String(Math.random() * 1000), 10)}</strong>`,
+    options.value,
+  );
 }
 
 function showLoadToast() {

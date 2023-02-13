@@ -96,6 +96,7 @@ function sidebarConfig() {
         { text: 'Container id', link: '/usage/container' },
         { text: 'Positioning toast', link: '/usage/positioning-toast' },
         { text: 'Replace the default transition', link: '/usage/replace-default-transition' },
+        { text: 'Disable multiple', link: '/usage/disable-multiple' },
         { text: 'Use a controlled progress bar', link: '/usage/use-a-controlled-progress-bar' },
         { text: 'How to style', link: '/usage/how-to-style' },
         { text: 'Define custom animation', link: '/usage/custom-animation' },

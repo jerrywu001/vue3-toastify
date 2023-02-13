@@ -1,4 +1,7 @@
-# Render just html string
+# Disable multiple.
+
+> Each click shows only one toast, and override the previous one.
+
 
 ## global
 
@@ -14,7 +17,7 @@
 import { toast } from 'vue3-toastify';
 
 const notify = () => {
-  toast('Hello world.\n I am <strong>jack</strong>', {
+  toast('Hello world', {
     position: toast.POSITION.BOTTOM_CENTER,
   });
 };
@@ -30,7 +33,7 @@ import 'vue3-toastify/dist/index.css';
 createApp(App).use(
   Vue3Toasity,
   {
-    dangerouslyHTMLString: true,
+    multiple: false,
   }, // global options type definition --> ToastContainerOptions
 ).mount('#app');
 ```
@@ -40,6 +43,6 @@ createApp(App).use(
 
 ```js
 toast('Hello world.\n I am <strong>jack</strong>', {
-  dangerouslyHTMLString: true, // can override the global option
+  multiple: false, // can override the global option
 });
 ```

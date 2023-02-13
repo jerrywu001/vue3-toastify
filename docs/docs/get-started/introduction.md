@@ -21,5 +21,6 @@ By default, all toasts will inherit [global props](../api/container). Props defi
 - Pause toast when the window loses focus 👁
 - Fancy progress bar to display the remaining time
 - Possibility to update a toast
+- support dangerously html string render (`default: false`).
 - Dark mode 🌒, automatic detection the system dark mode (`html.dark`)
 - And much more !

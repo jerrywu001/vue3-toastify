@@ -13,6 +13,11 @@ const props = {
     required: false,
     default: false,
   },
+  multiple: {
+    type: Boolean,
+    required: false,
+    default: true,
+  },
   position: {
     type: String as PropType<ToastPosition>,
     required: false,

@@ -55,6 +55,8 @@ export const TRANSITIONS: { [key in KeyOfTransition]: ToastTransition } = {
 };
 
 export const defaultOptions = {
+  dangerouslyHTMLString: false,
+  multiple: true,
   position: POSITION.TOP_RIGHT,
   autoClose: 5000,
   transition: 'bounce',

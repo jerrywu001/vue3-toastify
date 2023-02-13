@@ -97,6 +97,17 @@
 
     <div class="others-box">
       <div>
+        <Checkbox
+          :checked="dangerouslyHTMLString === true"
+          @change="() => {
+            dangerouslyHTMLString = !dangerouslyHTMLString;
+            updateGlobalOptions({ dangerouslyHTMLString });
+          }"
+        >
+          <span style="color: red;">dangerously html string (default: false)</span>
+        </Checkbox>
+      </div>
+      <div>
         <Checkbox v-model:checked="opts.hideProgressBar">
           Hide progress bar(less fanciness!)
         </Checkbox>
@@ -142,6 +153,17 @@
           Newest on top* (play nice with bottom toast)
         </Checkbox>
       </div>
+      <div>
+        <Checkbox
+          :checked="multiple === true"
+          @change="() => {
+            multiple = !multiple;
+            updateGlobalOptions({ multiple });
+          }"
+        >
+          support multiple
+        </Checkbox>
+      </div>
     </div>
   </div>
 </template>
@@ -170,6 +192,8 @@ const emit = defineEmits<{
 }>();
 
 const newestOnTop = ref(false);
+const multiple = ref(true);
+const dangerouslyHTMLString = ref(true);
 const progress = ref<number | undefined>(undefined);
 const iconVal = ref<string | number>('');
 
@@ -186,6 +210,8 @@ const opts = reactive({
   hideProgressBar: false,
   progress: progress.value as number,
   transition: toast.TRANSITIONS.BOUNCE,
+  dangerouslyHTMLString,
+  multiple,
 });
 
 const changeType = (value: ToastType) => {

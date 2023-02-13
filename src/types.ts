@@ -59,6 +59,11 @@ export type CloseBtnType =
  */
 export interface Options {
   /**
+   * support multiple
+   * @default true
+   */
+  multiple?: boolean;
+  /**
    * use like
    * ```
    * toast.info("Hello World.\n I am <b>Tom</b>", { dangerouslyHTMLString: true });
@@ -168,12 +173,7 @@ export interface ToastContainerOptions extends Options {
    * Add optional classes to the container
    * @default -
    */
-  containerClassName?: string; // TODO: ToastClassName
-  /**
-   * Used to limit the number of toast displayed on screen at the same time
-   * @default -
-   */
-  limit?: number; // TODO
+  containerClassName?: string;
 }
 
 export interface ToastOptions<Data = {}> extends Options {

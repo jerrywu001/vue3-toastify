@@ -7,7 +7,11 @@ import { POSITION, THEME, TRANSITIONS, TYPE } from '../utils/constant';
 import { ToastifyContainer } from '../components';
 import type { Content, Data, Id, ToastOptions, ToastProps, ToastType, UpdateOptions } from '../types';
 
+let inThrottle = false;
+
 function openToast(content: Content, type: ToastType, options = {} as ToastOptions) {
+  if (inThrottle) return;
+
   options = mergeOptions<ToastOptions>(getGlobalOptions(), { type }, options);
 
   if (!options.toastId || (typeof options.toastId !== 'string' && typeof options.toastId !== 'number')) {
@@ -32,6 +36,25 @@ function openToast(content: Content, type: ToastType, options = {} as ToastOptio
     options.theme = getSystemThem();
   }
 
+  if (!options.multiple) {
+    inThrottle = true;
+    toast.clearAll();
+
+    setTimeout(() => {
+      handler(content, type, options);
+    }, 0);
+
+    setTimeout(() => {
+      inThrottle = false;
+    }, 390);
+  } else {
+    handler(content, type, options);
+  }
+
+  return options.toastId as Id;
+}
+
+function handler(content: Content, type: ToastType, options = {} as ToastOptions) {
   if (!toastContainerInScreen(options.position)) {
     const rootDom = generateRenderRoot(options);
     const app = createApp(ToastifyContainer, options as Data);
@@ -46,8 +69,6 @@ function openToast(content: Content, type: ToastType, options = {} as ToastOptio
       eventManager.emit(Event.Add, content, options);
     }
   });
-
-  return options.toastId as Id;
 }
 
 /** default toast */
@@ -153,7 +174,7 @@ function handlePromise<T = unknown>(
   { pending, error, success }: ToastPromiseParams<T>,
   options?: ToastOptions,
 ) {
-  let id: Id;
+  let id: Id | undefined;
 
   if (pending) {
     id = isStr(pending)

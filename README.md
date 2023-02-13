@@ -1,7 +1,5 @@
 ![](https://user-images.githubusercontent.com/5574267/130804494-a9d2d69c-f170-4576-b2e1-0bb7f13dd92d.gif)
 
-# Online demos
-
 # Requirements
 
 vue version >=3.2.0
@@ -12,6 +10,14 @@ vue version >=3.2.0
 npm install --save vue3-toastify
 # yarn add vue3-toastify
 ```
+
+# Demo
+
+[A demo is worth a thousand words](https://vue3-toastify.js-bridge.com)
+
+# Document
+
+Check the [documentation](https://vue3-toastify.js-bridge.com/get-started/introduction.html) to get you started!
 
 # The gist
 
@@ -39,14 +45,6 @@ export default {
 };
 </script>
 ```
-
-# Demo
-
-[A demo is worth a thousand words](https://vue3-toastify.netlify.app)
-
-# Document
-
-Check the [documentation](https://vue3-toastify.netlify.app/get-started/introduction.html) to get you started!
 
 ## Init/Update Global Props
 
@@ -80,7 +78,7 @@ toast.success('Wow so easy!');
 
 ## nuxt
 
-https://stackblitz.com/edit/nuxt-starter-1gszqs?file=app.vue,plugins%2Fvue3-toastify.ts
+[A nuxt demo](https://stackblitz.com/edit/nuxt-starter-1gszqs?file=app.vue,plugins%2Fvue3-toastify.ts)
 
 - plugins/vue3-toastify.ts
 
