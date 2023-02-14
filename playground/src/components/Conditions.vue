@@ -252,6 +252,7 @@ watchEffect(() => {
 
 watchEffect(() => {
   if (opts.autoClose) {
+    opts.autoClose = Number(opts.autoClose);
     emit('on-change', opts);
   }
 });

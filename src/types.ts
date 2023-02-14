@@ -63,6 +63,14 @@ export interface Options {
    * @default true
    */
   multiple?: boolean;
+
+  /**
+   * Limit the number of toast displayed at the same time
+   *
+   * @ignore  Auto disabled when `multiple: false`
+   */
+  limit?: number;
+
   /**
    * use like
    * ```
@@ -219,12 +227,12 @@ export interface ToastOptions<Data = {}> extends Options {
   /**
    * Called when toast is mounted.
    */
-  onOpen?: () => void;
+  onOpen?: <T = {}>(props: T) => void;
 
   /**
    * Called when toast is unmounted.
    */
-  onClose?: () => void;
+  onClose?: <T = {}>(props: T) => void;
 
   /**
    * Called when click inside Toast notification

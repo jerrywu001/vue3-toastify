@@ -15,7 +15,6 @@ interface OtherProps extends ToastProps {
 }
 
 const NullCallback = () => {};
-const ExitDuration = 300;
 
 /**
  * Used to collapse toast after exit animation
@@ -64,6 +63,77 @@ export function useCssTransition(props: CSSTransitionProps & OtherProps) {
     onMouseleave: playToast,
   } : {});
 
+  function onEnterHandler() {
+    const classToToken = enterClassName.value.split(' ');
+
+    getTargetNode().addEventListener(
+      SyntheticEvent.ENTRANCE_ANIMATION_END,
+      playToast,
+      { once: true },
+    );
+
+    const onEntered = (e: AnimationEvent) => {
+      const node = getTargetNode();
+      if (e.target !== node) return;
+
+      node.dispatchEvent(new Event(SyntheticEvent.ENTRANCE_ANIMATION_END));
+      node.removeEventListener('animationend', onEntered);
+      node.removeEventListener('animationcancel', onEntered);
+      if (
+        animationStep.value === AnimationStep.Enter &&
+        e.type !== 'animationcancel'
+      ) {
+        node.classList.remove(...classToToken);
+      }
+    };
+
+    const onEnter = () => {
+      const node = getTargetNode();
+      node.classList.add(...classToToken);
+      node.addEventListener('animationend', onEntered);
+      node.addEventListener('animationcancel', onEntered);
+    };
+
+    if (props.pauseOnFocusLoss) {
+      bindFocusEvents();
+    }
+
+    onEnter();
+  }
+
+  function onExitHandler() {
+    if (!getTargetNode()) return;
+
+    const onExited = () => {
+      const node = getTargetNode();
+      node.removeEventListener('animationend', onExited);
+      if (options.collapse) {
+        collapseToast(node, doneHandler, options.collapseDuration);
+      } else {
+        doneHandler();
+      }
+    };
+
+    const onExit = () => {
+      const node = getTargetNode();
+      animationStep.value = AnimationStep.Exit;
+      node.className += ` ${exitClassName.value}`;
+      node.addEventListener('animationend', onExited);
+    };
+
+    if (!isIn.value) {
+      if (preventExitTransition.value) {
+        onExited();
+      } else {
+        setTimeout(onExit);
+      }
+    }
+  }
+
+  function getTargetNode() {
+    return props.toastRef.value as HTMLDivElement;
+  }
+
   function bindFocusEvents() {
     if (!document.hasFocus()) pauseToast();
 
@@ -75,16 +145,6 @@ export function useCssTransition(props: CSSTransitionProps & OtherProps) {
     window.removeEventListener('focus', playToast);
     window.removeEventListener('blur', pauseToast);
   }
-
-  watchEffect(() => {
-    if (props.isLoading !== undefined) {
-      if (props.loading.value) {
-        pauseToast();
-      } else {
-        playToast();
-      }
-    }
-  });
 
   function playToast() {
     if (!props.loading.value || props.isLoading === undefined) {
@@ -104,75 +164,24 @@ export function useCssTransition(props: CSSTransitionProps & OtherProps) {
     isIn.value = false;
   }
 
-  function onExitHandler() {
-    const node = props.toastRef.value as HTMLDivElement;
-
-    if (!node) return;
-
-    const onExited = () => {
-      if (options.collapse) {
-        setTimeout(() => {
-          node.removeEventListener('animationend', onExited);
-          collapseToast(node, doneHandler, options.collapseDuration);
-        }, ExitDuration);
-      } else {
-        doneHandler();
-      }
-    };
-
-    const onExit = () => {
-      animationStep.value = AnimationStep.Exit;
-      node.className += ` ${exitClassName.value}`;
-      node.addEventListener('animationend', onExited);
-    };
-
-    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    if (!isIn.value) preventExitTransition.value ? onExited() : onExit();
-  }
+  watchEffect(onExitHandler);
 
   watchEffect(() => {
     const all = getAllToast();
     isIn.value = all.findIndex(v => v.toastId === options.toastId) > -1;
   });
 
-  watchEffect(onExitHandler);
-
-  onMounted(() => {
-    const node = props.toastRef.value as HTMLDivElement;
-    const classToToken = enterClassName.value.split(' ');
-
-    node.addEventListener(
-      SyntheticEvent.ENTRANCE_ANIMATION_END,
-      playToast,
-      { once: true },
-    );
-
-    const onEntered = (e: AnimationEvent) => {
-      if (e.target !== props.toastRef.value) return;
-
-      node.dispatchEvent(new Event(SyntheticEvent.ENTRANCE_ANIMATION_END));
-      node.removeEventListener('animationend', onEntered);
-      node.removeEventListener('animationcancel', onEntered);
-      if (
-        animationStep.value === AnimationStep.Enter &&
-        e.type !== 'animationcancel'
-      ) {
-        node.classList.remove(...classToToken);
+  watchEffect(() => {
+    if (props.isLoading !== undefined) {
+      if (props.loading.value) {
+        pauseToast();
+      } else {
+        playToast();
       }
-    };
-
-    const onEnter = () => {
-      node.classList.add(...classToToken);
-      node.addEventListener('animationend', onEntered);
-      node.addEventListener('animationcancel', onEntered);
-    };
-
-    onEnter();
-
-    if (props.pauseOnFocusLoss) {
-      bindFocusEvents();
     }
   });
+
+  onMounted(onEnterHandler);
 
   onUnmounted(() => {
     if (props.pauseOnFocusLoss) {

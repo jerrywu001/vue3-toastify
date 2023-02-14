@@ -97,18 +97,47 @@ import Msg from './Msg';
 const JsxDemo = defineComponent({
   setup() {
     const displayMsg = () => {
-      toast(Msg, { closeOnClick: false, autoClose: 8000 });
-      // not work !!
-      // toast(<Msg />, { closeOnClick: false, autoClose: 8000 });
+      toast(<Msg uid="test custom props" />, {
+        closeOnClick: false,
+        autoClose: 8000,
+        onOpen: (props) => {
+          console.log(props);
+        },
+        onClose: (props) => {
+          console.log(props);
+        },
+      });
+      // or
+      // toast(Msg, {
+      //   closeOnClick: false,
+      //   autoClose: 8000,
+      //   data: {
+      //     uid: 'custom from data',
+      //   },
+      //   onOpen: (props) => {
+      //     console.log(props);
+      //   },
+      //   onClose: (props) => {
+      //     console.log(props);
+      //   },
+      // });
 
       // cool !!!
       toast(({ closeToast, toastProps }) => (
         <div>
           <p>I am a jsx component</p>
           <p>Position: {toastProps?.position}</p>
-          <button style="color: red;" onClick={closeToast}>Click me to close toast</button>
+          <button
+            style="color: red;"
+            onClick={closeToast}
+          >
+            Click me to close toast
+          </button>
         </div>
-      ), { closeOnClick: false, autoClose: 8000 });
+      ), {
+        closeOnClick: false,
+        autoClose: 8000,
+      });
     };
 
     return () => (

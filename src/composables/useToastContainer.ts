@@ -1,4 +1,4 @@
-import { nextTick, onMounted, onUnmounted, reactive, toRaw } from 'vue';
+import { isVNode, nextTick, onMounted, onUnmounted, reactive, toRaw } from 'vue';
 import { Content, Id, ToastOptions, ToastProps, UpdateOptions } from '../types';
 import { eventManager, Event, unmountAllContainer, unmountContainer } from '..';
 
@@ -35,15 +35,16 @@ export function removeOne(id?: Id) {
     if (containerId) {
       const toasts = toastMap[containerId];
       let item = toasts.find(v => v.toastId === id);
+
       toastMap[containerId] = toasts.filter(v => v.toastId !== id);
 
       if (!toastMap[containerId].length) {
-        unmountContainer(containerId);
+        unmountContainer(containerId, false);
       }
 
       nextTick(() => {
         if (item?.onClose) {
-          item.onClose();
+          item.onClose(getCallbackProps(item));
           item = undefined;
         }
       });
@@ -63,11 +64,16 @@ export function addOne(_: Content, opts: ToastProps) {
           toastMap[containerId].push(opts);
         }
         if (opts.onOpen) {
-          opts.onOpen();
+          opts.onOpen(getCallbackProps(opts));
         }
       }, opts.delay || 0);
     }
   }
+}
+
+function getCallbackProps(opts: ToastProps) {
+  const result = isVNode(opts.content) ? toRaw(opts.content.props) : null;
+  return result ?? toRaw(opts.data ?? {});
 }
 
 export function updateToast(opts = {} as UpdateOptions) {

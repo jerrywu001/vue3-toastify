@@ -18,6 +18,11 @@ const props = {
     required: false,
     default: true,
   },
+  limit: {
+    type: Number,
+    required: false,
+    default: undefined,
+  },
   position: {
     type: String as PropType<ToastPosition>,
     required: false,
