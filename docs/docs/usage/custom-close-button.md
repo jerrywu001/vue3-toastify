@@ -21,18 +21,21 @@ const notify = () => {
   toast('component close icon1', {
     closeOnClick: false,
     autoClose: false,
+    position: toast.POSITION.BOTTOM_CENTER,
     closeButton: ComponentIcon, // ComponentIcon as CloseBtnType,
   });
 
   toast('component close icon2', {
     closeOnClick: false,
     autoClose: false,
+    position: toast.POSITION.BOTTOM_CENTER,
     closeButton: (props) => h(ComponentIcon, props), // CloseButtonProps
   });
 
   toast('VNode close icon', {
     closeOnClick: false,
     autoClose: false,
+    position: toast.POSITION.BOTTOM_CENTER,
     closeButton: ({ closeToast }) => h(VNodeIcon, { onClick: closeToast  }),
   });
 };
@@ -139,7 +142,9 @@ toast('HELLO', {
 import { toast } from 'vue3-toastify';
 
 const notify = () => {
-  toast('component close icon');
+  toast('component close icon', {
+    position: toast.POSITION.BOTTOM_CENTER,
+  });
 };
 </script>
 

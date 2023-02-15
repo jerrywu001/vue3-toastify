@@ -1,8 +1,26 @@
 /* eslint-disable guard-for-in */
 import { type App, reactive } from 'vue';
 import { getDefaultTransition } from '../utils/constant';
-import { toastMap } from '../composables';
 import { CSSTransitionProps, Id, ToastOptions, ToastTransition } from '../types';
+import { toastContainers } from '.';
+
+function unmountComponent(evt: AnimationEvent | string) {
+  // @ts-ignore
+  const containerId = typeof evt === 'string' ? evt : (evt.currentTarget?.id || evt.target?.id);
+  const target = document.getElementById(containerId);
+  if (target) {
+    target.removeEventListener('animationend', unmountComponent, false);
+  }
+
+  try {
+    containerInstances[containerId].unmount();
+    document.getElementById(containerId)?.remove();
+    delete containerInstances[containerId];
+    delete toastContainers[containerId];
+  } catch (error) {
+    // error
+  }
+}
 
 export const containerInstances = reactive({} as Record<string, App<Element>>);
 
@@ -13,35 +31,30 @@ export function cacheRenderInstance(app: App<Element>, id: Id) {
   }
 }
 
-export function unmountContainer(containerId: Id, withAnimation = true) {
+export function removeContainer(containerId: Id, withExitAnimation = true) {
   const id = String(containerId);
 
   if (!containerInstances[id]) return;
 
-  if (withAnimation) resolveNodesAnimation(containerId);
+  if (withExitAnimation) {
+    resolveNodesAnimation(containerId);
 
-  setTimeout(() => {
-    try {
-      containerInstances[id].unmount();
-    } catch (error) {
-      // error
+    const target = document.getElementById(id);
+    if (target) {
+      target.addEventListener('animationend', unmountComponent, false);
     }
-    document.getElementById(id)?.remove();
-    delete containerInstances[id];
-
-    if (Object.prototype.hasOwnProperty.call(toastMap, id)) {
-      delete toastMap[id];
-    }
-  }, 680);
-}
-
-export function unmountAllContainer() {
-  for (const id in containerInstances) {
-    unmountContainer(id);
+  } else {
+    unmountComponent(id);
   }
 }
 
-export function addExitAnimateToNode(item: ToastOptions) {
+export function clearContainers(withExitAnimation?: boolean) {
+  for (const id in containerInstances) {
+    removeContainer(id, withExitAnimation);
+  }
+}
+
+export function addExitAnimateToNode(item: ToastOptions, clasback?: (node: HTMLElement) => void) {
   const node = document.getElementById(item.toastId as string);
   if (node) {
     let v = item as (CSSTransitionProps & ToastOptions);
@@ -51,13 +64,16 @@ export function addExitAnimateToNode(item: ToastOptions) {
     };
     const exitClassName = v.appendPosition ? `${v.exit}--${v.position}` : v.exit;
     node.className += ` ${exitClassName}`;
+    if (clasback) {
+      clasback(node);
+    }
   }
 }
 
 function resolveNodesAnimation(containerId: Id) {
-  for (const id in toastMap) {
+  for (const id in toastContainers) {
     if (id === containerId) {
-      for (const item of (toastMap[id] || [])) {
+      for (const item of (toastContainers[id] || [])) {
         addExitAnimateToNode(item);
       }
     }

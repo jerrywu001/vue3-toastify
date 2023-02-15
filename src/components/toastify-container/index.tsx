@@ -1,7 +1,7 @@
 import props from './prop';
 import ToastItem from '../ToastItem';
 import { computed, DefineComponent, defineComponent } from 'vue';
-import { useToastContainer } from '../..';
+import { toastContainers } from '../..';
 import type { Id, ToastOptions } from '../../types';
 
 const ToastifyContainer = defineComponent({
@@ -10,9 +10,8 @@ const ToastifyContainer = defineComponent({
   props,
   // @ts-ignore
   setup(_props: ToastOptions) {
-    const { toastMap } = useToastContainer(_props);
     const containerId = computed(() => _props.containerId as Id);
-    const allToasts = computed<ToastOptions[]>(() => toastMap[containerId.value] || []);
+    const allToasts = computed<ToastOptions[]>(() => toastContainers[containerId.value] || []);
     const toasts = computed(() => allToasts.value.filter(v => v.position === _props.position));
 
     return () => (

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "build": "tsc && vue-tsc && vite build",
-    "dev": "vite --open",
+    "dev": "vite --open --host",
     "dev:usepack": "cross-env USEPACK=true vite --port 5000 --open",
     "preview": "vite preview",
     "typecheck": "tsc && vue-tsc"

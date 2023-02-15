@@ -13,7 +13,10 @@ import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
 const notify = () => {
-  toast('Show after 1sec', { delay: 1000 });
+  toast('Show after 1sec', {
+    delay: 1000,
+    position: toast.POSITION.BOTTOM_CENTER,
+  });
 };
 </script>
 

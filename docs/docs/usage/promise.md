@@ -14,7 +14,12 @@ import Msg from './Msg.vue';
 import 'vue3-toastify/dist/index.css';
 
 const notify = () => {
-  const id = toast.loading('Please wait...');
+  const id = toast.loading(
+    'Please wait...',
+    {
+      position: toast.POSITION.BOTTOM_RIGHT,
+    },
+  );
 
   setTimeout(() => {
     toast.update(id, {
@@ -92,6 +97,9 @@ const displayPromise = () => {
       pending: 'Promise is pending',
       success: 'Promise resolved 👌',
       error: 'Promise rejected 🤯',
+    },
+    {
+      position: toast.POSITION.BOTTOM_CENTER,
     },
   );
 
@@ -172,6 +180,9 @@ const displayPromise = () => {
         // render: h('div', 'error'),
       },
     },
+    {
+      position: toast.POSITION.BOTTOM_CENTER,
+    }
   );
 };
 </script>

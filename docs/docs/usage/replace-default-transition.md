@@ -19,17 +19,19 @@ import 'vue3-toastify/dist/index.css';
 const notify = () => {
   toast('BOUNCE', {
     transition: toast.TRANSITIONS.BOUNCE,
+    position: toast.POSITION.BOTTOM_RIGHT,
   });
   toast('FLIP', {
     transition: toast.TRANSITIONS.FLIP,
+    position: toast.POSITION.BOTTOM_RIGHT,
   });
   toast('ZOOM', {
     transition: toast.TRANSITIONS.ZOOM,
-    position: toast.POSITION.TOP_LEFT,
+    position: toast.POSITION.BOTTOM_LEFT,
   });
   toast('SLIDE', {
     transition: toast.TRANSITIONS.SLIDE,
-    position: toast.POSITION.TOP_LEFT,
+    position: toast.POSITION.BOTTOM_LEFT,
   });
 };
 </script>

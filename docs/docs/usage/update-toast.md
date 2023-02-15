@@ -12,7 +12,10 @@ import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
 const toastId = ref('');
-const notify = () => toastId.value = toast('Hello', { autoClose: false });
+const notify = () => toastId.value = toast('Hello', {
+  autoClose: false,
+  position: toast.POSITION.BOTTOM_CENTER,
+});
 const update = () => toast.update(toastId.value, {
   type: toast.TYPE.INFO,
   autoClose: 5000,
@@ -38,7 +41,10 @@ import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
 const toastId = ref('');
-const notify = () => toastId.value = toast('Hello', { autoClose: false });
+const notify = () => toastId.value = toast('Hello', {
+  autoClose: false,
+  position: toast.POSITION.BOTTOM_CENTER,
+});
 const update = () => {
   toast.update(
     toastId.value,

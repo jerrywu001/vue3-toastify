@@ -1,5 +1,11 @@
 import ProgressBar from './progress-bar/ProgressBar';
 import props from './toastify-container/prop';
+import { CloseButton } from './CloseButton';
+import { Default, getDefaultTransition } from '../utils/constant';
+import { getIcon } from './Icons';
+import { isComponent, isFn } from '../utils/tools';
+import { ToastActions } from '../store';
+import { useCssTransition } from '../composables';
 import {
   computed,
   DefineComponent,
@@ -8,11 +14,6 @@ import {
   ref,
   toRaw,
 } from 'vue';
-import { CloseButton } from './CloseButton';
-import { Default, getDefaultTransition } from '../utils/constant';
-import { getIcon } from './Icons';
-import { isComponent, isFn } from '../utils/tools';
-import { removeOne, useCssTransition } from '../composables';
 import type {
   CloseButtonProps,
   Content,
@@ -49,7 +50,7 @@ const ToastItem = defineComponent({
     } = useCssTransition({
       toastRef,
       loading,
-      done: () => { removeOne(item.toastId); },
+      done: () => { ToastActions.remove(item.toastId); },
       ...getDefaultTransition(item.transition as ToastTransition),
       ...item,
     });

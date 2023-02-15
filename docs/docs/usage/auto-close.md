@@ -26,13 +26,14 @@ const notify = () => toast("Wow so easy !");
 ```js /src/main.js [active]
 import App from './App.vue';
 import { createApp } from 'vue';
-import Vue3Toasity from 'vue3-toastify';
+import Vue3Toasity, { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
 createApp(App).use(
   Vue3Toasity,
   {
     autoClose: 8000,
+    position: toast.POSITION.BOTTOM_CENTER,
     // ...
   }, // global options type definition --> ToastContainerOptions
 ).mount('#app');
@@ -54,12 +55,14 @@ import 'vue3-toastify/dist/index.css';
 const closeAfter15 = () => {
   toast("Will close after 15s", {
     autoClose: 15000,
+    position: toast.POSITION.BOTTOM_CENTER,
   });
 };
 
 const closeAfter7 = () => {
   toast("Will close after 7s", {
     autoClose: 7000,
+    position: toast.POSITION.BOTTOM_CENTER,
   });
 };
 </script>
@@ -75,12 +78,13 @@ const closeAfter7 = () => {
 ```js /src/main.js
 import App from './App.vue';
 import { createApp } from 'vue';
-import Vue3Toasity from 'vue3-toastify';
+import Vue3Toasity, { toast } from 'vue3-toastify';
 
 createApp(App).use(
   Vue3Toasity,
   {
     autoClose: 8000,
+    position: toast.POSITION.BOTTOM_CENTER,
     // ...
   }, // global options type definition --> ToastContainerOptions
 ).mount('#app');
@@ -95,7 +99,12 @@ createApp(App).use(
 <script setup>
 import { toast } from 'vue3-toastify';
 
-const show = () => toast("can not auto close");
+const show = () => toast(
+  "can not auto close",
+  {
+    position: toast.POSITION.BOTTOM_CENTER,
+  }
+);
 </script>
 
 <template>
@@ -108,13 +117,14 @@ const show = () => toast("can not auto close");
 ```js /src/main.js [active]
 import App from './App.vue';
 import { createApp } from 'vue';
-import Vue3Toasity from 'vue3-toastify';
+import Vue3Toasity, { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
 createApp(App).use(
   Vue3Toasity,
   {
     autoClose: false,
+    position: toast.POSITION.BOTTOM_CENTER,
   }, // global options type definition --> ToastContainerOptions
 ).mount('#app');
 ```
@@ -129,7 +139,13 @@ createApp(App).use(
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
-const show = () => toast("can not auto close", { autoClose: false });
+const show = () => toast(
+  "can not auto close",
+  {
+    autoClose: false,
+    position: toast.POSITION.BOTTOM_CENTER,
+  }
+);
 </script>
 
 <template>

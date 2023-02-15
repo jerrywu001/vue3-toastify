@@ -1,7 +1,7 @@
 import { computed, ComputedRef, Events, onMounted, onUnmounted, reactive, ref, Ref, watchEffect } from 'vue';
 import { Default, SyntheticEvent } from '../utils/constant';
 import { AnimationStep, CSSTransitionProps, ToastProps } from '../types';
-import { getAllToast } from './useToastContainer';
+import { getAllToast } from '../store/toastContainers';
 
 type EventHandlers<E> = {
   [K in keyof E]?: E[K] extends Function ? E[K] : (payload: E[K]) => void

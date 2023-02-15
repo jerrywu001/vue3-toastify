@@ -18,6 +18,7 @@ const customId = 'custom-id';
 const notify = () => {
   toast("I cannot be duplicated!", {
     toastId: customId,
+    position: toast.POSITION.BOTTOM_CENTER,
   });
 };
 </script>
@@ -46,7 +47,9 @@ const toastId = ref('');
 
 const notify = () => {
   if (!toast.isActive(toastId.value)) {
-    toastId.value = toast('I cannot be duplicated!');
+    toastId.value = toast('I cannot be duplicated!', {
+      position: toast.POSITION.BOTTOM_CENTER,
+    });
   }
 };
 </script>

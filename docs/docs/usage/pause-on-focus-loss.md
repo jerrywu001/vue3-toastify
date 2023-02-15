@@ -9,10 +9,13 @@ import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
 const notify = () => {
-  toast('default enable');
+  toast('default enable', {
+    position: toast.POSITION.BOTTOM_CENTER,
+  });
 
   toast('disable pauseOnFocusLoss', {
     pauseOnFocusLoss: false,
+    position: toast.POSITION.BOTTOM_CENTER,
   });
 };
 </script>

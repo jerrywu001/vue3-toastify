@@ -1,6 +1,6 @@
 import { cacheRenderInstance } from '../store';
 import { createApp, nextTick, toRaw } from 'vue';
-import { Event, eventManager, getAllToast, getToast } from '..';
+import { getAllToast, getToast, ToastActions } from '..';
 import { generateRenderRoot, toastContainerInScreen } from '../utils/render';
 import { generateToastId, getGlobalOptions, getSystemThem, isFn, isStr, mergeOptions } from '../utils/tools';
 import { POSITION, THEME, TRANSITIONS, TYPE } from '../utils/constant';
@@ -38,7 +38,7 @@ function openToast(content: Content, type: ToastType, options = {} as ToastOptio
 
   if (!options.multiple) {
     inThrottle = true;
-    toast.clearAll();
+    toast.clearAll(undefined, false);
 
     setTimeout(() => {
       handler(content, type, options);
@@ -64,9 +64,9 @@ function handler(content: Content, type: ToastType, options = {} as ToastOptions
 
   nextTick(() => {
     if (options.updateId) {
-      eventManager.emit(Event.Update, options as UpdateOptions);
+      ToastActions.update(options as UpdateOptions);
     } else {
-      eventManager.emit(Event.Add, content, options);
+      ToastActions.add(content, options);
     }
   });
 }
@@ -104,15 +104,15 @@ toast.dark = (content: Content, options?: ToastOptions) => openToast(
 /** remove a toast */
 toast.remove = (toastId?: Id) => {
   if (toastId) {
-    eventManager.emit(Event.Remove, toastId);
+    ToastActions.dismiss(toastId);
   } else {
-    eventManager.emit(Event.ClearAll);
+    ToastActions.clear();
   }
 };
 
 /** clear all toast */
-toast.clearAll = (containerId?: Id) => {
-  eventManager.emit(Event.ClearAll, containerId);
+toast.clearAll = (containerId?: Id, withExitAnimation?: boolean) => {
+  ToastActions.clear(containerId, withExitAnimation);
 };
 
 /**

@@ -17,9 +17,13 @@ import Msg from './Msg.vue';
 import 'vue3-toastify/dist/index.css';
 
 const notify = () => {
-  toast(Msg, { closeOnClick: false, autoClose: 8000 });
+  toast(Msg, {
+    closeOnClick: false,
+    autoClose: 8000,
+    position: toast.POSITION.BOTTOM_CENTER,
+  });
 
-  // not work!!!!
+  // not work in single vue file!!!!
   // toast(<Msg />, { closeOnClick: false, autoClose: 8000 });
 };
 </script>
@@ -78,7 +82,11 @@ import 'vue3-toastify/dist/index.css';
 const show = () => {
   toast(
     ({ closeToast, toastProps }) => h(Msg, { closeToast, toastProps }),
-    { closeOnClick: false, autoClose: 8000 },
+    {
+      closeOnClick: false,
+      autoClose: 8000,
+      position: toast.POSITION.BOTTOM_CENTER,
+    },
   );
 };
 </script>
@@ -100,6 +108,7 @@ const JsxDemo = defineComponent({
       toast(<Msg uid="test custom props" />, {
         closeOnClick: false,
         autoClose: 8000,
+        position: toast.POSITION.BOTTOM_CENTER,
         onOpen: (props) => {
           console.log(props);
         },
@@ -111,6 +120,7 @@ const JsxDemo = defineComponent({
       // toast(Msg, {
       //   closeOnClick: false,
       //   autoClose: 8000,
+      //   position: toast.POSITION.BOTTOM_CENTER,
       //   data: {
       //     uid: 'custom from data',
       //   },
@@ -137,6 +147,7 @@ const JsxDemo = defineComponent({
       ), {
         closeOnClick: false,
         autoClose: 8000,
+        position: toast.POSITION.BOTTOM_CENTER,
       });
     };
 
@@ -196,7 +207,11 @@ import CountDisplay from './CountDisplay.vue';
 import 'vue3-toastify/dist/index.css';
 
 const { increment } = useCounterStore();
-const notify = () => toast(CountDisplay, { autoClose: false, closeOnClick: false });
+const notify = () => toast(CountDisplay, {
+  autoClose: false,
+  closeOnClick: false,
+  position: toast.POSITION.BOTTOM_CENTER,
+});
 </script>
 
 <template>

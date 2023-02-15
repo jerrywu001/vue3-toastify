@@ -302,7 +302,7 @@ export interface CSSTransitionProps {
   collapse?: boolean;
 
   /**
-   * Collapse transition duration
+   * Collapse transition duration (auto disable when collapse: false)
    * `Default: 300`
    */
   collapseDuration?: number;

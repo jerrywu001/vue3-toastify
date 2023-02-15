@@ -15,6 +15,7 @@ const notify = () => {
   toast("Hello there", {
     onOpen: () => window.alert('Called when I open'),
     onClose: () => window.alert('Called when I close'),
+    position: toast.POSITION.BOTTOM_CENTER,
   });
 };
 </script>

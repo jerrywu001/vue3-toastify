@@ -29,6 +29,7 @@ const notify = () => {
       toastId: 'custom id',
       type: type.value,
       progress: progress.value,
+      position: toast.POSITION.BOTTOM_RIGHT,
       onOpen: () => setTimeout(changeProgress, 600),
     }, // as ToastOptions
   );

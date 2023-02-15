@@ -14,7 +14,9 @@ import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
 const toastId = ref('');
-const notify = () => toastId.value = toast('Hello!!!');
+const notify = () => toastId.value = toast('Hello!!!',{
+  position: toast.POSITION.BOTTOM_CENTER,
+});
 const dismiss = () =>  toast.remove(toastId.value);
 const dismissAll = () =>  toast.clearAll(); // toast.clearAll(containerId?: Id): void;
 </script>

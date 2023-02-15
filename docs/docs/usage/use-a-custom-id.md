@@ -10,7 +10,10 @@ import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
 const notify = () => {
-  toast("I use a custom id", { toastId: "customId" });
+  toast("I use a custom id", {
+    toastId: "customId",
+    position: toast.POSITION.BOTTOM_CENTER,
+  });
 };
 
 const remove = () => {

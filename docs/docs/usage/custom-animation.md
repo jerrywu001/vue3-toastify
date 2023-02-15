@@ -47,6 +47,7 @@ const customAnimation = {
 const notify = () => {
   toast('Wow so easy !', {
     transition: customAnimation,
+    position: toast.POSITION.BOTTOM_RIGHT,
   });
 };
 </script>
@@ -75,12 +76,12 @@ import 'vue3-toastify/dist/index.css';
 const customAnimation = {
   ...Bounce,
   collapse: false,
-  collapseDuration: 2000,
 }; // as CSSTransitionProps
 
 const notify = () => {
   toast('Wow so easy !', {
     transition: customAnimation,
+    position: toast.POSITION.BOTTOM_RIGHT,
   });
 };
 </script>
@@ -112,6 +113,7 @@ const customAnimation = {
 const notify = () => {
   toast('Wow so easy !', {
     transition: customAnimation,
+    position: toast.POSITION.BOTTOM_RIGHT,
   });
 };
 </script>
