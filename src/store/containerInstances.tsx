@@ -2,7 +2,7 @@
 import { type App, reactive } from 'vue';
 import { getDefaultTransition } from '../utils/constant';
 import { CSSTransitionProps, Id, ToastOptions, ToastTransition } from '../types';
-import { toastContainers } from '.';
+import { queue, toastContainers } from '.';
 
 function unmountComponent(evt: AnimationEvent | string) {
   // @ts-ignore
@@ -46,12 +46,16 @@ export function removeContainer(containerId: Id, withExitAnimation = true) {
   } else {
     unmountComponent(id);
   }
+  // remove toast in queue mathch the containerId
+  queue.items = queue.items.filter(v => v.containerId !== containerId);
 }
 
 export function clearContainers(withExitAnimation?: boolean) {
   for (const id in containerInstances) {
     removeContainer(id, withExitAnimation);
   }
+  // clear queue
+  queue.items = [];
 }
 
 export function addExitAnimateToNode(item: ToastOptions, clasback?: (node: HTMLElement) => void) {

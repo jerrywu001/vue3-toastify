@@ -119,3 +119,33 @@ const notify = () => {
   <button @click="notify">notify by click</button>
 </template>
 ```
+
+## Using the ES Module Build
+
+[jsfiddle demo](https://jsfiddle.net/jerrywu001/r42xous5/)
+
+```html
+<html lang="en">
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/vue3-toastify@0.0.9/dist/index.css" rel="stylesheet" />
+  <title>Using the ES Module Build</title>
+</head>
+<body>
+  <div id="app">
+    <button @click="notify">show toast</button>
+  </div>
+  <script type="module">
+    import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
+    import { toast } from 'https://cdn.jsdelivr.net/npm/vue3-toastify@0.0.9/+esm';
+
+    createApp({
+      methods: {
+        notify() {
+          toast.info('hello', { rtl: true });
+        },
+      }
+    }).mount('#app')
+  </script>
+</body>
+</html>
+```

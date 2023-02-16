@@ -1,6 +1,6 @@
 <template>
   <Sandbox
-    :template="template"
+    template="vue3-ts"
     :light-theme="lightTheme"
     :dark-theme="darkTheme"
     :rtl="true"

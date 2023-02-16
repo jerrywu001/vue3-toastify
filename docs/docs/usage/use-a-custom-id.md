@@ -4,8 +4,8 @@ A custom `toastId` can be used to replace the one generated. You can provide a `
 
 
 ::: sandbox
-```vue App.vue
-<script setup>
+```vue /src/App.vue
+<script setup lang="ts">
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 

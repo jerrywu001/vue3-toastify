@@ -7,8 +7,8 @@ You can delay the notification appearance as shown below. Under the hood, the li
 :::
 
 ::: sandbox
-```vue App.vue
-<script setup>
+```vue /src/App.vue
+<script setup lang="ts">
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 

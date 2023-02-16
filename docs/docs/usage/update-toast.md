@@ -5,8 +5,8 @@ When you update a toast, the toast options and the content are inherited but don
 ## Basic example
 
 ::: sandbox
-```vue App.vue
-<script setup>
+```vue /src/App.vue
+<script setup lang="ts">
 import { ref } from 'vue';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
@@ -34,8 +34,8 @@ const update = () => toast.update(toastId.value, {
 ## Update the content
 
 ::: sandbox
-```vue App.vue
-<script setup>
+```vue /src/App.vue
+<script setup lang="ts">
 import { ref, h } from 'vue';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';

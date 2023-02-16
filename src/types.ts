@@ -59,23 +59,12 @@ export type CloseBtnType =
  */
 export interface Options {
   /**
-   * support multiple
-   * @default true
-   */
-  multiple?: boolean;
-
-  /**
-   * Limit the number of toast displayed at the same time
-   *
-   * @ignore  Auto disabled when `multiple: false`
-   */
-  limit?: number;
-
-  /**
    * use like
    * ```
    * toast.info("Hello World.\n I am <b>Tom</b>", { dangerouslyHTMLString: true });
    * ```
+   *
+   * @default false
    */
   dangerouslyHTMLString?: boolean;
   /**
@@ -166,12 +155,31 @@ export interface Options {
    * @default 'auto'
    */
   theme?: ToastTheme;
+  /**
+   * Used to display a custom icon. Set it to `false` to prevent
+   * the icons from being displayed
+   * @default -
+   */
+  icon?: IconType;
 }
 
 /**
  * options for app.use
  */
 export interface ToastContainerOptions extends Options {
+  /**
+   * support multiple
+   * @default true
+   */
+  multiple?: boolean;
+  /**
+   * Limit the number of toast displayed at the same time
+   *
+   * @default undefined
+   *
+   * @ignore  Auto disabled when `multiple: false`
+   */
+  limit?: number;
   /**
    * Display newest toast on top
    * @default false
@@ -212,13 +220,6 @@ export interface ToastOptions<Data = {}> extends Options {
   type?: ToastType;
 
   /**
-   * Used to display a custom icon. Set it to `false` to prevent
-   * the icons from being displayed
-   * @default -
-   */
-  icon?: IconType;
-
-  /**
    * Let you delay the toast appearance. Pass a value in ms
    * @default -
    */
@@ -250,10 +251,9 @@ export interface ToastOptions<Data = {}> extends Options {
    */
   progress?: number;
 
+  /** Only available when using `toast.loading' */
   isLoading?: boolean;
 }
-
-export type ToastProps = ToastOptions & ToastContainerOptions;
 
 /**
  * ClassName for the elements - can take a function to build a classname or a raw string that is cx'ed to defaults

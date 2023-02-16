@@ -17,7 +17,8 @@ import {
 import type {
   CloseButtonProps,
   Content,
-  ToastProps,
+  ToastContainerOptions,
+  ToastOptions,
   ToastTheme,
   ToastTransition,
   ToastType,
@@ -28,7 +29,7 @@ const ToastItem = defineComponent({
   inheritAttrs: false,
   props,
   // @ts-ignore
-  setup(item: ToastProps) {
+  setup(item: ToastOptions & ToastContainerOptions) {
     const toastRef = ref<HTMLDivElement>();
 
     const loading = computed(() => !!item.isLoading);
@@ -64,6 +65,9 @@ const ToastItem = defineComponent({
         onClick={(e) => {
           if (item.closeOnClick) {
             hideToast();
+          }
+          if (item.onClick) {
+            item.onClick(e);
           }
         }}
         { ...eventHandlers.value }
@@ -177,6 +181,6 @@ const ToastItem = defineComponent({
       </div>
     );
   },
-}) as DefineComponent<ToastProps>;
+}) as DefineComponent<ToastOptions & ToastContainerOptions>;
 
 export default ToastItem;

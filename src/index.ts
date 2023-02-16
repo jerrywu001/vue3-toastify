@@ -4,7 +4,7 @@ import { defaultGlobalOptions } from './utils/constant';
 import { mergeOptions, saveGlobalOptions } from './utils/tools';
 
 const Vue3Toastify: Plugin = {
-  install(app, options = {} as Partial<ToastContainerOptions>) {
+  install(_, options = {} as Partial<ToastContainerOptions>) {
     updateGlobalOptions(options);
   },
 };

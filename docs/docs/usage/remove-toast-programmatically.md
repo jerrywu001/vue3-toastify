@@ -7,8 +7,8 @@ If you call `toast.remove` without argument, all the displayed toasts will be re
 :::
 
 ::: sandbox
-```vue App.vue
-<script setup>
+```vue /src/App.vue
+<script setup lang="ts">
 import { ref } from 'vue';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';

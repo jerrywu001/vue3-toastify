@@ -10,11 +10,11 @@ When you use a custom close button, your button will receive a `closeToast` func
 
 
 ::: sandbox
-```vue App.vue
-<script setup>
+```vue /src/App.vue
+<script setup lang="ts">
 import { h } from 'vue';
 import { toast } from 'vue3-toastify';
-import { VNodeIcon, ComponentIcon } from './icons.jsx';
+import { VNodeIcon, ComponentIcon } from './icons.tsx';
 import 'vue3-toastify/dist/index.css';
 
 const notify = () => {
@@ -48,7 +48,7 @@ const notify = () => {
 </template>
 ```
 
-```jsx /src/icons.jsx
+```jsx /src/icons.tsx
 // import { ToastType } from 'vue3-toastify'; // type ToastType, type IconProps, type ToastTheme
 import { defineComponent, PropType } from 'vue';
 import props from './props';
@@ -84,7 +84,7 @@ export const VNodeIcon = () => (
 );
 ```
 
-```js /src/props.js
+```js /src/props.ts
 const props = {
   theme: {
     type: String, //  as PropType<ToastTheme>
@@ -137,8 +137,8 @@ toast('HELLO', {
 ## Define it globally
 
 ::: sandbox
-```vue App.vue
-<script setup>
+```vue /src/App.vue
+<script setup lang="ts">
 import { toast } from 'vue3-toastify';
 
 const notify = () => {
@@ -155,7 +155,7 @@ const notify = () => {
 </template>
 ```
 
-```jsx /src/icons.jsx
+```jsx /src/icons.tsx
 // import { ToastType } from 'vue3-toastify'; // type ToastType, type IconProps, type ToastTheme
 import { defineComponent, PropType } from 'vue';
 import props from './props';
@@ -191,7 +191,7 @@ export const VNodeIcon = () => (
 );
 ```
 
-```js /src/props.js
+```js /src/props.ts
 const props = {
   theme: {
     type: String, //  as PropType<ToastTheme>
@@ -212,11 +212,11 @@ const props = {
 export default props;
 ```
 
-```js /src/main.js [active]
+```js /src/main.ts [active]
 import { h } from 'vue';
 import App from './App.vue';
 import { createApp } from 'vue';
-import { VNodeIcon, ComponentIcon } from './icons.jsx';
+import { VNodeIcon, ComponentIcon } from './icons.tsx';
 import Vue3Toasity from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 

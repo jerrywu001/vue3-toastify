@@ -1,9 +1,9 @@
 import { Default, POSITION } from './constant';
 import type {
   ToastClassName,
+  ToastContainerOptions,
   ToastOptions,
   ToastPosition,
-  ToastProps,
 } from '../types';
 import { isFn } from './tools';
 
@@ -35,7 +35,7 @@ export function getContainerId(options: ToastOptions) {
   return options.containerId || String(options.position);
 }
 
-export function generateRenderRoot(options: ToastProps) {
+export function generateRenderRoot(options: ToastOptions & ToastContainerOptions) {
   const { position, containerClassName, rtl = false, style = {} } = options;
   const rootClass = Default.CSS_NAMESPACE;
   const toastPosClassName = getToastPosClassName(position);

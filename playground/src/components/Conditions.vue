@@ -98,6 +98,38 @@
     <div class="others-box">
       <div>
         <Checkbox
+          :checked="multiple === true"
+          @change="() => {
+            multiple = !multiple;
+            updateGlobalOptions({ multiple });
+          }"
+        >
+          support multiple
+        </Checkbox>
+      </div>
+      <div v-if="multiple">
+        <span title="will not take effect when multiple: false">Limit: </span>
+        <div class="options-box">
+          <Input
+            v-model:value="limit"
+            title="will not take effect when multiple: false"
+            type="number"
+            :disabled="!multiple"
+          />
+        </div>
+      </div>
+      <div v-if="!multiple">
+        <span>Limit: </span>
+        <div class="options-box">
+          <Input
+            style="width: 238px;"
+            disabled
+            value="no effect when multiple set false"
+          />
+        </div>
+      </div>
+      <div>
+        <Checkbox
           :checked="dangerouslyHTMLString === true"
           @change="() => {
             dangerouslyHTMLString = !dangerouslyHTMLString;
@@ -134,7 +166,7 @@
       </div>
       <div>
         <Checkbox v-model:checked="opts.pauseOnHover">
-          Pause delay on hover
+          Pause on hover
         </Checkbox>
       </div>
       <div>
@@ -153,24 +185,13 @@
           Newest on top* (play nice with bottom toast)
         </Checkbox>
       </div>
-      <div>
-        <Checkbox
-          :checked="multiple === true"
-          @change="() => {
-            multiple = !multiple;
-            updateGlobalOptions({ multiple });
-          }"
-        >
-          support multiple
-        </Checkbox>
-      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { Divider, Input, Select, SelectOption, Checkbox } from 'ant-design-vue';
-import { reactive, ref, watchEffect, type VNode } from 'vue';
+import { reactive, ref, watchEffect, watch, type VNode } from 'vue';
 import { toast, updateGlobalOptions, ToastOptions, ToastPosition, ToastTheme, ToastTransition, ToastType } from 'vue3-toastify';
 import 'ant-design-vue/es/input/style/index.css';
 import 'ant-design-vue/es/divider/style/index.css';
@@ -191,6 +212,7 @@ const emit = defineEmits<{
   (event: 'on-close'): void;
 }>();
 
+const limit = ref<number>(0);
 const newestOnTop = ref(false);
 const multiple = ref(true);
 const dangerouslyHTMLString = ref(true);
@@ -211,7 +233,6 @@ const opts = reactive({
   progress: progress.value as number,
   transition: toast.TRANSITIONS.BOUNCE,
   dangerouslyHTMLString,
-  multiple,
 });
 
 const changeType = (value: ToastType) => {
@@ -255,6 +276,10 @@ watchEffect(() => {
     opts.autoClose = Number(opts.autoClose);
     emit('on-change', opts);
   }
+});
+
+watch(() => limit.value, () => {
+  updateGlobalOptions({ limit: isNaN(Number(limit.value)) ? 0 : Number(limit.value) });
 });
 </script>
 

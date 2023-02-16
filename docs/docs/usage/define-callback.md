@@ -6,8 +6,8 @@ You can define two callbacks. Their names are self-explanatory:
 - onClose
 
 ::: sandbox
-```vue App.vue
-<script setup>
+```vue /src/App.vue
+<script setup lang="ts">
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
@@ -33,14 +33,14 @@ const notify = () => {
 ::: details Msg.vue
 ```vue
 <script lang="ts">
-import { ToastProps } from 'vue3-toastify';
+import { ToastOptions } from 'vue3-toastify';
 import { PropType } from 'vue';
 
 export default {
   name: 'Msg',
   props: {
     closeToast: Function as PropType<(e?: MouseEvent) => void>,
-    toastProps: Object as PropType<ToastProps>,
+    toastProps: Object as PropType<ToastOptions>,
   },
 };
 </script>

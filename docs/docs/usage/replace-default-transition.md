@@ -11,8 +11,8 @@ Bounce is used by default, but you can replace it with your own transition, or w
 
 
 ::: sandbox
-```vue App.vue
-<script setup>
+```vue /src/App.vue
+<script setup lang="ts">
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 

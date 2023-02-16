@@ -8,8 +8,8 @@ Notifications of different types (`toast.info`, `toast.error`, `toast.success`, 
 
 
 ::: sandbox
-```vue App.vue
-<script setup>
+```vue /src/App.vue
+<script setup lang="ts">
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
@@ -44,8 +44,8 @@ const notify = () => {
 - Disable the icon individually
 
 ::: sandbox
-```vue App.vue
-<script setup>
+```vue /src/App.vue
+<script setup lang="ts">
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
@@ -68,21 +68,21 @@ const notify = () => {
 
 
 ::: sandbox
-```vue App.vue
+```vue /src/App.vue
 <template>
   <div>
     <button @click="notify">Notify !</button>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { toast } from 'vue3-toastify';
 
 const notify = () => toast.error('Disable the icon gloabally !');
 </script>
 ```
 
-```js /src/main.js [active]
+```js /src/main.ts [active]
 import App from './App.vue';
 import { createApp } from 'vue';
 import Vue3Toasity from 'vue3-toastify';
@@ -100,11 +100,11 @@ createApp(App).use(
 ## Custom icons
 
 ::: sandbox
-```vue App.vue
-<script setup>
+```vue /src/App.vue
+<script setup lang="ts">
 import { h } from 'vue';
 import { toast } from 'vue3-toastify';
-import { VNodeIcon, ComponentIcon } from './icons.jsx';
+import { VNodeIcon, ComponentIcon } from './icons.tsx';
 import 'vue3-toastify/dist/index.css';
 
 const notify = () => {
@@ -141,7 +141,7 @@ const notify = () => {
 </template>
 ```
 
-```jsx /src/icons.jsx
+```jsx /src/icons.tsx
 // import { ToastType } from 'vue3-toastify'; // type ToastType, type IconProps, type ToastTheme
 import { defineComponent, PropType } from 'vue';
 

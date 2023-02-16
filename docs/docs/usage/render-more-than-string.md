@@ -10,8 +10,8 @@ When you render a component, a `closeToast` prop and the `toastProps` are inject
 
 
 ::: sandbox
-```vue App.vue
-<script setup>
+```vue /src/App.vue
+<script setup lang="ts">
 import { toast } from 'vue3-toastify';
 import Msg from './Msg.vue';
 import 'vue3-toastify/dist/index.css';
@@ -36,18 +36,15 @@ const notify = () => {
 ```
 
 ```vue /src/Msg.vue [active]
-<script>
-import { ToastProps } from 'vue3-toastify';
-import { PropType } from 'vue';
+<script lang="ts">
+import type { ToastOptions } from 'vue3-toastify';
+import type { PropType } from 'vue';
 
 export default {
   name: 'Msg',
   props: {
-    closeToast: Function,
-    toastProps: Object,
-    // for ts
-    // closeToast: Function as PropType<(e?: MouseEvent) => void>,
-    // toastProps: Object as PropType<ToastProps>,
+    closeToast: Function as PropType<(e?: MouseEvent) => void>,
+    toastProps: Object as PropType<ToastOptions>,
   },
 };
 </script>
@@ -71,10 +68,10 @@ You can also write with a tsx component. that is cool!!
 :::
 
 ::: sandbox
-```vue App.vue
-<script setup>
+```vue /src/App.vue
+<script setup lang="ts">
 import { h } from 'vue';
-import JsxDemo from './JsxDemo.jsx';
+import JsxDemo from './JsxDemo.tsx';
 import Msg from './Msg.vue';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
@@ -97,7 +94,7 @@ const show = () => {
 </template>
 ```
 
-```jsx /src/JsxDemo.jsx [active]
+```jsx /src/JsxDemo.tsx [active]
 import { toast } from 'vue3-toastify';
 import { defineComponent } from 'vue';
 import Msg from './Msg';
@@ -163,18 +160,15 @@ export default JsxDemo;
 ```
 
 ```vue /src/Msg.vue
-<script>
-import { ToastProps } from 'vue3-toastify';
-import { PropType } from 'vue';
+<script lang="ts">
+import type { ToastOptions } from 'vue3-toastify';
+import type { PropType } from 'vue';
 
 export default {
   name: 'Msg',
   props: {
-    closeToast: Function,
-    toastProps: Object,
-    // for ts
-    // closeToast: Function as PropType<(e?: MouseEvent) => void>,
-    // toastProps: Object as PropType<ToastProps>,
+    closeToast: Function as PropType<(e?: MouseEvent) => void>,
+    toastProps: Object as PropType<ToastOptions>,
   },
 };
 </script>
@@ -199,8 +193,8 @@ In this example we will use pinia to share state accross a component and a toast
 
 
 ::: sandbox
-```vue App.vue
-<script setup>
+```vue /src/App.vue
+<script setup lang="ts">
 import { toast } from 'vue3-toastify';
 import { useCounterStore } from './stores/useCounterStore';
 import CountDisplay from './CountDisplay.vue';
@@ -224,7 +218,7 @@ const notify = () => toast(CountDisplay, {
 ```
 
 ```vue /src/CountDisplay.vue
-<script setup>
+<script setup lang="ts">
 import { storeToRefs } from 'pinia';
 import { useCounterStore } from './stores/useCounterStore';
 
@@ -237,7 +231,7 @@ const { count } = storeToRefs(store);
 </template>
 ```
 
-```js /src/stores/useCounterStore.js
+```js /src/stores/useCounterStore.ts
 import { defineStore } from 'pinia';
 
 export const useCounterStore = defineStore('counter', {
@@ -250,7 +244,7 @@ export const useCounterStore = defineStore('counter', {
 });
 ```
 
-```js /src/main.js
+```js /src/main.ts
 import App from './App.vue';
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';

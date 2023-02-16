@@ -1,12 +1,47 @@
-import { isVNode, nextTick, reactive, toRaw } from 'vue';
-import { Content, Id, ToastOptions, ToastProps, UpdateOptions } from '../types';
-import { addExitAnimateToNode, clearContainers, removeContainer } from '..';
+import { createApp, isVNode, nextTick, reactive, toRaw } from 'vue';
+import { Content, Data, Id, ToastContainerOptions, ToastOptions, UpdateOptions } from '../types';
+import { addExitAnimateToNode, cacheRenderInstance, clearContainers, removeContainer, ToastifyContainer } from '..';
+import { generateRenderRoot, toastContainerInScreen } from '../utils/render';
+
+type ToastSetting = ToastOptions & ToastContainerOptions;
+
+interface QueuedToast {
+  toastId: Id;
+  containerId: Id;
+  toastContent: Content;
+  toastProps: ToastSetting;
+}
+
+function getCallbackProps(opts: ToastSetting) {
+  const result = isVNode(opts.content) ? toRaw(opts.content.props) : null;
+  return result ?? toRaw(opts.data ?? {});
+}
+
+function appendFromQueue() {
+  if (queue.items.length > 0) {
+    const append = queue.items.shift();
+    doAppend(append?.toastContent as Content, append?.toastProps);
+  }
+}
+
+function existQueueItem(containerId?: Id) {
+  if (!containerId) {
+    return queue.items.length > 0;
+  } else {
+    const items = queue.items.filter(v => v.containerId === containerId);
+    return items.length > 0;
+  }
+}
 
 export interface IToastContainers {
   [containerId: Id]: ToastOptions[];
 }
 
 export const toastContainers = reactive({} as IToastContainers);
+
+export const queue = reactive({
+  items: [] as QueuedToast[],
+});
 
 export function getAllToast() {
   const rawMap = toRaw(toastContainers);
@@ -29,9 +64,21 @@ export function getContainerId(id: Id) {
   return toast?.containerId;
 }
 
-function getCallbackProps(opts: ToastProps) {
-  const result = isVNode(opts.content) ? toRaw(opts.content.props) : null;
-  return result ?? toRaw(opts.data ?? {});
+export function doAppend(content: Content, options = {} as ToastOptions) {
+  if (!toastContainerInScreen(options.position)) {
+    const rootDom = generateRenderRoot(options);
+    const app = createApp(ToastifyContainer, options as Data);
+    app.mount(rootDom);
+    cacheRenderInstance(app, rootDom.id);
+  }
+
+  nextTick(() => {
+    if (options.updateId) {
+      ToastActions.update(options as UpdateOptions);
+    } else {
+      ToastActions.add(content, options);
+    }
+  });
 }
 
 const ToastActions = {
@@ -40,7 +87,7 @@ const ToastActions = {
    * @param _ ..
    * @param opts toast props
    */
-  add(_: Content, opts: ToastProps) {
+  add(_: Content, opts: ToastSetting) {
     const { containerId = '' } = opts;
     if (containerId) {
       toastContainers[containerId] = toastContainers[containerId] || [];
@@ -71,9 +118,11 @@ const ToastActions = {
 
         toastContainers[containerId] = toasts.filter(v => v.toastId !== id);
 
-        if (!toastContainers[containerId].length) {
+        if (!toastContainers[containerId].length && !existQueueItem(containerId)) {
           removeContainer(containerId, false);
         }
+
+        appendFromQueue();
 
         nextTick(() => {
           if (item?.onClose) {

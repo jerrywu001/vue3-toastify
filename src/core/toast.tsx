@@ -1,13 +1,30 @@
-import { cacheRenderInstance } from '../store';
-import { createApp, nextTick, toRaw } from 'vue';
+import { queue, doAppend } from '../store';
+import { toRaw } from 'vue';
 import { getAllToast, getToast, ToastActions } from '..';
-import { generateRenderRoot, toastContainerInScreen } from '../utils/render';
 import { generateToastId, getGlobalOptions, getSystemThem, isFn, isStr, mergeOptions } from '../utils/tools';
 import { POSITION, THEME, TRANSITIONS, TYPE } from '../utils/constant';
-import { ToastifyContainer } from '../components';
-import type { Content, Data, Id, ToastOptions, ToastProps, ToastType, UpdateOptions } from '../types';
+import type { Content, Id, ToastContainerOptions, ToastOptions, ToastType, UpdateOptions } from '../types';
+
+type ToastSetting = ToastOptions & ToastContainerOptions;
 
 let inThrottle = false;
+
+function watingForQueue(limit?: number) {
+  const displayedCount = getAllToast().length;
+  const limitCount = limit ?? 0;
+  return limitCount > 0 && displayedCount + queue.items.length >= limitCount;
+}
+
+function resolveQueue(options: ToastSetting) {
+  if (watingForQueue(options.limit) && !options.updateId) {
+    queue.items.push({
+      toastId: options.toastId as Id,
+      containerId: options.containerId as Id,
+      toastContent: options.content as Content,
+      toastProps: options,
+    });
+  }
+}
 
 function openToast(content: Content, type: ToastType, options = {} as ToastOptions) {
   if (inThrottle) return;
@@ -36,39 +53,24 @@ function openToast(content: Content, type: ToastType, options = {} as ToastOptio
     options.theme = getSystemThem();
   }
 
-  if (!options.multiple) {
+  resolveQueue(options);
+
+  if (!(options as ToastSetting).multiple) {
     inThrottle = true;
     toast.clearAll(undefined, false);
 
     setTimeout(() => {
-      handler(content, type, options);
+      doAppend(content, options);
     }, 0);
 
     setTimeout(() => {
       inThrottle = false;
     }, 390);
-  } else {
-    handler(content, type, options);
+  } else if (!queue.items.length) {
+    doAppend(content, options);
   }
 
   return options.toastId as Id;
-}
-
-function handler(content: Content, type: ToastType, options = {} as ToastOptions) {
-  if (!toastContainerInScreen(options.position)) {
-    const rootDom = generateRenderRoot(options);
-    const app = createApp(ToastifyContainer, options as Data);
-    app.mount(rootDom);
-    cacheRenderInstance(app, rootDom.id);
-  }
-
-  nextTick(() => {
-    if (options.updateId) {
-      ToastActions.update(options as UpdateOptions);
-    } else {
-      ToastActions.add(content, options);
-    }
-  });
 }
 
 /** default toast */
@@ -141,7 +143,7 @@ toast.update = (toastId: Id, options: UpdateOptions = {}) => {
         ...options,
         toastId: options.toastId || toastId,
         updateId: generateToastId(),
-      } as ToastProps & UpdateOptions;
+      } as ToastSetting & UpdateOptions;
 
       const content = nextOptions.render || oldContent;
       delete nextOptions.render;

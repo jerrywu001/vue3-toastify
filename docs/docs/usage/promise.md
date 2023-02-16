@@ -7,8 +7,8 @@
 If you want to take care of each step yourself you can use `toast.loading` and update the notification yourself.
 
 ::: sandbox
-```vue App.vue [active]
-<script setup>
+```vue /src/App.vue
+<script setup lang="ts">
 import { toast } from 'vue3-toastify';
 import Msg from './Msg.vue';
 import 'vue3-toastify/dist/index.css';
@@ -48,7 +48,7 @@ const notify = () => {
 
 ```vue /src/Msg.vue
 <script>
-import { ToastProps } from 'vue3-toastify';
+import { ToastOptions } from 'vue3-toastify';
 import { PropType } from 'vue';
 
 export default {
@@ -58,7 +58,7 @@ export default {
     toastProps: Object,
     // for ts
     // closeToast: Function as PropType<(e?: MouseEvent) => void>,
-    // toastProps: Object as PropType<ToastProps>,
+    // toastProps: Object as PropType<ToastOptions>,
   },
 };
 </script>
@@ -84,8 +84,8 @@ The library exposes a `toast.promise` function. Supply a promise or a function t
 Let's start with a simple example
 
 :::sandbox
-```vue App.vue
-<script setup>
+```vue /src/App.vue
+<script setup lang="ts">
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
@@ -146,8 +146,8 @@ Displaying a simple message is what you would want to do in 90% of cases. But wh
 
 
 :::sandbox
-```vue App.vue
-<script setup>
+```vue /src/App.vue
+<script setup lang="ts">
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 

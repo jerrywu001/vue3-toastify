@@ -26,17 +26,17 @@ Don't forget to add the position as well when you write your css animations. If 
 :::
 
 ::: sandbox
-```vue App.vue
-<script setup>
-import { toast } from 'vue3-toastify';
+```vue /src/App.vue
+<script setup lang="ts">
+import { toast, type CSSTransitionProps } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 import 'animate.css';
 
-const customAnimation = {
+const customAnimation: CSSTransitionProps = {
   enter: "animate__animated animate__lightSpeedInRight",
   exit: "animate__animated animate__lightSpeedOutRight",
   // appendPosition: true,
-}; // as CSSTransitionProps
+};
 
 // TIPS !!!!!!!!!!!!!!!!
 // if add prop --> appendPosition: true
@@ -68,15 +68,29 @@ This can be disabled as well:
 
 
 ::: sandbox
-```vue App.vue
-<script setup>
-import { toast, Bounce } from 'vue3-toastify';
+```js /src/main.ts
+import App from './App.vue';
+import { createApp } from 'vue';
+import Vue3Toasity from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
+
+createApp(App).use(
+  Vue3Toasity,
+  {
+    newestOnTop: true,
+  },
+).mount('#app');
+```
+
+```vue /src/App.vue
+<script setup lang="ts">
+import { toast, Bounce, type CSSTransitionProps } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
 const customAnimation = {
   ...Bounce,
   collapse: false,
-}; // as CSSTransitionProps
+};
 
 const notify = () => {
   toast('Wow so easy !', {
@@ -100,15 +114,28 @@ The default duration is 300ms. This is also easy to change 💪
 
 
 ::: sandbox
-```vue App.vue
-<script setup>
-import { toast, Bounce } from 'vue3-toastify';
+```js /src/main.ts
+import App from './App.vue';
+import { createApp } from 'vue';
+import Vue3Toasity from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
-const customAnimation = {
+createApp(App).use(
+  Vue3Toasity,
+  {
+    newestOnTop: true,
+  },
+).mount('#app');
+```
+
+```vue /src/App.vue
+<script setup lang="ts">
+import { toast, Bounce, type CSSTransitionProps } from 'vue3-toastify';
+
+const customAnimation: CSSTransitionProps = {
   ...Bounce,
   collapseDuration: 2000,
-}; // as CSSTransitionProps
+};
 
 const notify = () => {
   toast('Wow so easy !', {

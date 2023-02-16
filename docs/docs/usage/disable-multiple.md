@@ -3,17 +3,15 @@
 > Each click shows only one toast, and override the previous one.
 
 
-## global
-
 ::: sandbox
-```vue App.vue
+```vue /src/App.vue
 <template>
   <div>
     <button @click="notify">Notify !</button>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { toast } from 'vue3-toastify';
 
 const notify = () => {
@@ -24,7 +22,7 @@ const notify = () => {
 </script>
 ```
 
-```js /src/main.js [active]
+```js /src/main.ts [active]
 import App from './App.vue';
 import { createApp } from 'vue';
 import Vue3Toasity from 'vue3-toastify';
@@ -38,11 +36,3 @@ createApp(App).use(
 ).mount('#app');
 ```
 :::
-
-## with toast option
-
-```js
-toast('Hello world.\n I am <strong>jack</strong>', {
-  multiple: false, // can override the global option
-});
-```

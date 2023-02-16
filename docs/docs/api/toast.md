@@ -7,35 +7,39 @@ When displaying a toast, the options are inherited from the [container](./contai
 :::
 
 
-| Options            | Type              | Description                                                                                         |
-|--------------------|-------------------|-----------------------------------------------------------------------------------------------------|
-| toastId            | Id                | Provide a custom id                                                                                 |
-| type               | ToastType         | One of info, success, warning, error                                                                |
-| position           | ToastPosition     | One of top-right, top-center, top-left, bottom-right, bottom-center, bottom-left                    |
-| theme              | ToastTheme        | One of auto, light, dark, colored, Default `auto`, that means automatically detects system theme colors  |
-| transition         | ToastTransition  \| CSSTransitionProps  | A reference to a valid transition animation                                   |
-| rtl                | booleanean        | Support right to left content                                                                       |
-| onOpen             | () => void        | Called when the notification appear                                                                 |
-| onClose            | () => void        | Called when the notification disappear                                                              |
-| autoClose          | boolean \| number | Delay in ms to close the toast. If set to false, the notification needs to be closed manually       |
-| closeButton        | CloseBtnType      | A React Component to replace the default close button or `false` to hide the button                 |
-| transition         | ToastTransition \| CSSTransitionProps         | A reference to a valid react-transition-group/Transition componen       |
-| hideProgressBar    | boolean           | Display or not the progress bar below the toast(remaining time)                                     |
-| pauseOnHover       | boolean           | Keep the timer running or not on hover                                                              |
-| pauseOnFocusLoss   | boolean           | Pause the timer when the window loses focus                                                         |
-| closeOnClick       | boolean           | Dismiss toast on click                                                                              |
-| toastClassName     | string            | Add optional classes to the container                                                               |
-| bodyClassName      | string            | Add optional classes to the TransitionGroup container                                               |
-| toastStyle         | CSSProperties     | Add optional inline style to the toast wrapper                                                      |
-| progressClassName  | string            | Add optional classes to the progress bar                                                            |
-| progressStyle      | CSSProperties     | Add optional inline style to the progress bar                                                       |
-| progress           | number            | Set the percentage for the controlled progress bar. `Value must be between 0 and 1.`                |
-| containerId        | Id                | Used to match a specific Toast container                                                            |
-| role               | string            | Define the ARIA role for the toasts                                                                 |
-| delay              | number            | Let you delay the toast appearance. Pass a value in ms                                              |
-| onClick            | (event: MouseEvent) => void      | Called when click inside Toast notification                                          |
-| render             | ToastContent\<T\>                | Only available when using `toast.update`                                             |
-| data               | T                                | any additional data you want to pass `toast("hello", { data: {key: value} } as T)`   |
+| Props                | Type              | Default Value            | Description     |
+| -------------------- | ----------------- | ------------------------ | --------------- |
+| toastId| Id  | - | Provide a custom id |
+| updateId | Id | - | Used during update |
+| data | T | - | any additional data you want to pass `toast("hello", { data: {key: value} } as T)` |
+| type | ToastType | 'default' | One of info, success, warning, error, default |
+| delay | number | - | Let you delay the toast appearance. Pass a value in ms |
+| onOpen  | () => void | - | Called when the notification appear |
+| onClose | () => void | - | Called when the notification disappear |
+| onClick | (event: MouseEvent) => void | - | Called when click inside Toast notification |
+| toastStyle | CSSProperties | - | Add optional inline style to the toast wrapper |
+| progress   | number        | - | Set the percentage for the controlled progress bar. `Value must be between 0 and 1.` |
+| render | ToastContent\<T\> | - | Only available when using `toast.update`                                             |
+| isLoading | bollean | - | Only available when using `toast.loading' |
+| dangerouslyHTMLString | boolean | false | render unsafe string, like html tag |
+| icon | IconType | - | Used to display a custom icon. Set it to `false` to prevent |
+| rtl | boolean | false | Support right to left content |
+| containerId | Id | - | Used to identify the ToastContainer when working with multiple container. Also used to set the id attribute |
+| position | ToastPosition | toast.POSITION.TOP_RIGHT | One of top-right, top-center, top-left, bottom-right, bottom-center, bottom-left |
+| autoClose | number \| boolean | 5000 | Delay in ms to close the toast. If set to false, the notification needs to be closed manually |
+| closeButton | VNode \| boolean | default icon | Replace the default close button or `false` to hide the button |
+| transition | ToastTransition \| CSSTransitionProps | toast.TRANSITIONS.Bounce | A reference to a valid transition animation |
+| hideProgressBar   | boolean        | false     | Display or not the progress bar below the toast(remaining time) |
+| pauseOnHover      | boolean        | true      | Keep the timer running or not on hover |
+| pauseOnFocusLoss  | boolean        | true      | Pause the timer when the window loses focus |
+| closeOnClick      | boolean        | true      | Dismiss toast on click |
+| toastClassName    | string         | -         | Add optional classes to the toast |
+| bodyClassName     | string         | -         | Add optional classes to the toast body |
+| style             | CSSProperties  | -         | Add optional inline style to the container |
+| progressClassName | string         | -         | Add optional classes to the progress bar |
+| progressStyle     | CSSProperties  | -         | Add optional inline style to the progress bar |
+| role              | string         | alert     | Define the ARIA role for the toasts |
+| theme             | ToastTheme     | auto | One of auto, light, dark, colored, `auto` means automatically detects system theme colors |
 
 ## Usages
 

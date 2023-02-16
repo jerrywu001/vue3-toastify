@@ -55,28 +55,29 @@ export default JsxDemo;
 :::
 
 ::: sandbox
-```vue App.vue
+```vue /src/App.vue
 <template>
   <div>
     <button @click="notify">Notify !</button>
   </div>
 </template>
 
-<script setup>
-import { toast } from 'vue3-toastify';
+<script setup lang="ts">
+import { toast, type ToastOptions } from 'vue3-toastify';
 
 const notify = () => {
   toast("Wow so easy !", {
     autoClose: 1000,
-  }); // ToastOptions
+    position: toast.POSITION.BOTTOM_RIGHT,
+  } as ToastOptions);
 }
 </script>
 ```
 
-```js /src/main.js [active]
+```js /src/main.ts [active]
 import App from './App.vue';
 import { createApp } from 'vue';
-import Vue3Toasity from 'vue3-toastify';
+import Vue3Toasity, { type ToastContainerOptions } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
 createApp(App).use(
@@ -84,7 +85,7 @@ createApp(App).use(
   {
     autoClose: 3000,
     // ...
-  }, // global options type definition --> ToastContainerOptions
+  } as ToastContainerOptions,
 ).mount('#app');
 ```
 :::

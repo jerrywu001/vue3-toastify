@@ -5,14 +5,14 @@ React-toastify has built-in support for RTL layout. All you need to do is to set
 ## global
 
 ::: sandbox
-```vue App.vue
+```vue /src/App.vue
 <template>
   <div>
     <button @click="notify">Notify !</button>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { toast } from 'vue3-toastify';
 
 const notify = () => {
@@ -23,7 +23,7 @@ const notify = () => {
 </script>
 ```
 
-```js /src/main.js [active]
+```js /src/main.ts [active]
 import App from './App.vue';
 import { createApp } from 'vue';
 import Vue3Toasity from 'vue3-toastify';

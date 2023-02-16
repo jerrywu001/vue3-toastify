@@ -1,13 +1,13 @@
 import { computed, ComputedRef, Events, onMounted, onUnmounted, reactive, ref, Ref, watchEffect } from 'vue';
 import { Default, SyntheticEvent } from '../utils/constant';
-import { AnimationStep, CSSTransitionProps, ToastProps } from '../types';
+import { AnimationStep, type CSSTransitionProps, type ToastOptions, type ToastContainerOptions } from '../types';
 import { getAllToast } from '../store/toastContainers';
 
 type EventHandlers<E> = {
   [K in keyof E]?: E[K] extends Function ? E[K] : (payload: E[K]) => void
 };
 
-interface OtherProps extends ToastProps {
+interface OtherProps extends ToastOptions, ToastContainerOptions {
   toastRef: Ref<HTMLDivElement | undefined>;
   loading: ComputedRef<boolean>;
   /** on propgress end or cancel */
@@ -117,8 +117,10 @@ export function useCssTransition(props: CSSTransitionProps & OtherProps) {
     const onExit = () => {
       const node = getTargetNode();
       animationStep.value = AnimationStep.Exit;
-      node.className += ` ${exitClassName.value}`;
-      node.addEventListener('animationend', onExited);
+      if (node) {
+        node.className += ` ${exitClassName.value}`;
+        node.addEventListener('animationend', onExited);
+      }
     };
 
     if (!isIn.value) {

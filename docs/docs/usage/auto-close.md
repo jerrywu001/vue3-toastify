@@ -9,21 +9,21 @@ close toast after 8 seconds
 :::
 
 ::: sandbox
-```vue App.vue
+```vue /src/App.vue
 <template>
   <div>
     <button @click="notify">Notify !</button>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { toast } from 'vue3-toastify';
 
 const notify = () => toast("Wow so easy !");
 </script>
 ```
 
-```js /src/main.js [active]
+```js /src/main.ts [active]
 import App from './App.vue';
 import { createApp } from 'vue';
 import Vue3Toasity, { toast } from 'vue3-toastify';
@@ -47,8 +47,8 @@ It will overrides the global options
 :::
 
 ::: sandbox
-```vue App.vue [active]
-<script setup>
+```vue /src/App.vue
+<script setup lang="ts">
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
@@ -75,7 +75,7 @@ const closeAfter7 = () => {
 </template>
 ```
 
-```js /src/main.js
+```js /src/main.ts
 import App from './App.vue';
 import { createApp } from 'vue';
 import Vue3Toasity, { toast } from 'vue3-toastify';
@@ -95,8 +95,8 @@ createApp(App).use(
 
 
 ::: sandbox
-```vue App.vue
-<script setup>
+```vue /src/App.vue
+<script setup lang="ts">
 import { toast } from 'vue3-toastify';
 
 const show = () => toast(
@@ -114,7 +114,7 @@ const show = () => toast(
 </template>
 ```
 
-```js /src/main.js [active]
+```js /src/main.ts [active]
 import App from './App.vue';
 import { createApp } from 'vue';
 import Vue3Toasity, { toast } from 'vue3-toastify';
@@ -134,8 +134,8 @@ createApp(App).use(
 
 
 ::: sandbox
-```vue App.vue
-<script setup>
+```vue /src/App.vue
+<script setup lang="ts">
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
