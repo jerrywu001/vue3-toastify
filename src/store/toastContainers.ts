@@ -65,11 +65,18 @@ export function getContainerId(id: Id) {
 }
 
 export function doAppend(content: Content, options = {} as ToastOptions) {
-  if (!toastContainerInScreen(options.position)) {
+  const sameContainerToasts = toastContainers[options.containerId as Id] || [];
+  const hasSameContainer = sameContainerToasts.length > 0;
+  if (!hasSameContainer && !toastContainerInScreen(options.position)) {
     const rootDom = generateRenderRoot(options);
     const app = createApp(ToastifyContainer, options as Data);
     app.mount(rootDom);
     cacheRenderInstance(app, rootDom.id);
+  }
+
+  if (hasSameContainer) {
+    // should display in the same container.
+    options.position = sameContainerToasts[0].position;
   }
 
   nextTick(() => {

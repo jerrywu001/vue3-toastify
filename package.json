@@ -108,7 +108,7 @@
     "postcss-nested": "^6.0.0",
     "postcss-scss": "^4.0.6",
     "rimraf": "^4.1.2",
-    "sass": "^1.58.1",
+    "sass": "^1.58.2",
     "shelljs": "^0.8.5",
     "stylelint": "^14.16.1",
     "stylelint-config-prettier": "^9.0.5",
@@ -122,7 +122,7 @@
     "vite-plugin-style-import": "^2.0.0",
     "vitest": "^0.28.5",
     "vue-loader": "^17.0.1",
-    "vue-tsc": "^1.1.0"
+    "vue-tsc": "^1.1.2"
   },
   "peerDependencies": {
     "vue": "^3.2.0"

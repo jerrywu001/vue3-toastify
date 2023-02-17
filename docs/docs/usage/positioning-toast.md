@@ -4,7 +4,7 @@ By default, all the toasts will be positioned on the top right of your browser. 
 
 The following values are allowed: **top-right**, **top-center**, **top-left**, **bottom-right**, **bottom-center**, **bottom-left**
 
-For convenience, `toast` exposes a POSITION property to avoid any typos.
+For convenience, `toast` exposes a `POSITION` property to avoid any typos.
 
 ## example
 

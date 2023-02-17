@@ -85,8 +85,8 @@ function sidebarConfig() {
       text: 'API Reference',
       collapsible: true,
       items: [
-        { text: 'Container', link: '/api/container' },
-        { text: 'Toast', link: '/api/toast' },
+        { text: 'Container Props', link: '/api/container' },
+        { text: 'Toast Props', link: '/api/toast' },
       ]
     },
     {

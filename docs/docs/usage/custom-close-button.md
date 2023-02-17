@@ -2,7 +2,7 @@
 
 ## Override the default one
 
-You can pass a custom close button to the ToastContainer to replace the default one.
+You can pass a custom close button to the `toast options` to replace the default one.
 
 :::tip
 When you use a custom close button, your button will receive a `closeToast` function. You need to use it to close the toast.

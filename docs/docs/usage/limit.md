@@ -1,9 +1,9 @@
 # Limit the number of toast displayed
 
-Notifications are useful to get the attention of the user. But displaying too many of them can also be counterproductive. The `GlobalOptions` expose a `limit` prop to meet your needs.
+Notifications are useful to get the attention of the user. But displaying too many of them can also be counterproductive. The [container props](../api/container.md) expose a `limit` prop to meet your needs.
 
-::: tip WHAT HAPPENS TO THE NOTIFICATIONS THAT ARE NOT DISPLAYED ? 🧐
-They are added to a queue. They will be displayed as soon as a slot is free.
+::: danger What happens to the notifications that are not displayed ? 🧐
+Because they are added to a queue. They will be displayed as soon as a slot is free.
 :::
 
 ::: sandbox
@@ -43,10 +43,19 @@ const notify = () => {
 ```
 :::
 
-or
+
+::: tip
+You can also use `updateGlobalOptions` hook to defined the `container props`.
 
 ```ts
-updateGlobalOptions({ rtl: true });
+updateGlobalOptions({
+  limit: 2,
+});
+```
 
+then use it per toast
+
+```ts
 toast.success('Wow so easy!');
 ```
+:::

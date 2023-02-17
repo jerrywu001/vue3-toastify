@@ -1,7 +1,7 @@
 # Vue3 toastify
 
 :::tip
-By default, all toasts will inherit [global props](../api/container). Props defined on toast supersede [global props](../api/container).
+By default, all toasts will inherit [container props](../api/container). Props defined on toast supersede [container props](../api/container).
 :::
 
 # Demo
@@ -17,7 +17,7 @@ By default, all toasts will inherit [global props](../api/container). Props defi
 - You can limit the number of toast displayed at the same time
 - Super easy to use an animation of your choice. Works well with animate.css for example
 - Can display a Vue3 component inside the toast!
-- Has onOpen and onClose hooks. Both can access the props passed to the react component rendered inside the toast
+- Has onOpen and onClose hooks. Both can access the props passed to the vue3 component rendered inside the toast
 - Can remove a toast programmatically
 - Define behavior per toast
 - Pause toast when the window loses focus 👁

@@ -1,9 +1,11 @@
-# toast
+# Toast Props
+
+![](./desc.png)
 
 ## Props
 
 :::tip
-When displaying a toast, the options are inherited from the [container](./container.md). Toast options supersede Container props
+When displaying a toast, the props are inherited from the [container props](./container.md). `Toast props` supersede `container props`
 :::
 
 
@@ -24,10 +26,10 @@ When displaying a toast, the options are inherited from the [container](./contai
 | dangerouslyHTMLString | boolean | false | render unsafe string, like html tag |
 | icon | IconType | - | Used to display a custom icon. Set it to `false` to prevent |
 | rtl | boolean | false | Support right to left content |
-| containerId | Id | - | Used to identify the ToastContainer when working with multiple container. Also used to set the id attribute |
+| containerId | Id | toast.POSITION.TOP_RIGHT | Used to identify the [Container](./container.md) when working with multiple container. Also used to set the id attribute |
 | position | ToastPosition | toast.POSITION.TOP_RIGHT | One of top-right, top-center, top-left, bottom-right, bottom-center, bottom-left |
 | autoClose | number \| boolean | 5000 | Delay in ms to close the toast. If set to false, the notification needs to be closed manually |
-| closeButton | VNode \| boolean | default icon | Replace the default close button or `false` to hide the button |
+| closeButton | VNode \| boolean | default close icon | Replace the default close button or `false` to hide the button |
 | transition | ToastTransition \| CSSTransitionProps | toast.TRANSITIONS.Bounce | A reference to a valid transition animation |
 | hideProgressBar   | boolean        | false     | Display or not the progress bar below the toast(remaining time) |
 | pauseOnHover      | boolean        | true      | Keep the timer running or not on hover |
