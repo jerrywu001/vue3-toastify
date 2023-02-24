@@ -49,6 +49,7 @@ export function generateRenderRoot(options: ToastOptions & ToastContainerOptions
     containerClassName as ToastClassName,
     rtl,
   );
+  renderRoot.dataset.testid = `${Default.CSS_NAMESPACE}__toast-container--${position}`;
   renderRoot.id = getContainerId(options) as string;
 
   for (const name in style) {

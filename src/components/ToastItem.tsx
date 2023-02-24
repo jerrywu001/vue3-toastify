@@ -62,6 +62,7 @@ const ToastItem = defineComponent({
         class={className.value}
         style={item.toastStyle || {}}
         ref={toastRef}
+        data-testid={`toast-item-${item.toastId}`}
         onClick={(e) => {
           if (item.closeOnClick) {
             hideToast();
@@ -74,12 +75,14 @@ const ToastItem = defineComponent({
       >
         <div
           role={item.role}
+          data-testid="toast-body"
           class={`${Default.CSS_NAMESPACE}__toast-body ${item.bodyClassName || ''}`}
         >
           {/* icon */}
           {
             toastIcon.value != null && (
               <div
+                data-testid={`toast-icon-${item.type}`}
                 class={
                   [
                     `${Default.CSS_NAMESPACE}__toast-icon`,
@@ -125,7 +128,7 @@ const ToastItem = defineComponent({
                 }) : (
                   item.dangerouslyHTMLString
                     ? h('div', {
-                      innerHTML: (item.content as string).replace(/\n/g, '<br>'),
+                      innerHTML: item.content as string,
                     }) : item.content
                 )
             }

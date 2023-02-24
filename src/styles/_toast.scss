@@ -27,6 +27,8 @@
     padding: 6px;
     display: flex;
     align-items: center;
+    white-space: pre-wrap;
+    word-break: break-all;
 
     & > div:last-child {
       flex: 1;
