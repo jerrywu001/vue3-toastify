@@ -3,6 +3,7 @@ import { type App, reactive } from 'vue';
 import { getDefaultTransition } from '../utils/constant';
 import { CSSTransitionProps, Id, ToastOptions, ToastTransition } from '../types';
 import { queue, toastContainers } from '.';
+import { UnmountTag } from '../utils/render';
 
 function unmountComponent(evt: AnimationEvent | string) {
   // @ts-ignore
@@ -36,10 +37,13 @@ export function removeContainer(containerId: Id, withExitAnimation = true) {
 
   if (!containerInstances[id]) return;
 
+  const target = document.getElementById(id);
+  if (target) {
+    target.classList.add(UnmountTag);
+  }
+
   if (withExitAnimation) {
     resolveNodesAnimation(containerId);
-
-    const target = document.getElementById(id);
     if (target) {
       target.addEventListener('animationend', unmountComponent, false);
     }

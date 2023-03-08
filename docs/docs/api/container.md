@@ -38,13 +38,13 @@ By default, all toasts will inherit `container props`. Props defined on toast su
 
 ```ts
 import { createApp } from 'vue';
-import Vue3Toasity, { type ToastContainerOptions } from 'vue3-toastify';
+import Vue3Toastify, { type ToastContainerOptions } from 'vue3-toastify';
 import App from './App.vue';
 
 const app = createApp(App);
 
 app.use(
-  Vue3Toasity,
+  Vue3Toastify,
   {
     autoClose: 2000,
     style: {

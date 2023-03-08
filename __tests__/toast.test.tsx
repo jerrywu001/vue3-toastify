@@ -1,12 +1,15 @@
 import { fireEvent, screen } from '@testing-library/vue';
-import { nextTick } from 'process';
 import { Id, toast } from '../src';
 
-describe('toastify', () => {
-  afterEach(() => {
-    toast.clearAll();
+function promiseTick(delay = 0) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(void 0);
+    }, delay);
   });
+}
 
+describe('toastify', () => {
   it('Should not crash if no container is mounted', async () => {
     await toast('hello');
     const content = await screen.findByTestId('toast-content');
@@ -58,23 +61,24 @@ describe('toastify', () => {
 
     await fireEvent.click(target);
 
-    nextTick(() => {
-      expect(target.className).toContain('-animate');
-      expect(target.className).toContain('-exit');
-    })
+    await promiseTick();
+    expect(target.className).toContain('-animate');
+    expect(target.className.includes('-exit')).toBeTruthy();
   });
 
   it('should pause on hove, running on leave', async () => {
-    const id = toast('hello');
+    const id = await toast('hello');
+
     const target = await screen.findByTestId(`toast-item-${id}`);
+    const progressBar = target.querySelector('.Toastify__progress-bar') as HTMLElement;
+
     expect(target).toBeInTheDocument();
 
     await fireEvent.mouseOver(target);
+    expect(progressBar.style.animationPlayState).toBe('paused');
 
-    nextTick(() => {
-      const progressBar = target.querySelector('.Toastify__progress-bar') as HTMLElement;
-      expect(progressBar.style.animationPlayState).toBe('paused');
-    });
+    await fireEvent.mouseLeave(target);
+    expect(progressBar.style.animationPlayState).toBe('running');
   });
 
   it('should pause on lost foucs on window', async () => {
@@ -84,17 +88,12 @@ describe('toastify', () => {
 
     await fireEvent.focusOut(window);
 
-    nextTick(() => {
-      const progressBar = target.querySelector('.Toastify__progress-bar') as HTMLElement;
-      expect(progressBar.style.animationPlayState).toBe('paused');
-    });
+    const progressBar = target.querySelector('.Toastify__progress-bar') as HTMLElement;
+    expect(progressBar.style.animationPlayState).toBe('paused');
 
-    nextTick(async () => {
-      await fireEvent.focus(window);
-      nextTick(() => {
-        const progressBar = target.querySelector('.Toastify__progress-bar') as HTMLElement;
-        expect(progressBar.style.animationPlayState).toBe('running');
-      });
-    });
+    await fireEvent.focus(window);
+
+    const progressBar2 = target.querySelector('.Toastify__progress-bar') as HTMLElement;
+    expect(progressBar2.style.animationPlayState).toBe('running');
   });
 });

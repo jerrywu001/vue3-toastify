@@ -1,7 +1,7 @@
 import { createApp, isVNode, nextTick, reactive, toRaw } from 'vue';
 import { Content, Data, Id, ToastContainerOptions, ToastOptions, UpdateOptions } from '../types';
 import { addExitAnimateToNode, cacheRenderInstance, clearContainers, removeContainer, ToastifyContainer } from '..';
-import { generateRenderRoot, toastContainerInScreen } from '../utils/render';
+import { generateRenderRoot, toastContainerInScreen, UnmountTag } from '../utils/render';
 
 type ToastSetting = ToastOptions & ToastContainerOptions;
 
@@ -12,16 +12,25 @@ interface QueuedToast {
   toastProps: ToastSetting;
 }
 
+function getContainerIdByToastId(id: Id) {
+  const all = getAllToast();
+  const toast = all.find(v => v.toastId === id);
+
+  return toast?.containerId;
+}
+
+function getContainerById(containerId: Id) {
+  return document.getElementById(containerId as string);
+}
+
+function needWaitingForUnmount(options: ToastOptions) {
+  const container = getContainerById(options.containerId as string);
+  return container && container.classList.contains(UnmountTag);
+}
+
 function getCallbackProps(opts: ToastSetting) {
   const result = isVNode(opts.content) ? toRaw(opts.content.props) : null;
   return result ?? toRaw(opts.data ?? {});
-}
-
-function appendFromQueue() {
-  if (queue.items.length > 0) {
-    const append = queue.items.shift();
-    doAppend(append?.toastContent as Content, append?.toastProps);
-  }
 }
 
 function existQueueItem(containerId?: Id) {
@@ -30,6 +39,13 @@ function existQueueItem(containerId?: Id) {
   } else {
     const items = queue.items.filter(v => v.containerId === containerId);
     return items.length > 0;
+  }
+}
+
+export function appendFromQueue() {
+  if (queue.items.length > 0) {
+    const append = queue.items.shift();
+    doAppend(append?.toastContent as Content, append?.toastProps);
   }
 }
 
@@ -57,14 +73,23 @@ export function getToast(toastId: Id) {
   return toasts.find(v => v.toastId === toastId);
 }
 
-export function getContainerId(id: Id) {
-  const all = getAllToast();
-  const toast = all.find(v => v.toastId === id);
-
-  return toast?.containerId;
+export function doAppend(content: Content, options = {} as ToastOptions) {
+  if (needWaitingForUnmount(options)) {
+    const container = getContainerById(options.containerId as Id);
+    if (container) {
+      container.addEventListener('animationend', resolveAppend.bind(null, content, options), false);
+    }
+  } else {
+    resolveAppend(content, options);
+  }
 }
 
-export function doAppend(content: Content, options = {} as ToastOptions) {
+function resolveAppend(content: Content, options = {} as ToastOptions) {
+  const container = getContainerById(options.containerId as Id);
+  if (container) {
+    container.removeEventListener('animationend', resolveAppend.bind(null, content, options), false);
+  }
+
   const sameContainerToasts = toastContainers[options.containerId as Id] || [];
   const hasSameContainer = sameContainerToasts.length > 0;
   if (!hasSameContainer && !toastContainerInScreen(options.position)) {
@@ -118,7 +143,7 @@ const ToastActions = {
    */
   remove(id?: Id) {
     if (id) {
-      const containerId = getContainerId(id);
+      const containerId = getContainerIdByToastId(id);
       if (containerId) {
         const toasts = toastContainers[containerId];
         let item = toasts.find(v => v.toastId === id);
@@ -179,7 +204,7 @@ const ToastActions = {
     if (node) {
       node.removeEventListener('animationend', ToastActions.dismissCallback, false);
       setTimeout(() => {
-        this.remove(toastId);
+        ToastActions.remove(toastId);
       });
     }
   },

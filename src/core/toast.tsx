@@ -4,13 +4,26 @@ import { getAllToast, getToast, ToastActions } from '..';
 import { generateToastId, getGlobalOptions, getSystemThem, isFn, isStr, mergeOptions } from '../utils/tools';
 import { POSITION, THEME, TRANSITIONS, TYPE } from '../utils/constant';
 import type { Content, Id, ToastContainerOptions, ToastOptions, ToastType, UpdateOptions } from '../types';
+import { UnmountTag } from '../utils/render';
 
 type ToastSetting = ToastOptions & ToastContainerOptions;
 
 let inThrottle = false;
 
+function getAllActiveToast() {
+  const result: ToastOptions[] = [];
+  const items = getAllToast();
+  items.forEach((v) => {
+    const container = document.getElementById(v.containerId as string);
+    if (container && !container.classList.contains(UnmountTag)) {
+      result.push(v);
+    }
+  });
+  return result;
+}
+
 function watingForQueue(limit?: number) {
-  const displayedCount = getAllToast().length;
+  const displayedCount = getAllActiveToast().length;
   const limitCount = limit ?? 0;
   return limitCount > 0 && displayedCount + queue.items.length >= limitCount;
 }
@@ -26,7 +39,8 @@ function resolveQueue(options: ToastSetting) {
   }
 }
 
-function openToast(content: Content, type: ToastType, options = {} as ToastOptions) {
+function openToast(content: Content, type: ToastType, options = {} as ToastOptions): Id {
+  // @ts-ignore
   if (inThrottle) return;
 
   options = mergeOptions<ToastOptions>(getGlobalOptions(), { type }, options);
@@ -123,7 +137,7 @@ toast.clearAll = (containerId?: Id, withExitAnimation?: boolean) => {
 toast.isActive = (toastId: Id) => {
   let isToastActive = false;
 
-  const all = getAllToast();
+  const all = getAllActiveToast();
   isToastActive = all.findIndex(v => v.toastId === toastId) > -1;
 
   return isToastActive;

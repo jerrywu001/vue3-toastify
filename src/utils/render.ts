@@ -7,6 +7,12 @@ import type {
 } from '../types';
 import { isFn } from './tools';
 
+function getContainerId(options: ToastOptions) {
+  return options.containerId || String(options.position);
+}
+
+export const UnmountTag = 'will-unmount';
+
 export function toastContainerInScreen(position = POSITION.TOP_RIGHT as ToastPosition) {
   return !!document.querySelector(`.${Default.CSS_NAMESPACE}__toast-container--${position}`);
 }
@@ -31,17 +37,14 @@ export function getContainerClassName(position: ToastPosition, className: ToastC
     : `${defaultClassName} ${className || ''}`;
 }
 
-export function getContainerId(options: ToastOptions) {
-  return options.containerId || String(options.position);
-}
-
 export function generateRenderRoot(options: ToastOptions & ToastContainerOptions) {
   const { position, containerClassName, rtl = false, style = {} } = options;
   const rootClass = Default.CSS_NAMESPACE;
   const toastPosClassName = getToastPosClassName(position);
-  const existRoot = !!document.querySelector(`.${rootClass}`);
-  const existRenderRoot = !!document.querySelector(`.${toastPosClassName}`);
-  const container = document.querySelector(`.${rootClass}`) || document.createElement('div');
+  const root = document.querySelector(`.${rootClass}`);
+  const willRenderRoot = document.querySelector(`.${toastPosClassName}`);
+  const existRenderRoot = !!willRenderRoot && !willRenderRoot.className?.includes(UnmountTag);
+  const container = root || document.createElement('div');
   const renderRoot = document.createElement('div');
 
   renderRoot.className = getContainerClassName(
@@ -59,7 +62,7 @@ export function generateRenderRoot(options: ToastOptions & ToastContainerOptions
     }
   }
 
-  if (!existRoot) {
+  if (!root) {
     container.className = Default.CSS_NAMESPACE;
     document.body.appendChild(container);
   }

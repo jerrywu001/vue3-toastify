@@ -2,10 +2,6 @@ import { screen } from '@testing-library/vue';
 import { toast } from '../../src';
 
 describe('toastify icons', () => {
-  afterEach(() => {
-    toast.clearAll();
-  });
-
   it('default have no icon', async () => {
     toast('hello');
     const content = await screen.findByTestId(`toast-content`);

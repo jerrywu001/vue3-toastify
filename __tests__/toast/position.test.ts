@@ -3,10 +3,6 @@ import { toast } from '../../src';
 import { positionClass } from '../tools';
 
 describe('toastify', () => {
-  afterEach(() => {
-    toast.clearAll();
-  });
-
   it('default containerId should be top-right', async () => {
     const id = toast('hello');
     const container = screen.getByTestId(positionClass());

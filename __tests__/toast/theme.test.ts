@@ -2,10 +2,6 @@ import { screen } from '@testing-library/vue';
 import { toast } from '../../src';
 
 describe('toastify theme', () => {
-  afterEach(() => {
-    toast.clearAll();
-  });
-
   it('default theme should be light', async () => {
     const id = toast('hello');
     const target = await screen.findByTestId(`toast-item-${id}`);
