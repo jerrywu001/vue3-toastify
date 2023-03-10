@@ -1,7 +1,7 @@
 import { queue, doAppend } from '../store';
 import { toRaw } from 'vue';
 import { getAllToast, getToast, ToastActions } from '..';
-import { generateToastId, getGlobalOptions, getSystemThem, isFn, isStr, mergeOptions } from '../utils/tools';
+import { generateToastId, getGlobalOptions, getSystemTheme, isFn, isStr, mergeOptions } from '../utils/tools';
 import { POSITION, THEME, TRANSITIONS, TYPE } from '../utils/constant';
 import type { Content, Id, ToastContainerOptions, ToastOptions, ToastType, UpdateOptions } from '../types';
 import { UnmountTag } from '../utils/render';
@@ -64,7 +64,7 @@ function openToast(content: Content, type: ToastType, options = {} as ToastOptio
   }
 
   if (options.theme === 'auto') {
-    options.theme = getSystemThem();
+    options.theme = getSystemTheme();
   }
 
   resolveQueue(options);
