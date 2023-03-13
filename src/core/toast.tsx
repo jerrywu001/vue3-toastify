@@ -43,7 +43,7 @@ function openToast(content: Content, type: ToastType, options = {} as ToastOptio
   // @ts-ignore
   if (inThrottle) return;
 
-  options = mergeOptions<ToastOptions>(getGlobalOptions(), { type }, options);
+  options = mergeOptions<ToastOptions>(getGlobalOptions(), { ...options, type });
 
   if (!options.toastId || (typeof options.toastId !== 'string' && typeof options.toastId !== 'number')) {
     options.toastId = generateToastId();

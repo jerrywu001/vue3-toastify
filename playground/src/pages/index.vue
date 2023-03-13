@@ -13,7 +13,7 @@ const onOptionsChange = (opts: ToastOptions) => {
 };
 
 function showToast() {
-  toast.success(
+  toast(
     `Hello!\nWow so easy!&nbsp;<strong>${parseInt(String(Math.random() * 1000), 10)}</strong>`,
     options.value,
   );
