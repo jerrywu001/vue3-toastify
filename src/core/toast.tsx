@@ -43,7 +43,7 @@ function openToast(content: Content, type: ToastType, options = {} as ToastOptio
   // @ts-ignore
   if (inThrottle) return;
 
-  options = mergeOptions<ToastOptions>(getGlobalOptions(), { ...options, type });
+  options = mergeOptions<ToastOptions>(getGlobalOptions(), type, options);
 
   if (!options.toastId || (typeof options.toastId !== 'string' && typeof options.toastId !== 'number')) {
     options.toastId = generateToastId();
@@ -90,14 +90,17 @@ function openToast(content: Content, type: ToastType, options = {} as ToastOptio
 /** default toast */
 const toast = (content: Content, options?: ToastOptions) => openToast(content, TYPE.DEFAULT, options);
 /** info toast */
-toast.info = (content: Content, options?: ToastOptions) => openToast(content, TYPE.INFO, options);
+toast.info = (content: Content, options?: ToastOptions) => openToast(content, TYPE.DEFAULT, { ...options, type: TYPE.INFO });
 /** error toast */
-toast.error = (content: Content, options?: ToastOptions) => openToast(content, TYPE.ERROR, options);
+toast.error =
+  (content: Content, options?: ToastOptions) => openToast(content, TYPE.DEFAULT, { ...options, type: TYPE.ERROR });
 /** warning toast */
-toast.warning = (content: Content, options?: ToastOptions) => openToast(content, TYPE.WARNING, options);
+toast.warning =
+  (content: Content, options?: ToastOptions) => openToast(content, TYPE.DEFAULT, { ...options, type: TYPE.WARNING });
 toast.warn = toast.warning;
 /** success toast */
-toast.success = (content: Content, options?: ToastOptions) => openToast(content, TYPE.SUCCESS, options);
+toast.success =
+  (content: Content, options?: ToastOptions) => openToast(content, TYPE.DEFAULT, { ...options, type: TYPE.SUCCESS });
 /** loading toast */
 toast.loading = (content: Content, options?: ToastOptions) => openToast(
   content,
