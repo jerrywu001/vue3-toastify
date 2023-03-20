@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { queue, doAppend } from '../store';
 import { toRaw } from 'vue';
 import { getAllToast, getToast, ToastActions } from '..';
@@ -7,6 +8,8 @@ import type { Content, Id, ToastContainerOptions, ToastOptions, ToastType, Updat
 import { UnmountTag } from '../utils/render';
 
 type ToastSetting = ToastOptions & ToastContainerOptions;
+type OmitTypeToastOption = Omit<ToastOptions, 'type'>;
+type OmitThemeToastOption = Omit<ToastOptions, 'theme'>;
 
 let inThrottle = false;
 
@@ -90,17 +93,17 @@ function openToast(content: Content, type: ToastType, options = {} as ToastOptio
 /** default toast */
 const toast = (content: Content, options?: ToastOptions) => openToast(content, TYPE.DEFAULT, options);
 /** info toast */
-toast.info = (content: Content, options?: ToastOptions) => openToast(content, TYPE.DEFAULT, { ...options, type: TYPE.INFO });
+toast.info = (content: Content, options?: OmitTypeToastOption) => openToast(content, TYPE.DEFAULT, { ...options, type: TYPE.INFO });
 /** error toast */
 toast.error =
-  (content: Content, options?: ToastOptions) => openToast(content, TYPE.DEFAULT, { ...options, type: TYPE.ERROR });
+  (content: Content, options?: OmitTypeToastOption) => openToast(content, TYPE.DEFAULT, { ...options, type: TYPE.ERROR });
 /** warning toast */
 toast.warning =
-  (content: Content, options?: ToastOptions) => openToast(content, TYPE.DEFAULT, { ...options, type: TYPE.WARNING });
+  (content: Content, options?: OmitTypeToastOption) => openToast(content, TYPE.DEFAULT, { ...options, type: TYPE.WARNING });
 toast.warn = toast.warning;
 /** success toast */
 toast.success =
-  (content: Content, options?: ToastOptions) => openToast(content, TYPE.DEFAULT, { ...options, type: TYPE.SUCCESS });
+  (content: Content, options?: OmitTypeToastOption) => openToast(content, TYPE.DEFAULT, { ...options, type: TYPE.SUCCESS });
 /** loading toast */
 toast.loading = (content: Content, options?: ToastOptions) => openToast(
   content,
@@ -114,7 +117,7 @@ toast.loading = (content: Content, options?: ToastOptions) => openToast(
   } as ToastOptions),
 );
 /** dark toast */
-toast.dark = (content: Content, options?: ToastOptions) => openToast(
+toast.dark = (content: Content, options?: OmitThemeToastOption) => openToast(
   content,
   TYPE.DEFAULT,
   mergeOptions(options, { theme: THEME.DARK }),
