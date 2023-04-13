@@ -1,2 +1,5 @@
 dist
+build
+docs
+playground
 src/index.css

@@ -1,5 +1,5 @@
 {
-  "**/*.{css,less,scss,vue}": [
+  "src/**/*.{css,less,scss,vue}": [
     "stylelint --fix"
   ],
   "src/**/*.{ts,tsx}": [

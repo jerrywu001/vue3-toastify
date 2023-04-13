@@ -13,6 +13,7 @@ node_modules
 package-lock.json
 pnpm-lock.yaml
 yarn.lock
+.env
 
 src/index.css
 playground/dist
