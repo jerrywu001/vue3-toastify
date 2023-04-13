@@ -14,6 +14,8 @@ package-lock.json
 pnpm-lock.yaml
 yarn.lock
 .env
+sponsorkit
+sponsorkit.config.ts
 
 src/index.css
 playground/dist

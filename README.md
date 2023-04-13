@@ -149,3 +149,11 @@ const notify = () => {
 </body>
 </html>
 ```
+
+## Sponsors
+
+<p align="center">
+  <a href="https://ik.imagekit.io/jerrywu001/sponsors.svg?updatedAt=1681361460564">
+    <img src='https://ik.imagekit.io/jerrywu001/sponsors.svg?updatedAt=1681361460564'/>
+  </a>
+</p>
