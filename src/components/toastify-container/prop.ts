@@ -82,14 +82,14 @@ const props = {
     type: Object as PropType<CSSProperties>,
     required: false,
     default() {
-      return {} as CSSProperties;
+      return {};
     },
   },
   progressStyle: {
     type: Object as PropType<CSSProperties>,
     required: false,
     default() {
-      return {} as CSSProperties;
+      return {};
     },
   },
   role: {

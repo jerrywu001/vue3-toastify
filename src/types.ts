@@ -1,4 +1,4 @@
-import type { CSSProperties, DefineComponent, VNode } from 'vue';
+import type { DefineComponent, VNode } from 'vue';
 
 /**
  * Used when providing custom icon
@@ -132,7 +132,7 @@ export interface Options {
    * Add optional inline style to the container
    * @default {}
    */
-  style?: CSSProperties;
+  style?: Record<string, any>;
   /**
    * Add optional classes to the progress bar
    * @default -
@@ -142,7 +142,7 @@ export interface Options {
    * Add optional inline style to the progress bar
    * @default {}
    */
-  progressStyle?: CSSProperties;
+  progressStyle?: Record<string, any>;
   /**
    * Define the ARIA role for the toasts
    * @default 'alert'
@@ -244,7 +244,7 @@ export interface ToastOptions<Data = {}> extends Options {
   /**
    * An optional inline style to apply.
    */
-  toastStyle?: CSSProperties;
+  toastStyle?: Record<string, any>;
 
   /**
    * Set the percentage for the controlled progress bar. `Value must be between 0 and 1.`
