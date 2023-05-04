@@ -10,10 +10,9 @@
   },
   "dependencies": {
     "vue-router": "^4.1.6",
-    "ant-design-vue": "^3.2.17"
+    "ant-design-vue": "^3.2.20"
   },
   "devDependencies": {
-    "cross-env": "^7.0.3",
-    "vue-loader": "^17.0.1"
+    "cross-env": "^7.0.3"
   }
 }

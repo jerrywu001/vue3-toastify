@@ -7,6 +7,7 @@ import path from 'path';
 import Vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import { defineConfig } from 'vite';
+import browserslistToEsbuild from 'browserslist-to-esbuild';
 import pkg from './package.json';
 
 const resolvePath = (pathName: string) => path.resolve(__dirname, pathName);
@@ -18,6 +19,7 @@ export default defineConfig({
     },
   },
   build: {
+    target: browserslistToEsbuild(),
     minify: true,
     lib: {
       fileName: (type) => {
