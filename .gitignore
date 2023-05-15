@@ -22,3 +22,5 @@ playground/dist
 
 __unconfig_vite.config.ts
 .vercel
+
+.vercel

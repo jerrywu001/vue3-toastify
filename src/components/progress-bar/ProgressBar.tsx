@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { ProgressBarProps, props as properties } from './prop';
-import { computed, CSSProperties, DefineComponent, defineComponent, ref, watchEffect } from 'vue';
+import { computed, CSSProperties, defineComponent, ref, watchEffect } from 'vue';
 import { Default } from '../../utils/constant';
 
 const ProgressBar = defineComponent({
@@ -68,6 +68,6 @@ const ProgressBar = defineComponent({
       />
     );
   },
-}) as DefineComponent<ProgressBarProps>;
+});
 
 export default ProgressBar;

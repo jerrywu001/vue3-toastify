@@ -8,7 +8,6 @@ import { ToastActions } from '../store';
 import { useCssTransition } from '../composables';
 import {
   computed,
-  DefineComponent,
   defineComponent,
   h,
   ref,
@@ -184,6 +183,6 @@ const ToastItem = defineComponent({
       </div>
     );
   },
-}) as DefineComponent<ToastOptions & ToastContainerOptions>;
+});
 
 export default ToastItem;

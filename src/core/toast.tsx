@@ -10,6 +10,7 @@ import { UnmountTag } from '../utils/render';
 type ToastSetting = ToastOptions & ToastContainerOptions;
 type OmitTypeToastOption = Omit<ToastOptions, 'type'>;
 type OmitThemeToastOption = Omit<ToastOptions, 'theme'>;
+type OmitLoadingOptsToastOption = Omit<ToastOptions, 'isLoading' | 'autoClose' | 'closeOnClick' | 'closeButton' | 'draggable'>;
 
 let inThrottle = false;
 
@@ -105,7 +106,7 @@ toast.warn = toast.warning;
 toast.success =
   (content: Content, options?: OmitTypeToastOption) => openToast(content, TYPE.DEFAULT, { ...options, type: TYPE.SUCCESS });
 /** loading toast */
-toast.loading = (content: Content, options?: ToastOptions) => openToast(
+toast.loading = (content: Content, options?: OmitLoadingOptsToastOption) => openToast(
   content,
   TYPE.DEFAULT,
   mergeOptions(options, {
@@ -194,7 +195,7 @@ export interface ToastPromiseParams<T = unknown> {
 function handlePromise<T = unknown>(
   promise: Promise<T> | (() => Promise<T>),
   { pending, error, success }: ToastPromiseParams<T>,
-  options?: ToastOptions,
+  options?: OmitLoadingOptsToastOption,
 ) {
   let id: Id | undefined;
 
@@ -203,7 +204,7 @@ function handlePromise<T = unknown>(
       ? toast.loading(pending, options)
       : toast.loading(pending.render as Content, {
         ...options,
-        ...(pending as ToastOptions),
+        ...(pending as OmitLoadingOptsToastOption),
       });
   }
 

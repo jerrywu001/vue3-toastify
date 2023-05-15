@@ -1,6 +1,6 @@
 import props from './prop';
 import ToastItem from '../ToastItem';
-import { computed, DefineComponent, defineComponent } from 'vue';
+import { computed, defineComponent } from 'vue';
 import { toastContainers } from '../..';
 import type { Id, ToastOptions } from '../../types';
 
@@ -28,6 +28,6 @@ const ToastifyContainer = defineComponent({
       </>
     );
   },
-}) as DefineComponent<ToastOptions>;
+});
 
 export default ToastifyContainer;
