@@ -8,6 +8,11 @@ const props = {
     required: false,
     default: '',
   },
+  clearOnUrlChange: {
+    type: Boolean,
+    required: false,
+    default: true,
+  },
   dangerouslyHTMLString: {
     type: Boolean,
     required: false,

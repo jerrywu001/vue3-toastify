@@ -168,6 +168,11 @@ export interface Options {
  */
 export interface ToastContainerOptions extends Options {
   /**
+   * clear all toasts on url change
+   * @default true
+  */
+  clearOnUrlChange?: boolean;
+  /**
    * support multiple
    * @default true
    */

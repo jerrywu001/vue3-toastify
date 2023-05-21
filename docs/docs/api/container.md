@@ -11,6 +11,7 @@
 | newestOnTop | boolean | false | Display newest toast on top |
 | containerClassName | string | - | Add optional classes to the container |
 | dangerouslyHTMLString | boolean | false | render unsafe string, like html tag |
+| clearOnUrlChange | boolean | true | clear all toasts on url change |
 | icon | IconType | - | Used to display a custom icon. Set it to `false` to prevent |
 | rtl | boolean | false | Support right to left content |
 | containerId | Id | toast.POSITION.TOP_RIGHT | Used to identify the Container when working with multiple container. Also used to set the id attribute |

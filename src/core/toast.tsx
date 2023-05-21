@@ -4,6 +4,7 @@ import { toRaw } from 'vue';
 import { getAllToast, getToast, ToastActions } from '..';
 import { generateToastId, getGlobalOptions, getSystemTheme, isFn, isStr, mergeOptions } from '../utils/tools';
 import { POSITION, THEME, TRANSITIONS, TYPE } from '../utils/constant';
+import { globalCache } from '../store/globalOptions';
 import type { Content, Id, ToastContainerOptions, ToastOptions, ToastType, UpdateOptions } from '../types';
 import { UnmountTag } from '../utils/render';
 
@@ -72,6 +73,8 @@ function openToast(content: Content, type: ToastType, options = {} as ToastOptio
   }
 
   resolveQueue(options);
+
+  globalCache.lastUrl = window.location.href;
 
   if (!(options as ToastSetting).multiple) {
     inThrottle = true;
