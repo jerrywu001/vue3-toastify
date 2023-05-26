@@ -48,7 +48,7 @@ function openToast(content: Content, type: ToastType, options = {} as ToastOptio
   // @ts-ignore
   if (inThrottle) return;
 
-  options = mergeOptions<ToastOptions>(getGlobalOptions(), type, options);
+  options = mergeOptions<ToastOptions>(getGlobalOptions(), { type }, toRaw(options));
 
   if (!options.toastId || (typeof options.toastId !== 'string' && typeof options.toastId !== 'number')) {
     options.toastId = generateToastId();
@@ -88,6 +88,8 @@ function openToast(content: Content, type: ToastType, options = {} as ToastOptio
       inThrottle = false;
     }, 390);
   } else if (!queue.items.length) {
+    doAppend(content, options);
+  } else if (options.updateId) {
     doAppend(content, options);
   }
 
@@ -264,7 +266,12 @@ function handlePromise<T = unknown>(
   const p = isFn(promise) ? promise() : promise;
 
   // call the resolvers only when needed
-  p.then(result => resolver('success', success, result)).catch(err => resolver('error', error, err));
+  p
+    .then(result => {
+      resolver('success', success, result);
+    }).catch(err => {
+      resolver('error', error, err);
+    });
 
   return p;
 }
