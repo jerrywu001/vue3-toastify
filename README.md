@@ -153,7 +153,7 @@ const notify = () => {
 ## Sponsors
 
 <p align="center">
-  <a href="https://ik.imagekit.io/jerrywu001/sponsors.svg?updatedAt=1681361460564">
-    <img src='https://ik.imagekit.io/jerrywu001/sponsors.svg?updatedAt=1681361460564'/>
+  <a href="https://ik.imagekit.io/jerrywu001/sponsors.svg?updatedAt=1687766750623">
+    <img src="https://ik.imagekit.io/jerrywu001/sponsors.svg?updatedAt=1687766750623"/>
   </a>
 </p>

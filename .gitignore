@@ -16,6 +16,8 @@ yarn.lock
 .env
 sponsorkit
 sponsorkit.config.ts
+sponsorkit.config.js
+sponsors.svg
 
 src/index.css
 playground/dist
