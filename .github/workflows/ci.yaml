@@ -12,30 +12,30 @@ on:
       - main
 
 jobs:
-  # lint:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #     - name: Setup Node 16.x
-  #       uses: actions/setup-node@v3
-  #       with:
-  #         node-version: 16.x
-  #         registry-url: https://registry.npmjs.org/
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          registry-url: https://registry.npmjs.org/
 
-  #     - name: Install
-  #       run: npm i
+      - name: Install
+        run: npm i
 
-  #     - name: Lint
-  #       run: npm run lint
+      - name: Lint
+        run: npm run lint
 
   stylelint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Setup Node 16.x
+      - name: Setup Node 18.x
         uses: actions/setup-node@v3
         with:
-          node-version: 16.x
+          node-version: 18.x
           registry-url: https://registry.npmjs.org/
 
       - name: Install
@@ -48,10 +48,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Setup Node 16.x
+      - name: Setup Node 18.x
         uses: actions/setup-node@v3
         with:
-          node-version: 16.x
+          node-version: 18.x
           registry-url: https://registry.npmjs.org/
 
       - name: Install
@@ -64,10 +64,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Setup Node 16.x
+      - name: Setup Node 18.x
         uses: actions/setup-node@v3
         with:
-          node-version: 16.x
+          node-version: 18.x
           registry-url: https://registry.npmjs.org/
 
       - name: Install

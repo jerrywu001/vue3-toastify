@@ -17,12 +17,12 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
 
       - run: npm i
 
       - run: npm test
-      # - run: npm run lint
+      - run: npm run lint
       - run: npm run stylelint
       - run: npm run typecheck
 
@@ -34,15 +34,15 @@ jobs:
       - uses: actions/checkout@v3
 
       # https://github.com/marketplace/actions/netlify-deploy
-      - name: deploy to netlify
-        uses: jsmrcaga/action-netlify-deploy@v1.8.0
-        with:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-          NETLIFY_DEPLOY_TO_PROD: true
-          use_nvm: false
-          build_command: 'npm run build:docs'
-          build_directory: 'docs/docs/.vitepress/dist'
+      # - name: deploy to netlify
+      #   uses: jsmrcaga/action-netlify-deploy@v1.8.0
+      #   with:
+      #     NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
+      #     NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      #     NETLIFY_DEPLOY_TO_PROD: true
+      #     use_nvm: false
+      #     build_command: 'npm run build:docs'
+      #     build_directory: 'docs/docs/.vitepress/dist'
 
       # https://github.com/marketplace/actions/vercel-action
       - name: deploy to vercel
