@@ -9,8 +9,8 @@
     "typecheck": "tsc && vue-tsc"
   },
   "dependencies": {
-    "vue-router": "^4.2.2",
-    "ant-design-vue": "^3.2.20"
+    "ant-design-vue": "^3.2.20",
+    "vue-router": "^4.2.4"
   },
   "devDependencies": {
     "cross-env": "^7.0.3"
