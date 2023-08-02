@@ -1,3 +1,4 @@
+/* eslint-disable vue/no-setup-props-destructure */
 import ProgressBar from './progress-bar/ProgressBar';
 import props from './toastify-container/prop';
 import { CloseButton } from './CloseButton';

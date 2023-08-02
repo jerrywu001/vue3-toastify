@@ -25,6 +25,10 @@ export default defineConfig({
   themeConfig: {
     nav: nav(),
 
+    search: {
+      provider: 'local'
+    },
+
     sidebar: sidebarConfig(),
 
     editLink: {
