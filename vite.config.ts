@@ -23,7 +23,7 @@ export default defineConfig({
     minify: true,
     lib: {
       fileName: (type) => {
-        if (type === 'es') return 'esm/index.js';
+        if (type === 'es') return 'index.mjs';
         if (type === 'cjs') return 'index.js';
         return 'index.js';
       },

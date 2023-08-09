@@ -9,6 +9,12 @@ export default defineConfig({
   entry: [
     './src/index.ts',
   ],
+  outExtension({ format }) {
+    const extension = format === 'esm' ? '.mjs' : '.js';
+    return {
+      js: extension,
+    };
+  },
   target: 'es6',
   format: [
     'cjs',
