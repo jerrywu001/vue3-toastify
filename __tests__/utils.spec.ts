@@ -1,3 +1,4 @@
+import { it, expect, describe } from 'vitest';
 import { generateToastId, isBool, isNum, isStr, mergeOptions, parseClassName } from '../src/utils/tools';
 import { CSSTransitionProps, toast } from '../src';
 import { Bounce, getDefaultTransition } from '../src/utils/constant';

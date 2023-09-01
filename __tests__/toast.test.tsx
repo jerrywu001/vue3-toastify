@@ -1,4 +1,5 @@
 import { fireEvent, screen } from '@testing-library/vue';
+import { describe, it, expect } from 'vitest';
 import { Id, toast } from '../src';
 
 function promiseTick(delay = 0) {

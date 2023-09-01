@@ -12,7 +12,7 @@
     "ant-design-vue": "^3.2.20"
   },
   "devDependencies": {
-    "vitepress": "^1.0.0-rc.4",
+    "vitepress": "^1.0.0-rc.10",
     "vitepress-plugin-sandpack": "latest"
   }
 }

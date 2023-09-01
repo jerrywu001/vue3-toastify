@@ -1,4 +1,5 @@
 import { screen } from '@testing-library/vue';
+import { test, describe, it, expect } from 'vitest';
 import { toast } from '../../src';
 import { positionClass } from '../tools';
 

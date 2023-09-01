@@ -1,6 +1,6 @@
 import { CloseButton } from '../src/components/CloseButton';
 import { fireEvent, render, screen } from '@testing-library/vue';
-import { vi } from 'vitest';
+import { vi, describe, it, expect } from 'vitest';
 
 const closeToast = vi.fn();
 

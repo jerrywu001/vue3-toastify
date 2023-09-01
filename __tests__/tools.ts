@@ -1,3 +1,4 @@
+import { it, expect } from 'vitest';
 import { toast } from '../src';
 import { Default } from '../src/utils/constant';
 

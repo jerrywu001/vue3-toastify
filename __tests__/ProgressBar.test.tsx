@@ -1,7 +1,7 @@
 import ProgressBar from '../src/components/progress-bar/ProgressBar';
 import { render } from '@testing-library/vue';
 import { ProgressBarProps } from '../src/components/progress-bar/prop';
-import { vi } from 'vitest';
+import { vi, describe, beforeEach, afterEach, it, expect } from 'vitest';
 import type { ToastTheme } from '../src/types';
 
 const closeToast = vi.fn();

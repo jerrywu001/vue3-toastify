@@ -1,4 +1,5 @@
 import { screen } from '@testing-library/vue';
+import { describe, it, expect } from 'vitest';
 import { toast } from '../../src';
 
 describe('toastify theme', () => {
