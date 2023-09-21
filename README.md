@@ -127,7 +127,7 @@ const notify = () => {
 ```html
 <html lang="en">
 <head>
-  <link href="https://cdn.jsdelivr.net/npm/vue3-toastify@0.1.11/dist/index.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/vue3-toastify@0.1.13/dist/index.css" rel="stylesheet" />
   <title>Using the ES Module Build</title>
 </head>
 <body>
@@ -136,7 +136,7 @@ const notify = () => {
   </div>
   <script type="module">
     import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
-    import { toast } from 'https://cdn.jsdelivr.net/npm/vue3-toastify@0.1.11/+esm';
+    import { toast } from 'https://cdn.jsdelivr.net/npm/vue3-toastify@0.1.13/+esm';
 
     createApp({
       methods: {

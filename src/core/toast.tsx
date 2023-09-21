@@ -11,7 +11,7 @@ import { UnmountTag } from '../utils/render';
 type ToastSetting = ToastOptions & ToastContainerOptions;
 type OmitTypeToastOption = Omit<ToastOptions, 'type'>;
 type OmitThemeToastOption = Omit<ToastOptions, 'theme'>;
-type OmitLoadingOptsToastOption = Omit<ToastOptions, 'isLoading' | 'autoClose' | 'closeOnClick' | 'closeButton' | 'draggable'>;
+type OmitLoadingOptsToastOption = Omit<ToastOptions, 'isLoading' | 'draggable'>;
 
 let inThrottle = false;
 
@@ -203,21 +203,22 @@ function handlePromise<T = unknown>(
   options?: OmitLoadingOptsToastOption,
 ) {
   let id: Id | undefined;
+  const loadingOpts = { ...(options || {}), autoClose: false };
 
   if (pending) {
     id = isStr(pending)
-      ? toast.loading(pending, options)
+      ? toast.loading(pending, loadingOpts)
       : toast.loading(pending.render as Content, {
-        ...options,
+        ...loadingOpts,
         ...(pending as OmitLoadingOptsToastOption),
       });
   }
 
   const resetParams = {
+    autoClose: options?.autoClose ?? true,
+    closeOnClick: options?.closeOnClick ?? true,
+    closeButton: options?.autoClose ?? null,
     isLoading: undefined,
-    autoClose: null,
-    closeOnClick: null,
-    closeButton: null,
     draggable: null,
     delay: 100,
   };
@@ -248,7 +249,6 @@ function handlePromise<T = unknown>(
         ...baseParams,
         ...params,
         isLoading: false,
-        autoClose: true,
       } as UpdateOptions);
     } else {
       // using toast.promise without loading
@@ -256,7 +256,6 @@ function handlePromise<T = unknown>(
         ...baseParams,
         ...params,
         isLoading: false,
-        autoClose: true,
       } as ToastOptions);
     }
 

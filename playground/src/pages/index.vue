@@ -37,6 +37,9 @@ const displayPromise = () => {
       success: 'Promise resolved 👌',
       error: 'Promise rejected 🤯',
     },
+    {
+      ...options.value,
+    },
   );
 
   // eslint-disable-next-line no-promise-executor-return
@@ -47,6 +50,9 @@ const displayPromise = () => {
       pending: 'Promise is pending',
       success: 'Promise resolved 👌',
       error: 'Promise rejected 🤯',
+    },
+    {
+      ...options.value,
     },
   );
 
@@ -80,6 +86,7 @@ const displayPromise = () => {
       },
     },
     {
+      ...options.value,
       position: toast.POSITION.BOTTOM_CENTER,
     },
   );
