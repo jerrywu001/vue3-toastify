@@ -118,15 +118,15 @@ const displayPromise = () => {
 
   .my-btn {
     color: #fff;
-    border-color: #42b983;
-    background-color: #42b983;
+    border-color: #5672cd;
+    background-color: #5672cd;
     border-radius: 20px;
     padding: 5px 18px;
     margin: 0 8px 8px 0;
 
     &:hover {
-      border-color: #33986a;
-      background-color: #33986a;
+      border-color: #2e4388;
+      background-color: #2e4388;
     }
 
     &.danger {

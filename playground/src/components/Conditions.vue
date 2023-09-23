@@ -338,7 +338,7 @@ html.dark {
 
   .ant-input {
     background-color: transparent;
-    border-color: #32a06f;
+    border-color: #5672cd;
     color: #fff;
   }
 

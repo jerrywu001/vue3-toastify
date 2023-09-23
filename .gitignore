@@ -10,6 +10,7 @@ node_modules
 .idea/
 *.log
 /coverage
+bun.lockb
 package-lock.json
 pnpm-lock.yaml
 yarn.lock

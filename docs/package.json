@@ -6,12 +6,15 @@
   "scripts": {
     "docs:build": "vitepress build docs",
     "docs:dev": "vitepress dev docs",
-    "docs:serve": "vitepress serve docs"
+    "docs:serve": "vitepress serve docs",
+    "documate:upload": "documate upload"
   },
   "dependencies": {
+    "@documate/vue": "latest",
     "ant-design-vue": "^3.2.20"
   },
   "devDependencies": {
+    "@documate/documate": "latest",
     "vitepress": "^1.0.0-rc.15",
     "vitepress-plugin-sandpack": "latest"
   }
