@@ -16,7 +16,7 @@ const ProgressBar = defineComponent({
       ...(attrs.style as CSSProperties || {}),
       animationDuration: `${props.autoClose === true ? 5000 : props.autoClose}ms`,
       animationPlayState: props.isRunning ? 'running' : 'paused',
-      opacity: props.hide ? 0 : 1,
+      opacity: props.hide || props.autoClose === false ? 0 : 1,
       transform: props.controlledProgress ? `scaleX(${props.progress})` : 'none',
     }));
 
