@@ -3,6 +3,7 @@ import { h, ref } from 'vue';
 import { Divider } from 'ant-design-vue';
 import { toast, ToastOptions } from 'vue3-toastify';
 import Conditions from '../components/Conditions.vue';
+import ToastCode from '../components/ToastCode.vue';
 import 'ant-design-vue/es/button/style/index.css';
 import 'ant-design-vue/es/divider/style/index.css';
 
@@ -107,6 +108,7 @@ const displayPromise = () => {
     <Conditions
       @on-change="onOptionsChange"
     />
+    <ToastCode :options="options"></ToastCode>
   </div>
 </template>
 
