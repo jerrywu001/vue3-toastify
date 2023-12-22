@@ -1,6 +1,6 @@
 {
   "name": "vue3-toastify",
-  "version": "0.1.14",
+  "version": "0.2.0",
   "type": "module",
   "description": "🎉 Vue3-Toastify allows you to add notifications to your app with ease. No more nonsense!",
   "keywords": [
