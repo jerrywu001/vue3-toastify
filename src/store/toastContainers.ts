@@ -1,6 +1,26 @@
-import { createApp, isVNode, nextTick, reactive, toRaw } from 'vue';
-import { Content, Data, Id, ToastContainerOptions, ToastOptions, UpdateOptions } from '../types';
-import { addExitAnimateToNode, cacheRenderInstance, clearContainers, removeContainer, ToastifyContainer } from '..';
+import {
+  addExitAnimateToNode,
+  cacheRenderInstance,
+  clearContainers,
+  removeContainer,
+  toast,
+  ToastifyContainer,
+} from '..';
+import {
+  Content,
+  Data,
+  Id,
+  ToastContainerOptions,
+  ToastOptions,
+  UpdateOptions,
+} from '../types';
+import {
+  createApp,
+  isVNode,
+  nextTick,
+  reactive,
+  toRaw,
+} from 'vue';
 import { generateRenderRoot, toastContainerInScreen, UnmountTag } from '../utils/render';
 
 type ToastSetting = ToastOptions & ToastContainerOptions;
@@ -14,9 +34,9 @@ interface QueuedToast {
 
 function getContainerIdByToastId(id: Id) {
   const all = getAllToast();
-  const toast = all.find(v => v.toastId === id);
+  const item = all.find(v => v.toastId === id);
 
-  return toast?.containerId;
+  return item?.containerId;
 }
 
 function getContainerById(containerId: Id) {
@@ -99,7 +119,7 @@ function resolveAppend(content: Content, options = {} as ToastOptions) {
     cacheRenderInstance(app, rootDom.id);
   }
 
-  if (hasSameContainer) {
+  if (hasSameContainer && !options.updateId) {
     // should display in the same container.
     options.position = sameContainerToasts[0].position;
   }
@@ -173,17 +193,12 @@ const ToastActions = {
     const { containerId = '' } = opts;
     if (containerId && opts.updateId) {
       toastContainers[containerId] = toastContainers[containerId] || [];
-      const item = toastContainers[containerId].find(v => v.toastId === opts.toastId);
-      if (item) {
-        setTimeout(() => {
-          for (const optName in opts) {
-            if (Object.prototype.hasOwnProperty.call(opts, optName)) {
-              const value = opts[optName];
-              item[optName] = value;
-            }
-          }
-        }, opts.delay || 0);
-      }
+      const newOpts = { ...opts, updateId: undefined } as ToastOptions;
+
+      ToastActions.dismissForce(opts?.toastId as string);
+      setTimeout(() => {
+        toast(newOpts.content as Content, newOpts);
+      }, opts.delay || 0);
     }
   },
   /**
@@ -216,6 +231,24 @@ const ToastActions = {
           addExitAnimateToNode(item, (node) => {
             node.addEventListener('animationend', ToastActions.dismissCallback, false);
           });
+          break;
+        }
+      }
+    }
+  },
+  dismissForce(toastId?: Id) {
+    if (toastId) {
+      const allToasts = getAllToast();
+      for (const item of allToasts) {
+        if (item.toastId === toastId) {
+          const node = document.getElementById(toastId as string);
+
+          if (node) {
+            node.remove();
+            node.removeEventListener('animationend', ToastActions.dismissCallback, false);
+            ToastActions.remove(toastId);
+          }
+
           break;
         }
       }

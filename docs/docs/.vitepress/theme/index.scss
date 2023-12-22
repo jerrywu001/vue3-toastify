@@ -47,6 +47,14 @@ html.dark {
   }
 }
 
-.sp-layout > .sp-stack {
-    min-width: 100% !important;
+.sp-layout>.sp-stack {
+  min-width: 100% !important;
+}
+
+@media (prefers-color-scheme: light) {
+  .hljs-meta .hljs-string,
+  .hljs-regexp,
+  .hljs-string {
+    color: aqua !important;
+  }
 }
