@@ -9,7 +9,7 @@ import type { Content, Id, ToastContainerOptions, ToastOptions, ToastType, Updat
 import { UnmountTag } from '../utils/render';
 
 type ToastSetting = ToastOptions & ToastContainerOptions;
-type OmitTypeToastOption = Omit<ToastOptions, 'type'>;
+type OmitTypeToastOption = Omit<ToastOptions, 'type' | 'disabledEnterTransition'>;
 type OmitThemeToastOption = Omit<ToastOptions, 'theme'>;
 type OmitLoadingOptsToastOption = Omit<ToastOptions, 'isLoading' | 'draggable'>;
 

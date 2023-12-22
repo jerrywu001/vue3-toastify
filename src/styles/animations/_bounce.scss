@@ -227,3 +227,34 @@
     animation-name: #{$rt-namespace}__bounceOutDown;
   }
 }
+
+@keyframes #{$rt-namespace}__none {
+  from,
+  60%,
+  75%,
+  90%,
+  to {
+    animation-timing-function: none;
+    animation-duration: 0;
+  }
+
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.#{$rt-namespace}__none-enter {
+  &--top-left,
+  &--bottom-left,
+  &--top-right,
+  &--bottom-right,
+  &--top-center,
+  &--bottom-center {
+    animation-name: #{$rt-namespace}__none;
+  }
+}

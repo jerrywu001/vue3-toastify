@@ -19,7 +19,7 @@ type KeyOfPosition =
 
 type KeyOfType = 'INFO' | 'SUCCESS' | 'WARNING' | 'ERROR' | 'DEFAULT';
 
-type KeyOfTransition = 'FLIP' | 'SLIDE' | 'ZOOM' | 'BOUNCE';
+type KeyOfTransition = 'FLIP' | 'SLIDE' | 'ZOOM' | 'BOUNCE' | 'NONE';
 
 type KeyOfTheme = 'AUTO' | 'LIGHT' | 'DARK' | 'COLORED';
 
@@ -52,6 +52,7 @@ export const TRANSITIONS: { [key in KeyOfTransition]: ToastTransition } = {
   SLIDE: 'slide',
   FLIP: 'flip',
   ZOOM: 'zoom',
+  NONE: 'none',
 };
 
 export const defaultOptions = {
@@ -123,8 +124,11 @@ export const Flip: CSSTransitionProps = {
   exit: `${Default.CSS_NAMESPACE}--animate ${Default.CSS_NAMESPACE}__flip-exit`,
 };
 
-export function getDefaultTransition(type: ToastTransition | CSSTransitionProps) {
+const NoneEnterClass = `${Default.CSS_NAMESPACE}--animate ${Default.CSS_NAMESPACE}__none-enter`;
+
+export function getDefaultTransition(type: ToastTransition | CSSTransitionProps, disabledEnterTransition = false) {
   let result = Bounce as CSSTransitionProps;
+
   if (!type || typeof type === 'string') {
     switch (type) {
       case 'flip':
@@ -142,5 +146,13 @@ export function getDefaultTransition(type: ToastTransition | CSSTransitionProps)
   } else {
     result = type;
   }
+
+  if (disabledEnterTransition) {
+    result.enter = NoneEnterClass;
+  } else if (result.enter === NoneEnterClass) {
+    const animation = result.exit.split('__')[1]?.split('-')[0];
+    result.enter = `${Default.CSS_NAMESPACE}--animate ${Default.CSS_NAMESPACE}__${animation}-enter`;
+  }
+
   return result;
 }

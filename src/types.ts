@@ -25,7 +25,7 @@ export type Id = number | string;
 
 export type ToastType = 'info' | 'success' | 'error' | 'warning' | 'loading' | 'default';
 export type ToastPosition = 'top-left' | 'top-right' | 'top-center' | 'bottom-left' | 'bottom-right' | 'bottom-center';
-export type ToastTransition = 'zoom' | 'flip' | 'bounce' | 'slide';
+export type ToastTransition = 'zoom' | 'flip' | 'bounce' | 'slide' | 'none';
 export type ToastTheme = 'auto' | 'light' | 'dark' | 'colored';
 
 export interface CloseButtonProps {
@@ -98,6 +98,11 @@ export interface Options {
    * @default 'bounce'
    */
   transition?: ToastTransition | CSSTransitionProps;
+  /**
+   * disabled the enter transition (for system)
+   * @default false
+  */
+  disabledEnterTransition?: boolean;
   /**
    * Display or not the progress bar below the toast(remaining time)
    * @default false

@@ -193,7 +193,9 @@ const ToastActions = {
     const { containerId = '' } = opts;
     if (containerId && opts.updateId) {
       toastContainers[containerId] = toastContainers[containerId] || [];
-      const newOpts = { ...opts, updateId: undefined } as ToastOptions;
+      const prevOtps = toastContainers[containerId].find(v => v.toastId === opts.toastId);
+      const enabledEnter = prevOtps?.position !== opts.position || prevOtps?.transition !== opts.transition;
+      const newOpts = { ...opts, disabledEnterTransition: !enabledEnter, updateId: undefined } as ToastOptions;
 
       ToastActions.dismissForce(opts?.toastId as string);
       setTimeout(() => {

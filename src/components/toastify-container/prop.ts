@@ -13,6 +13,11 @@ const props = {
     required: false,
     default: true,
   },
+  disabledEnterTransition: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
   dangerouslyHTMLString: {
     type: Boolean,
     required: false,

@@ -52,7 +52,7 @@ const ToastItem = defineComponent({
       toastRef,
       loading,
       done: () => { ToastActions.remove(item.toastId); },
-      ...getDefaultTransition(item.transition as ToastTransition),
+      ...getDefaultTransition(item.transition as ToastTransition, item.disabledEnterTransition),
       ...item,
     });
 
