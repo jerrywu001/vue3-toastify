@@ -157,6 +157,16 @@ const notify = () => {
 ## Sponsors
 
 <p align="center">
+  <h3 align="center">Special Sponsor</h3>
+</p>
+
+<p align="center">
+  <a target="_blank" href="https://www.bnsense.com/">
+  <img alt="special sponsor appwrite" src="https://www.bnsense.com/uploads/LOGO/imgs/logo_1704355682323.png" width="300">
+  </a>
+</p>
+
+<p align="center">
   <a href="https://ik.imagekit.io/jerrywu001/sponsors.svg?updatedAt=1691025797559">
     <img src="https://ik.imagekit.io/jerrywu001/sponsors.svg?updatedAt=1691025797559"/>
   </a>
