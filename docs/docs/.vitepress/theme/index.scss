@@ -51,6 +51,27 @@ html.dark {
   min-width: 100% !important;
 }
 
+.documate-button {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  height: 40px;
+  justify-content: flex-start;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  transition: border-color .25s ease-in-out;
+  background: #f6f6f7;
+  border: 1px solid transparent;
+  border-radius: 0.5rem;
+  color: rgba(60,60,67,.78);
+  font-size: 13px;
+  margin-left: 1.2rem;
+
+  &:hover {
+    border-color: #3451b2 !important;
+  }
+}
+
 @media (prefers-color-scheme: light) {
   .hljs-meta .hljs-string,
   .hljs-regexp,
