@@ -1,1 +1,3 @@
->0.2%
+chrome >= 76
+firefox >= 78
+edge >= 88

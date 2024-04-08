@@ -9,7 +9,7 @@
     "source.fixAll.stylelint": "explicit"
   },
   "eslint.options": {
-    "overrideConfigFile": "./.eslintrc.js"
+    "overrideConfigFile": "./.eslintrc.cjs"
   },
   "eslint.validate": [
     "javascript",
