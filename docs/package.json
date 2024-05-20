@@ -15,7 +15,7 @@
   },
   "devDependencies": {
     "@documate/documate": "latest",
-    "vitepress": "^1.0.2",
+    "vitepress": "^1.2.0",
     "vitepress-plugin-sandpack": "latest"
   }
 }

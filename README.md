@@ -130,27 +130,60 @@ const notify = () => {
 
 ```html
 <html lang="en">
+
 <head>
-  <link href="https://cdn.jsdelivr.net/npm/vue3-toastify@0.1.13/dist/index.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/vue3-toastify@0.2.1/dist/index.css" rel="stylesheet" />
   <title>Using the ES Module Build</title>
 </head>
+
 <body>
   <div id="app">
     <button @click="notify">show toast</button>
+    <span>&nbsp;&nbsp;</span>
+    <button @click="dismiss">dismiss</button>
   </div>
+  <script type="importmap">
+    {
+      "imports": {
+        "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+      }
+    }
+  </script>
   <script type="module">
-    import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
-    import { toast } from 'https://cdn.jsdelivr.net/npm/vue3-toastify@0.1.13/+esm';
+    import { createApp } from 'vue'
+    import { toast } from 'https://unpkg.com/vue3-toastify@0.2.1/dist/index.mjs'
 
     createApp({
+      data() {
+        return {
+          toastId: '',
+          toastIds: [],
+        };
+      },
       methods: {
         notify() {
-          toast.info('hello', { rtl: true });
+          const toastId = toast.info(
+            'hello',
+            {
+              rtl: true,
+              limit: 3,
+              position: toast.POSITION.BOTTOM_CENTER,
+            },
+          );
+          this.toastIds.push(toastId);
+        },
+        dismiss() {
+          console.log(this.toastIds)
+          this.toastIds.forEach(id => {
+            toast.remove(this.toastId);
+          });
+          /* toast.clearAll() */;
         },
       }
     }).mount('#app')
   </script>
 </body>
+
 </html>
 ```
 
