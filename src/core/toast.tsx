@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import { queue, doAppend } from '../store';
-import { toRaw } from 'vue';
+import { nextTick, toRaw } from 'vue';
 import { getAllToast, getToast, ToastActions } from '..';
 import { generateToastId, getGlobalOptions, getSystemTheme, isFn, isStr, mergeOptions } from '../utils/tools';
 import { POSITION, THEME, TRANSITIONS, TYPE } from '../utils/constant';
@@ -140,7 +140,9 @@ toast.remove = (toastId?: Id) => {
 
 /** clear all toast */
 toast.clearAll = (containerId?: Id, withExitAnimation?: boolean) => {
-  ToastActions.clear(containerId, withExitAnimation);
+  nextTick(() => {
+    ToastActions.clear(containerId, withExitAnimation);
+  });
 };
 
 /**
