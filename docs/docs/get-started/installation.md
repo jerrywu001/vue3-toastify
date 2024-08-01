@@ -77,11 +77,11 @@ const notify = () => {
 ```js /src/main.ts [active]
 import App from './App.vue';
 import { createApp } from 'vue';
-import Vue3Toasity, { type ToastContainerOptions } from 'vue3-toastify';
+import Vue3Toastify, { type ToastContainerOptions } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
 createApp(App).use(
-  Vue3Toasity,
+  Vue3Toastify,
   {
     autoClose: 3000,
     // ...
