@@ -1,5 +1,5 @@
 import { ToastifyContainer, type ToastFunc } from 'vue3-toastify';
-import type { Plugin, VNode } from 'vue';
+import type { Plugin } from 'vue';
 
 declare const Vue3Toastify: Plugin;
 export default Vue3Toastify;
@@ -11,7 +11,7 @@ declare global {
   }
 }
 
-declare module '@vue/runtime-core' {
+declare module 'vue' {
   export interface ComponentCustomProperties {
     $toast: ToastFunc;
   }
