@@ -24,9 +24,7 @@ src/index.css
 playground/dist
 
 __unconfig_vite.config.ts
-.vercel
-
-.vercel
 
 # Local Netlify folder
 .netlify
+.vercel
