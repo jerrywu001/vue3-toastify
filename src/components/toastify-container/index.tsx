@@ -31,7 +31,7 @@ const ToastifyContainer = defineComponent({
   setup(_props: ToastContainerOptions) {
     const containerId = computed(() => _props.containerId as Id);
     const allToasts = computed<ToastOptions[]>(() => toastContainers[containerId.value] || []);
-    const toasts = computed(() => allToasts.value.filter(v => v.position === _props.position));
+    const toasts = computed(() => allToasts.value.filter((v) => v.position === _props.position));
 
     onMounted(() => {
       if (typeof window !== 'undefined' && _props.clearOnUrlChange) {
@@ -46,19 +46,19 @@ const ToastifyContainer = defineComponent({
       }
     });
 
-    return () => (
+    return () => 
       <>
         {
           toasts.value.map((item) => {
             const { toastId = '' } = item;
 
             return (
-              <ToastItem key={toastId} { ...item } />
+              <ToastItem key={toastId} {...item} />
             );
           })
         }
       </>
-    );
+    ;
   },
 });
 

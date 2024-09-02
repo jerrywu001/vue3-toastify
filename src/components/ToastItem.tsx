@@ -1,4 +1,3 @@
-/* eslint-disable vue/no-setup-props-destructure */
 import ProgressBar from './progress-bar/ProgressBar';
 import props from './toastify-container/prop';
 import { CloseButton } from './CloseButton';
@@ -51,12 +50,14 @@ const ToastItem = defineComponent({
     } = useCssTransition({
       toastRef,
       loading,
-      done: () => { ToastActions.remove(item.toastId); },
+      done: () => {
+        ToastActions.remove(item.toastId); 
+      },
       ...getDefaultTransition(item.transition as ToastTransition, item.disabledEnterTransition),
       ...item,
     });
 
-    return () => (
+    return () => 
       <div
         id={item.toastId as string}
         class={className.value}
@@ -71,7 +72,7 @@ const ToastItem = defineComponent({
             item.onClick(e);
           }
         }}
-        { ...eventHandlers.value }
+        {...eventHandlers.value}
       >
         <div
           role={item.role}
@@ -80,34 +81,37 @@ const ToastItem = defineComponent({
         >
           {/* icon */}
           {
-            toastIcon.value != null && (
-              <div
-                data-testid={`toast-icon-${item.type}`}
-                class={
-                  [
-                    `${Default.CSS_NAMESPACE}__toast-icon`,
-                    !item.isLoading ? `${Default.CSS_NAMESPACE}--animate-icon ${Default.CSS_NAMESPACE}__zoom-enter` : '',
-                  ].join(' ')
-                }
-              >
-                {
-                  isComponent(toastIcon.value as any)
-                    ?
-                    h(
+            toastIcon.value != null && 
+            <div
+              data-testid={`toast-icon-${item.type}`}
+              class={
+                [
+                  `${Default.CSS_NAMESPACE}__toast-icon`,
+                  !item.isLoading ? `${Default.CSS_NAMESPACE}--animate-icon ${Default.CSS_NAMESPACE}__zoom-enter` : '',
+                ].join(' ')
+              }
+            >
+              {
+                isComponent(toastIcon.value as any)
+                  ?
+                  h(
                       toRaw(toastIcon.value) as any,
                       {
                         theme: item.theme,
                         type: item.type,
                       },
-                    )
-                    : isFn(toastIcon.value) ? (toastIcon.value as Function)({
+                  )
+                  : isFn(toastIcon.value)
+                    ? (toastIcon.value as Function)({
                       theme: item.theme,
                       type: item.type,
-                    }) : toastIcon.value
-                }
-              </div>
-            )
+                    })
+                    : toastIcon.value
+              }
+            </div>
+            
           }
+
           {/* content */}
           <div data-testid="toast-content">
             {
@@ -121,33 +125,35 @@ const ToastItem = defineComponent({
                     data: item.data,
                   },
                 )
-                : isFn(item.content) ? (item.content as Function)({
-                  toastProps: toRaw(item),
-                  closeToast: hideToast,
-                  data: item.data,
-                }) : (
+                : isFn(item.content)
+                  ? (item.content as Function)({
+                    toastProps: toRaw(item),
+                    closeToast: hideToast,
+                    data: item.data,
+                  })
+                  : 
                   item.dangerouslyHTMLString
-                    ? h('div', {
-                      innerHTML: item.content as string,
-                    }) : item.content
-                )
+                    ? h('div', { innerHTML: item.content as string })
+                    : item.content
+                
             }
           </div>
         </div>
 
         {/* close button */}
         {
-          (item.closeButton === undefined || item.closeButton === true) && (
-            <CloseButton
-              theme={item.theme as ToastTheme}
-              closeToast={(e) => {
-                e.stopPropagation();
-                e.preventDefault();
-                hideToast();
-              }}
-            />
-          )
+          (item.closeButton === undefined || item.closeButton === true) && 
+          <CloseButton
+            theme={item.theme as ToastTheme}
+            closeToast={(e) => {
+              e.stopPropagation();
+              e.preventDefault();
+              hideToast();
+            }}
+          />
+          
         }
+
         {
           isComponent(item.closeButton as any)
             ?
@@ -159,11 +165,13 @@ const ToastItem = defineComponent({
                 theme: item.theme as ToastTheme,
               } as CloseButtonProps,
             )
-            : isFn(item.closeButton) ? (item.closeButton as Function)({
-              closeToast: hideToast,
-              type: item.type as ToastType,
-              theme: item.theme as ToastTheme,
-            }) : null
+            : isFn(item.closeButton)
+              ? (item.closeButton as Function)({
+                closeToast: hideToast,
+                type: item.type as ToastType,
+                theme: item.theme as ToastTheme,
+              })
+              : null
         }
 
         {/* progress bar */}
@@ -182,7 +190,7 @@ const ToastItem = defineComponent({
           closeToast={item.isLoading ? undefined : hideToast}
         />
       </div>
-    );
+    ;
   },
 });
 

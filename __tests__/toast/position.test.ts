@@ -8,6 +8,7 @@ describe('toastify', () => {
     const id = toast('hello');
     const container = screen.getByTestId(positionClass());
     const target = await screen.findByTestId(`toast-item-${id}`);
+
     expect(container).toBeInTheDocument();
     expect(container.id).toBe(toast.POSITION.TOP_RIGHT);
     expect(target).toBeInTheDocument();
@@ -18,6 +19,7 @@ describe('toastify', () => {
     const id = toast('hello', { position: toast.POSITION.BOTTOM_CENTER });
     const container = screen.getByTestId(positionClass(customPosition));
     const target = await screen.findByTestId(`toast-item-${id}`);
+
     expect(container).toBeInTheDocument();
     expect(container.id).toBe(customPosition);
     expect(target).toBeInTheDocument();
@@ -25,8 +27,13 @@ describe('toastify', () => {
 
   test('custom containerId', async () => {
     const containerId = 'A';
-    toast('hello', { containerId, position: toast.POSITION.BOTTOM_LEFT });
+
+    toast('hello', {
+      containerId,
+      position: toast.POSITION.BOTTOM_LEFT, 
+    });
     const container = await screen.findByTestId(positionClass(toast.POSITION.BOTTOM_LEFT));
+
     expect(container.id).toBe(containerId);
   });
 });

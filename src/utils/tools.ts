@@ -7,7 +7,9 @@ import { Default, defaultGlobalOptions } from './constant';
  * Generate a random toastId
  */
 export function generateToastId() {
-  return Math.random().toString(36).substring(2, 9);
+  return Math.random()
+    .toString(36)
+    .substring(2, 9);
 }
 
 export function isNum(v: any): v is Number {

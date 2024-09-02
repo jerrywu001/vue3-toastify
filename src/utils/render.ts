@@ -58,6 +58,7 @@ export function generateRenderRoot(options: ToastOptions & ToastContainerOptions
   for (const name in style) {
     if (Object.prototype.hasOwnProperty.call(style, name)) {
       const val = style[name];
+
       renderRoot.style[name] = val;
     }
   }

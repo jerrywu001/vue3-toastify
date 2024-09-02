@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { ProgressBarProps, props as properties } from './prop';
 import { computed, CSSProperties, defineComponent, ref, watchEffect } from 'vue';
 import { Default } from '../../utils/constant';
@@ -13,7 +12,7 @@ const ProgressBar = defineComponent({
     const ariaHidden = computed(() => props.hide ? 'true' : 'false');
 
     const style = computed<CSSProperties>(() => ({
-      ...(attrs.style as CSSProperties || {}),
+      ...attrs.style as CSSProperties || {},
       animationDuration: `${props.autoClose === true ? 5000 : props.autoClose}ms`,
       animationPlayState: props.isRunning ? 'running' : 'paused',
       opacity: props.hide || props.autoClose === false ? 0 : 1,
@@ -57,7 +56,7 @@ const ProgressBar = defineComponent({
       }
     });
 
-    return () => (
+    return () =>
       <div
         ref={nodeRef}
         role="progressbar"
@@ -66,7 +65,7 @@ const ProgressBar = defineComponent({
         class={classNames.value}
         style={style.value}
       />
-    );
+    ;
   },
 });
 

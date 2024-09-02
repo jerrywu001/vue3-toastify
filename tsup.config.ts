@@ -6,14 +6,11 @@ import babel from 'esbuild-plugin-babel';
 
 export default defineConfig({
   name: 'tsup',
-  entry: [
-    './src/index.ts',
-  ],
+  entry: ['./src/index.ts'],
   outExtension({ format }) {
     const extension = format === 'esm' ? '.mjs' : '.js';
-    return {
-      js: extension,
-    };
+
+    return { js: extension };
   },
   target: 'es6',
   format: [
@@ -26,7 +23,5 @@ export default defineConfig({
   // sourcemap: true,
   splitting: false,
   minify: true,
-  esbuildPlugins: [
-    babel(),
-  ],
+  esbuildPlugins: [babel()],
 });

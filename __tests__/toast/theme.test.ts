@@ -6,6 +6,7 @@ describe('toastify theme', () => {
   it('default theme should be light', async () => {
     const id = toast('hello');
     const target = await screen.findByTestId(`toast-item-${id}`);
+
     expect(target).toBeInTheDocument();
     expect(target.className).toContain('--light');
   });
@@ -13,6 +14,7 @@ describe('toastify theme', () => {
   it('light', async () => {
     const id = toast('hello', { theme: toast.THEME.LIGHT });
     const target = await screen.findByTestId(`toast-item-${id}`);
+
     expect(target).toBeInTheDocument();
     expect(target.className).toContain('--light');
   });
@@ -20,6 +22,7 @@ describe('toastify theme', () => {
   it('dark', async () => {
     const id = toast('hello', { theme: toast.THEME.DARK });
     const target = await screen.findByTestId(`toast-item-${id}`);
+
     expect(target).toBeInTheDocument();
     expect(target.className).toContain('--dark');
   });
@@ -27,6 +30,7 @@ describe('toastify theme', () => {
   it('colored', async () => {
     const id = toast('hello', { theme: toast.THEME.COLORED });
     const target = await screen.findByTestId(`toast-item-${id}`);
+
     expect(target).toBeInTheDocument();
     expect(target.className).toContain('--colored');
   });
@@ -34,6 +38,7 @@ describe('toastify theme', () => {
   it('auto with light mode', async () => {
     const id = toast('hello', { theme: toast.THEME.AUTO });
     const target = await screen.findByTestId(`toast-item-${id}`);
+
     expect(target).toBeInTheDocument();
     expect(target.className).toContain('--light');
   });
@@ -43,8 +48,8 @@ describe('toastify theme', () => {
 
     const id = toast('hello', { theme: toast.THEME.AUTO });
     const target = await screen.findByTestId(`toast-item-${id}`);
+
     expect(target).toBeInTheDocument();
     expect(target.className).toContain('--dark');
   });
 });
-``

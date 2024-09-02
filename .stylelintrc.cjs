@@ -8,10 +8,7 @@ module.exports = {
   ],
   // rule覆盖（根据自己喜好来配置）
   rules: {
-    'string-quotes': 'single',
-    'declaration-colon-newline-after': null,
-    'value-list-comma-newline-after': null,
-    'no-missing-end-of-source-newline': true,
+    'media-query-no-invalid': null,
     'annotation-no-unknown': null,
     'at-rule-no-unknown': null,
     'keyframe-selector-notation': null,

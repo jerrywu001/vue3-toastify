@@ -17,9 +17,7 @@ export type Content =
   | ((props: ToastContentProps) => VNode)
   | DefineComponent<{}, {}, any>;
 
-export type ToastFunc = {
-  (content: Content, options?: ToastOptions): void;
-};
+export type ToastFunc = {(content: Content, options?: ToastOptions): void};
 
 export type Id = number | string;
 
@@ -42,17 +40,17 @@ export interface ToastContentProps<Data = {}> {
 }
 
 export type IconType =
-| boolean
-| string
-| number
-| VNode
-| ((props: IconProps) => VNode)
-| DefineComponent<IconProps, {}, {}>;
+  | boolean
+  | string
+  | number
+  | VNode
+  | ((props: IconProps) => VNode)
+  | DefineComponent<IconProps, {}, {}>;
 
 export type CloseBtnType =
-| boolean
-| ((props: CloseButtonProps) => VNode)
-| DefineComponent<IconProps, {}, {}>;
+  | boolean
+  | ((props: CloseButtonProps) => VNode)
+  | DefineComponent<IconProps, {}, {}>;
 
 /**
  * options for toast

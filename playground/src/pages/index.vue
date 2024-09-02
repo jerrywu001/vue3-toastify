@@ -29,8 +29,9 @@ const clearAll = () => {
 };
 
 const displayPromise = () => {
-  // eslint-disable-next-line no-promise-executor-return
-  const resolveAfter3Sec = new Promise(resolve => setTimeout(resolve, 3000));
+   
+  const resolveAfter3Sec = new Promise((resolve) => setTimeout(resolve, 3000));
+
   toast.promise(
     resolveAfter3Sec,
     {
@@ -38,13 +39,11 @@ const displayPromise = () => {
       success: 'Promise resolved 👌',
       error: 'Promise rejected 🤯',
     },
-    {
-      ...options.value,
-    },
+    { ...options.value },
   );
-
-  // eslint-disable-next-line no-promise-executor-return
+   
   const functionThatReturnPromise = () => new Promise((resolve, reject) => setTimeout(reject, 3000));
+
   toast.promise(
     functionThatReturnPromise,
     {
@@ -52,20 +51,19 @@ const displayPromise = () => {
       success: 'Promise resolved 👌',
       error: 'Promise rejected 🤯',
     },
-    {
-      ...options.value,
-    },
+    { ...options.value },
   );
 
   const resolveWithSomeData =
-      // eslint-disable-next-line no-promise-executor-return
-      new Promise<{ message: string; }>((resolve, reject) => setTimeout(() => reject({ message: 'world' }), 3000));
+       
+      new Promise<{ message: string }>((resolve, reject) => setTimeout(() => reject({ message: 'world' }), 3000));
+
   toast.promise(
     resolveWithSomeData,
     {
       pending: {
         render() {
-          return "I'm loading";
+          return 'I\'m loading';
         },
         icon: false,
       },
@@ -99,10 +97,18 @@ const displayPromise = () => {
     <Divider>The playground</Divider>
 
     <div class="btn-group">
-      <button class="my-btn" @click="showToast">normal toast</button>
-      <button class="my-btn" @click="displayPromise">with promise</button>
-      <button class="my-btn" @click="showLoadToast">🚴🏽 loading toast</button>
-      <button class="my-btn danger" @click="clearAll">unmount all container</button>
+      <button class="my-btn" @click="showToast">
+        normal toast
+      </button>
+      <button class="my-btn" @click="displayPromise">
+        with promise
+      </button>
+      <button class="my-btn" @click="showLoadToast">
+        🚴🏽 loading toast
+      </button>
+      <button class="my-btn danger" @click="clearAll">
+        unmount all container
+      </button>
     </div>
 
     <Conditions
@@ -115,7 +121,9 @@ const displayPromise = () => {
 
     <Divider />
 
-    <h2 align="center" style="font-size: 26px; font-weight: bold; padding: 10px 0 22px 0;">Special Sponsor</h2>
+    <h2 align="center" style="font-size: 26px; font-weight: bold; padding: 10px 0 22px;">
+      Special Sponsor
+    </h2>
 
     <p align="center">
       <a

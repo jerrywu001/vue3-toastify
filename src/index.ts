@@ -16,6 +16,7 @@ if (typeof window !== 'undefined') {
 
 export function updateGlobalOptions(options = {} as Partial<ToastContainerOptions>) {
   const globalOptions = mergeOptions<ToastContainerOptions>(defaultGlobalOptions, options);
+
   saveGlobalOptions(globalOptions);
 }
 

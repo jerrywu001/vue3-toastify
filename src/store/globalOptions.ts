@@ -3,6 +3,4 @@ import { reactive } from 'vue';
 
 export const globalOptions = reactive<{ [key: string]: ToastContainerOptions }>({});
 
-export const globalCache = reactive({} as {
-  lastUrl: string;
-});
+export const globalCache = reactive({} as { lastUrl: string });

@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { Default, THEME } from '../utils/constant';
 import { type DefineComponent, defineComponent, type PropType } from 'vue';
 import { ToastType, type CloseButtonProps, type ToastTheme } from '../types';
@@ -29,11 +28,11 @@ export const CloseButton = defineComponent({
     },
   },
   setup(props) {
-    return () => (
+    return () =>
       <button
         class={`${Default.CSS_NAMESPACE}__close-button ${Default.CSS_NAMESPACE}__close-button--${props.theme}`}
         type="button"
-        onClick={e => {
+        onClick={(e) => {
           e.stopPropagation();
           if (props.closeToast) props.closeToast(e);
         }}
@@ -46,6 +45,6 @@ export const CloseButton = defineComponent({
           />
         </svg>
       </button>
-    );
+    ;
   },
 }) as DefineComponent<Partial<CloseButtonProps>>;

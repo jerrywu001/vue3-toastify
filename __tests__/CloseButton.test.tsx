@@ -7,7 +7,7 @@ const closeToast = vi.fn();
 describe('CloseButton', () => {
   it('Should call closeToast on click', () => {
     render(
-      <CloseButton closeToast={closeToast} type="default" theme="light" />
+      <CloseButton closeToast={closeToast} type="default" theme="light" />,
     );
 
     expect(closeToast).not.toHaveBeenCalled();
@@ -17,7 +17,7 @@ describe('CloseButton', () => {
 
   it('Should have aria-label set to close by default', () => {
     const { getByLabelText } = render(
-      <CloseButton closeToast={closeToast} type="default" theme="dark" />
+      <CloseButton closeToast={closeToast} type="default" theme="dark" />,
     );
 
     expect(getByLabelText('close')).not.toBe(null);

@@ -1,5 +1,3 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-
-npx lint-staged --allow-empty
-
+npm run lint
+npm run stylelint
+npm run typecheck

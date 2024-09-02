@@ -1,74 +1,122 @@
 <template>
   <div class="flex-modal">
     <div>
-      <div class="breadcrumb">🎨&nbsp;&nbsp;/&nbsp;&nbsp;Theme</div>
+      <div class="breadcrumb">
+        🎨&nbsp;&nbsp;/&nbsp;&nbsp;Theme
+      </div>
       <div class="options-box">
         <Select
           v-model:value="opts.theme"
           :style="{ width: '130px' }"
           @change="(val) => { changeTheme(val as ToastTheme); }"
         >
-          <SelectOption :value="toast.THEME.AUTO">{{ toast.THEME.AUTO }}</SelectOption>
-          <SelectOption :value="toast.THEME.LIGHT">{{ toast.THEME.LIGHT }}</SelectOption>
-          <SelectOption :value="toast.THEME.DARK">{{ toast.THEME.DARK }}</SelectOption>
-          <SelectOption :value="toast.THEME.COLORED">{{ toast.THEME.COLORED }}</SelectOption>
+          <SelectOption :value="toast.THEME.AUTO">
+            {{ toast.THEME.AUTO }}
+          </SelectOption>
+          <SelectOption :value="toast.THEME.LIGHT">
+            {{ toast.THEME.LIGHT }}
+          </SelectOption>
+          <SelectOption :value="toast.THEME.DARK">
+            {{ toast.THEME.DARK }}
+          </SelectOption>
+          <SelectOption :value="toast.THEME.COLORED">
+            {{ toast.THEME.COLORED }}
+          </SelectOption>
         </Select>
       </div>
     </div>
 
     <div>
-      <div class="breadcrumb">💡&nbsp;&nbsp;/&nbsp;&nbsp;Type</div>
+      <div class="breadcrumb">
+        💡&nbsp;&nbsp;/&nbsp;&nbsp;Type
+      </div>
       <div class="options-box">
         <Select
           v-model:value="opts.type"
           :style="{ width: '130px' }"
           @change="(val) => { changeType(val as ToastType); }"
         >
-          <SelectOption :value="toast.TYPE.DEFAULT">{{ toast.TYPE.DEFAULT }}</SelectOption>
-          <SelectOption :value="toast.TYPE.INFO">{{ toast.TYPE.INFO }}</SelectOption>
-          <SelectOption :value="toast.TYPE.SUCCESS">{{ toast.TYPE.SUCCESS }}</SelectOption>
-          <SelectOption :value="toast.TYPE.WARNING">{{ toast.TYPE.WARNING }}</SelectOption>
-          <SelectOption :value="toast.TYPE.ERROR">{{ toast.TYPE.ERROR }}</SelectOption>
+          <SelectOption :value="toast.TYPE.DEFAULT">
+            {{ toast.TYPE.DEFAULT }}
+          </SelectOption>
+          <SelectOption :value="toast.TYPE.INFO">
+            {{ toast.TYPE.INFO }}
+          </SelectOption>
+          <SelectOption :value="toast.TYPE.SUCCESS">
+            {{ toast.TYPE.SUCCESS }}
+          </SelectOption>
+          <SelectOption :value="toast.TYPE.WARNING">
+            {{ toast.TYPE.WARNING }}
+          </SelectOption>
+          <SelectOption :value="toast.TYPE.ERROR">
+            {{ toast.TYPE.ERROR }}
+          </SelectOption>
         </Select>
       </div>
     </div>
 
     <div>
-      <div class="breadcrumb">📡&nbsp;&nbsp;/&nbsp;&nbsp;Position</div>
+      <div class="breadcrumb">
+        📡&nbsp;&nbsp;/&nbsp;&nbsp;Position
+      </div>
       <div class="options-box">
         <Select
           v-model:value="opts.position"
           :style="{ width: '130px' }"
           @change="(val) => { changePos(val as ToastPosition); }"
         >
-          <SelectOption :value="toast.POSITION.TOP_LEFT">{{ toast.POSITION.TOP_LEFT }}</SelectOption>
-          <SelectOption :value="toast.POSITION.TOP_CENTER">{{ toast.POSITION.TOP_CENTER }}</SelectOption>
-          <SelectOption :value="toast.POSITION.TOP_RIGHT">{{ toast.POSITION.TOP_RIGHT }}</SelectOption>
-          <SelectOption :value="toast.POSITION.BOTTOM_LEFT">{{ toast.POSITION.BOTTOM_LEFT }}</SelectOption>
-          <SelectOption :value="toast.POSITION.BOTTOM_CENTER">{{ toast.POSITION.BOTTOM_CENTER }}</SelectOption>
-          <SelectOption :value="toast.POSITION.BOTTOM_RIGHT">{{ toast.POSITION.BOTTOM_RIGHT }}</SelectOption>
+          <SelectOption :value="toast.POSITION.TOP_LEFT">
+            {{ toast.POSITION.TOP_LEFT }}
+          </SelectOption>
+          <SelectOption :value="toast.POSITION.TOP_CENTER">
+            {{ toast.POSITION.TOP_CENTER }}
+          </SelectOption>
+          <SelectOption :value="toast.POSITION.TOP_RIGHT">
+            {{ toast.POSITION.TOP_RIGHT }}
+          </SelectOption>
+          <SelectOption :value="toast.POSITION.BOTTOM_LEFT">
+            {{ toast.POSITION.BOTTOM_LEFT }}
+          </SelectOption>
+          <SelectOption :value="toast.POSITION.BOTTOM_CENTER">
+            {{ toast.POSITION.BOTTOM_CENTER }}
+          </SelectOption>
+          <SelectOption :value="toast.POSITION.BOTTOM_RIGHT">
+            {{ toast.POSITION.BOTTOM_RIGHT }}
+          </SelectOption>
         </Select>
       </div>
     </div>
 
     <div>
-      <div class="breadcrumb">🎉&nbsp;&nbsp;/&nbsp;&nbsp;Transition</div>
+      <div class="breadcrumb">
+        🎉&nbsp;&nbsp;/&nbsp;&nbsp;Transition
+      </div>
       <div class="options-box">
         <Select
           v-model:value="opts.transition"
           :style="{ width: '130px' }"
           @change="(val) => { changeTransition(val as ToastTransition); }"
         >
-          <SelectOption :value="toast.TRANSITIONS.BOUNCE">{{ toast.TRANSITIONS.BOUNCE }}</SelectOption>
-          <SelectOption :value="toast.TRANSITIONS.FLIP">{{ toast.TRANSITIONS.FLIP }}</SelectOption>
-          <SelectOption :value="toast.TRANSITIONS.SLIDE">{{ toast.TRANSITIONS.SLIDE }}</SelectOption>
-          <SelectOption :value="toast.TRANSITIONS.ZOOM">{{ toast.TRANSITIONS.ZOOM }}</SelectOption>
+          <SelectOption :value="toast.TRANSITIONS.BOUNCE">
+            {{ toast.TRANSITIONS.BOUNCE }}
+          </SelectOption>
+          <SelectOption :value="toast.TRANSITIONS.FLIP">
+            {{ toast.TRANSITIONS.FLIP }}
+          </SelectOption>
+          <SelectOption :value="toast.TRANSITIONS.SLIDE">
+            {{ toast.TRANSITIONS.SLIDE }}
+          </SelectOption>
+          <SelectOption :value="toast.TRANSITIONS.ZOOM">
+            {{ toast.TRANSITIONS.ZOOM }}
+          </SelectOption>
         </Select>
       </div>
     </div>
   </div>
 
-  <Divider orientation="left">Other Props</Divider>
+  <Divider orientation="left">
+    Other Props
+  </Divider>
 
   <div class="others">
     <div class="others-box">

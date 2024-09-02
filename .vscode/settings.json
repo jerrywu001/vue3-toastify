@@ -8,8 +8,9 @@
     "source.fixAll.tslint": "explicit",
     "source.fixAll.stylelint": "explicit"
   },
+  "eslint.useFlatConfig": true,
   "eslint.options": {
-    "overrideConfigFile": "./.eslintrc.cjs"
+    "overrideConfigFile": "./eslint.config.js"
   },
   "eslint.validate": [
     "javascript",
@@ -17,6 +18,7 @@
     "typescript",
     "typescriptreact"
   ],
+  "scss.lint.unknownAtRules": "ignore",
   "stylelint.validate": [
     "css",
     "postcss",
@@ -43,7 +45,6 @@
   "[typescript]": {
     "editor.defaultFormatter": "vscode.typescript-language-features"
   },
-  "tslint.suppressWhileTypeErrorsPresent": true,
   "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": true,
   "typescript.format.semicolons": "insert",
   "typescript.updateImportsOnFileMove.enabled": "always",

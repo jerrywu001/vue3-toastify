@@ -1,7 +1,8 @@
+<!-- eslint-disable vue/no-v-html -->
 <template>
   <div class="code-container">
     <pre>
-      <code class="language-javascript" v-html="highlightedCode"></code>
+      <code class="language-javascript" v-html="highlightedCode" />
     </pre>
   </div>
 </template>
@@ -17,14 +18,14 @@ hljs.registerLanguage('javascript', javascript);
 const props = defineProps({
   options: {
     type: Object,
-    required: true
-  }
+    required: true,
+  },
 });
 
 const defaultOptions = {
   dangerouslyHTMLString: false,
   multiple: true,
-  position: "top-right",
+  position: 'top-right',
   autoClose: 3000,
   transition: 'bounce',
   hideProgressBar: false,
@@ -34,7 +35,7 @@ const defaultOptions = {
   rtl: false,
   role: 'alert',
   theme: 'light',
-}
+};
 
 const highlightedCode = ref('');
 
@@ -44,12 +45,13 @@ import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
 
 toast("Hello! Wow so easy!", ${JSON.stringify(options, (key, value) => {
-    //only return the value if it's different from the default
-  if (value !== defaultOptions[key]) {
+    // only return the value if it's different from the default
+    if (value !== defaultOptions[key]) {
       return value;
     }
   }, 2)})`;
-  const highlighted = hljs.highlight(code, {language:'javascript'}).value;
+  const highlighted = hljs.highlight(code, { language: 'javascript' }).value;
+
   highlightedCode.value = highlighted;
 };
 
@@ -69,7 +71,6 @@ watch(() => ({ ...props.options }), (newOptions) => {
   box-shadow: 0 20px 68px rgba(0, 0, 0, 0.55);
   position: relative;
   padding: 0 12px;
-  background-color: #292d3e;
   overflow-x: auto;
   transition: background-color .5s;
   color: #CFD2D1 !important;
@@ -81,6 +82,7 @@ watch(() => ({ ...props.options }), (newOptions) => {
   letter-spacing: normal;
   line-height: 18.6167px
 }
+
 pre{
   margin: 0;
 }

@@ -28,30 +28,33 @@ describe('ProgressBar', () => {
     render(<ProgressBar {...getProps()} class="test" />);
 
     expect(
-      document.querySelector('.test')?.classList.contains('test')
+      document.querySelector('.test')?.classList.contains('test'),
     ).toBe(true);
   });
 
   it('Should be able to hide the progress bar', () => {
     const { container } = render(<ProgressBar {...getProps()} hide />);
+
     expect((container.firstChild! as HTMLElement).style.opacity).toBe('0');
   });
 
   it('Should be able to pause animation', () => {
     const { container } = render(
-      <ProgressBar {...getProps()} isRunning={false} />
+      <ProgressBar {...getProps()} isRunning={false} />,
     );
+
     expect(
-      (container.firstChild! as HTMLElement).style.animationPlayState
+      (container.firstChild! as HTMLElement).style.animationPlayState,
     ).toBe('paused');
   });
 
   it('Should render controlled progress bar', () => {
     const { container } = render(
-      <ProgressBar {...getProps()} controlledProgress progress={0.7} />
+      <ProgressBar {...getProps()} controlledProgress progress={0.7} />,
     );
+
     expect((container.firstChild! as HTMLElement).style.transform).toBe(
-      'scaleX(0.7)'
+      'scaleX(0.7)',
     );
   });
 });

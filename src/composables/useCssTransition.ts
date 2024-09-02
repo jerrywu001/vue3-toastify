@@ -58,10 +58,12 @@ export function useCssTransition(props: CSSTransitionProps & OtherProps) {
   const enterClassName = computed(() => options.appendPosition ? `${options.enter}--${options.position}` : options.enter);
   const exitClassName = computed(() => options.appendPosition ? `${options.exit}--${options.position}` : options.exit);
 
-  const eventHandlers = computed<EventHandlers<Events>>(() => props.pauseOnHover ? {
-    onMouseenter: pauseToast,
-    onMouseleave: playToast,
-  } : {});
+  const eventHandlers = computed<EventHandlers<Events>>(() => props.pauseOnHover
+    ? {
+      onMouseenter: pauseToast,
+      onMouseleave: playToast,
+    }
+    : {});
 
   function onEnterHandler() {
     const classToToken = enterClassName.value.split(' ');
@@ -74,6 +76,7 @@ export function useCssTransition(props: CSSTransitionProps & OtherProps) {
 
     const onEntered = (e: AnimationEvent) => {
       const node = getTargetNode();
+
       if (e.target !== node) return;
 
       node.dispatchEvent(new Event(SyntheticEvent.ENTRANCE_ANIMATION_END));
@@ -89,6 +92,7 @@ export function useCssTransition(props: CSSTransitionProps & OtherProps) {
 
     const onEnter = () => {
       const node = getTargetNode();
+
       node.classList.add(...classToToken);
       node.addEventListener('animationend', onEntered);
       node.addEventListener('animationcancel', onEntered);
@@ -106,6 +110,7 @@ export function useCssTransition(props: CSSTransitionProps & OtherProps) {
 
     const onExited = () => {
       const node = getTargetNode();
+
       node.removeEventListener('animationend', onExited);
       if (options.collapse) {
         collapseToast(node, doneHandler, options.collapseDuration);
@@ -116,6 +121,7 @@ export function useCssTransition(props: CSSTransitionProps & OtherProps) {
 
     const onExit = () => {
       const node = getTargetNode();
+
       animationStep.value = AnimationStep.Exit;
       if (node) {
         node.className += ` ${exitClassName.value}`;
@@ -170,7 +176,8 @@ export function useCssTransition(props: CSSTransitionProps & OtherProps) {
 
   watchEffect(() => {
     const all = getAllToast();
-    isIn.value = all.findIndex(v => v.toastId === options.toastId) > -1;
+
+    isIn.value = all.findIndex((v) => v.toastId === options.toastId) > -1;
   });
 
   watchEffect(() => {

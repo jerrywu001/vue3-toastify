@@ -1,10 +1,10 @@
-/* eslint-disable max-len */
+/* eslint-disable @stylistic/js/max-len */
 import { Default } from '../utils/constant';
 import { BuiltInIconProps, IconType, ToastOptions } from '../types';
 import { cloneVNode, isVNode, toRaw, VNode } from 'vue';
 import { isComponent, isFn, isNum, isStr } from '../utils/tools';
 
-const Svg = ({ theme, type, path, ...rest }: BuiltInIconProps) => (
+const Svg = ({ theme, type, path, ...rest }: BuiltInIconProps) =>
   <svg
     viewBox="0 0 24 24"
     width="100%"
@@ -18,7 +18,7 @@ const Svg = ({ theme, type, path, ...rest }: BuiltInIconProps) => (
   >
     <path d={path} />
   </svg>
-);
+;
 
 function Warning(props: BuiltInIconProps) {
   return (
@@ -72,7 +72,11 @@ const maybeIcon = (type: string): type is keyof typeof Icons => type in Icons;
 
 export function getIcon({ theme, type, isLoading, icon }: ToastOptions) {
   let Icon: undefined | IconType;
-  const iconProps = { theme, type };
+  const iconProps = {
+    theme,
+    type,
+  };
+
   if (isLoading) {
     Icon = Icons.spinner();
   } else if (icon === false) {
@@ -82,10 +86,11 @@ export function getIcon({ theme, type, isLoading, icon }: ToastOptions) {
   } else if (isFn(icon)) {
     // @ts-ignore
     const iconCreator: (props?: BuiltInIconProps) => VNode = icon;
+
     Icon = iconCreator(iconProps as BuiltInIconProps);
   } else if (isVNode(icon)) {
     Icon = cloneVNode(icon, iconProps);
-  } else if ((isStr(icon) || isNum(icon))) {
+  } else if (isStr(icon) || isNum(icon)) {
     Icon = icon;
   } else if (maybeIcon(type as string)) {
     Icon = Icons[type as string](iconProps);

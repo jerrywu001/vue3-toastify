@@ -1,4 +1,4 @@
-/* eslint-disable max-len */
+
 import { queue, doAppend } from '../store';
 import { nextTick, toRaw } from 'vue';
 import { getAllToast, getToast, ToastActions } from '..';
@@ -18,8 +18,10 @@ let inThrottle = false;
 function getAllActiveToast() {
   const result: ToastOptions[] = [];
   const items = getAllToast();
+
   items.forEach((v) => {
     const container = document.getElementById(v.containerId as string);
+
     if (container && !container.classList.contains(UnmountTag)) {
       result.push(v);
     }
@@ -30,6 +32,7 @@ function getAllActiveToast() {
 function watingForQueue(limit?: number) {
   const displayedCount = getAllActiveToast().length;
   const limitCount = limit ?? 0;
+
   return limitCount > 0 && displayedCount + queue.items.length >= limitCount;
 }
 
@@ -50,7 +53,7 @@ function openToast(content: Content, type: ToastType, options = {} as ToastOptio
 
   options = mergeOptions<ToastOptions>(getGlobalOptions(), { type }, toRaw(options));
 
-  if (!options.toastId || (typeof options.toastId !== 'string' && typeof options.toastId !== 'number')) {
+  if (!options.toastId || typeof options.toastId !== 'string' && typeof options.toastId !== 'number') {
     options.toastId = generateToastId();
   }
 
@@ -61,6 +64,7 @@ function openToast(content: Content, type: ToastType, options = {} as ToastOptio
   } as ToastOptions;
 
   const progress = Number(options?.progress);
+
   if (progress < 0) {
     options.progress = 0;
   }
@@ -98,18 +102,36 @@ function openToast(content: Content, type: ToastType, options = {} as ToastOptio
 
 /** default toast */
 const toast = (content: Content, options?: ToastOptions) => openToast(content, TYPE.DEFAULT, options);
+
 /** info toast */
-toast.info = (content: Content, options?: OmitTypeToastOption) => openToast(content, TYPE.DEFAULT, { ...options, type: TYPE.INFO });
+toast.info = (content: Content, options?: OmitTypeToastOption) => openToast(content, TYPE.DEFAULT, {
+  ...options,
+  type: TYPE.INFO,
+});
+
 /** error toast */
 toast.error =
-  (content: Content, options?: OmitTypeToastOption) => openToast(content, TYPE.DEFAULT, { ...options, type: TYPE.ERROR });
+  (content: Content, options?: OmitTypeToastOption) => openToast(content, TYPE.DEFAULT, {
+    ...options,
+    type: TYPE.ERROR,
+  });
+
 /** warning toast */
 toast.warning =
-  (content: Content, options?: OmitTypeToastOption) => openToast(content, TYPE.DEFAULT, { ...options, type: TYPE.WARNING });
+  (content: Content, options?: OmitTypeToastOption) => openToast(content, TYPE.DEFAULT, {
+    ...options,
+    type: TYPE.WARNING,
+  });
+
 toast.warn = toast.warning;
+
 /** success toast */
 toast.success =
-  (content: Content, options?: OmitTypeToastOption) => openToast(content, TYPE.DEFAULT, { ...options, type: TYPE.SUCCESS });
+  (content: Content, options?: OmitTypeToastOption) => openToast(content, TYPE.DEFAULT, {
+    ...options,
+    type: TYPE.SUCCESS,
+  });
+
 /** loading toast */
 toast.loading = (content: Content, options?: OmitLoadingOptsToastOption) => openToast(
   content,
@@ -122,6 +144,7 @@ toast.loading = (content: Content, options?: OmitLoadingOptsToastOption) => open
     draggable: false,
   } as ToastOptions),
 );
+
 /** dark toast */
 toast.dark = (content: Content, options?: OmitThemeToastOption) => openToast(
   content,
@@ -152,7 +175,8 @@ toast.isActive = (toastId: Id) => {
   let isToastActive = false;
 
   const all = getAllActiveToast();
-  isToastActive = all.findIndex(v => v.toastId === toastId) > -1;
+
+  isToastActive = all.findIndex((v) => v.toastId === toastId) > -1;
 
   return isToastActive;
 };
@@ -162,6 +186,7 @@ toast.update = (toastId: Id, options: UpdateOptions = {}) => {
   // this is why I defered the update
   setTimeout(() => {
     const item = getToast(toastId);
+
     if (item) {
       const oldOptions = toRaw(item);
       const { content: oldContent } = oldOptions;
@@ -174,6 +199,7 @@ toast.update = (toastId: Id, options: UpdateOptions = {}) => {
       } as ToastSetting & UpdateOptions;
 
       const content = nextOptions.render || oldContent;
+
       delete nextOptions.render;
 
       openToast(content as Content, nextOptions.type as ToastType, nextOptions);
@@ -205,7 +231,10 @@ function handlePromise<T = unknown>(
   options?: OmitLoadingOptsToastOption,
 ) {
   let id: Id | undefined;
-  const loadingOpts = { ...(options || {}), autoClose: false };
+  const loadingOpts = {
+    ...options || {},
+    autoClose: false,
+  };
 
   if (pending) {
     id = isStr(pending)
@@ -268,9 +297,9 @@ function handlePromise<T = unknown>(
 
   // call the resolvers only when needed
   p
-    .then(result => {
+    .then((result) => {
       resolver('success', success, result);
-    }).catch(err => {
+    }).catch((err) => {
       resolver('error', error, err);
     });
 

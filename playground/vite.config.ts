@@ -12,13 +12,9 @@ export default defineConfig({
       'vue3-toastify': path.resolve(__dirname, process.env.USEPACK === 'true' ? '../dist' : '../src'),
     },
   },
-  build: {
-    sourcemap: true,
-  },
+  build: { sourcemap: true },
   plugins: [
-    Vue({
-      // reactivityTransform: true,
-    }),
+    Vue(),
 
     vueJsx(),
   ],

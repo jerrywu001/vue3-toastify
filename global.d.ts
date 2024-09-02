@@ -12,11 +12,7 @@ declare global {
 }
 
 declare module 'vue' {
-  export interface ComponentCustomProperties {
-    $toast: ToastFunc;
-  }
+  export interface ComponentCustomProperties {$toast: ToastFunc}
 
-  export interface GlobalComponents {
-    ToastifyContainer: typeof ToastifyContainer;
-  }
+  export interface GlobalComponents {ToastifyContainer: typeof ToastifyContainer}
 }

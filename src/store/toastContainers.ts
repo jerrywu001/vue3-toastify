@@ -34,7 +34,7 @@ interface QueuedToast {
 
 function getContainerIdByToastId(id: Id) {
   const all = getAllToast();
-  const item = all.find(v => v.toastId === id);
+  const item = all.find((v) => v.toastId === id);
 
   return item?.containerId;
 }
@@ -45,11 +45,13 @@ function getContainerById(containerId: Id) {
 
 function needWaitingForUnmount(options: ToastOptions) {
   const container = getContainerById(options.containerId as string);
+
   return container && container.classList.contains(UnmountTag);
 }
 
 function getCallbackProps(opts: ToastSetting) {
   const result = isVNode(opts.content) ? toRaw(opts.content.props) : null;
+
   return result ?? toRaw(opts.data ?? {});
 }
 
@@ -57,7 +59,8 @@ function existQueueItem(containerId?: Id) {
   if (!containerId) {
     return queue.items.length > 0;
   } else {
-    const items = queue.items.filter(v => v.containerId === containerId);
+    const items = queue.items.filter((v) => v.containerId === containerId);
+
     return items.length > 0;
   }
 }
@@ -65,22 +68,20 @@ function existQueueItem(containerId?: Id) {
 export function appendFromQueue() {
   if (queue.items.length > 0) {
     const append = queue.items.shift();
+
     doAppend(append?.toastContent as Content, append?.toastProps);
   }
 }
 
-export interface IToastContainers {
-  [containerId: Id]: ToastOptions[];
-}
+export interface IToastContainers {[containerId: Id]: ToastOptions[]}
 
 export const toastContainers = reactive({} as IToastContainers);
 
-export const queue = reactive({
-  items: [] as QueuedToast[],
-});
+export const queue = reactive({ items: [] as QueuedToast[] });
 
 export function getAllToast() {
   const rawMap = toRaw(toastContainers);
+
   return Object.values(rawMap).reduce((t, v) => [...t, ...v], []);
 }
 
@@ -90,12 +91,13 @@ export function getAllToast() {
 export function getToast(toastId: Id) {
   const toasts = getAllToast();
 
-  return toasts.find(v => v.toastId === toastId);
+  return toasts.find((v) => v.toastId === toastId);
 }
 
 export function doAppend(content: Content, options = {} as ToastOptions) {
   if (needWaitingForUnmount(options)) {
     const container = getContainerById(options.containerId as Id);
+
     if (container) {
       container.addEventListener('animationend', resolveAppend.bind(null, content, options), false);
     }
@@ -106,15 +108,18 @@ export function doAppend(content: Content, options = {} as ToastOptions) {
 
 function resolveAppend(content: Content, options = {} as ToastOptions) {
   const container = getContainerById(options.containerId as Id);
+
   if (container) {
     container.removeEventListener('animationend', resolveAppend.bind(null, content, options), false);
   }
 
   const sameContainerToasts = toastContainers[options.containerId as Id] || [];
   const hasSameContainer = sameContainerToasts.length > 0;
+
   if (!hasSameContainer && !toastContainerInScreen(options.position)) {
     const rootDom = generateRenderRoot(options);
     const app = createApp(ToastifyContainer, options as Data);
+
     app.mount(rootDom);
     cacheRenderInstance(app, rootDom.id);
   }
@@ -141,9 +146,10 @@ const ToastActions = {
    */
   add(_: Content, opts: ToastSetting) {
     const { containerId = '' } = opts;
+
     if (containerId) {
       toastContainers[containerId] = toastContainers[containerId] || [];
-      if (!toastContainers[containerId].find(v => v.toastId === opts.toastId)) {
+      if (!toastContainers[containerId].find((v) => v.toastId === opts.toastId)) {
         setTimeout(() => {
           if (opts.newestOnTop) {
             toastContainers[containerId]?.unshift(opts);
@@ -164,11 +170,12 @@ const ToastActions = {
   remove(id?: Id) {
     if (id) {
       const containerId = getContainerIdByToastId(id);
+
       if (containerId) {
         const toasts = toastContainers[containerId];
-        let item = toasts.find(v => v.toastId === id);
+        let item = toasts.find((v) => v.toastId === id);
 
-        toastContainers[containerId] = toasts.filter(v => v.toastId !== id);
+        toastContainers[containerId] = toasts.filter((v) => v.toastId !== id);
 
         if (!toastContainers[containerId].length && !existQueueItem(containerId)) {
           removeContainer(containerId, false);
@@ -191,11 +198,16 @@ const ToastActions = {
    */
   update(opts = {} as UpdateOptions) {
     const { containerId = '' } = opts;
+
     if (containerId && opts.updateId) {
       toastContainers[containerId] = toastContainers[containerId] || [];
-      const prevOtps = toastContainers[containerId].find(v => v.toastId === opts.toastId);
+      const prevOtps = toastContainers[containerId].find((v) => v.toastId === opts.toastId);
       const enabledEnter = prevOtps?.position !== opts.position || prevOtps?.transition !== opts.transition;
-      const newOpts = { ...opts, disabledEnterTransition: !enabledEnter, updateId: undefined } as ToastOptions;
+      const newOpts = {
+        ...opts,
+        disabledEnterTransition: !enabledEnter,
+        updateId: undefined,
+      } as ToastOptions;
 
       ToastActions.dismissForce(opts?.toastId as string);
       setTimeout(() => {
@@ -218,6 +230,7 @@ const ToastActions = {
     // @ts-ignore
     const toastId = evt.currentTarget?.id;
     const node = document.getElementById(toastId);
+
     if (node) {
       node.removeEventListener('animationend', ToastActions.dismissCallback, false);
       setTimeout(() => {
@@ -228,6 +241,7 @@ const ToastActions = {
   dismiss(toastId?: Id) {
     if (toastId) {
       const allToasts = getAllToast();
+
       for (const item of allToasts) {
         if (item.toastId === toastId) {
           addExitAnimateToNode(item, (node) => {
@@ -241,6 +255,7 @@ const ToastActions = {
   dismissForce(toastId?: Id) {
     if (toastId) {
       const allToasts = getAllToast();
+
       for (const item of allToasts) {
         if (item.toastId === toastId) {
           const node = document.getElementById(toastId as string);

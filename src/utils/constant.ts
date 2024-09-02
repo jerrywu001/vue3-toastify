@@ -151,6 +151,7 @@ export function getDefaultTransition(type: ToastTransition | CSSTransitionProps,
     result.enter = NoneEnterClass;
   } else if (result.enter === NoneEnterClass) {
     const animation = result.exit.split('__')[1]?.split('-')[0];
+
     result.enter = `${Default.CSS_NAMESPACE}--animate ${Default.CSS_NAMESPACE}__${animation}-enter`;
   }
 

@@ -14,6 +14,7 @@ describe('toastify', () => {
   it('Should not crash if no container is mounted', async () => {
     await toast('hello');
     const content = await screen.findByTestId('toast-content');
+
     expect(content).toBeInTheDocument();
     expect(content.innerHTML).toBe('hello');
   });
@@ -58,6 +59,7 @@ describe('toastify', () => {
   it('should exit on click', async () => {
     const id = toast('hello');
     const target = await screen.findByTestId(`toast-item-${id}`);
+
     expect(target).toBeInTheDocument();
 
     await fireEvent.click(target);
@@ -85,16 +87,19 @@ describe('toastify', () => {
   it('should pause on lost foucs on window', async () => {
     const id = toast('hello');
     const target = await screen.findByTestId(`toast-item-${id}`);
+
     expect(target).toBeInTheDocument();
 
     await fireEvent.focusOut(window);
 
     const progressBar = target.querySelector('.Toastify__progress-bar') as HTMLElement;
+
     expect(progressBar.style.animationPlayState).toBe('paused');
 
     await fireEvent.focus(window);
 
     const progressBar2 = target.querySelector('.Toastify__progress-bar') as HTMLElement;
+
     expect(progressBar2.style.animationPlayState).toBe('running');
   });
 });
