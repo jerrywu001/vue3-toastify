@@ -45,11 +45,11 @@ import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
 
 toast("Hello! Wow so easy!", ${JSON.stringify(options, (key, value) => {
-    // only return the value if it's different from the default
-    if (value !== defaultOptions[key]) {
-      return value;
-    }
-  }, 2)})`;
+  // only return the value if it's different from the default
+  if (value !== defaultOptions[key]) {
+    return value;
+  }
+}, 2)})`;
   const highlighted = hljs.highlight(code, { language: 'javascript' }).value;
 
   highlightedCode.value = highlighted;

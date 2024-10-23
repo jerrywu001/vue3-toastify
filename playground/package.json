@@ -12,7 +12,7 @@
   "dependencies": {
     "ant-design-vue": "^3.2.20",
     "highlight.js": "^11.10.0",
-    "vue-router": "^4.4.3"
+    "vue-router": "^4.4.5"
   },
   "devDependencies": {
     "cross-env": "^7.0.3"
