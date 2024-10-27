@@ -179,6 +179,11 @@ const props = {
     required: false,
     default: '',
   },
+  contentProps: {
+    type: Object,
+    required: false,
+    default: null,
+  },
 };
 
 export default props;
