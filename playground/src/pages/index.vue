@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { h, reactive, ref } from 'vue';
+import { h, ref } from 'vue';
 import { Divider } from 'ant-design-vue';
 import { toast, ToastOptions } from 'vue3-toastify';
 import Conditions from '../components/Conditions.vue';
@@ -13,7 +13,6 @@ const options = ref({} as ToastOptions);
 const onOptionsChange = (opts: ToastOptions) => {
   options.value = opts;
 };
-
 
 function showToast() {
   toast(constomCompo, {
@@ -32,7 +31,7 @@ const clearAll = () => {
 };
 
 const displayPromise = () => {
-   
+
   const resolveAfter3Sec = new Promise((resolve) => setTimeout(resolve, 3000));
 
   toast.promise(
@@ -44,7 +43,7 @@ const displayPromise = () => {
     },
     { ...options.value },
   );
-   
+
   const functionThatReturnPromise = () => new Promise((resolve, reject) => setTimeout(reject, 3000));
 
   toast.promise(
@@ -58,7 +57,7 @@ const displayPromise = () => {
   );
 
   const resolveWithSomeData =
-       
+
       new Promise<{ message: string }>((resolve, reject) => setTimeout(() => reject({ message: 'world' }), 3000));
 
   toast.promise(
