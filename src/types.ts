@@ -15,7 +15,8 @@ export type Content =
   | string
   | VNode
   | ((props: ToastContentProps) => VNode)
-  | DefineComponent<{}, {}, any>;
+  | DefineComponent<{}, {}, any>
+  |any;
 
 export type ToastFunc = {(content: Content, options?: ToastOptions): void};
 
@@ -261,6 +262,8 @@ export interface ToastOptions<Data = {}> extends Options {
 
   /** Only available when using `toast.loading' */
   isLoading?: boolean;
+
+  contentProps?: Object;
 }
 
 /**

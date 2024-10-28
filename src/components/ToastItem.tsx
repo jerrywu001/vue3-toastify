@@ -113,7 +113,43 @@ const ToastItem = defineComponent({
           }
 
           {/* content */}
-          <div data-testid="toast-content">
+          {
+            item.contentProps
+              ? 
+              <div data-testid="toast-content">
+                {h(
+                  toRaw(item.content) as any, { contentProps: item.contentProps },
+                )}
+              </div>
+              : 
+              <div data-testid="toast-content">
+                {
+                  isComponent(item.content as Content)
+                    ?
+                    h(
+                  toRaw(item.content) as any,
+                  {
+                    toastProps: toRaw(item),
+                    closeToast: hideToast,
+                    data: item.data,
+                  },
+                    )
+                    : isFn(item.content)
+                      ? (item.content as Function)({
+                        toastProps: toRaw(item),
+                        closeToast: hideToast,
+                        data: item.data,
+                      })
+                      : 
+                      item.dangerouslyHTMLString
+                        ? h('div', { innerHTML: item.content as string })
+                        : item.content
+                
+                }
+              </div>
+          }
+
+          {/* <div data-testid="toast-content">
             {
               isComponent(item.content as Content)
                 ?
@@ -137,7 +173,7 @@ const ToastItem = defineComponent({
                     : item.content
                 
             }
-          </div>
+          </div> */}
         </div>
 
         {/* close button */}

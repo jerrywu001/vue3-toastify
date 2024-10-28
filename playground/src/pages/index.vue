@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { h, ref } from 'vue';
+import { h, reactive, ref } from 'vue';
 import { Divider } from 'ant-design-vue';
 import { toast, ToastOptions } from 'vue3-toastify';
 import Conditions from '../components/Conditions.vue';
 import ToastCode from '../components/ToastCode.vue';
 import 'ant-design-vue/es/button/style/index.css';
 import 'ant-design-vue/es/divider/style/index.css';
+import constomCompo from '@/components/constomCompo.vue';
 
 const options = ref({} as ToastOptions);
 
@@ -13,11 +14,13 @@ const onOptionsChange = (opts: ToastOptions) => {
   options.value = opts;
 };
 
+
 function showToast() {
-  toast(
-    `Hello!\nWow so easy!&nbsp;<strong>${parseInt(String(Math.random() * 1000), 10)}</strong>`,
-    options.value,
-  );
+  toast(constomCompo, {
+    contentProps: { title: 'narges1' },
+    type: 'info',
+    ...options.value,
+  });
 }
 
 function showLoadToast() {
