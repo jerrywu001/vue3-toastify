@@ -2,25 +2,20 @@
   <div>
     {{ contentProps.title }}
   </div>
-  <button>Click me</button>
+  <Button type="primary" size="small">
+    Click me
+  </Button>
 </template>
+
 <script setup>
- 
+import { Button } from 'ant-design-vue';
+
 const props = defineProps({
   contentProps: {
     type: Object,
-    default: () => ({ title: String }) 
-    , 
-  }, 
+    default: () => ({ title: String }),
+  },
 });
 
 console.log(props);
 </script>
-
-<style>
-button{
-  background-color: orange;
-  padding: 3px;
-  border: 1px solid red
-}
-</style>

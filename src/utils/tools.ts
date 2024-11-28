@@ -58,5 +58,8 @@ export function getGlobalOptions() {
 }
 
 export function getSystemTheme(): ToastTheme {
-  return document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const customDark = document.documentElement.classList.contains('dark');
+
+  return customDark ? 'dark' : prefersDark ? 'dark' : 'light';
 }

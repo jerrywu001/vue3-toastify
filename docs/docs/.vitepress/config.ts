@@ -144,10 +144,10 @@ function sidebarConfig() {
           text: 'Limit the number of toast displayed',
           link: '/usage/limit',
         },
-        {
-          text: 'Use a controlled progress bar',
-          link: '/usage/use-a-controlled-progress-bar',
-        },
+        // {
+        //   text: 'Use a controlled progress bar',
+        //   link: '/usage/use-a-controlled-progress-bar',
+        // },
         {
           text: 'How to style',
           link: '/usage/how-to-style',

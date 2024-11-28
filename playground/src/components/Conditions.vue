@@ -241,10 +241,10 @@
 import { Divider, Input, Select, SelectOption, Checkbox } from 'ant-design-vue';
 import { reactive, ref, watchEffect, watch, type VNode } from 'vue';
 import { toast, updateGlobalOptions, ToastOptions, ToastPosition, ToastTheme, ToastTransition, ToastType } from 'vue3-toastify';
-import 'ant-design-vue/es/input/style/index.css';
-import 'ant-design-vue/es/divider/style/index.css';
-import 'ant-design-vue/es/select/style/index.css';
-import 'ant-design-vue/es/checkbox/style/index.css';
+import 'ant-design-vue/es/input/style/index.js';
+import 'ant-design-vue/es/divider/style/index.js';
+import 'ant-design-vue/es/select/style/index.js';
+import 'ant-design-vue/es/checkbox/style/index.js';
 
 type Icon = string | number | boolean | VNode | undefined;
 

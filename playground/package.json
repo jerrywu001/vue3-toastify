@@ -10,9 +10,9 @@
     "typecheck": "tsc && vue-tsc"
   },
   "dependencies": {
-    "ant-design-vue": "^3.2.20",
+    "ant-design-vue": "^4.2.6",
     "highlight.js": "^11.10.0",
-    "vue-router": "^4.4.5"
+    "vue-router": "^4.5.0"
   },
   "devDependencies": {
     "cross-env": "^7.0.3"

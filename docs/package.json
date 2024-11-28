@@ -11,12 +11,12 @@
   },
   "dependencies": {
     "@documate/vue": "latest",
-    "ant-design-vue": "^3.2.20"
+    "ant-design-vue": "^4.2.6"
   },
   "devDependencies": {
     "@documate/documate": "latest",
     "markdown-it-container": "^4.0.0",
-    "vitepress": "^1.4.1",
+    "vitepress": "^1.5.0",
     "vitepress-plugin-sandpack": "latest"
   }
 }

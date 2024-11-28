@@ -2,11 +2,12 @@
 import { h, ref } from 'vue';
 import { Divider } from 'ant-design-vue';
 import { toast, ToastOptions } from 'vue3-toastify';
+import constomCompo from '../components/constomCompo.vue';
 import Conditions from '../components/Conditions.vue';
 import ToastCode from '../components/ToastCode.vue';
-import 'ant-design-vue/es/button/style/index.css';
-import 'ant-design-vue/es/divider/style/index.css';
-import constomCompo from '@/components/constomCompo.vue';
+
+import 'ant-design-vue/es/button/style/index.js';
+import 'ant-design-vue/es/divider/style/index.js';
 
 const options = ref({} as ToastOptions);
 
