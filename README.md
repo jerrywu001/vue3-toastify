@@ -80,6 +80,41 @@ updateGlobalOptions({ rtl: true });
 toast.success('Wow so easy!');
 ```
 
+## use global components (antd eg.)
+
+```ts
+import { App, createApp } from 'vue';
+import router from './routes';
+
+import Vue3Toasity, { type ToastContainerOptions } from 'vue3-toastify';
+
+import Root from './App.vue';
+
+import Antd from 'ant-design-vue';
+import 'ant-design-vue/dist/reset.css';
+
+function resolveGLobalComponents(instance: App<Element>) {
+  instance.use(Antd);
+}
+
+const app = createApp(Root);
+
+app.use(router);
+
+resolveGLobalComponents(app);
+
+app.use(
+  Vue3Toasity,
+  {
+    // the Toast application is separate from the main application, so we need to call .use
+    useHandler: resolveGLobalComponents,
+    // other props...
+  } as ToastContainerOptions,
+);
+
+app.mount('#app');
+```
+
 ## nuxt
 
 [A nuxt demo](https://stackblitz.com/edit/nuxt-starter-1gszqs?file=app.vue,plugins%2Fvue3-toastify.ts)
