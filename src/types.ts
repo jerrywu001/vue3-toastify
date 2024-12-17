@@ -1,4 +1,4 @@
-import type { DefineComponent, VNode } from 'vue';
+import type { App, DefineComponent, VNode } from 'vue';
 
 /**
  * Used when providing custom icon
@@ -165,6 +165,8 @@ export interface Options {
    * @default -
    */
   icon?: IconType;
+  /** app use hander */
+  useHandler?: (app: App<Element>) => void;
 }
 
 /**

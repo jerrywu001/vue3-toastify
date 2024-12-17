@@ -397,6 +397,10 @@ html.dark {
   .breadcrumb {
     color: #fff;
   }
+
+  .others-box {
+    color: #fff;
+  }
 }
 
 </style>

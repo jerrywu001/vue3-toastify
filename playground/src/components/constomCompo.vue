@@ -2,14 +2,12 @@
   <div>
     {{ contentProps.title }}
   </div>
-  <Button type="primary" size="small">
+  <a-button type="primary" size="small">
     Click me
-  </Button>
+  </a-button>
 </template>
 
 <script setup>
-import { Button } from 'ant-design-vue';
-
 const props = defineProps({
   contentProps: {
     type: Object,

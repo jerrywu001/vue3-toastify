@@ -2,9 +2,11 @@ import { Plugin } from 'vue';
 import { ToastContainerOptions } from './types';
 import { defaultGlobalOptions } from './utils/constant';
 import { mergeOptions, saveGlobalOptions } from './utils/tools';
+import { appInstance } from './store';
 
 const Vue3Toastify: Plugin = {
   install(_, options = {} as Partial<ToastContainerOptions>) {
+    appInstance.useHandler = options.useHandler || (() => {});
     updateGlobalOptions(options);
   },
 };

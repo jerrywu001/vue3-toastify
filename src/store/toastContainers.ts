@@ -120,6 +120,8 @@ function resolveAppend(content: Content, options = {} as ToastOptions) {
     const rootDom = generateRenderRoot(options);
     const app = createApp(ToastifyContainer, options as Data);
 
+    if (options.useHandler) options.useHandler(app);
+
     app.mount(rootDom);
     cacheRenderInstance(app, rootDom.id);
   }

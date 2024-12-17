@@ -5,6 +5,7 @@ import { toast, ToastOptions } from 'vue3-toastify';
 import constomCompo from '../components/constomCompo.vue';
 import Conditions from '../components/Conditions.vue';
 import ToastCode from '../components/ToastCode.vue';
+import RegisteGloablCode from '../components/RegisteGloablCode.vue';
 
 import 'ant-design-vue/es/button/style/index.js';
 import 'ant-design-vue/es/divider/style/index.js';
@@ -119,6 +120,14 @@ const displayPromise = () => {
     />
     <ToastCode :options="options" />
 
+    <Divider />
+
+    <h5 align="center" style="font-size: 16px; text-align: left;">
+      Registe global components (For example antd)
+    </h5>
+
+    <RegisteGloablCode />
+
     <br>
     <br>
 
@@ -176,6 +185,10 @@ html.dark {
   .ant-divider-horizontal.ant-divider-with-text {
     color: #fff;
     border-color: #8a8989;
+  }
+
+  h2, h5 {
+    color: #fff;
   }
 }
 </style>
