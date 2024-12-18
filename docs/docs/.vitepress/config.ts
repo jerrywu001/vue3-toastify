@@ -149,6 +149,10 @@ function sidebarConfig() {
         //   link: '/usage/use-a-controlled-progress-bar',
         // },
         {
+          text: 'Pass props to custom component',
+          link: '/usage/pass-props-to-custom-component',
+        },
+        {
           text: 'How to style',
           link: '/usage/how-to-style',
         },

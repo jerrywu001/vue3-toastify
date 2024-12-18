@@ -18,9 +18,12 @@ const onOptionsChange = (opts: ToastOptions) => {
 
 function showToast() {
   toast(constomCompo, {
-    contentProps: { title: 'narges1' },
     type: 'info',
     ...options.value,
+    contentProps: {
+      title: 'narges1',
+      color: '#ff0',
+    },
   });
 }
 

@@ -184,6 +184,11 @@ const props = {
     required: false,
     default: null,
   },
+  expandCustomProps: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
 };
 
 export default props;

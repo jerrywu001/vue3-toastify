@@ -51,13 +51,13 @@ const ToastItem = defineComponent({
       toastRef,
       loading,
       done: () => {
-        ToastActions.remove(item.toastId); 
+        ToastActions.remove(item.toastId);
       },
       ...getDefaultTransition(item.transition as ToastTransition, item.disabledEnterTransition),
       ...item,
     });
 
-    return () => 
+    return () =>
       <div
         id={item.toastId as string}
         class={className.value}
@@ -81,7 +81,7 @@ const ToastItem = defineComponent({
         >
           {/* icon */}
           {
-            toastIcon.value != null && 
+            toastIcon.value != null &&
             <div
               data-testid={`toast-icon-${item.type}`}
               class={
@@ -109,76 +109,43 @@ const ToastItem = defineComponent({
                     : toastIcon.value
               }
             </div>
-            
+
           }
 
           {/* content */}
           {
-            item.contentProps
-              ? 
-              <div data-testid="toast-content">
-                {h(
-                  toRaw(item.content) as any, { contentProps: item.contentProps },
-                )}
-              </div>
-              : 
-              <div data-testid="toast-content">
-                {
-                  isComponent(item.content as Content)
-                    ?
-                    h(
+            <div data-testid="toast-content">
+              {
+                isComponent(item.content as Content)
+                  ?
+                  h(
                   toRaw(item.content) as any,
                   {
                     toastProps: toRaw(item),
                     closeToast: hideToast,
                     data: item.data,
+                    ...item.expandCustomProps ? item.contentProps : { contentProps: item.contentProps || {} },
                   },
-                    )
-                    : isFn(item.content)
-                      ? (item.content as Function)({
-                        toastProps: toRaw(item),
-                        closeToast: hideToast,
-                        data: item.data,
-                      })
-                      : 
-                      item.dangerouslyHTMLString
-                        ? h('div', { innerHTML: item.content as string })
-                        : item.content
-                
-                }
-              </div>
-          }
+                  )
+                  : isFn(item.content)
+                    ? (item.content as Function)({
+                      toastProps: toRaw(item),
+                      closeToast: hideToast,
+                      data: item.data,
+                    })
+                    :
+                    item.dangerouslyHTMLString
+                      ? h('div', { innerHTML: item.content as string })
+                      : item.content
 
-          {/* <div data-testid="toast-content">
-            {
-              isComponent(item.content as Content)
-                ?
-                h(
-                  toRaw(item.content) as any,
-                  {
-                    toastProps: toRaw(item),
-                    closeToast: hideToast,
-                    data: item.data,
-                  },
-                )
-                : isFn(item.content)
-                  ? (item.content as Function)({
-                    toastProps: toRaw(item),
-                    closeToast: hideToast,
-                    data: item.data,
-                  })
-                  : 
-                  item.dangerouslyHTMLString
-                    ? h('div', { innerHTML: item.content as string })
-                    : item.content
-                
-            }
-          </div> */}
+              }
+            </div>
+          }
         </div>
 
         {/* close button */}
         {
-          (item.closeButton === undefined || item.closeButton === true) && 
+          (item.closeButton === undefined || item.closeButton === true) &&
           <CloseButton
             theme={item.theme as ToastTheme}
             closeToast={(e) => {
@@ -187,7 +154,7 @@ const ToastItem = defineComponent({
               hideToast();
             }}
           />
-          
+
         }
 
         {

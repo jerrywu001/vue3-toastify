@@ -1,10 +1,15 @@
 <template>
   <div>
-    {{ contentProps.title }}
+    <div>
+      {{ contentProps.title }}
+    </div>
+
+    <br>
+
+    <a-button type="primary" size="small" @click.prevent.stop="doALert">
+      Click me
+    </a-button>
   </div>
-  <a-button type="primary" size="small">
-    Click me
-  </a-button>
 </template>
 
 <script setup>
@@ -14,6 +19,10 @@ const props = defineProps({
     default: () => ({ title: String }),
   },
 });
+
+function doALert() {
+  alert(1);
+}
 
 console.log(props);
 </script>
