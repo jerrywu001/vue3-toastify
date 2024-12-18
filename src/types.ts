@@ -45,7 +45,7 @@ export type IconType =
   | string
   | number
   | VNode
-  | ((props: IconProps) => VNode)
+  | ((props: IconProps) => VNode | string | undefined | null)
   | DefineComponent<IconProps, {}, {}>;
 
 export type CloseBtnType =
@@ -165,6 +165,41 @@ export interface Options {
    * @default -
    */
   icon?: IconType;
+  /** props of custom component */
+  contentProps?: Record<string, any>;
+  /**
+   * use with `contentProps`, allow to pass custom props to the custom component
+   * @default false
+   *
+   * how to receive custom props in the custom component:
+   *
+   * - expandCustomProps: false
+   *
+   * ```ts
+   * defineProps({
+   *   contentProps: {
+   *     type: Object as PropType<{ title: string; color: String }>,
+   *     default: () => ({}),
+   *  },
+   * });
+   * ```
+   *
+   * - expandCustomProps: true
+   *
+   * ```ts
+   * defineProps({
+  *   title: {
+  *     type: String,
+  *     default: '',
+  *   },
+  *   color: {
+  *     type: String,
+  *     default: '',
+  *   },
+  * });
+   * ```
+   */
+  expandCustomProps?: boolean;
   /** app use hander */
   useHandler?: (app: App<Element>) => void;
 }
@@ -264,8 +299,6 @@ export interface ToastOptions<Data = {}> extends Options {
 
   /** Only available when using `toast.loading' */
   isLoading?: boolean;
-
-  contentProps?: Object;
 }
 
 /**

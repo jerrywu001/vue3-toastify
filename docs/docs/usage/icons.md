@@ -154,10 +154,30 @@ import { VNodeIcon } from './icons.tsx';
 import Vue3Toasity from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
+const ResolveCustomIcon = (props: IconProps) => {
+  switch (props.type) {
+    case 'default':
+      return '👌';
+    case 'loading':
+      return '...';
+    case 'info':
+      return '🎈';
+    case 'success':
+      return '✌️';
+    case 'error':
+      return '🤣';
+    case 'warning':
+      return '😢';
+    default:
+      return undefined;
+  }
+};
+
 createApp(App).use(
   Vue3Toasity,
   {
-    icon: VNodeIcon,
+    icon: ResolveCustomIcon, // use function
+    // icon: VNodeIcon, // use Unified icon
   },
 ).mount('#app');
 ```
