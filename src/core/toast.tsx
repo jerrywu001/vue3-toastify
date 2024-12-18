@@ -15,6 +15,14 @@ type OmitLoadingOptsToastOption = Omit<ToastOptions, 'isLoading' | 'draggable'>;
 
 let inThrottle = false;
 
+const loadingProps = {
+  isLoading: true,
+  autoClose: false,
+  closeOnClick: false,
+  closeButton: false,
+  draggable: false,
+} as ToastOptions;
+
 function getAllActiveToast() {
   const result: ToastOptions[] = [];
   const items = getAllToast();
@@ -59,13 +67,14 @@ function openToast(content: Content, type: ToastType, options = {} as ToastOptio
 
   options = {
     ...options,
+    ...options.type === 'loading' ? loadingProps : {},
     content,
     containerId: options.containerId || String(options.position),
   } as ToastOptions;
 
   const progress = Number(options?.progress);
 
-  if (progress < 0) {
+  if (!isNaN(progress) && progress < 0) {
     options.progress = 0;
   }
   if (progress > 1) {
@@ -136,13 +145,7 @@ toast.success =
 toast.loading = (content: Content, options?: OmitLoadingOptsToastOption) => openToast(
   content,
   TYPE.DEFAULT,
-  mergeOptions(options, {
-    isLoading: true,
-    autoClose: false,
-    closeOnClick: false,
-    closeButton: false,
-    draggable: false,
-  } as ToastOptions),
+  mergeOptions(options, loadingProps as ToastOptions),
 );
 
 /** dark toast */

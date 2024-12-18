@@ -52,7 +52,7 @@ defineProps({
 ```
 :::
 
-- disable globally
+- enable globally
 
 ```ts
 app.use(

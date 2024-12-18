@@ -72,22 +72,28 @@ const maybeIcon = (type: string): type is keyof typeof Icons => type in Icons;
 
 export function getIcon({ theme, type, isLoading, icon }: ToastOptions) {
   let Icon: undefined | IconType;
+
+  const loading = !!isLoading || type === 'loading';
+
   const iconProps = {
     theme,
     type,
   };
 
-  if (isLoading) {
-    Icon = Icons.spinner();
-  } else if (icon === false) {
-    Icon = undefined;
-  } else if (isComponent(icon as any)) {
+  if (loading && (icon === undefined || typeof icon === 'boolean')) return Icons.spinner();
+
+  if (icon === false) return undefined;
+
+  if (isComponent(icon as any)) {
     Icon = toRaw(icon);
   } else if (isFn(icon)) {
     // @ts-ignore
     const iconCreator: (props?: BuiltInIconProps) => VNode = icon;
 
+    iconProps.type = loading ? 'loading' : type;
+
     Icon = iconCreator(iconProps as BuiltInIconProps);
+    Icon = !Icon && loading ? Icons.spinner() : Icon;
   } else if (isVNode(icon)) {
     Icon = cloneVNode(icon, iconProps);
   } else if (isStr(icon) || isNum(icon)) {

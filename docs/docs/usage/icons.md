@@ -159,7 +159,7 @@ const ResolveCustomIcon = (props: IconProps) => {
     case 'default':
       return '👌';
     case 'loading':
-      return '...';
+      return '⏳';
     case 'info':
       return '🎈';
     case 'success':
