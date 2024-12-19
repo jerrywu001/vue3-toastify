@@ -15,13 +15,9 @@ npm install --save vue3-toastify
 
 [A demo is worth a thousand words](https://vue3-toastify.js-bridge.com)
 
-[备用地址](https://vue3-toastify.netlify.app)
-
 # Document
 
 Check the [documentation](https://vue3-toastify.js-bridge.com/get-started/introduction.html) to get you started!
-
-[备用地址](https://vue3-toastify.netlify.app/get-started/introduction.html)
 
 # The gist
 
