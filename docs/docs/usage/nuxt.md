@@ -1,6 +1,6 @@
-## Nuxt
+# Nuxt
 
-[A nuxt demo](https://stackblitz.com/edit/nuxt-starter-1gszqs?file=app.vue,plugins%2Fvue3-toastify.ts)
+[Nuxt demo](https://stackblitz.com/edit/nuxt-starter-1gszqs?file=app.vue,plugins%2Fvue3-toastify.ts)
 
 - plugins/vue3-toastify.ts
 
