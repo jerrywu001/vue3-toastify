@@ -5,7 +5,6 @@ import { toast, ToastOptions } from 'vue3-toastify';
 import constomCompo from '../components/constomCompo.vue';
 import Conditions from '../components/Conditions.vue';
 import ToastCode from '../components/ToastCode.vue';
-import RegisteGloablCode from '../components/RegisteGloablCode.vue';
 
 import 'ant-design-vue/es/button/style/index.js';
 import 'ant-design-vue/es/divider/style/index.js';
@@ -99,21 +98,21 @@ const displayPromise = () => {
 </script>
 
 <template>
-  <div style="padding: 0 24px 22px; margin: 0 auto; max-width: 1192px;">
+  <div>
     <Divider>The playground</Divider>
 
     <div class="btn-group">
       <button class="my-btn" @click="showToast">
-        normal toast
+        Default toast
       </button>
       <button class="my-btn" @click="displayPromise">
-        with promise
+        With promise
       </button>
       <button class="my-btn" @click="showLoadToast">
-        🚴🏽 loading toast
+        Loading toast
       </button>
       <button class="my-btn danger" @click="clearAll">
-        unmount all container
+        Unmount all containers
       </button>
     </div>
 
@@ -124,18 +123,7 @@ const displayPromise = () => {
 
     <Divider />
 
-    <h5 align="center" style="font-size: 16px; text-align: left;">
-      Registe global components (For example antd)
-    </h5>
-
-    <RegisteGloablCode />
-
-    <br>
-    <br>
-
-    <Divider />
-
-    <h2 align="center" style="font-size: 26px; font-weight: bold; padding: 10px 0 22px;">
+    <h2 align="center" style="font-size: 26px; font-weight: bold; padding: 64px 0 32px; margin: 0;">
       Special Sponsor
     </h2>
 

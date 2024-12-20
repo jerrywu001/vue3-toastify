@@ -6,26 +6,30 @@ View it with a PC, the effect is even better
 
 ## Requirements
 
-`vue` version >=`3.2.0`
+`Vue` >=`3.2.0`
 
 ## Installation
 
 
 :::code-group
 ```bash  [Npm]
-npm install --save vue3-toastify
+npm install vue3-toastify
 ```
 
 ```bash  [Yarn]
 yarn add vue3-toastify
 ```
+
+```bash  [pnpm]
+pnpm add vue3-toastify
+```
 :::
 
 ## Global config
 
-see: [demo](#demo) --> `main.js`
+See: [demo](#demo) --> `main.js`
 
-## demo
+## Demo
 
 :::warning
 Don't forget to import styles

@@ -6,7 +6,7 @@ By default, all toasts will inherit [container props](../api/container). Props d
 
 # Demo
 
-[Demo](/)
+Check out the [live demo](/)!
 
 ## Features
 

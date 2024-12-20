@@ -23,21 +23,24 @@ html.dark {
       color: #5672cd !important;
     }
   }
+  .ant-select-selection-item {
+    color: #fff !important;
+  }
 
   .ant-select-dropdown {
-    background-color: rgba(86, 114, 205, 0.82);
+    background-color: #5672cd;
 
     .ant-select-item {
       color: rgba(255, 255, 255, 0.85);
 
       &.ant-select-item-option-selected {
         &:not(.ant-select-item-option-disabled) {
-          background-color: #5672cd;
+          background-color: #2e4388;
         }
       }
 
       &.ant-select-item-option-active:not(.ant-select-item-option-disabled) {
-        background-color: rgba(86, 114, 205, 0.9);
+        background-color: #2e4388;
       }
     }
   }
