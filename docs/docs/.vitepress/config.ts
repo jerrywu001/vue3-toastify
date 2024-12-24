@@ -133,6 +133,14 @@ function sidebarConfig() {
           link: '/usage/positioning-toast',
         },
         {
+          text: 'Nuxt plugin',
+          link: '/usage/nuxt',
+        },
+        {
+          text: 'Usage with global components',
+          link: '/usage/use-global-components',
+        },
+        {
           text: 'Replace the default transition',
           link: '/usage/replace-default-transition',
         },

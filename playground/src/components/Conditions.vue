@@ -114,7 +114,7 @@
     </div>
   </div>
 
-  <Divider orientation="left">
+  <Divider>
     Other Props
   </Divider>
 
@@ -127,6 +127,7 @@
             v-model:value="opts.autoClose"
             type="number"
             placeholder="empty to be false"
+            width="150px"
           />
         </div>
         <span>ms</span>
@@ -388,6 +389,9 @@ html.dark {
     background-color: transparent;
     border-color: #5672cd;
     color: #fff;
+    &::placeholder {
+      color: white;
+    }
   }
 
   .ant-checkbox-wrapper {
