@@ -9,8 +9,6 @@ import { useRouter } from '#app';
 export default defineNuxtPlugin((nuxtApp) => {
     const router = useRouter();
 
-    resolveGLobalComponents(nuxtApp.vueApp);
-
     function resolveGLobalComponents(instance: App<Element>) {
         instance.use(router);
     }
