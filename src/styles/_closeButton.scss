@@ -1,4 +1,6 @@
-.#{$rt-namespace}__close-button {
+@use 'variables' as vars;
+
+.#{vars.$rt-namespace}__close-button {
   color: #fff;
   background: transparent;
   outline: none;

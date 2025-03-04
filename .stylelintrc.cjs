@@ -8,6 +8,7 @@ module.exports = {
   ],
   // rule覆盖（根据自己喜好来配置）
   rules: {
+    'at-rule-prelude-no-invalid': null,
     'media-query-no-invalid': null,
     'annotation-no-unknown': null,
     'at-rule-no-unknown': null,

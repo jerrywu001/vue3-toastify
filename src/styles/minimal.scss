@@ -1,9 +1,9 @@
 /* stylelint-disable import-notation */
 @charset "UTF-8";
 
-@import 'variables';
+@use 'variables' as vars;
 
-@keyframes #{$rt-namespace}__trackProgress {
+@keyframes #{vars.$rt-namespace}__trackProgress {
   0% {
     transform: scaleX(1);
   }
@@ -13,6 +13,6 @@
   }
 }
 
-.#{$rt-namespace}__progress-bar {
-  animation: #{$rt-namespace}__trackProgress linear 1 forwards;
+.#{vars.$rt-namespace}__progress-bar {
+  animation: #{vars.$rt-namespace}__trackProgress linear 1 forwards;
 }

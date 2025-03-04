@@ -1,4 +1,6 @@
-.#{$rt-namespace}__toast {
+@use 'variables' as vars;
+
+.#{vars.$rt-namespace}__toast {
   &-theme--dark {
     background: var(--toastify-color-dark);
     color: var(--toastify-text-color-dark);
@@ -30,7 +32,7 @@
   }
 }
 
-.#{$rt-namespace}__progress-bar {
+.#{vars.$rt-namespace}__progress-bar {
   &-theme--light {
     background: var(--toastify-color-progress-light);
   }

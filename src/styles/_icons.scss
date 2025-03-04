@@ -1,4 +1,6 @@
-.#{$rt-namespace}__spinner {
+@use 'variables' as vars;
+
+.#{vars.$rt-namespace}__spinner {
   width: 20px;
   height: 20px;
   box-sizing: border-box;
@@ -6,5 +8,5 @@
   border-radius: 100%;
   border-color: var(--toastify-spinner-color-empty-area);
   border-right-color: var(--toastify-spinner-color);
-  animation: #{$rt-namespace}__spin 0.65s linear infinite;
+  animation: #{vars.$rt-namespace}__spin 0.65s linear infinite;
 }

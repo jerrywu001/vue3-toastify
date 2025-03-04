@@ -1,4 +1,7 @@
-.#{$rt-namespace}__toast-container {
+
+@use 'variables' as vars;
+
+.#{vars.$rt-namespace}__toast-container {
   z-index: var(--toastify-z-index);
   transform: translate3d(0, 0, var(--toastify-z-index) px);
   position: fixed;
@@ -40,8 +43,8 @@
   }
 }
 
-@media #{$rt-mobile} {
-  .#{$rt-namespace}__toast-container {
+@media #{vars.$rt-mobile} {
+  .#{vars.$rt-namespace}__toast-container {
     width: 100vw;
     padding: 0;
     left: 0;

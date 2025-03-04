@@ -1,8 +1,10 @@
+@use '../variables' as vars;
+
 @mixin transform {
   transform: translate3d(0, 0, 0);
 }
 
-@keyframes #{$rt-namespace}__slideInRight {
+@keyframes #{vars.$rt-namespace}__slideInRight {
   from {
     transform: translate3d(110%, 0, 0);
     visibility: visible;
@@ -13,7 +15,7 @@
   }
 }
 
-@keyframes #{$rt-namespace}__slideInLeft {
+@keyframes #{vars.$rt-namespace}__slideInLeft {
   from {
     transform: translate3d(-110%, 0, 0);
     visibility: visible;
@@ -24,7 +26,7 @@
   }
 }
 
-@keyframes #{$rt-namespace}__slideInUp {
+@keyframes #{vars.$rt-namespace}__slideInUp {
   from {
     transform: translate3d(0, 110%, 0);
     visibility: visible;
@@ -35,7 +37,7 @@
   }
 }
 
-@keyframes #{$rt-namespace}__slideInDown {
+@keyframes #{vars.$rt-namespace}__slideInDown {
   from {
     transform: translate3d(0, -110%, 0);
     visibility: visible;
@@ -46,7 +48,7 @@
   }
 }
 
-@keyframes #{$rt-namespace}__slideOutRight {
+@keyframes #{vars.$rt-namespace}__slideOutRight {
   from {
     @include transform;
   }
@@ -57,7 +59,7 @@
   }
 }
 
-@keyframes #{$rt-namespace}__slideOutLeft {
+@keyframes #{vars.$rt-namespace}__slideOutLeft {
   from {
     @include transform;
   }
@@ -68,7 +70,7 @@
   }
 }
 
-@keyframes #{$rt-namespace}__slideOutDown {
+@keyframes #{vars.$rt-namespace}__slideOutDown {
   from {
     @include transform;
   }
@@ -79,7 +81,7 @@
   }
 }
 
-@keyframes #{$rt-namespace}__slideOutUp {
+@keyframes #{vars.$rt-namespace}__slideOutUp {
   from {
     @include transform;
   }
@@ -90,42 +92,42 @@
   }
 }
 
-.#{$rt-namespace}__slide-enter {
+.#{vars.$rt-namespace}__slide-enter {
   &--top-left,
   &--bottom-left {
-    animation-name: #{$rt-namespace}__slideInLeft;
+    animation-name: #{vars.$rt-namespace}__slideInLeft;
   }
 
   &--top-right,
   &--bottom-right {
-    animation-name: #{$rt-namespace}__slideInRight;
+    animation-name: #{vars.$rt-namespace}__slideInRight;
   }
 
   &--top-center {
-    animation-name: #{$rt-namespace}__slideInDown;
+    animation-name: #{vars.$rt-namespace}__slideInDown;
   }
 
   &--bottom-center {
-    animation-name: #{$rt-namespace}__slideInUp;
+    animation-name: #{vars.$rt-namespace}__slideInUp;
   }
 }
 
-.#{$rt-namespace}__slide-exit {
+.#{vars.$rt-namespace}__slide-exit {
   &--top-left,
   &--bottom-left {
-    animation-name: #{$rt-namespace}__slideOutLeft;
+    animation-name: #{vars.$rt-namespace}__slideOutLeft;
   }
 
   &--top-right,
   &--bottom-right {
-    animation-name: #{$rt-namespace}__slideOutRight;
+    animation-name: #{vars.$rt-namespace}__slideOutRight;
   }
 
   &--top-center {
-    animation-name: #{$rt-namespace}__slideOutUp;
+    animation-name: #{vars.$rt-namespace}__slideOutUp;
   }
 
   &--bottom-center {
-    animation-name: #{$rt-namespace}__slideOutDown;
+    animation-name: #{vars.$rt-namespace}__slideOutDown;
   }
 }

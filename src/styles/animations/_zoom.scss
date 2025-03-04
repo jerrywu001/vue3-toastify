@@ -1,4 +1,6 @@
-@keyframes #{$rt-namespace}__zoomIn {
+@use '../variables' as vars;
+
+@keyframes #{vars.$rt-namespace}__zoomIn {
   from {
     opacity: 0;
     transform: scale3d(0.3, 0.3, 0.3);
@@ -9,7 +11,7 @@
   }
 }
 
-@keyframes #{$rt-namespace}__zoomOut {
+@keyframes #{vars.$rt-namespace}__zoomOut {
   from {
     opacity: 1;
   }
@@ -24,10 +26,10 @@
   }
 }
 
-.#{$rt-namespace}__zoom-enter {
-  animation-name: #{$rt-namespace}__zoomIn;
+.#{vars.$rt-namespace}__zoom-enter {
+  animation-name: #{vars.$rt-namespace}__zoomIn;
 }
 
-.#{$rt-namespace}__zoom-exit {
-  animation-name: #{$rt-namespace}__zoomOut;
+.#{vars.$rt-namespace}__zoom-exit {
+  animation-name: #{vars.$rt-namespace}__zoomOut;
 }

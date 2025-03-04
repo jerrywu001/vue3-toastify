@@ -1,4 +1,6 @@
-@keyframes #{$rt-namespace}__spin {
+@use '../variables' as vars;
+
+@keyframes #{vars.$rt-namespace}__spin {
   from {
     transform: rotate(0deg);
   }

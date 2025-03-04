@@ -1,4 +1,6 @@
-@keyframes #{$rt-namespace}__trackProgress {
+@use 'variables' as vars;
+
+@keyframes #{vars.$rt-namespace}__trackProgress {
   0% {
     transform: scaleX(1);
   }
@@ -8,7 +10,7 @@
   }
 }
 
-.#{$rt-namespace}__progress-bar {
+.#{vars.$rt-namespace}__progress-bar {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -19,7 +21,7 @@
   transform-origin: left;
 
   &--animated {
-    animation: #{$rt-namespace}__trackProgress linear 1 forwards;
+    animation: #{vars.$rt-namespace}__trackProgress linear 1 forwards;
   }
 
   &--controlled {

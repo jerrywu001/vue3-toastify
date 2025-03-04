@@ -1,15 +1,14 @@
 /* stylelint-disable import-notation */
 @charset "UTF-8";
 
-@import 'variables';
-@import 'toastContainer';
-@import 'toast';
-@import 'theme';
-@import 'closeButton';
-@import 'progressBar';
-@import 'icons';
-@import 'animations/bounce.scss';
-@import 'animations/zoom.scss';
-@import 'animations/flip.scss';
-@import 'animations/slide.scss';
-@import 'animations/spin.scss';
+@use 'toastContainer';
+@use 'toast';
+@use 'theme';
+@use 'closeButton';
+@use 'progressBar';
+@use 'icons';
+@use 'animations/bounce.scss';
+@use 'animations/zoom.scss';
+@use 'animations/flip.scss';
+@use 'animations/slide.scss';
+@use 'animations/spin.scss';
