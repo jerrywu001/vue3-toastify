@@ -49,6 +49,34 @@ const notify = () => {
 </script>
 ```
 
+## Sponsorship Support
+Maintaining an open-source project requires significant time and resources. Your sponsorship will directly support:
+
+- 🛠️ Continuous development and updates
+
+- 🐛 Swift bug fixes and issue resolution
+
+- 📚 Documentation improvements and expanded examples
+
+### Ways to contribute:
+
+- GitHub Sponsors
+  
+[GitHub Sponsors](https://github.com/sponsors/jerrywu001) (Recommended · Zero fees)
+
+- Alipay/Wechat
+  
+<table style="display: flex; width: 500px;">
+  <tr>
+    <td style="margin-right: 16px;">
+      <img style="width: 150px;" src="https://www.js-bridge.com/alipay.jpg" />
+    </td>
+    <td style="margin-right: 16px;">
+      <img style="width: 150px;" src="https://www.js-bridge.com/wechat.jpg" />
+    </td>
+  </tr>
+</table>
+
 ## Sponsors
 
 <p align="center">
