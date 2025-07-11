@@ -1,4 +1,4 @@
-# Pass porps to your custom compoonent.
+# Pass porps to your custom component.
 
 > `expandCustomProps` default is false.
 
