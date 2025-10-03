@@ -95,11 +95,11 @@ const ToastItem = defineComponent({
                 isComponent(toastIcon.value as any)
                   ?
                   h(
-                      toRaw(toastIcon.value) as any,
-                      {
-                        theme: item.theme,
-                        type: item.type,
-                      },
+                    toRaw(toastIcon.value) as any,
+                    {
+                      theme: item.theme,
+                      type: item.type,
+                    },
                   )
                   : isFn(toastIcon.value)
                     ? (toastIcon.value as Function)({
@@ -119,13 +119,13 @@ const ToastItem = defineComponent({
                 isComponent(item.content as Content)
                   ?
                   h(
-                  toRaw(item.content) as any,
-                  {
-                    toastProps: toRaw(item),
-                    closeToast: hideToast,
-                    data: item.data,
-                    ...item.expandCustomProps ? item.contentProps : { contentProps: item.contentProps || {} },
-                  },
+                    toRaw(item.content) as any,
+                    {
+                      toastProps: toRaw(item),
+                      closeToast: hideToast,
+                      data: item.data,
+                      ...item.expandCustomProps ? item.contentProps : { contentProps: item.contentProps || {} },
+                    },
                   )
                   : isFn(item.content)
                     ? (item.content as Function)({

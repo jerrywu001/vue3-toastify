@@ -98,9 +98,7 @@ export const enum Default {
   CSS_NAMESPACE = 'Toastify',
 }
 
-export const enum SyntheticEvent {
-  ENTRANCE_ANIMATION_END = 'd',
-}
+export const enum SyntheticEvent { ENTRANCE_ANIMATION_END = 'd' }
 
 export const Bounce: CSSTransitionProps = {
   enter: `${Default.CSS_NAMESPACE}--animate ${Default.CSS_NAMESPACE}__bounce-enter`,

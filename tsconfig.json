@@ -3,7 +3,7 @@
     "baseUrl": ".",
     "target": "ES2015",
     "module": "ESNext",
-    "moduleResolution": "Node",
+    "moduleResolution": "Bundler",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "skipDefaultLibCheck": true,
     "sourceMap": true,

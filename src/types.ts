@@ -16,9 +16,9 @@ export type Content =
   | VNode
   | ((props: ToastContentProps) => VNode)
   | DefineComponent<{}, {}, any>
-  |any;
+  | any;
 
-export type ToastFunc = {(content: Content, options?: ToastOptions): void};
+export type ToastFunc = { (content: Content, options?: ToastOptions): void };
 
 export type Id = number | string;
 

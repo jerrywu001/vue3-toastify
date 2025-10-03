@@ -73,7 +73,7 @@ export function appendFromQueue() {
   }
 }
 
-export interface IToastContainers {[containerId: Id]: ToastOptions[]}
+export interface IToastContainers { [containerId: Id]: ToastOptions[] }
 
 export const toastContainers = reactive({} as IToastContainers);
 

@@ -59,9 +59,7 @@ const displayPromise = () => {
     { ...options.value },
   );
 
-  const resolveWithSomeData =
-
-      new Promise<{ message: string }>((resolve, reject) => setTimeout(() => reject({ message: 'world' }), 3000));
+  const resolveWithSomeData = new Promise<{ message: string }>((resolve, reject) => setTimeout(() => reject({ message: 'world' }), 3000));
 
   toast.promise(
     resolveWithSomeData,

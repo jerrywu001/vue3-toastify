@@ -1,4 +1,4 @@
-/* eslint-disable @stylistic/js/max-len */
+/* eslint-disable @stylistic/max-len */
 import { Default } from '../utils/constant';
 import { BuiltInIconProps, IconType, ToastOptions } from '../types';
 import { cloneVNode, isVNode, toRaw, VNode } from 'vue';

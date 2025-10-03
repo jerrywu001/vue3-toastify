@@ -16,7 +16,7 @@
   "devDependencies": {
     "@documate/documate": "latest",
     "markdown-it-container": "^4.0.0",
-    "vitepress": "^1.6.3",
+    "vitepress": "^1.6.4",
     "vitepress-plugin-sandpack": "latest"
   }
 }

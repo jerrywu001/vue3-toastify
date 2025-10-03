@@ -1,4 +1,4 @@
-/* eslint-disable @stylistic/js/max-len */
+/* eslint-disable @stylistic/max-len */
 /* eslint-disable vue/require-default-prop */
 
 import { defineComponent, PropType } from 'vue';
