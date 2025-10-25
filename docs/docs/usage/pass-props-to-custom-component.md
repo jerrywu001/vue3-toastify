@@ -108,7 +108,88 @@ defineProps({
 });
 </script>
 ```
-:::
+
+## Use a Custom Vue Component in Your Toasts
+
+You can render **any Vue component** inside a toast — ideal for displaying rich, dynamic content.
+
+When using Vue 3, the easiest approach is to create a composable that wraps your custom component and the `vue3-toastify` API.
+
+---
+
+### Example: Custom Toast Component
+
+::: sandbox
+
+```ts /src/composables/useToast.ts
+import { h } from "vue";
+import { toast, ToastType } from "vue3-toastify";
+import ToastContent from "@/components/ToastContent.vue";
+
+export const useToast = () => {
+  const showToast = ({
+    status,
+    title,
+    message,
+  }: {
+    status: ToastType;
+    title?: string;
+    message: string;
+  }) => {
+    toast(() => h(ToastContent, { status, title, message }), {
+      type: status,
+      icon: false,
+    });
+  };
+
+  return { showToast };
+};
+```
+
+```vue /src/components/ToastContent.vue
+<template>
+  <div class="toast-content">
+    <strong v-if="title">{{ title }}</strong>
+    <p>{{ message }}</p>
+  </div>
+</template>
+
+<script setup lang="ts">
+defineProps<{
+  status: string;
+  title?: string;
+  message: string;
+}>();
+</script>
+
+<style scoped>
+.toast-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+</style>
+```
+
+```vue /src/App.vue
+<script setup lang="ts">
+import { useToast } from "@/composables/useToast";
+import "vue3-toastify/dist/index.css";
+
+const { showToast } = useToast();
+
+const notify = () => {
+  showToast({
+    status: "success",
+    title: "Success",
+    message: "Your data was saved successfully!",
+  });
+};
+</script>
+
+<template>
+  <button @click="notify">Show Toast</button>
+</template>
 ```
 
 
