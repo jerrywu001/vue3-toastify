@@ -42,6 +42,22 @@
     flex-shrink: 0;
     display: flex;
   }
+
+  &-text {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    line-height: 1.35;
+  }
+
+  &-text-title {
+    font-weight: 600;
+  }
+
+  &-text-content {
+    opacity: 0.92;
+  }
 }
 
 .#{vars.$rt-namespace}--animate {

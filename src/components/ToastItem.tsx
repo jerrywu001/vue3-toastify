@@ -18,10 +18,25 @@ import type {
   Content,
   ToastContainerOptions,
   ToastOptions,
+  ToastTextContent,
   ToastTheme,
   ToastTransition,
   ToastType,
 } from '../types';
+
+function isToastTextContent(content: Content): content is ToastTextContent {
+  if (!content || typeof content !== 'object' || Array.isArray(content)) {
+    return false;
+  }
+
+  if ((content as { __v_isVNode?: boolean }).__v_isVNode) {
+    return false;
+  }
+
+  const payload = content as ToastTextContent;
+
+  return ['title', 'content'].some((key) => key in payload);
+}
 
 const ToastItem = defineComponent({
   name: 'ToastItem',
@@ -56,6 +71,65 @@ const ToastItem = defineComponent({
       ...getDefaultTransition(item.transition as ToastTransition, item.disabledEnterTransition),
       ...item,
     });
+
+    function renderContentNode() {
+      const content = item.content as Content;
+
+      if (isToastTextContent(content)) {
+        const textNodes = [] as any[];
+
+        if (content.title !== undefined) {
+          textNodes.push(
+            <div data-testid="toast-text-title" class={`${Default.CSS_NAMESPACE}__toast-text-title`}>
+              {content.title}
+            </div>,
+          );
+        }
+
+        if (content.content !== undefined) {
+          textNodes.push(
+            <div data-testid="toast-text-content" class={`${Default.CSS_NAMESPACE}__toast-text-content`}>
+              {content.content}
+            </div>,
+          );
+        }
+
+        return (
+          <div
+            data-testid="toast-text-content-wrapper"
+            class={`${Default.CSS_NAMESPACE}__toast-text`}
+          >
+            {textNodes}
+          </div>
+        );
+      }
+
+      if (isComponent(content)) {
+        return h(
+          toRaw(content) as any,
+          {
+            toastProps: toRaw(item),
+            closeToast: hideToast,
+            data: item.data,
+            ...item.expandCustomProps ? item.contentProps : { contentProps: item.contentProps || {} },
+          },
+        );
+      }
+
+      if (isFn(content)) {
+        return (content as Function)({
+          toastProps: toRaw(item),
+          closeToast: hideToast,
+          data: item.data,
+        });
+      }
+
+      if (item.dangerouslyHTMLString) {
+        return h('div', { innerHTML: content as string });
+      }
+
+      return content;
+    }
 
     return () =>
       <div
@@ -115,30 +189,7 @@ const ToastItem = defineComponent({
           {/* content */}
           {
             <div data-testid="toast-content">
-              {
-                isComponent(item.content as Content)
-                  ?
-                  h(
-                    toRaw(item.content) as any,
-                    {
-                      toastProps: toRaw(item),
-                      closeToast: hideToast,
-                      data: item.data,
-                      ...item.expandCustomProps ? item.contentProps : { contentProps: item.contentProps || {} },
-                    },
-                  )
-                  : isFn(item.content)
-                    ? (item.content as Function)({
-                      toastProps: toRaw(item),
-                      closeToast: hideToast,
-                      data: item.data,
-                    })
-                    :
-                    item.dangerouslyHTMLString
-                      ? h('div', { innerHTML: item.content as string })
-                      : item.content
-
-              }
+              {renderContentNode()}
             </div>
           }
         </div>

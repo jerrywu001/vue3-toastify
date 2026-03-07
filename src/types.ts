@@ -16,7 +16,13 @@ export type Content =
   | VNode
   | ((props: ToastContentProps) => VNode)
   | DefineComponent<{}, {}, any>
+  | ToastTextContent
   | any;
+
+export interface ToastTextContent {
+  title?: string | number;
+  content?: string | number;
+}
 
 export type ToastFunc = { (content: Content, options?: ToastOptions): void };
 
@@ -71,6 +77,12 @@ export interface Options {
    * @default false
    */
   rtl?: boolean;
+  /**
+   * Clear toast on url change.
+   * Set to `false` to keep this toast when navigation happens.
+   * @default true
+   */
+  clearOnUrlChange?: boolean;
 
   /** Used to identify the ToastContainer when working with multiple container. Also used to set the id attribute */
   containerId?: Id;
@@ -208,11 +220,6 @@ export interface Options {
  * options for app.use
  */
 export interface ToastContainerOptions extends Options {
-  /**
-   * clear all toasts on url change
-   * @default true
-  */
-  clearOnUrlChange?: boolean;
   /**
    * support multiple
    * @default true

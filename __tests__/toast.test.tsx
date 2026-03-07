@@ -56,6 +56,20 @@ describe('toastify', () => {
     expect(target.className).toContain('--rtl');
   });
 
+  it('supports object content with title and content', async () => {
+    const id = toast.success({
+      title: 'The toast title',
+      content: 1111,
+    });
+
+    await screen.findByTestId(`toast-item-${id}`);
+    const title = await screen.findByTestId('toast-text-title');
+    const content = await screen.findByTestId('toast-text-content');
+
+    expect(title.textContent).toBe('The toast title');
+    expect(content.textContent).toBe('1111');
+  });
+
   it('should exit on click', async () => {
     const id = toast('hello');
     const target = await screen.findByTestId(`toast-item-${id}`);

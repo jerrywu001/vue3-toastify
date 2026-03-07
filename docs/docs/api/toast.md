@@ -24,6 +24,7 @@ When displaying a toast, the props are inherited from the [container props](./co
 | render | ToastContent\<T\> | - | Only available when using `toast.update`                                             |
 | isLoading | bollean | - | Only available when using `toast.loading' |
 | dangerouslyHTMLString | boolean | false | render unsafe string, like html tag |
+| clearOnUrlChange | boolean | true | clear this toast on url change. Set `false` to keep it across navigation |
 | icon | IconType | - | Used to display a custom icon. Set it to `false` to prevent |
 | rtl | boolean | false | Support right to left content |
 | containerId | Id | toast.POSITION.TOP_RIGHT | Used to identify the [Container](./container.md) when working with multiple container. Also used to set the id attribute |
@@ -72,6 +73,12 @@ toast.success("Hello", options as ToastOptions);
 toast.info("World", options as ToastOptions);
 toast.warn(MyComponent, options as ToastOptions);
 toast.error("Error", options as ToastOptions);
+
+// New: object content (built-in title + content layout)
+toast.success({
+  title: 'The toast title',
+  content: 'Some toast content',
+});
 
 // Remove all toasts !
 toast.remove();

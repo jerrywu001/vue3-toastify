@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { h, ref } from 'vue';
-import { Divider } from 'ant-design-vue';
+import { computed, h, ref } from 'vue';
+import { Divider, Radio, RadioGroup } from 'ant-design-vue';
 import { toast, ToastOptions } from 'vue3-toastify';
 import constomCompo from '../components/constomCompo.vue';
 import Conditions from '../components/Conditions.vue';
@@ -8,16 +8,32 @@ import ToastCode from '../components/ToastCode.vue';
 
 import 'ant-design-vue/es/button/style/index.js';
 import 'ant-design-vue/es/divider/style/index.js';
+import 'ant-design-vue/es/radio/style/index.js';
 
 const options = ref({} as ToastOptions);
+const perToastClearOnUrlChange = ref<'inherit' | 'true' | 'false'>('inherit');
 
 const onOptionsChange = (opts: ToastOptions) => {
   options.value = opts;
 };
 
+function getPerToastClearOption() {
+  if (perToastClearOnUrlChange.value === 'inherit') {
+    return {};
+  }
+
+  return { clearOnUrlChange: perToastClearOnUrlChange.value === 'true' };
+}
+
+const codeOptions = computed(() => ({
+  ...options.value,
+  ...getPerToastClearOption(),
+}));
+
 function showToast() {
   toast(constomCompo, {
     ...options.value,
+    ...getPerToastClearOption(),
     contentProps: {
       title: 'narges1',
       color: '#ff0',
@@ -26,7 +42,13 @@ function showToast() {
 }
 
 function showLoadToast() {
-  toast.loading(`I can not auto close! ${parseInt(String(Math.random() * 100000), 10)}`, options.value);
+  toast.loading(
+    `I can not auto close! ${parseInt(String(Math.random() * 100000), 10)}`,
+    {
+      ...options.value,
+      ...getPerToastClearOption(),
+    },
+  );
 }
 
 const clearAll = () => {
@@ -44,7 +66,10 @@ const displayPromise = () => {
       success: 'Promise resolved 👌',
       error: 'Promise rejected 🤯',
     },
-    { ...options.value },
+    {
+      ...options.value,
+      ...getPerToastClearOption(),
+    },
   );
 
   const functionThatReturnPromise = () => new Promise((resolve, reject) => setTimeout(reject, 3000));
@@ -56,7 +81,10 @@ const displayPromise = () => {
       success: 'Promise resolved 👌',
       error: 'Promise rejected 🤯',
     },
-    { ...options.value },
+    {
+      ...options.value,
+      ...getPerToastClearOption(),
+    },
   );
 
   const resolveWithSomeData = new Promise<{ message: string }>((resolve, reject) => setTimeout(() => reject({ message: 'world' }), 3000));
@@ -89,6 +117,7 @@ const displayPromise = () => {
     },
     {
       ...options.value,
+      ...getPerToastClearOption(),
       position: toast.POSITION.BOTTOM_CENTER,
     },
   );
@@ -112,12 +141,31 @@ const displayPromise = () => {
       <button class="my-btn danger" @click="clearAll">
         Unmount all containers
       </button>
+      <!-- <RouterLink class="my-btn nav-link" to="/router-nav-test">
+        Router nav test
+      </RouterLink> -->
     </div>
 
     <Conditions
       @on-change="onOptionsChange"
-    />
-    <ToastCode :options="options" />
+    >
+      <div class="per-toast-option">
+        <span>Per toast clearOnUrlChange</span>
+        <RadioGroup v-model:value="perToastClearOnUrlChange" size="small">
+          <Radio value="inherit">
+            inherit global(true)
+          </Radio>
+          <Radio value="true">
+            true
+          </Radio>
+          <Radio value="false">
+            false
+          </Radio>
+        </RadioGroup>
+      </div>
+    </Conditions>
+
+    <ToastCode :options="codeOptions" />
 
     <Divider />
 
@@ -142,15 +190,19 @@ const displayPromise = () => {
 .btn-group {
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 28px;
+  margin-bottom: 16px;
 
   .my-btn {
+    display: inline-block;
     color: #fff;
+    border: 1px solid #5672cd;
     border-color: #5672cd;
     background-color: #5672cd;
     border-radius: 20px;
     padding: 5px 18px;
     margin: 0 8px 8px 0;
+    text-decoration: none;
+    cursor: pointer;
 
     &:hover {
       border-color: #2e4388;
@@ -169,6 +221,13 @@ const displayPromise = () => {
   }
 }
 
+.per-toast-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
 html.dark {
   .ant-divider-horizontal.ant-divider-with-text {
     color: #fff;
@@ -177,6 +236,14 @@ html.dark {
 
   h2, h5 {
     color: #fff;
+  }
+
+  .per-toast-option {
+    color: #fff;
+
+    .ant-radio-wrapper {
+      color: #fff;
+    }
   }
 }
 </style>

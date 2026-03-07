@@ -117,6 +117,8 @@
   <Divider>
     Other Props
   </Divider>
+  
+  <slot />
 
   <div class="others">
     <div class="others-box">
@@ -389,6 +391,7 @@ html.dark {
     background-color: transparent;
     border-color: #5672cd;
     color: #fff;
+
     &::placeholder {
       color: white;
     }
