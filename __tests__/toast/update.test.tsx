@@ -108,4 +108,80 @@ describe('toast.update', () => {
     expect(doneToast.querySelector('.Toastify__spinner')).toBeNull();
     expect(doneToast).toHaveTextContent('working');
   });
+
+  it('keeps a middle-of-stack toast in place when updated', async () => {
+    const first = toast('First', {
+      toastId: 'pos-first',
+      autoClose: false,
+    });
+    const second = toast('Second', {
+      toastId: 'pos-second',
+      autoClose: false,
+    });
+    const third = toast('Third', {
+      toastId: 'pos-third',
+      autoClose: false,
+    });
+
+    await screen.findByTestId(`toast-item-${first}`);
+    await screen.findByTestId(`toast-item-${second}`);
+    await screen.findByTestId(`toast-item-${third}`);
+
+    expect(domOrder()).toEqual(['toast-item-pos-first', 'toast-item-pos-second', 'toast-item-pos-third']);
+
+    toast.update(second, { render: 'Second (updated)' });
+
+    await screen.findByText('Second (updated)');
+
+    // issue #77: the update must not push the toast to the end of the stack
+    expect(domOrder()).toEqual(['toast-item-pos-first', 'toast-item-pos-second', 'toast-item-pos-third']);
+  });
+
+  it('keeps the promise pending toast slot on success', async () => {
+    let resolvePromise: (value: string) => void;
+
+    const promise = new Promise<string>((resolve) => {
+      resolvePromise = resolve;
+    });
+
+    toast.promise(promise, {
+      pending: 'Saving...',
+      success: 'Saved!',
+      error: 'Failed!',
+    }, { toastId: 'promise-pos-target' });
+
+    const first = toast('First', {
+      toastId: 'promise-pos-first',
+      autoClose: false,
+    });
+    const second = toast('Second', {
+      toastId: 'promise-pos-second',
+      autoClose: false,
+    });
+
+    await screen.findByText('Saving...');
+    await screen.findByTestId(`toast-item-${first}`);
+    await screen.findByTestId(`toast-item-${second}`);
+
+    expect(domOrder()).toEqual([
+      'toast-item-promise-pos-target',
+      'toast-item-promise-pos-first',
+      'toast-item-promise-pos-second',
+    ]);
+
+    resolvePromise!('ok');
+    await promise;
+
+    await screen.findByText('Saved!');
+
+    expect(domOrder()).toEqual([
+      'toast-item-promise-pos-target',
+      'toast-item-promise-pos-first',
+      'toast-item-promise-pos-second',
+    ]);
+  });
 });
+
+function domOrder() {
+  return [...document.querySelectorAll('[data-testid^="toast-item-"]')].map((n) => n.getAttribute('data-testid'));
+}

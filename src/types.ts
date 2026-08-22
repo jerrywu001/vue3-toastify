@@ -266,6 +266,9 @@ export interface ToastOptions<Data = {}> extends Options {
   /** Used internally to signal that a duplicate toast was triggered. */
   duplicateId?: Id;
 
+  /** Used internally to restore the stack slot of an updated toast. */
+  restoreIndex?: number;
+
   /** toast content */
   content?: Content;
 

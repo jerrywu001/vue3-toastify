@@ -178,7 +178,14 @@ const ToastActions = {
       if (resolveDuplicate(opts)) return;
 
       setTimeout(() => {
-        if (opts.newestOnTop) {
+        const { restoreIndex } = opts;
+
+        // an updated toast returns to its original stack slot
+        if (typeof restoreIndex === 'number' && restoreIndex > -1) {
+          const index = Math.min(restoreIndex, toastContainers[containerId]?.length ?? 0);
+
+          toastContainers[containerId]?.splice(index, 0, opts);
+        } else if (opts.newestOnTop) {
           toastContainers[containerId]?.unshift(opts);
         } else {
           toastContainers[containerId]?.push(opts);
@@ -227,12 +234,15 @@ const ToastActions = {
 
     if (containerId && opts.updateId) {
       toastContainers[containerId] = toastContainers[containerId] || [];
-      const prevOtps = toastContainers[containerId].find((v) => v.toastId === opts.toastId);
+      const prevIndex = toastContainers[containerId].findIndex((v) => v.toastId === opts.toastId);
+      const prevOtps = prevIndex > -1 ? toastContainers[containerId][prevIndex] : undefined;
       const enabledEnter = prevOtps?.position !== opts.position || prevOtps?.transition !== opts.transition;
       const newOpts = {
         ...opts,
         disabledEnterTransition: !enabledEnter,
         updateId: undefined,
+        // an updated toast is recreated, remember its stack slot to splice it back in
+        restoreIndex: prevIndex > -1 ? prevIndex : undefined,
       } as ToastOptions;
 
       ToastActions.dismissForce(opts?.toastId as string);
