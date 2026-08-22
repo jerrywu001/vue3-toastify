@@ -12,6 +12,7 @@ import {
   h,
   ref,
   toRaw,
+  watch,
 } from 'vue';
 import type {
   CloseButtonProps,
@@ -45,6 +46,30 @@ const ToastItem = defineComponent({
   // @ts-ignore
   setup(item: ToastOptions & ToastContainerOptions) {
     const toastRef = ref<HTMLDivElement>();
+    const duplicateAnimation = ref(false);
+    const duplicateClassName = `${Default.CSS_NAMESPACE}__toast--duplicate`;
+
+    const clearDuplicateAnimation = () => {
+      duplicateAnimation.value = false;
+      toastRef.value?.classList.remove(duplicateClassName);
+    };
+
+    watch(() => item.duplicateId, (duplicateId, previousDuplicateId) => {
+      if (!duplicateId || duplicateId === previousDuplicateId) return;
+
+      duplicateAnimation.value = true;
+
+      const node = toastRef.value;
+
+      if (!node) return;
+
+      // replay the cue: drop the class, force a reflow, then add it back
+      node.removeEventListener('animationend', clearDuplicateAnimation);
+      node.classList.remove(duplicateClassName);
+      void node.offsetWidth;
+      node.classList.add(duplicateClassName);
+      node.addEventListener('animationend', clearDuplicateAnimation, { once: true });
+    }, { flush: 'sync' });
 
     const loading = computed(() => !!item.isLoading);
     const isProgressControlled = computed(() => item.progress !== undefined && item.progress !== null);
@@ -54,6 +79,7 @@ const ToastItem = defineComponent({
       `${Default.CSS_NAMESPACE}__toast-theme--${item.theme}`,
       `${Default.CSS_NAMESPACE}__toast--${item.type}`,
       item.rtl ? `${Default.CSS_NAMESPACE}__toast--rtl` : undefined,
+      duplicateAnimation.value ? duplicateClassName : undefined,
       item.toastClassName || '',
     ].filter(Boolean).join(' '));
 
@@ -230,6 +256,7 @@ const ToastItem = defineComponent({
 
         {/* progress bar */}
         <ProgressBar
+          key={item.duplicateId}
           className={item.progressClassName}
           style={item.progressStyle}
           rtl={item.rtl}

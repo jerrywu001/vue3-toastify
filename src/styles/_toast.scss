@@ -1,5 +1,15 @@
 @use 'variables' as vars;
 
+@keyframes #{vars.$rt-namespace}__toastDuplicate {
+  0%, 100% {
+    transform: scale(1);
+  }
+
+  45% {
+    transform: scale(1.035);
+  }
+}
+
 .#{vars.$rt-namespace}__toast {
   position: relative;
   min-height: var(--toastify-toast-min-height);
@@ -21,6 +31,12 @@
 
   &--rtl {
     direction: rtl;
+  }
+
+  &--duplicate {
+    @media (prefers-reduced-motion: no-preference) {
+      animation: #{vars.$rt-namespace}__toastDuplicate 0.3s ease-out;
+    }
   }
 
   &-body {

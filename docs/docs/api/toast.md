@@ -25,6 +25,7 @@ When displaying a toast, the props are inherited from the [container props](./co
 | isLoading | bollean | - | Only available when using `toast.loading' |
 | dangerouslyHTMLString | boolean | false | render unsafe string, like html tag |
 | clearOnUrlChange | boolean | true | clear this toast on url change. Set `false` to keep it across navigation |
+| resetOnDuplicate | boolean | false | When a toast with the same `toastId` is triggered again, restart its auto-close timer instead of ignoring the call. See [prevent duplicate](../usage/prevent-duplicate.md) |
 | icon | IconType | - | Used to display a custom icon. Set it to `false` to prevent |
 | rtl | boolean | false | Support right to left content |
 | containerId | Id | toast.POSITION.TOP_RIGHT | Used to identify the [Container](./container.md) when working with multiple container. Also used to set the id attribute |

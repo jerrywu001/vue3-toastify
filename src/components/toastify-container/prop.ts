@@ -48,6 +48,11 @@ const props = {
     required: false,
     default: false,
   },
+  resetOnDuplicate: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
   closeButton: {
     type: [Boolean, Function, Object] as PropType<boolean | VNode | (() => VNode)>,
     required: false,
@@ -175,6 +180,11 @@ const props = {
     default: '',
   },
   updateId: {
+    type: [String, Number],
+    required: false,
+    default: '',
+  },
+  duplicateId: {
     type: [String, Number],
     required: false,
     default: '',

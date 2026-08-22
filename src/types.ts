@@ -99,6 +99,13 @@ export interface Options {
   autoClose?: number | boolean;
 
   /**
+   * Restart the auto-close timer and replay a visual cue when a toast with the
+   * same `toastId` is triggered again.
+   * @default false
+   */
+  resetOnDuplicate?: boolean;
+
+  /**
    * Pass a custom close button.
    * To remove the close button pass `false`
    */
@@ -255,6 +262,9 @@ export interface ToastOptions<Data = {}> extends Options {
    * Used during update
    */
   updateId?: Id;
+
+  /** Used internally to signal that a duplicate toast was triggered. */
+  duplicateId?: Id;
 
   /** toast content */
   content?: Content;

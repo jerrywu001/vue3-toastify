@@ -22,6 +22,7 @@ import {
   toRaw,
 } from 'vue';
 import { generateRenderRoot, toastContainerInScreen, UnmountTag } from '../utils/render';
+import { generateToastId } from '../utils/tools';
 
 type ToastSetting = ToastOptions & ToastContainerOptions;
 
@@ -94,6 +95,28 @@ export function getToast(toastId: Id) {
   return toasts.find((v) => v.toastId === toastId);
 }
 
+/**
+ * Handle a toast whose `toastId` is already displayed in the same container.
+ * When `resetOnDuplicate` is enabled, a fresh `duplicateId` restarts the
+ * auto-close timer and replays the duplicate cue.
+ * @returns `true` when the duplicate was handled and no new toast should be created
+ */
+export function resolveDuplicate(opts: ToastSetting) {
+  const { containerId = '' } = opts;
+
+  if (!containerId) return false;
+
+  const duplicate = (toastContainers[containerId] || []).find((v) => v.toastId === opts.toastId);
+
+  if (!duplicate) return false;
+
+  if (opts.resetOnDuplicate ?? duplicate.resetOnDuplicate) {
+    duplicate.duplicateId = generateToastId();
+  }
+
+  return true;
+}
+
 export function doAppend(content: Content, options = {} as ToastOptions) {
   if (needWaitingForUnmount(options)) {
     const container = getContainerById(options.containerId as Id);
@@ -151,18 +174,19 @@ const ToastActions = {
 
     if (containerId) {
       toastContainers[containerId] = toastContainers[containerId] || [];
-      if (!toastContainers[containerId].find((v) => v.toastId === opts.toastId)) {
-        setTimeout(() => {
-          if (opts.newestOnTop) {
-            toastContainers[containerId]?.unshift(opts);
-          } else {
-            toastContainers[containerId]?.push(opts);
-          }
-          if (opts.onOpen) {
-            opts.onOpen(getCallbackProps(opts));
-          }
-        }, opts.delay || 0);
-      }
+
+      if (resolveDuplicate(opts)) return;
+
+      setTimeout(() => {
+        if (opts.newestOnTop) {
+          toastContainers[containerId]?.unshift(opts);
+        } else {
+          toastContainers[containerId]?.push(opts);
+        }
+        if (opts.onOpen) {
+          opts.onOpen(getCallbackProps(opts));
+        }
+      }, opts.delay || 0);
     }
   },
   /**
