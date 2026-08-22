@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/vue';
+import { screen, waitFor } from '@testing-library/vue';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { toast } from '../../src';
 
@@ -28,10 +28,11 @@ describe('toast.update', () => {
     expect(target).toHaveTextContent('Hello');
 
     toast.update(id, { render: 'Updated!' });
-    await promiseTick(50);
+    const updated = await screen.findByText('Updated!');
 
+    // update replaces the node: exactly one item with this id must remain
     expect(screen.getAllByTestId(`toast-item-${id}`)).toHaveLength(1);
-    expect(screen.getByTestId('toast-content')).toHaveTextContent('Updated!');
+    expect(updated.closest('.Toastify__toast')).not.toBeNull();
   });
 
   it('updates options like type and theme', async () => {
@@ -45,13 +46,11 @@ describe('toast.update', () => {
       type: 'success',
       theme: 'dark',
     });
-    await promiseTick(50);
 
-    const updated = screen.getByTestId(`toast-item-${id}`);
+    const updatedRoot = (await screen.findByText('Saved')).closest('.Toastify__toast') as HTMLElement;
 
-    expect(updated).toBeInTheDocument();
-    expect(updated).toHaveClass('Toastify__toast--success');
-    expect(updated).toHaveClass('Toastify__toast-theme--dark');
+    expect(updatedRoot).toHaveClass('Toastify__toast--success');
+    expect(updatedRoot).toHaveClass('Toastify__toast-theme--dark');
     expect(screen.queryByTestId('toast-icon-default')).toBeNull();
     expect(screen.getByTestId('toast-icon-success')).toBeInTheDocument();
   });
@@ -61,21 +60,31 @@ describe('toast.update', () => {
     const target = await screen.findByTestId(`toast-item-${id}`);
     const progressBar = target.querySelector('.Toastify__progress-bar') as HTMLElement;
 
+    // opacity 0 means autoClose === false (ProgressBar style: hide || autoClose === false ? 0 : 1)
     expect(progressBar.style.opacity).toBe('0');
 
     toast.update(id, { render: 'Updated!' });
-    await promiseTick(50);
 
-    const updatedBar = screen.getByTestId(`toast-item-${id}`).querySelector('.Toastify__progress-bar') as HTMLElement;
+    // wait for the update itself to land before checking the preserved option
+    const updated = await screen.findByText('Updated!');
+    const updatedBar = updated.closest('.Toastify__toast')?.querySelector('.Toastify__progress-bar') as HTMLElement;
 
     expect(updatedBar.style.opacity).toBe('0');
   });
 
-  it('does nothing when the toast does not exist', async () => {
+  it('leaves existing toasts untouched when the id does not exist', async () => {
+    const id = toast('Hello', { autoClose: false });
+
+    await screen.findByTestId(`toast-item-${id}`);
+
     toast.update('ghost-toast', { render: 'boo' });
+
+    // negative case: nothing new will appear, so settle once and check nothing changed
     await promiseTick(50);
 
-    expect(screen.queryByTestId('toast-content')).toBeNull();
+    expect(screen.queryByText('boo')).toBeNull();
+    expect(screen.getAllByTestId(`toast-item-${id}`)).toHaveLength(1);
+    expect(screen.getByTestId(`toast-item-${id}`)).toHaveTextContent('Hello');
   });
 
   it('turns a loading toast into its final state via toast.done', async () => {
@@ -85,13 +94,18 @@ describe('toast.update', () => {
     expect(target.querySelector('.Toastify__spinner')).not.toBeNull();
 
     toast.done(id);
-    await promiseTick(50);
 
-    const doneToast = screen.getByTestId(`toast-item-${id}`);
-    const progressBar = doneToast.querySelector('.Toastify__progress-bar') as HTMLElement;
+    // done recreates the node: poll until the controlled progress bar reports progress 1
+    const doneToast = await waitFor(() => {
+      const node = screen.getByTestId(`toast-item-${id}`);
+      const bar = node.querySelector('.Toastify__progress-bar') as HTMLElement;
+
+      expect(bar.style.transform).toBe('scaleX(1)');
+
+      return node;
+    });
 
     expect(doneToast.querySelector('.Toastify__spinner')).toBeNull();
     expect(doneToast).toHaveTextContent('working');
-    expect(progressBar.style.transform).toBe('scaleX(1)');
   });
 });

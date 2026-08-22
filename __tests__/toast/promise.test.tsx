@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/vue';
+import { screen, waitFor } from '@testing-library/vue';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { toast } from '../../src';
 
@@ -22,7 +22,7 @@ function deferred<T>() {
   return {
     promise,
     resolve,
-    reject, 
+    reject,
   };
 }
 
@@ -52,9 +52,9 @@ describe('toast.promise', () => {
 
     resolve('ok');
     await expect(result).resolves.toBe('ok');
-    await promiseTick(400);
 
-    const successToast = screen.getByText('saved!').closest('.Toastify__toast');
+    // findByText retries through the update pipeline (setTimeout + nextTick + delay hops)
+    const successToast = (await screen.findByText('saved!')).closest('.Toastify__toast');
 
     expect(successToast).toHaveClass('Toastify__toast--success');
     expect(successToast?.querySelector('.Toastify__spinner')).toBeNull();
@@ -73,9 +73,8 @@ describe('toast.promise', () => {
 
     reject(new Error('boom'));
     await expect(promise).rejects.toThrow('boom');
-    await promiseTick(400);
 
-    const errorToast = screen.getByText('failed!').closest('.Toastify__toast');
+    const errorToast = (await screen.findByText('failed!')).closest('.Toastify__toast');
 
     expect(errorToast).toHaveClass('Toastify__toast--error');
   });
@@ -83,9 +82,44 @@ describe('toast.promise', () => {
   it('skips the pending state when no pending option is given', async () => {
     const result = toast.promise(Promise.resolve('v'), { success: 'done!' });
 
-    await expect(result).resolves.toBe('v');
-    await promiseTick(400);
+    // nothing may render while waiting
+    expect(screen.queryByTestId('toast-content')).toBeNull();
 
-    expect(screen.getByText('done!')).toBeInTheDocument();
+    await expect(result).resolves.toBe('v');
+
+    expect(await screen.findByText('done!')).toBeInTheDocument();
+    // and no loading phase ever mounted
+    expect(document.querySelector('.Toastify__spinner')).toBeNull();
+  });
+
+  it('accepts a function returning the promise', async () => {
+    const result = toast.promise(() => Promise.resolve('lazy'), { success: 'ready!' });
+
+    await expect(result).resolves.toBe('lazy');
+    expect(await screen.findByText('ready!')).toBeInTheDocument();
+  });
+
+  it('passes the settled value to a function renderer', async () => {
+    const result = toast.promise(Promise.resolve('payload'), { success: { render: ({ data }) => `got ${data}` } });
+
+    await expect(result).resolves.toBe('payload');
+    expect(await screen.findByText('got payload')).toBeInTheDocument();
+  });
+
+  it('dismisses the pending toast when no success or error content is given', async () => {
+    const { promise, resolve } = deferred<string>();
+
+    toast.promise(promise, { pending: 'waiting...' });
+    const target = await screen.findByText('waiting...');
+    const pendingToast = target.closest('.Toastify__toast') as HTMLElement;
+
+    resolve('ok');
+    await expect(promise).resolves.toBe('ok');
+
+    // jsdom never fires animationend, so completion of the removal can't be observed;
+    // assert that the exit transition started instead of the toast hanging around
+    await waitFor(() => {
+      expect(pendingToast.className).toContain('-exit');
+    });
   });
 });
