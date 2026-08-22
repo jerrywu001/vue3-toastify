@@ -1,7 +1,7 @@
 
 import { queue, doAppend } from '../store';
 import { nextTick, toRaw } from 'vue';
-import { getAllToast, getToast, ToastActions } from '..';
+import { getAllToast, getToast, resolveDuplicate, ToastActions } from '..';
 import { generateToastId, getGlobalOptions, getSystemTheme, isFn, isStr, mergeOptions } from '../utils/tools';
 import { POSITION, THEME, TRANSITIONS, TYPE } from '../utils/constant';
 import { globalCache } from '../store/globalOptions';
@@ -85,9 +85,15 @@ function openToast(content: Content, type: ToastType, options = {} as ToastOptio
     options.theme = getSystemTheme();
   }
 
-  resolveQueue(options);
-
   globalCache.lastUrl = window.location.href;
+
+  // a duplicate resets the toast already displayed, it never takes a queue slot.
+  // updateId means the call comes from toast.update, which must reach its own flow
+  if ((options as ToastSetting).multiple && !options.updateId && resolveDuplicate(options as ToastSetting)) {
+    return options.toastId as Id;
+  }
+
+  resolveQueue(options);
 
   if (!(options as ToastSetting).multiple) {
     inThrottle = true;
